@@ -38,7 +38,7 @@ class UserController extends AbstractController
 			return $this->redirectToRoute('signup-form');
 		}
 
-		if (!preg_match('/^[a-zA-Z]+$/', $newPassword)) {
+		if (preg_match('/^[a-zA-Z]+$/', $newPassword)) {
 			$session->getFlashBag()->add('error', 'Пароль должен содержать только латинские буквы.');
 			return $this->redirectToRoute('signup-form');
 		}
