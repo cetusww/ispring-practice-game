@@ -42,17 +42,16 @@ class __TwigTemplate_036a01fc20abbd042f5b6865d8d022f7 extends Template
 <head>
   <meta charset=\"UTF-8\">
   <title>Title</title>
+  <link href=\"https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap\" rel=\"stylesheet\">
   <link rel=\"stylesheet\" href=\"css/screensaver-style.css\">
+  <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-  <div class=\"title\">
-    <h1 class=\"title-text\">Game name</h1>
+  <div>
+    <h1 class=\"center-align title\">Demon Deliverance</h1>
   </div>
-  <form action=\"/user/signup\">
-    <button type=\"submit\">Sign Up</button>
-  </form>
   <form action=\"/user/signin\">
-    <button type=\"submit\">Sign In</button>
+    <button class=\"medium padding center button-custom\" type=\"submit\">Continue</button>
   </form>
 </body>
 </html>";
@@ -85,17 +84,16 @@ class __TwigTemplate_036a01fc20abbd042f5b6865d8d022f7 extends Template
 <head>
   <meta charset=\"UTF-8\">
   <title>Title</title>
+  <link href=\"https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap\" rel=\"stylesheet\">
   <link rel=\"stylesheet\" href=\"css/screensaver-style.css\">
+  <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-  <div class=\"title\">
-    <h1 class=\"title-text\">Game name</h1>
+  <div>
+    <h1 class=\"center-align title\">Demon Deliverance</h1>
   </div>
-  <form action=\"/user/signup\">
-    <button type=\"submit\">Sign Up</button>
-  </form>
   <form action=\"/user/signin\">
-    <button type=\"submit\">Sign In</button>
+    <button class=\"medium padding center button-custom\" type=\"submit\">Continue</button>
   </form>
 </body>
 </html>", "screensaver.html.twig", "/home/yogurt/Documents/projects/ispring-practice-game/templates/screensaver.html.twig");

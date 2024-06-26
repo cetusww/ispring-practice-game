@@ -68,14 +68,15 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
         // line 16
         yield "    <form action=\"/signup\" method=\"post\">
         <div class=\"form__username\">
-            <label for=\"username\">Name:</label><br>
-            <input name=\"username\" id=\"username\" type=\"text\">
+            <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
         <div class=\"form__password\">
-            <label for=\"password\">Password:</label><br>
-            <input name=\"password\" id=\"password\" type=\"text\">
+            <input name=\"password\" id=\"password\" type=\"text\" placeholder=\"пароль\">
         </div>
-        <button class=\"form__button-signup\" type=\"submit\">Sign Up</button>
+        <button class=\"form__button-signup\" type=\"submit\">войти</button>
+    </form>
+    <form action=\"/user/signin\">
+        <button type=\"submit\">Sign In</button>
     </form>
 </div>
 </body>";
@@ -128,14 +129,15 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
     {% endfor %}
     <form action=\"/signup\" method=\"post\">
         <div class=\"form__username\">
-            <label for=\"username\">Name:</label><br>
-            <input name=\"username\" id=\"username\" type=\"text\">
+            <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
         <div class=\"form__password\">
-            <label for=\"password\">Password:</label><br>
-            <input name=\"password\" id=\"password\" type=\"text\">
+            <input name=\"password\" id=\"password\" type=\"text\" placeholder=\"пароль\">
         </div>
-        <button class=\"form__button-signup\" type=\"submit\">Sign Up</button>
+        <button class=\"form__button-signup\" type=\"submit\">войти</button>
+    </form>
+    <form action=\"/user/signin\">
+        <button type=\"submit\">Sign In</button>
     </form>
 </div>
 </body>", "signup-user-form.html.twig", "/home/yogurt/Documents/projects/ispring-practice-game/templates/signup-user-form.html.twig");

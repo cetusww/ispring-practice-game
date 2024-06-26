@@ -43,23 +43,26 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
     <meta charset=\"UTF-8\">
     <title>Sign In User</title>
     <link rel=\"stylesheet\" href=\"css/signin-style.css\">
+    <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
 <div class=\"form\">
-    <h1 class=\"form__title\">Sign In</h1>
     <form action=\"/signin\" method=\"post\">
         <div class=\"form__username\">
-            <label for=\"username\">Name:</label><br>
-            <input name=\"username\" id=\"username\" type=\"text\">
+            <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
         <div class=\"form__password\">
-            <label for=\"password\">Password:</label><br>
-            <input name=\"password\" id=\"password\" type=\"text\">
+            <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
-        <button class=\"form__button-signin\" type=\"submit\">Sign In</button>
+        <button class=\"button-large\" type=\"submit\">войти</button>
+    </form>
+    <p>Ещё не зарегистрированы?</p>
+    <form action=\"/user/signup\">
+        <button class=\"secondary-button\" type=\"submit\">регистрация</button>
     </form>
 </div>
-</body>";
+</body>
+</html>";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -90,22 +93,25 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
     <meta charset=\"UTF-8\">
     <title>Sign In User</title>
     <link rel=\"stylesheet\" href=\"css/signin-style.css\">
+    <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
 <div class=\"form\">
-    <h1 class=\"form__title\">Sign In</h1>
     <form action=\"/signin\" method=\"post\">
         <div class=\"form__username\">
-            <label for=\"username\">Name:</label><br>
-            <input name=\"username\" id=\"username\" type=\"text\">
+            <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
         <div class=\"form__password\">
-            <label for=\"password\">Password:</label><br>
-            <input name=\"password\" id=\"password\" type=\"text\">
+            <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
-        <button class=\"form__button-signin\" type=\"submit\">Sign In</button>
+        <button class=\"button-large\" type=\"submit\">войти</button>
+    </form>
+    <p>Ещё не зарегистрированы?</p>
+    <form action=\"/user/signup\">
+        <button class=\"secondary-button\" type=\"submit\">регистрация</button>
     </form>
 </div>
-</body>", "signin-user-form.html.twig", "/home/yogurt/Documents/projects/ispring-practice-game/templates/signin-user-form.html.twig");
+</body>
+</html>", "signin-user-form.html.twig", "/home/yogurt/Documents/projects/ispring-practice-game/templates/signin-user-form.html.twig");
     }
 }
