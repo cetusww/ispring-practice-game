@@ -42,23 +42,23 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
 <head>
     <meta charset=\"UTF-8\">
     <title>Sign In User</title>
-    <link rel=\"stylesheet\" href=\"css/signin-style.css\">
+    <link rel=\"stylesheet\" href=\"/css/signin-style.css\">
     <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-<div class=\"form\">
+<div class=\" form\">
     <form action=\"/signin\" method=\"post\">
-        <div class=\"form__username\">
+        <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
-        <div class=\"form__password\">
+        <div class=\"field border fill input\">
             <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
-        <button class=\"button-large\" type=\"submit\">войти</button>
+        <button class=\"small-round responsive button-signin\" type=\"submit\">войти</button>
     </form>
-    <p>Ещё не зарегистрированы?</p>
+    <p class=\"form__text\">Ещё не зарегистрированы?</p>
     <form action=\"/user/signup\">
-        <button class=\"secondary-button\" type=\"submit\">регистрация</button>
+        <button class=\"small-round responsive button-signup\" type=\"submit\">регистрация</button>
     </form>
 </div>
 </body>
@@ -92,23 +92,23 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
 <head>
     <meta charset=\"UTF-8\">
     <title>Sign In User</title>
-    <link rel=\"stylesheet\" href=\"css/signin-style.css\">
+    <link rel=\"stylesheet\" href=\"/css/signin-style.css\">
     <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-<div class=\"form\">
+<div class=\" form\">
     <form action=\"/signin\" method=\"post\">
-        <div class=\"form__username\">
+        <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
-        <div class=\"form__password\">
+        <div class=\"field border fill input\">
             <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
-        <button class=\"button-large\" type=\"submit\">войти</button>
+        <button class=\"small-round responsive button-signin\" type=\"submit\">войти</button>
     </form>
-    <p>Ещё не зарегистрированы?</p>
+    <p class=\"form__text\">Ещё не зарегистрированы?</p>
     <form action=\"/user/signup\">
-        <button class=\"secondary-button\" type=\"submit\">регистрация</button>
+        <button class=\"small-round responsive button-signup\" type=\"submit\">регистрация</button>
     </form>
 </div>
 </body>

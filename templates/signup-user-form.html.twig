@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up User</title>
-    <link rel="stylesheet" href="css/signup-style.css">
+    <link rel="stylesheet" href="/css/signup-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="form">
-    <h1 class="form__title">Sign Up</h1>
-    {% for message in app.flashes('error') %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
-    {% endfor %}
+<div class=" form">
     <form action="/signup" method="post">
-        <div class="form__username">
+        <div class="field border fill responsive input">
             <input name="username" id="username" type="text" placeholder="имя">
         </div>
-        <div class="form__password">
-            <input name="password" id="password" type="text" placeholder="пароль">
+        <div class="field border fill input">
+            <input name="password" id="password" type="password" placeholder="пароль">
         </div>
-        <button class="form__button-signup" type="submit">войти</button>
+        <button class="small-round responsive button-signin" type="submit">зарегистрироваться</button>
     </form>
+    <p class="form__text">Уже зарегистрированы?</p>
     <form action="/user/signin">
-        <button type="submit">Sign In</button>
+        <button class="small-round responsive button-signup" type="submit">войти</button>
     </form>
 </div>
 </body>
+</html>

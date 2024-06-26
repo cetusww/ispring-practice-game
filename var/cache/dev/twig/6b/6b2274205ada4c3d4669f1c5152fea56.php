@@ -37,49 +37,32 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "signup-user-form.html.twig"));
 
-        // line 1
         yield "<!DOCTYPE html>
 <html lang=\"en\">
 <head>
     <meta charset=\"UTF-8\">
     <title>Sign Up User</title>
-    <link rel=\"stylesheet\" href=\"css/signup-style.css\">
+    <link rel=\"stylesheet\" href=\"/css/signup-style.css\">
+    <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-<div class=\"form\">
-    <h1 class=\"form__title\">Sign Up</h1>
-    ";
-        // line 11
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 11, $this->source); })()), "flashes", ["error"], "method", false, false, false, 11));
-        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 12
-            yield "        <div class=\"alert alert-danger\">
-            ";
-            // line 13
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "html", null, true);
-            yield "
-        </div>
-    ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 16
-        yield "    <form action=\"/signup\" method=\"post\">
-        <div class=\"form__username\">
+<div class=\" form\">
+    <form action=\"/signup\" method=\"post\">
+        <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
-        <div class=\"form__password\">
-            <input name=\"password\" id=\"password\" type=\"text\" placeholder=\"пароль\">
+        <div class=\"field border fill input\">
+            <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
-        <button class=\"form__button-signup\" type=\"submit\">войти</button>
+        <button class=\"small-round responsive button-signin\" type=\"submit\">зарегистрироваться</button>
     </form>
+    <p class=\"form__text\">Уже зарегистрированы?</p>
     <form action=\"/user/signin\">
-        <button type=\"submit\">Sign In</button>
+        <button class=\"small-round responsive button-signup\" type=\"submit\">войти</button>
     </form>
 </div>
-</body>";
+</body>
+</html>";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -97,17 +80,9 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
     /**
      * @codeCoverageIgnore
      */
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
     public function getDebugInfo()
     {
-        return array (  69 => 16,  60 => 13,  57 => 12,  53 => 11,  41 => 1,);
+        return array ();
     }
 
     public function getSourceContext()
@@ -117,29 +92,26 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
 <head>
     <meta charset=\"UTF-8\">
     <title>Sign Up User</title>
-    <link rel=\"stylesheet\" href=\"css/signup-style.css\">
+    <link rel=\"stylesheet\" href=\"/css/signup-style.css\">
+    <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-<div class=\"form\">
-    <h1 class=\"form__title\">Sign Up</h1>
-    {% for message in app.flashes('error') %}
-        <div class=\"alert alert-danger\">
-            {{ message }}
-        </div>
-    {% endfor %}
+<div class=\" form\">
     <form action=\"/signup\" method=\"post\">
-        <div class=\"form__username\">
+        <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
-        <div class=\"form__password\">
-            <input name=\"password\" id=\"password\" type=\"text\" placeholder=\"пароль\">
+        <div class=\"field border fill input\">
+            <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
-        <button class=\"form__button-signup\" type=\"submit\">войти</button>
+        <button class=\"small-round responsive button-signin\" type=\"submit\">зарегистрироваться</button>
     </form>
+    <p class=\"form__text\">Уже зарегистрированы?</p>
     <form action=\"/user/signin\">
-        <button type=\"submit\">Sign In</button>
+        <button class=\"small-round responsive button-signup\" type=\"submit\">войти</button>
     </form>
 </div>
-</body>", "signup-user-form.html.twig", "/home/yogurt/Documents/projects/ispring-practice-game/templates/signup-user-form.html.twig");
+</body>
+</html>", "signup-user-form.html.twig", "/home/yogurt/Documents/projects/ispring-practice-game/templates/signup-user-form.html.twig");
     }
 }
