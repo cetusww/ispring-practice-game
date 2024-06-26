@@ -8,6 +8,11 @@
 <body>
 <div class="form">
     <h1 class="form__title">Sign Up</h1>
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
     <form action="/signup" method="post">
         <div class="form__username">
             <label for="username">Name:</label><br>
