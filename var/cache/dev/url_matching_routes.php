@@ -15,6 +15,7 @@ return [
         '/signin' => [[['_route' => 'signin', '_controller' => 'App\\Controller\\UserController::signInUser'], null, null, null, false, false, null]],
         '/user/signout' => [[['_route' => 'signout', '_controller' => 'App\\Controller\\UserController::signOutUser'], null, null, null, false, false, null]],
         '/menu' => [[['_route' => 'show_menu', '_controller' => 'App\\Controller\\ViewController::showMenu'], null, null, null, false, false, null]],
+        '/game' => [[['_route' => 'show_game', '_controller' => 'App\\Controller\\ViewController::showGame'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
