@@ -44,4 +44,9 @@ class ViewController extends AbstractController
 		return $this->render('menu.html.twig');
 	}
 
+    public function showGame(): Response
+    {
+        return $this->render('game.html.twig');
+    }
+
 }
