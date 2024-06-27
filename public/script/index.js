@@ -1,9 +1,3 @@
-//import { Application } from 'pixi.js';
-// let Application			= PIXI.Application
-
-//import { Application } from "/pixi.js";
-
-// Asynchronous IIFE
 const SCENE_WIDTH = window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
 
@@ -11,6 +5,68 @@ const scene = new PIXI.Container();
 const platforms = []
 const bullets = []
 const app = new PIXI.Application();
+
+const keys = {
+    keyDown: false,
+    keyUp: false,
+    keyLeft: false,
+    keyRight: false,
+}
+let mouse = {
+    isDownLeft: false,
+    positionX: 0,
+    positionY: 0,
+}
+function onAppMouseDown(event) {
+    if (event.button === 0) {
+        mouse.isDownLeft = true
+    }
+}
+function onAppMouseMove(event) {
+    if (event.button === 0) {
+        mouse.positionX = event.clientX
+        mouse.positionY = event.clientY
+    }
+}
+function onAppMouseUp(event) {
+    if (event.button === 0) {
+        mouse.isDownLeft = false
+    }
+}
+
+function onKeyDown(event) {
+    if (event.keyCode === 37) {
+        keys.keyLeft = true
+        keys.keyRight = false
+    }
+    if (event.keyCode === 39) {
+        keys.keyRight = true
+        keys.keyLeft = false
+    }
+    if (event.keyCode === 38) {
+        keys.keyUp = true
+        keys.keyDown = false
+    }
+    if (event.keyCode === 40) {
+        keys.keyDown = true
+        keys.keyUp = false
+    }
+}
+function onKeyUp(event) {
+    if (event.keyCode === 37) {
+        keys.keyLeft = false
+    }
+    if (event.keyCode === 39) {
+        keys.keyRight = false
+    }
+    if (event.keyCode === 40) {
+        keys.keyDown = false
+    }
+    if (event.keyCode === 38) {
+        keys.keyUp = false
+    }
+}
+
 (async () =>
 {
     // Intialize the application.
@@ -26,27 +82,9 @@ const app = new PIXI.Application();
     ])
 
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
-    let mouse = {
-        isDownLeft: false,
-        positionX: 0,
-        positionY: 0,
-    }
-    function onAppMouseDown(event) {
-        if (event.button === 0) {
-            mouse.isDownLeft = true
-        }
-    }
-    function onAppMouseMove(event) {
-        if (event.button === 0) {
-            mouse.positionX = event.clientX
-            mouse.positionY = event.clientY
-        }
-    }
-    function onAppMouseUp(event) {
-        if (event.button === 0) {
-            mouse.isDownLeft = false
-        }
-    }
+    
+    
+
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
     app.canvas.addEventListener('mouseup', onAppMouseUp)
@@ -78,17 +116,6 @@ const app = new PIXI.Application();
     });
 })();
 
-function levelCreate() {
-    let texture = PIXI.Texture.from('/images/ground.svg')
-    platforms.push(new Ground(texture, 89, 280, 178, 40))
-    platforms.push(new Ground(texture, 370, 370, 178, 40))
-    platforms.push(new Ground(texture, 600, 370, 178, 40))
-    platforms.push(new Ground(texture, 900, 370, 178, 40))
-    platforms.push(new Ground(texture, 1200, 370, 178, 40))
-    platforms.push(new Ground(texture, 1500, 370, 178, 40))
-    platforms.push(new Ground(texture, 2411, 370, 178, 40))
-}
-
 function moveCamera(x, y) {
     let moveX = x
     let moveY = y
@@ -104,49 +131,15 @@ function moveCamera(x, y) {
     scene.y += y
 }
 
-function intersects(platform1, platform2)
-{
-    const bounds1 = platform1.getBounds();
-    const bounds2 = platform2.getBounds();
+window.addEventListener('keydown', onKeyDown)
+window.addEventListener('keyup', onKeyUp)
 
-    return (
-        bounds1.x < bounds2.x + bounds2.width
-        && bounds1.x + bounds1.width > bounds2.x
-        && bounds1.y < bounds2.y + bounds2.height
-        && bounds1.y + bounds1.height > bounds2.y
-    );
+function levelCreate() {
+    let texture = PIXI.Texture.from('/images/ground.svg')
+    platforms.push(new Ground(texture, 89, 250, 178, 40))
+    platforms.push(new Ground(texture, app.screen.width / 2, app.screen.height / 2 + 80, 178, 40))
+    platforms.push(new Ground(texture, app.screen.width / 2, app.screen.height / 2 - 80, 178, 40))
+    platforms.push(new Ground(texture, app.screen.width / 2 + 200, app.screen.height / 2 + 70, 178, 40))
+    platforms.push(new Ground(texture, app.screen.width / 2 - 200, app.screen.height / 2 + 70, 178, 40))
 }
 
-function keyboard(keyCode) {
-    const key = {};
-    key.code = keyCode;
-    key.isDown = false;
-    key.isUp = true;
-    key.press = undefined;
-    key.release = undefined;
-    key.downHandler = (event) => {
-      if (event.keyCode === key.code) {
-        if (key.isUp && key.press) {
-          key.press();
-        }
-        key.isDown = true;
-        key.isUp = false;
-      }
-      event.preventDefault();
-    };
-  
-    key.upHandler = (event) => {
-      if (event.keyCode === key.code) {
-        if (key.isDown && key.release) {
-          key.release();
-        }
-        key.isDown = false;
-        key.isUp = true;
-      }
-      event.preventDefault();
-    };
-  
-    window.addEventListener("keydown", key.downHandler.bind(key), false);
-    window.addEventListener("keyup", key.upHandler.bind(key), false);
-    return key;
-}

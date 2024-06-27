@@ -5,26 +5,37 @@ class Hero {
         this.sprite.y = posY
         this.sprite.width = 60
         this.sprite.height = 85
+
+        this.collideTop = this.sprite.y - this.sprite.height / 2
+        this.collideBottom = this.sprite.y + this.sprite.height / 2
+        this.collideLeft = this.sprite.x - this.sprite.width / 2
+        this.collideRight = this.sprite.x + this.sprite.width / 2
+
         this.sprite.anchor.set(0.5)
         this.speedX = speedX
         this.speedY = speedY
         this.sprite.vx = 0
-        this.sprite.vy = 0
-        this.left = keyboard(37)
-        this.up = keyboard(38)
-        this.right = keyboard(39)
-        this.down = keyboard(40)
-        this.isGroung = false
+        this.sprite.vy = 1
+        this.isGround = false
         this.cameraRectX = 100
         this.cameraRectY = 10
 
-
+        this.jumpPower = 12
+        this.gravitationPower = 0.5
         this.weaponTime = 10
         this.weaponCountBullet = 20
         this.currentWeaponTime = 0
         this.currentCountBullet = this.weaponCountBullet
         this.rechargeTime = 300
         this.currentRechargeTime = this.rechargeTime
+
+        this.updateCollide = function () {
+            this.collideTop = this.sprite.y - this.sprite.height / 2
+            this.collideBottom = this.sprite.y + this.sprite.height / 2
+            this.collideLeft = this.sprite.x - this.sprite.width / 2
+            this.collideRight = this.sprite.x + this.sprite.width / 2
+        }
+
         this.createBullet = function (mouseX, mouseY) {
             if (this.currentWeaponTime <= 0 && this.currentCountBullet > 0) {
                 let globalPosition = this.sprite.getGlobalPosition()
@@ -44,36 +55,6 @@ class Hero {
                     bullets.push(bullet)
                 }
             }          
-        }
-        this.left.press = () => {
-            this.sprite.vx = -this.speedX;
-            this.right.isDown = false;
-            this.right.isUp = true;
-            if (this.sprite.scale.x > 0)
-            {
-                this.sprite.scale.x *= -1;
-            } 
-        };
-        this.left.release = () => {
-            if (!this.right.isDown && this.sprite.vy === 0) {
-              this.sprite.vx = 0;
-            }
-        };
-
-        this.right.press = () => {
-            this.sprite.vx = this.speedX;
-            this.left.isDown = false;
-            this.left.isUp = true;
-            if (this.sprite.scale.x < 0)
-            {
-                this.sprite.scale.x *= -1;
-            }  
-        }
-
-        this.right.release = () => {
-            if (!this.left.isDown && this.sprite.vy === 0) {
-              this.sprite.vx = 0;
-            }
         }
 
         this.view = function () {
@@ -100,7 +81,40 @@ class Hero {
             
         }
         this.update = function (time) {
+            if (keys.keyLeft) {
+                this.sprite.vx = -this.speedX
+                if (this.sprite.scale.x > 0)
+                {
+                    this.sprite.scale.x *= -1
+                } 
+            }
+            if (keys.keyRight) {
+                this.sprite.vx = this.speedX
+                if (this.sprite.scale.x < 0)
+                {
+                    this.sprite.scale.x *= -1
+                } 
+            }
+            if (!keys.keyLeft && !keys.keyRight) {
+                this.sprite.vx = 0
+            }
+            if (keys.keyUp) {
+                if (this.isGround) {
+                    this.sprite.vy = -this.jumpPower
+                    console.log('+')
+                }
+            }
+
+            if (!this.isGround) {
+                this.sprite.vy += this.gravitationPower * time.deltaTime
+            } else {
+                if (this.sprite.vy > 0) {
+                    this.sprite.vy = 0
+                } 
+            }
             this.sprite.x += this.sprite.vx * time.deltaTime
+            this.sprite.y += this.sprite.vy * time.deltaTime
+            
             let globalPosition = this.sprite.getGlobalPosition()
             let deltaX = globalPosition.x - app.screen.width / 2 
             if (deltaX > this.cameraRectX && this.sprite.scale.x > 0) {
@@ -117,11 +131,24 @@ class Hero {
         }
 
         this.collise = function () {
-            platforms.forEach(platform => {
-                //console.log(intersects(this.sprite, platform.sprite))
-            })
-        }
-
-        
+            this.isGround = false
+            if (this.sprite.vy >= 0) {
+                this.updateCollide()
+                platforms.forEach(platform => {
+                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
+                        this.collideBottom >= platform.collideTop &&
+                        this.collideLeft <= platform.collideRight &&
+                        this.collideRight >= platform.collideLeft
+                    ) {
+                        this.isGround = true
+                        if (this.sprite.vy > 1) {
+                            this.sprite.y -= (this.collideBottom - platform.collideTop)
+                        } else {
+                            this.sprite.y -= (this.collideBottom - platform.collideTop) / 4
+                        }     
+                    }
+                })
+            }
+        } 
     }
 }

@@ -5,7 +5,11 @@ class Ground {
         this.sprite.y = posY
         this.sprite.width = width
         this.sprite.height = height
-        this.sprite.anchor.set(0.5)        
+        this.sprite.anchor.set(0.5)    
+        this.collideTop = this.sprite.y - this.sprite.height / 2
+        this.collideBottom = this.collideTop + 10
+        this.collideLeft = this.sprite.x - this.sprite.width / 2
+        this.collideRight = this.sprite.x + this.sprite.width / 2
 
         this.view = function () {
             scene.addChild(this.sprite);
