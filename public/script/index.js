@@ -8,7 +8,7 @@ const SCENE_WIDTH = window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
 
 const scene = new PIXI.Container();
-const objects = []
+const platforms = []
 const bullets = []
 const app = new PIXI.Application();
 (async () =>
@@ -52,8 +52,8 @@ const app = new PIXI.Application();
     app.canvas.addEventListener('mouseup', onAppMouseUp)
     levelCreate()
     
-    objects.forEach(object => {
-        object.view()
+    platforms.forEach(platform => {
+        platform.view()
     })
 
     app.stage.addChild(scene);
@@ -80,13 +80,13 @@ const app = new PIXI.Application();
 
 function levelCreate() {
     let texture = PIXI.Texture.from('/images/ground.svg')
-    objects.push(new Ground(texture, 89, 280, 178, 40))
-    objects.push(new Ground(texture, 370, 370, 178, 40))
-    objects.push(new Ground(texture, 600, 370, 178, 40))
-    objects.push(new Ground(texture, 900, 370, 178, 40))
-    objects.push(new Ground(texture, 1200, 370, 178, 40))
-    objects.push(new Ground(texture, 1500, 370, 178, 40))
-    objects.push(new Ground(texture, 2411, 370, 178, 40))
+    platforms.push(new Ground(texture, 89, 280, 178, 40))
+    platforms.push(new Ground(texture, 370, 370, 178, 40))
+    platforms.push(new Ground(texture, 600, 370, 178, 40))
+    platforms.push(new Ground(texture, 900, 370, 178, 40))
+    platforms.push(new Ground(texture, 1200, 370, 178, 40))
+    platforms.push(new Ground(texture, 1500, 370, 178, 40))
+    platforms.push(new Ground(texture, 2411, 370, 178, 40))
 }
 
 function moveCamera(x, y) {
@@ -104,10 +104,10 @@ function moveCamera(x, y) {
     scene.y += y
 }
 
-function intersects(object1, object2)
+function intersects(platform1, platform2)
 {
-    const bounds1 = object1.getBounds();
-    const bounds2 = object2.getBounds();
+    const bounds1 = platform1.getBounds();
+    const bounds2 = platform2.getBounds();
 
     return (
         bounds1.x < bounds2.x + bounds2.width

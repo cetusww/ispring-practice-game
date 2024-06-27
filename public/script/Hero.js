@@ -117,8 +117,8 @@ class Hero {
         }
 
         this.collise = function () {
-            objects.forEach(object => {
-                //console.log(intersects(this.sprite, object.sprite))
+            platforms.forEach(platform => {
+                //console.log(intersects(this.sprite, platform.sprite))
             })
         }
 
