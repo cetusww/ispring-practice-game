@@ -14,16 +14,21 @@ const app = new PIXI.Application();
 (async () =>
 {
     // Intialize the application.
-    await app.init({ background: '#1099bb',  resizeTo: window });//
+    await app.init({ background: '#000000',  resizeTo: window });//
 
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
 
-    await PIXI.Assets.load([
-        '/images/hero.svg',
-        '/images/bullet.svg',
-        '/images/ground.svg',
-    ])
+    let assets = [
+        { alias: 'background', src: '/images/screensaver-background.jpeg' },
+        { alias: 'hero', src: '/images/hero.svg' },
+        { alias: 'bullet', src: '/images/bullet.svg' },
+        { alias: 'ground', src: '/images/ground.svg' },
+    ]
+
+    await PIXI.Assets.load(assets);
+
+    addBackground(app);
 
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
     let mouse = {
@@ -131,8 +136,8 @@ function keyboard(keyCode) {
         }
         key.isDown = true;
         key.isUp = false;
+        event.preventDefault();
       }
-      event.preventDefault();
     };
   
     key.upHandler = (event) => {
@@ -149,4 +154,20 @@ function keyboard(keyCode) {
     window.addEventListener("keydown", key.downHandler.bind(key), false);
     window.addEventListener("keyup", key.upHandler.bind(key), false);
     return key;
+}
+
+function addBackground(app)
+{
+    const background = PIXI.Sprite.from('background');
+
+    background.anchor.set(0);
+
+    function resizeBackground() {
+        background.width = app.screen.width;
+        background.height = app.screen.height;
+    }
+
+    resizeBackground();
+
+    app.stage.addChild(background);
 }
