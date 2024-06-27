@@ -152,6 +152,7 @@ function addBackground(app) {
     const background = PIXI.Sprite.from('background');
     background.anchor.set(0);
 
+
     function resizeBackground() {
         background.width = app.screen.width;
         background.height = app.screen.height;
