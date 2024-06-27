@@ -47,9 +47,7 @@ class __TwigTemplate_036a01fc20abbd042f5b6865d8d022f7 extends Template
   <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-  <div>
-    <h1 class=\"center-align title\">Demon Deliverance</h1>
-  </div>
+  <h1 class=\"center-align title\">Demon Deliverance</h1>
   <form action=\"/user/signin\">
     <button class=\"medium padding center button-custom\" type=\"submit\">Continue</button>
   </form>
@@ -89,9 +87,7 @@ class __TwigTemplate_036a01fc20abbd042f5b6865d8d022f7 extends Template
   <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-  <div>
-    <h1 class=\"center-align title\">Demon Deliverance</h1>
-  </div>
+  <h1 class=\"center-align title\">Demon Deliverance</h1>
   <form action=\"/user/signin\">
     <button class=\"medium padding center button-custom\" type=\"submit\">Continue</button>
   </form>
