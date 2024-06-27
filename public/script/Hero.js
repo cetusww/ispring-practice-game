@@ -21,6 +21,7 @@ class Hero {
         this.cameraRectY = 10
 
         this.jumpPower = 12
+        this.doubleJump = true
         this.gravitationPower = 0.5
         this.weaponTime = 10
         this.weaponCountBullet = 20
@@ -77,8 +78,7 @@ class Hero {
                     this.currentCountBullet = this.weaponCountBullet
                     this.currentRechargeTime = this.rechargeTime
                 }
-            }
-            
+            }  
         }
         this.update = function (time) {
             if (keys.keyLeft) {
@@ -101,7 +101,11 @@ class Hero {
             if (keys.keyUp) {
                 if (this.isGround) {
                     this.sprite.vy = -this.jumpPower
-                    console.log('+')
+                } else {
+                    if (this.doubleJump && this.sprite.vy > 0) {
+                        this.sprite.vy = -this.jumpPower
+                        this.doubleJump = false
+                    }
                 }
             }
 
@@ -141,6 +145,7 @@ class Hero {
                         this.collideRight >= platform.collideLeft
                     ) {
                         this.isGround = true
+                        this.doubleJump = true
                         if (this.sprite.vy > 1) {
                             this.sprite.y -= (this.collideBottom - platform.collideTop)
                         } else {
