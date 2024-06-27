@@ -11,4 +11,5 @@ return [
     'signin' => [[], ['_controller' => 'App\\Controller\\UserController::signInUser'], [], [['text', '/signin']], [], [], []],
     'signout' => [[], ['_controller' => 'App\\Controller\\UserController::signOutUser'], [], [['text', '/user/signout']], [], [], []],
     'show_menu' => [[], ['_controller' => 'App\\Controller\\ViewController::showMenu'], [], [['text', '/menu']], [], [], []],
+    'show_game' => [[], ['_controller' => 'App\\Controller\\ViewController::showGame'], [], [['text', '/game']], [], [], []],
 ];
