@@ -56,7 +56,7 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
         </div>
         <button class=\"small-round responsive button-signin\" type=\"submit\">зарегистрироваться</button>
     </form>
-    <p class=\"form__text\">Уже зарегистрированы?</p>
+    <p class=\"center-align form__text\">Уже зарегистрированы?</p>
     <form action=\"/user/signin\">
         <button class=\"small-round responsive button-signup\" type=\"submit\">войти</button>
     </form>
@@ -106,7 +106,7 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
         </div>
         <button class=\"small-round responsive button-signin\" type=\"submit\">зарегистрироваться</button>
     </form>
-    <p class=\"form__text\">Уже зарегистрированы?</p>
+    <p class=\"center-align form__text\">Уже зарегистрированы?</p>
     <form action=\"/user/signin\">
         <button class=\"small-round responsive button-signup\" type=\"submit\">войти</button>
     </form>

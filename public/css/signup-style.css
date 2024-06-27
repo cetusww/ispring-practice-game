@@ -10,6 +10,7 @@ html {
 }
 
 body {
+    cursor: url('../images/cursor.png'), auto;
     height: 100%;
     background: url('../images/signup-background.jpeg') no-repeat;
     background-size: cover;
@@ -35,6 +36,10 @@ body {
     background-color: rgba(4, 0, 200, 1);
     margin: 0 0 38px 0;
     font: 400 22px/26px "Miltonian Tattoo", sans-serif;
+}
+
+.button-signin:hover {
+    background-color: rgba(4, 0, 200, 0.6);
 }
 
 .button-signup {

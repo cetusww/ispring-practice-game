@@ -41,14 +41,17 @@ class __TwigTemplate_fac77bef1f8aef2965df1d33bf20f26d extends Template
 <html lang=\"en\">
 <head>
   <meta charset=\"UTF-8\">
-  <title>Game name</title>
+  <title>Menu</title>
   <link rel=\"stylesheet\" href=\"css/menu-style.css\">
+  <link href=\"https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap\" rel=\"stylesheet\">
+  <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-  <h1>Game name</h1>
-  <p>Legend</p>
-  <form action=\"/game\">
-    <button type=\"submit\">Play</button>
+  <h1 class=\"center-align title\">Menu</h1>
+  <form class=\"form-play\" action=\"/game\">
+    <button class=\"button-custom\" type=\"submit\">
+      <img class=\"button-custom__play\" src=\"images/play-button.png\" alt=\"play\">
+    </button>
   </form>
   <form action=\"/user/signout\">
     <button type=\"submit\">Sign Out</button>
@@ -83,14 +86,17 @@ class __TwigTemplate_fac77bef1f8aef2965df1d33bf20f26d extends Template
 <html lang=\"en\">
 <head>
   <meta charset=\"UTF-8\">
-  <title>Game name</title>
+  <title>Menu</title>
   <link rel=\"stylesheet\" href=\"css/menu-style.css\">
+  <link href=\"https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap\" rel=\"stylesheet\">
+  <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
 </head>
 <body>
-  <h1>Game name</h1>
-  <p>Legend</p>
-  <form action=\"/game\">
-    <button type=\"submit\">Play</button>
+  <h1 class=\"center-align title\">Menu</h1>
+  <form class=\"form-play\" action=\"/game\">
+    <button class=\"button-custom\" type=\"submit\">
+      <img class=\"button-custom__play\" src=\"images/play-button.png\" alt=\"play\">
+    </button>
   </form>
   <form action=\"/user/signout\">
     <button type=\"submit\">Sign Out</button>
