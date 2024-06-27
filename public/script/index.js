@@ -34,42 +34,27 @@ const app = new PIXI.Application();
     function onAppMouseDown(event) {
         if (event.button === 0) {
             mouse.isDownLeft = true
-            //hero.createBullet(event.clientX, event.clientY)
         }
     }
     function onAppMouseMove(event) {
         if (event.button === 0) {
             mouse.positionX = event.clientX
             mouse.positionY = event.clientY
-            //hero.createBullet(event.clientX, event.clientY)
         }
     }
     function onAppMouseUp(event) {
         if (event.button === 0) {
             mouse.isDownLeft = false
-            //hero.createBullet(event.clientX, event.clientY)
         }
     }
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
     app.canvas.addEventListener('mouseup', onAppMouseUp)
-
-    let texture = PIXI.Texture.from('/images/ground.svg')
-    let ground = new Ground(texture, 89, 280, 178, 40)
-    objects.push(ground)
-    ground.view()
-    ground = new Ground(texture, 370, 370, 178, 40)
-    ground.view()
-    ground = new Ground(texture, 600, 370, 178, 40)
-    ground.view()
-    ground = new Ground(texture, 900, 370, 178, 40)
-    ground.view()
-    ground = new Ground(texture, 1200, 370, 178, 40)
-    ground.view()
-    ground = new Ground(texture, 1500, 370, 178, 40)
-    ground.view()
-    ground = new Ground(texture, 2411, 370, 178, 40)
-    ground.view()
+    levelCreate()
+    
+    objects.forEach(object => {
+        object.view()
+    })
 
     app.stage.addChild(scene);
 
@@ -92,6 +77,18 @@ const app = new PIXI.Application();
         }
     });
 })();
+
+function levelCreate() {
+    let texture = PIXI.Texture.from('/images/ground.svg')
+    objects.push(new Ground(texture, 89, 280, 178, 40))
+    objects.push(new Ground(texture, 370, 370, 178, 40))
+    objects.push(new Ground(texture, 600, 370, 178, 40))
+    objects.push(new Ground(texture, 900, 370, 178, 40))
+    objects.push(new Ground(texture, 1200, 370, 178, 40))
+    objects.push(new Ground(texture, 1500, 370, 178, 40))
+    objects.push(new Ground(texture, 2411, 370, 178, 40))
+}
+
 function moveCamera(x, y) {
     let moveX = x
     let moveY = y

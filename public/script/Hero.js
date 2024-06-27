@@ -23,7 +23,7 @@ class Hero {
         this.weaponCountBullet = 20
         this.currentWeaponTime = 0
         this.currentCountBullet = this.weaponCountBullet
-        this.rechargeTime = 500
+        this.rechargeTime = 300
         this.currentRechargeTime = this.rechargeTime
         this.createBullet = function (mouseX, mouseY) {
             if (this.currentWeaponTime <= 0 && this.currentCountBullet > 0) {
