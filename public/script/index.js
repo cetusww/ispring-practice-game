@@ -105,10 +105,6 @@ function moveCamera(x, y) {
         scene.x -= moveX
     }
     scene.y += y
-    return {
-        x: moveX,
-        y: moveY
-    }
 }
 
 function intersects(object1, object2)

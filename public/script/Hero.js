@@ -1,6 +1,5 @@
 class Hero {
     constructor(texture, posX, posY, speedX, speedY) {
-        //this.sprite = new PIXI.Sprite(texture);
         this.sprite = PIXI.Sprite.from(texture);
         this.sprite.x = posX
         this.sprite.y = posY
@@ -28,10 +27,11 @@ class Hero {
         this.currentRechargeTime = this.rechargeTime
         this.createBullet = function (mouseX, mouseY) {
             if (this.currentWeaponTime <= 0 && this.currentCountBullet > 0) {
-                let distance = Math.sqrt((this.sprite.x - mouseX)*(this.sprite.x - mouseX) + (this.sprite.y - mouseY)*(this.sprite.y - mouseY))
-                let vecX = (mouseX - this.sprite.x) / distance
+                let globalPosition = this.sprite.getGlobalPosition()
+                let distance = Math.sqrt((globalPosition.x - mouseX)*(globalPosition.x - mouseX) + (globalPosition.y - mouseY)*(globalPosition.y - mouseY))
+                let vecX = (mouseX - globalPosition.x) / distance
                 if ((this.sprite.vx > 0 && vecX >= 0) || (this.sprite.vx < 0 && vecX <= 0) || (this.sprite.vx == 0)){
-                    let vecY = (mouseY - this.sprite.y) / distance
+                    let vecY = (mouseY - globalPosition.y) / distance
                     let angle = Math.acos(vecX)
                     if (vecY < 0) {
                         angle *= -1
@@ -77,11 +77,11 @@ class Hero {
         }
 
         this.view = function () {
-            app.stage.addChild(this.sprite);
+            scene.addChild(this.sprite);
         }
 
         this.deleteView = function () {
-            app.stage.removeChild(this.sprite);
+            scene.removeChild(this.sprite);
         }
         this.updateWeapon = function (time) {
             if (this.currentCountBullet > 0) {
@@ -101,18 +101,16 @@ class Hero {
         }
         this.update = function (time) {
             this.sprite.x += this.sprite.vx * time.deltaTime
-
-            let deltaX = this.sprite.x - app.screen.width / 2 
+            let globalPosition = this.sprite.getGlobalPosition()
+            let deltaX = globalPosition.x - app.screen.width / 2 
             if (deltaX > this.cameraRectX && this.sprite.scale.x > 0) {
                 let moveX = deltaX - this.cameraRectX
-                let move = moveCamera(moveX, 0)
-                this.sprite.x -= move.x
+                moveCamera(moveX, 0)
             }
 
             if (deltaX < -this.cameraRectX && this.sprite.scale.x < 0) {
                 let moveX = deltaX + this.cameraRectX
-                let move = moveCamera(moveX, 0)
-                this.sprite.x -= move.x
+                moveCamera(moveX, 0)
             }
             this.updateWeapon(time)
             this.collise()
