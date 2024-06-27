@@ -18,10 +18,32 @@ class Hero {
         this.isGroung = false
         this.cameraRectX = 100
         this.cameraRectY = 10
-        this.up.press = () => {
-            let bullet = new Bullet('/images/bullet.svg', this.sprite.x, this.sprite.y, 1, 1)
-            bullet.view()
-            console.log('+')
+
+
+        this.weaponTime = 10
+        this.weaponCountBullet = 20
+        this.currentWeaponTime = 0
+        this.currentCountBullet = this.weaponCountBullet
+        this.rechargeTime = 500
+        this.currentRechargeTime = this.rechargeTime
+        this.createBullet = function (mouseX, mouseY) {
+            if (this.currentWeaponTime <= 0 && this.currentCountBullet > 0) {
+                let distance = Math.sqrt((this.sprite.x - mouseX)*(this.sprite.x - mouseX) + (this.sprite.y - mouseY)*(this.sprite.y - mouseY))
+                let vecX = (mouseX - this.sprite.x) / distance
+                if ((this.sprite.vx > 0 && vecX >= 0) || (this.sprite.vx < 0 && vecX <= 0) || (this.sprite.vx == 0)){
+                    let vecY = (mouseY - this.sprite.y) / distance
+                    let angle = Math.acos(vecX)
+                    if (vecY < 0) {
+                        angle *= -1
+                    }
+                    let bullet = new Bullet('/images/bullet.svg', this.sprite.x, this.sprite.y, vecX, vecY, angle)
+                    this.currentCountBullet -= 1
+                    if (this.currentRechargeTime)
+                    this.currentWeaponTime = this.weaponTime
+                    bullet.view()
+                    bullets.push(bullet)
+                }
+            }          
         }
         this.left.press = () => {
             this.sprite.vx = -this.speedX;
@@ -61,7 +83,22 @@ class Hero {
         this.deleteView = function () {
             app.stage.removeChild(this.sprite);
         }
-
+        this.updateWeapon = function (time) {
+            if (this.currentCountBullet > 0) {
+                if (this.currentWeaponTime > 0) {
+                    this.currentWeaponTime -= time.deltaTime
+                }
+            } else {
+                if (this.currentRechargeTime > 0) {
+                    this.currentRechargeTime -= time.deltaTime
+                } else {
+                    this.currentWeaponTime = 0
+                    this.currentCountBullet = this.weaponCountBullet
+                    this.currentRechargeTime = this.rechargeTime
+                }
+            }
+            
+        }
         this.update = function (time) {
             this.sprite.x += this.sprite.vx * time.deltaTime
 
@@ -77,6 +114,7 @@ class Hero {
                 let move = moveCamera(moveX, 0)
                 this.sprite.x -= move.x
             }
+            this.updateWeapon(time)
             this.collise()
         }
 

@@ -7,28 +7,55 @@
 const SCENE_WIDTH = window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
 
-var scene = new PIXI.Container();
-var objects = []
-var app = new PIXI.Application();
+const scene = new PIXI.Container();
+const objects = []
+const bullets = []
+const app = new PIXI.Application();
 (async () =>
 {
-    // Create a PixiJS application.
-    
-
     // Intialize the application.
     await app.init({ background: '#1099bb',  resizeTo: window });//
 
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
 
-    //var bulletTexture = await PIXI.Assets.load('/images/bullet.svg')
-    let heroTexture = await PIXI.Assets.load('/images/hero.svg');
-    let bulletTexture = await PIXI.Assets.load('/images/bullet.svg');
+    await PIXI.Assets.load([
+        '/images/hero.svg',
+        '/images/bullet.svg',
+        '/images/ground.svg',
+    ])
+
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
+    let mouse = {
+        isDownLeft: false,
+        positionX: 0,
+        positionY: 0,
+    }
+    function onAppMouseDown(event) {
+        if (event.button === 0) {
+            mouse.isDownLeft = true
+            //hero.createBullet(event.clientX, event.clientY)
+        }
+    }
+    function onAppMouseMove(event) {
+        if (event.button === 0) {
+            mouse.positionX = event.clientX
+            mouse.positionY = event.clientY
+            //hero.createBullet(event.clientX, event.clientY)
+        }
+    }
+    function onAppMouseUp(event) {
+        if (event.button === 0) {
+            mouse.isDownLeft = false
+            //hero.createBullet(event.clientX, event.clientY)
+        }
+    }
+    app.canvas.addEventListener('mousedown', onAppMouseDown)
+    app.canvas.addEventListener('mousemove', onAppMouseMove)
+    app.canvas.addEventListener('mouseup', onAppMouseUp)
 
-
-    texture = await PIXI.Assets.load('/images/ground.svg')
-    ground = new Ground(texture, 89, 280, 178, 40)
+    let texture = PIXI.Texture.from('/images/ground.svg')
+    let ground = new Ground(texture, 89, 280, 178, 40)
     objects.push(ground)
     ground.view()
     ground = new Ground(texture, 370, 370, 178, 40)
@@ -43,25 +70,26 @@ var app = new PIXI.Application();
     ground.view()
     ground = new Ground(texture, 2411, 370, 178, 40)
     ground.view()
-    
-
 
     app.stage.addChild(scene);
-    
-
-
-    // Функция для обновления камеры (перемещение и масштабирование)
-    function updateScene(x, y, scale) {
-        scene.x = -x * scale// + app.renderer.width / 2;
-        scene.y = -y * scale// + app.renderer.height / 2;
-        scene.scale.set(scale);
-    }
-    
-    // Обновляем камеру с новыми координатами и масштабом
 
     hero.view()
     app.ticker.add((time) => {
-      hero.update(time)
+        hero.update(time)
+        if (mouse.isDownLeft) {
+            hero.createBullet(mouse.positionX, mouse.positionY)
+        }
+        let i = 0
+
+        while (i < bullets.length) {
+            if (bullets[i].lifeTime > 0) {
+                bullets[i].update(time)
+            } else {
+                bullets[i].sprite.destroy()
+                bullets.splice(i, 1)
+            }
+            i++
+        }
     });
 })();
 function moveCamera(x, y) {
@@ -76,7 +104,6 @@ function moveCamera(x, y) {
     } else {
         scene.x -= moveX
     }
-    //console.log(scene.x)
     scene.y += y
     return {
         x: moveX,
@@ -96,7 +123,6 @@ function intersects(object1, object2)
         && bounds1.y + bounds1.height > bounds2.y
     );
 }
-
 
 function keyboard(keyCode) {
     const key = {};
