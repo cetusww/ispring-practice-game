@@ -16,17 +16,37 @@ class ViewController extends AbstractController
 
 	public function signUpUserForm(): Response
 	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION !== []) {
+			return $this->redirectToRoute('show_menu');
+		}
 		return $this->render('signup-user-form.html.twig');
 	}
 
 	public function signInUserForm(): Response
 	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION !== []) {
+			return $this->redirectToRoute('show_menu');
+		}
 		return $this->render('signin-user-form.html.twig');
 	}
 
 	public function showMenu(): Response
 	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
 		return $this->render('menu.html.twig');
 	}
+
+    public function showGame(): Response
+    {
+        return $this->render('game.html.twig');
+    }
 
 }

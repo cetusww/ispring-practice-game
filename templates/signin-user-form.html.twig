@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign In User</title>
-    <link rel="stylesheet" href="css/signin-style.css">
+    <link rel="stylesheet" href="/css/signin-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="form">
-    <h1 class="form__title">Sign In</h1>
+<div class=" form">
     <form action="/signin" method="post">
-        <div class="form__username">
-            <label for="username">Name:</label><br>
-            <input name="username" id="username" type="text">
+        <div class="field border fill responsive input">
+            <input name="username" id="username" type="text" placeholder="имя">
         </div>
-        <div class="form__password">
-            <label for="password">Password:</label><br>
-            <input name="password" id="password" type="text">
+        <div class="field border fill input">
+            <input name="password" id="password" type="password" placeholder="пароль">
         </div>
-        <button class="form__button-signin" type="submit">Sign In</button>
+        <button class="small-round responsive button-signin" type="submit">войти</button>
+    </form>
+    <p class="center-align form__text">Ещё не зарегистрированы?</p>
+    <form action="/user/signup">
+        <button class="small-round responsive button-signup" type="submit">регистрация</button>
     </form>
 </div>
 </body>
+</html>
