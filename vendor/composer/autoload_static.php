@@ -319,7 +319,11 @@ class ComposerStaticInitfd0115627e097aebd3ce530b8a36e4bb
     );
 
     public static $classMap = array (
+        'App\\Controller\\UserController' => __DIR__ . '/../..' . '/src/Controller/UserController.php',
+        'App\\Controller\\ViewController' => __DIR__ . '/../..' . '/src/Controller/ViewController.php',
+        'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
