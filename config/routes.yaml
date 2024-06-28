@@ -29,3 +29,7 @@ show_menu:
 show_game:
     path: /game
     controller: App\Controller\ViewController::showGame
+
+show_legend:
+    path: /legend
+    controller: App\Controller\ViewController::showLegend

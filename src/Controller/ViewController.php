@@ -49,4 +49,9 @@ class ViewController extends AbstractController
         return $this->render('game.html.twig');
     }
 
+		public function showLegend(): Response
+		{
+			return $this->render('legend.html.twig');
+		}
+
 }
