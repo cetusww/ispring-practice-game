@@ -5,7 +5,9 @@ const scene = new PIXI.Container();
 const platforms = []
 const bullets = []
 const app = new PIXI.Application();
-
+const hero_walk = []
+const hero_jump = []
+const hero_idle = []
 const keys = {
     keyDown: false,
     keyUp: false,
@@ -77,9 +79,18 @@ function onKeyUp(event) {
 
     await PIXI.Assets.load([
         {
-            alias: 'hero-group',
-            src: '/images/hero-group.json'
+            alias: 'hero-idle-group',
+            src: '/images/hero-idle-group.json'
         },
+        {
+            alias: 'hero-walk-group',
+            src: '/images/hero-walk-group.json'
+        },
+        {
+            alias: 'hero-jump-group',
+            src: '/images/hero-jump-group.json'
+        },
+        
         {
             alias: 'hero',
             src: '/images/hero.svg'
@@ -93,10 +104,16 @@ function onKeyUp(event) {
             src: '/images/bullet.svg'
         },
     ])
-
-    const hero = new Hero('hero',app.screen.width / 2-200, app.screen.height / 2, 7, 0)
-    
-    
+    for (let i = 0; i < 10; i++) {
+        hero_idle.push(PIXI.Texture.from(`idle${1 + i}.png`))
+    }
+    for (let i = 0; i < 10; i++) {
+        hero_walk.push(PIXI.Texture.from(`walk${1 + i}.png`))
+    }
+    for (let i = 0; i < 10; i++) {
+        hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`))
+    }
+    const hero = new Hero('hero',100, 100, 6, 0)
 
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
@@ -150,9 +167,9 @@ window.addEventListener('keyup', onKeyUp)
 function levelCreate() {
     let texture = PIXI.Texture.from('ground')
     platforms.push(new Ground(texture, 89, 250, 178, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2, app.screen.height / 2 + 80, 178, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2, app.screen.height / 2 - 80, 178, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2 + 200, app.screen.height / 2 + 70, 178, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2 - 200, app.screen.height / 2 + 70, 178, 40))
+    platforms.push(new Ground(texture, 300, 400, 178, 40))
+    platforms.push(new Ground(texture, 300, 300, 178, 40))
+    platforms.push(new Ground(texture, 500, 400, 178, 40))
+    platforms.push(new Ground(texture, 100, 500, 178, 40))
 }
 

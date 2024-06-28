@@ -1,18 +1,11 @@
 class Hero {
     constructor(texture, posX, posY, speedX, speedY) {
+        this.sprite = new PIXI.AnimatedSprite(hero_idle);
 
+        this.sprite.animationSpeed = 0.2; // Скорость анимации
+        this.sprite.loop = true; // Зацикливание анимации
+        this.sprite.play(); // Запуск анимации
 
-        // const sheet = PIXI.Assets.get('hero-group').data;
-        // // console.log(sheet.animations["walk"])
-        // this.sprite = PIXI.AnimatedSprite.from(['walk01', 'walk02', 'walk03']);
-
-        // // // Настройте анимированный спрайт
-        //  this.sprite.animationSpeed = 0.1; // Скорость анимации
-        //  this.sprite.loop = true; // Зацикливание анимации
-        //  this.sprite.play(); // Запуск анимации
-
-        //this.sprite = PIXI.Sprite.from('walk01');
-        this.sprite = PIXI.Sprite.from(texture);
         this.sprite.x = posX
         this.sprite.y = posY
         this.sprite.width = 60
@@ -41,12 +34,36 @@ class Hero {
         this.currentCountBullet = this.weaponCountBullet
         this.rechargeTime = 300
         this.currentRechargeTime = this.rechargeTime
+        this.ainimateType = ''
+
+        this.updateAnim = function (type) {
+            if (type == 'idle') {
+                this.sprite.loop = false;
+                this.sprite.textures = hero_idle;
+                this.sprite.animationSpeed = 0.1;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.ainimateType = 'idle'
+            } else if (type == 'walk') {
+                this.sprite.textures = hero_walk;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.ainimateType = 'walk'
+            } else if (type == 'jump') {
+                this.sprite.textures = hero_jump;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = false;
+                this.sprite.play();
+                this.ainimateType = 'jump'
+            }  
+        }
 
         this.updateCollide = function () {
             this.collideTop = this.sprite.y - this.sprite.height / 2
-            this.collideBottom = this.sprite.y + this.sprite.height / 2
-            this.collideLeft = this.sprite.x - this.sprite.width / 2
-            this.collideRight = this.sprite.x + this.sprite.width / 2
+            this.collideBottom = this.sprite.y + this.sprite.height / 2 - 6
+            this.collideLeft = this.sprite.x - this.sprite.width / 2 + 10
+            this.collideRight = this.sprite.x + this.sprite.width / 2 - 10
         }
 
         this.createBullet = function (mouseX, mouseY) {
@@ -93,6 +110,7 @@ class Hero {
             }  
         }
         this.update = function (time) {
+            //console.log(this.ainimateType)
             if (keys.keyLeft) {
                 this.sprite.vx = -this.speedX
                 if (this.sprite.scale.x > 0)
@@ -112,9 +130,11 @@ class Hero {
             }
             if (keys.keyUp) {
                 if (this.isGround) {
+                    this.updateAnim('jump')
                     this.sprite.vy = -this.jumpPower
                 } else {
                     if (this.doubleJump && this.sprite.vy > 0) {
+                        this.updateAnim('jump')
                         this.sprite.vy = -this.jumpPower
                         this.doubleJump = false
                     }
@@ -123,11 +143,20 @@ class Hero {
 
             if (!this.isGround) {
                 this.sprite.vy += this.gravitationPower * time.deltaTime
-                //console.log(this.sprite.y)
             } else {
                 if (this.sprite.vy > 0) {
-                    this.sprite.vy = 0
-                } 
+                    this.sprite.vy = 0   
+                }  
+                if (!keys.keyLeft && !keys.keyRight) {
+                    this.sprite.vx = 0
+                    if (this.ainimateType !== 'idle' && this.sprite.vy >= 0) {
+                        this.updateAnim('idle')
+                    }
+                } else {
+                    if (this.ainimateType !== 'walk' && this.sprite.vy >= 0){
+                        this.updateAnim('walk')
+                    } 
+                }
             }
             this.sprite.x += this.sprite.vx * time.deltaTime
             this.sprite.y += this.sprite.vy * time.deltaTime
