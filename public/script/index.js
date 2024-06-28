@@ -76,6 +76,7 @@ function onKeyUp(event) {
     document.body.appendChild(app.canvas);
 
     let assets = [
+        { alias: 'hero-group', src: '/images/hero-group.json' },
         { alias: 'background', src: '/images/level1-map.jpg' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },

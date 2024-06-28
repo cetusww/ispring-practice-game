@@ -1,5 +1,17 @@
 class Hero {
     constructor(texture, posX, posY, speedX, speedY) {
+
+
+        // const sheet = PIXI.Assets.get('hero-group').data;
+        // // console.log(sheet.animations["walk"])
+        // this.sprite = PIXI.AnimatedSprite.from(['walk01', 'walk02', 'walk03']);
+
+        // // // Настройте анимированный спрайт
+        //  this.sprite.animationSpeed = 0.1; // Скорость анимации
+        //  this.sprite.loop = true; // Зацикливание анимации
+        //  this.sprite.play(); // Запуск анимации
+
+        //this.sprite = PIXI.Sprite.from('walk01');
         this.sprite = PIXI.Sprite.from(texture);
         this.sprite.x = posX
         this.sprite.y = posY
@@ -48,7 +60,7 @@ class Hero {
                     if (vecY < 0) {
                         angle *= -1
                     }
-                    let bullet = new Bullet('/images/bullet.svg', this.sprite.x, this.sprite.y, vecX, vecY, angle)
+                    let bullet = new Bullet('bullet', this.sprite.x, this.sprite.y, vecX, vecY, angle)
                     this.currentCountBullet -= 1
                     if (this.currentRechargeTime)
                     this.currentWeaponTime = this.weaponTime
@@ -111,6 +123,7 @@ class Hero {
 
             if (!this.isGround) {
                 this.sprite.vy += this.gravitationPower * time.deltaTime
+                //console.log(this.sprite.y)
             } else {
                 if (this.sprite.vy > 0) {
                     this.sprite.vy = 0
