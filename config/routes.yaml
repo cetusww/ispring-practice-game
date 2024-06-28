@@ -37,3 +37,7 @@ show_legend:
 show_win:
     path: /win
     controller: App\Controller\ViewController::showWin
+
+show_lose:
+    path: /lose
+    controller: App\Controller\ViewController::showLose

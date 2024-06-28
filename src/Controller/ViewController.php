@@ -74,4 +74,14 @@ class ViewController extends AbstractController
 		return $this->render('game-win.html.twig');
 	}
 
+	public function showLose(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('game-lose.html.twig');
+	}
+
 }

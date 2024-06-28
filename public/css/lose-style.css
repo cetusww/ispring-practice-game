@@ -17,7 +17,7 @@ body {
 .main {
     background-color: rgba(61, 61, 61, 0.6);
     width: 700px;
-    height: 90%;
+    height: 50%;
     margin: 5% auto 0 auto;
     padding: 30px;
 }
@@ -27,14 +27,9 @@ h1 {
     color: rgba(255, 255, 255, 1);
 }
 
-p {
-    font: 400 20px/24px "Miltonian Tattoo", sans-serif;
-    color: rgba(255, 255, 255, 1);
-}
-
 .continue {
     display: block;
     color: rgba(255, 255, 255, 1);
     font: 400 20px/24px sans-serif;
-    text-align: right;
+    text-align: center;
 }

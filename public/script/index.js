@@ -104,8 +104,11 @@ function onKeyUp(event) {
     hero.view()
     app.ticker.add((time) => {
         hero.update(time)
-        if (hero.sprite.x > 1000) {        // проверка на победу по достижении точки
+        if (hero.sprite.x > app.screen.width) {        // проверка на победу по достижении точки
             window.location.href = "/win";
+        }
+        if (hero.sprite.x < 0) {
+            window.location.href = "/lose";
         }
         console.log(hero.sprite.x)
         if (mouse.isDownLeft) {
