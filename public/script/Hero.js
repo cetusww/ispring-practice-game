@@ -150,10 +150,10 @@ class Hero {
                             this.sprite.y -= (this.collideBottom - platform.collideTop)
                         } else {
                             this.sprite.y -= (this.collideBottom - platform.collideTop) / 4
-                        }     
+                        }
                     }
                 })
             }
-        } 
+        }
     }
 }

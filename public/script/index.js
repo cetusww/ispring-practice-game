@@ -69,8 +69,8 @@ function onKeyUp(event) {
 
 (async () =>
 {
-    // Intialize the application.
-    await app.init({ background: '#1099bb',  resizeTo: window });//
+    // Initialize the application.
+    await app.init({ background: '#000000',  resizeTo: window });//
 
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
@@ -87,8 +87,9 @@ function onKeyUp(event) {
     addBackground(app);
 
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
+    const hero2 = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
 
-
+    const spriteAnimation = new enemy('canvas', 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png');
 
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
@@ -101,7 +102,8 @@ function onKeyUp(event) {
 
     app.stage.addChild(scene);
 
-    hero.view()
+    hero2.view();
+    hero.view();
     app.ticker.add((time) => {
         hero.update(time)
         if (mouse.isDownLeft) {

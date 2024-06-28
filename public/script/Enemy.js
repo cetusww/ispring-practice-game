@@ -1,7 +1,17 @@
 class enemy {
     constructor(canvasSelector, imageSrc) {
         this.canvas = document.querySelector(canvasSelector);
-        this.ctx = this.canvas.getContext('2d');
+        if (this.canvas) {
+            console.log('Canvas element found:', this.canvas);
+            this.ctx = this.canvas.getContext('2d');
+            if (this.ctx) {
+                console.log('2D context obtained:', this.ctx);
+            } else {
+                console.error('Failed to get 2D context');
+            }
+        } else {
+            console.error('Canvas element not found');
+        }
         this.img = new Image();
         this.img.src = imageSrc;
         this.img.onload = () => this.init();
@@ -42,7 +52,12 @@ class enemy {
             return;
         }
         this.frameCount = 0;
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (this.ctx) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            // Other drawing operations
+        } else {
+            console.error('Context is null');
+        }
         this.updateCharacterPosition();
         this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], this.currentDirection, this.characterX, this.characterY);
         this.currentLoopIndex++;
