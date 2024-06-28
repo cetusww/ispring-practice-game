@@ -40,7 +40,7 @@ class Hero {
             if (type == 'idle') {
                 this.sprite.loop = false;
                 this.sprite.textures = hero_idle;
-                this.sprite.animationSpeed = 0.1;
+                this.sprite.animationSpeed = 0.15;
                 this.sprite.loop = true;
                 this.sprite.play();
                 this.ainimateType = 'idle'
@@ -83,6 +83,12 @@ class Hero {
                     this.currentWeaponTime = this.weaponTime
                     bullet.view()
                     bullets.push(bullet)
+                    if (vecX > 0 && this.sprite.scale.x < 0) {
+                        this.sprite.scale.x *= -1
+                    }
+                    if (vecX < 0 && this.sprite.scale.x > 0) {
+                        this.sprite.scale.x *= -1
+                    }
                 }
             }          
         }

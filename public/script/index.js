@@ -14,7 +14,7 @@ const keys = {
     keyLeft: false,
     keyRight: false,
 }
-let mouse = {
+const mouse = {
     isDownLeft: false,
     positionX: 0,
     positionY: 0,
@@ -78,31 +78,12 @@ function onKeyUp(event) {
     document.body.appendChild(app.canvas);
 
     await PIXI.Assets.load([
-        {
-            alias: 'hero-idle-group',
-            src: '/images/hero-idle-group.json'
-        },
-        {
-            alias: 'hero-walk-group',
-            src: '/images/hero-walk-group.json'
-        },
-        {
-            alias: 'hero-jump-group',
-            src: '/images/hero-jump-group.json'
-        },
-        
-        {
-            alias: 'hero',
-            src: '/images/hero.svg'
-        },
-        {
-            alias: 'ground',
-            src: '/images/ground.svg'
-        },
-        {
-            alias: 'bullet',
-            src: '/images/bullet.svg'
-        },
+        { alias: 'hero-idle-group', src: '/images/hero-idle-group.json' },
+        { alias: 'hero-walk-group', src: '/images/hero-walk-group.json' },
+        { alias: 'hero-jump-group', src: '/images/hero-jump-group.json' },        
+        { alias: 'hero', src: '/images/hero.svg' },
+        { alias: 'ground', src: '/images/ground.svg' },
+        { alias: 'bullet', src: '/images/bullet.svg' },
     ])
     for (let i = 0; i < 10; i++) {
         hero_idle.push(PIXI.Texture.from(`idle${1 + i}.png`))
