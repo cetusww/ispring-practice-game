@@ -33,3 +33,7 @@ show_game:
 show_legend:
     path: /legend
     controller: App\Controller\ViewController::showLegend
+
+show_win:
+    path: /win
+    controller: App\Controller\ViewController::showWin

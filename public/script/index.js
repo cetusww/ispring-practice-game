@@ -104,6 +104,10 @@ function onKeyUp(event) {
     hero.view()
     app.ticker.add((time) => {
         hero.update(time)
+        if (hero.sprite.x > 1000) {        // проверка на победу по достижении точки
+            window.location.href = "/win";
+        }
+        console.log(hero.sprite.x)
         if (mouse.isDownLeft) {
             hero.createBullet(mouse.positionX, mouse.positionY)
         }
