@@ -76,12 +76,25 @@ function onKeyUp(event) {
     document.body.appendChild(app.canvas);
 
     await PIXI.Assets.load([
-        '/images/hero.svg',
-        '/images/bullet.svg',
-        '/images/ground.svg',
+        {
+            alias: 'hero-group',
+            src: '/images/hero-group.json'
+        },
+        {
+            alias: 'hero',
+            src: '/images/hero.svg'
+        },
+        {
+            alias: 'ground',
+            src: '/images/ground.svg'
+        },
+        {
+            alias: 'bullet',
+            src: '/images/bullet.svg'
+        },
     ])
 
-    const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
+    const hero = new Hero('hero',app.screen.width / 2-200, app.screen.height / 2, 7, 0)
     
     
 
@@ -135,7 +148,7 @@ window.addEventListener('keydown', onKeyDown)
 window.addEventListener('keyup', onKeyUp)
 
 function levelCreate() {
-    let texture = PIXI.Texture.from('/images/ground.svg')
+    let texture = PIXI.Texture.from('ground')
     platforms.push(new Ground(texture, 89, 250, 178, 40))
     platforms.push(new Ground(texture, app.screen.width / 2, app.screen.height / 2 + 80, 178, 40))
     platforms.push(new Ground(texture, app.screen.width / 2, app.screen.height / 2 - 80, 178, 40))
