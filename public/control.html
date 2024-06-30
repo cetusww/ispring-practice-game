@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Control</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+      button {
+          width: 100px;
+          height: 100px;
+          font-size: 20px;
+          margin: 10px;
+      }
+  </style>
+</head>
+<body>
+<button id="up">Up</button>
+<button id="down">Down</button>
+<button id="left">Left</button>
+<button id="right">Right</button>
+
+<script>
+    const socket = io();
+
+    const buttons = {
+        up: document.getElementById('up'),
+        down: document.getElementById('down'),
+        left: document.getElementById('left'),
+        right: document.getElementById('right')
+    };
+
+    for (const [direction, button] of Object.entries(buttons)) {
+        button.addEventListener('mousedown', () => {
+            socket.emit('control', { direction, action: 'down' });
+        });
+
+        button.addEventListener('mouseup', () => {
+            socket.emit('control', { direction, action: 'up' });
+        });
+
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            socket.emit('control', { direction, action: 'down' });
+        });
+
+        button.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            socket.emit('control', { direction, action: 'up' });
+        });
+    }
+</script>
+</body>
+</html>

@@ -67,10 +67,44 @@ function onKeyUp(event) {
     }
 }
 
+function onButtonDown(event) {
+    if (event.target.id === 'left') {
+        keys.keyLeft = true
+        keys.keyRight = false
+    }
+    if (event.target.id === 'right') {
+        keys.keyRight = true
+        keys.keyLeft = false
+    }
+    if (event.target.id === 'up') {
+        keys.keyUp = true
+        keys.keyDown = false
+    }
+    if (event.target.id === 'down') {
+        keys.keyDown = true
+        keys.keyUp = false
+    }
+}
+function onButtonUp(event) {
+    if (event.target.id === 'left') {
+        keys.keyLeft = false
+    }
+    if (event.target.id === 'right') {
+        keys.keyRight = false
+    }
+    if (event.target.id === 'up') {
+        keys.keyDown = false
+    }
+    if (event.target.id === 'down') {
+        keys.keyUp = false
+    }
+}
+
 (async () =>
 {
     // Intialize the application.
     await app.init({ background: '#1099bb',  resizeTo: window });//
+    const socket = io();
 
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
@@ -88,13 +122,24 @@ function onKeyUp(event) {
 
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
 
-
+    const buttonLeft = document.getElementById('left');
+    const buttonRight = document.getElementById('right');
+    const buttonUp = document.getElementById('up');
+    const buttonDown = document.getElementById('down');
+    buttonLeft.addEventListener('mousedown', onButtonDown);
+    buttonRight.addEventListener('mousedown', onButtonDown);
+    buttonUp.addEventListener('mousedown', onButtonDown);
+    buttonDown.addEventListener('mousedown', onButtonDown);
+    buttonLeft.addEventListener('mouseup', onButtonUp);
+    buttonRight.addEventListener('mouseup', onButtonUp);
+    buttonUp.addEventListener('mouseup', onButtonUp);
+    buttonDown.addEventListener('mouseup', onButtonUp);
 
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
     app.canvas.addEventListener('mouseup', onAppMouseUp)
     levelCreate()
-    
+
     platforms.forEach(platform => {
         platform.view()
     })
@@ -119,6 +164,12 @@ function onKeyUp(event) {
             i++
         }
     });
+
+    socket.on('move', (data) => {
+        const { direction, action } = data;
+        moving[direction] = action === 'down';
+    });
+
 })();
 
 function moveCamera(x, y) {
