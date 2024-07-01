@@ -1,5 +1,5 @@
-const url = new URL('https://50aa-188-187-189-230.ngrok-free.app/.well-known/mercure');
-url.searchParams.append('topic', 'https://50aa-188-187-189-230.ngrok-free.app/game');
+const url = new URL('https://localhost:3000/.well-known/mercure');
+url.searchParams.append('topic', 'https://localhost:8002/game');
 const eventSource = new EventSource(url);
 
 eventSource.onmessage = function (event) {

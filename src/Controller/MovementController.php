@@ -16,7 +16,7 @@ class MovementController extends AbstractController
 	{
 		$data = json_decode($request->getContent(), true);
 		$update = new Update(
-			'https://50aa-188-187-189-230.ngrok-free.app/game',
+			'https://localhost:8002/game',
 			json_encode(['keys' => $data['keys']])
 		);
 		$hub->publish($update);
