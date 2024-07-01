@@ -28,20 +28,31 @@ class UserController extends AbstractController
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
 
-		if (strlen($newUsername) < 3) {
-			$session->getFlashBag()->add('error', 'Имя слишком короткое. Оно должен содержать не менее 3 символов.');
-			return $this->redirectToRoute('signup-form');
+		$errors = [];
+
+		if (empty($newUsername))
+		{
+			$errors['username'] = 'Имя пользователя не может быть пустым.';
+		}
+		if (empty($newPassword))
+		{
+			$errors['password'] = 'Пароль не может быть пустым.';
+		}
+		if (strlen($newPassword) < 6)
+		{
+			$errors['password'] = 'Пароль должен содержать не менее 6 символов.';
+		}
+		if ($this->repository->findUserByUserName($newUsername))
+		{
+			$errors['username'] = 'Пользователь с таким именем уже существует.';
 		}
 
-		if (strlen($newPassword) < 6) {
-			$session->getFlashBag()->add('error', 'Пароль слишком короткий. Он должен содержать не менее 6 символов.');
-			return $this->redirectToRoute('signup-form');
+		if (!empty($errors))
+		{
+			return $this->render('signup-user-form.html.twig', ['errors' => $errors]);
 		}
 
-		if (preg_match('/^[a-zA-Z]+$/', $newPassword)) {
-			$session->getFlashBag()->add('error', 'Пароль должен содержать только латинские буквы.');
-			return $this->redirectToRoute('signup-form');
-		}
+
 
 		$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 		$user = new User(
@@ -52,6 +63,11 @@ class UserController extends AbstractController
 
 		$this->repository->saveUserToDatabase($user);
 
+		session_name('auth');
+		session_start();
+		$_SESSION['user_id'] = $user->getId();
+		$_SESSION['username'] = $newUsername;
+
 		return $this->redirectToRoute('show_menu');
 	}
 
@@ -59,22 +75,32 @@ class UserController extends AbstractController
 	{
 		$username = $request->get('username');
 		$password = $request->get('password');
+
 		$user = $this->repository->findUserByUserName($username);
-		if ($this->repository->checkPassword($user->getId(), $password)) {
-			session_name('auth');
-			session_start();
-			$_SESSION['user_id'] = $user->getId();
-			$_SESSION['username'] = $username;
-			return $this->redirectToRoute(
-				'show_menu',
-				(array)Response::HTTP_SEE_OTHER
-			);
-		}	else {
-			return $this->redirectToRoute(
-				'signin-form',
-				(array)Response::HTTP_SEE_OTHER
-			);
+
+		$errors = [];
+
+		if (!$user)
+		{
+			$errors['username'] = 'Пользователя с таким именем не существует';
 		}
+		if ($user && !$this->repository->checkPassword($user->getId(), $password))
+		{
+			$errors['password'] = 'Неверный пароль';
+		}
+		if (!empty($errors))
+		{
+			return $this->render('signin-user-form.html.twig', ['errors' => $errors]);
+		}
+
+		session_name('auth');
+		session_start();
+		$_SESSION['user_id'] = $user->getId();
+		$_SESSION['username'] = $username;
+		return $this->redirectToRoute(
+			'show_menu',
+			(array)Response::HTTP_SEE_OTHER
+		);
 	}
 
 	public function signOutUser(): Response
