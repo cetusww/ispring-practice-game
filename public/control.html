@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Control</title>
+</head>
+<body>
+<button id="left">Left</button>
+<button id="right">Right</button>
+<button id="up">Up</button>
+<button id="down">Down</button>
+
+<script>
+    const keys = {
+        keyDown: false,
+        keyUp: false,
+        keyLeft: false,
+        keyRight: false,
+    }
+
+    function sendKeys() {
+        fetch('/move', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ keys }),
+        });
+    }
+
+    document.getElementById('left').addEventListener('mousedown', () => { keys.keyLeft = true; sendKeys(); });
+    document.getElementById('left').addEventListener('mouseup', () => { keys.keyLeft = false; sendKeys(); });
+    document.getElementById('right').addEventListener('mousedown', () => { keys.keyRight = true; sendKeys(); });
+    document.getElementById('right').addEventListener('mouseup', () => { keys.keyRight = false; sendKeys(); });
+    document.getElementById('up').addEventListener('mousedown', () => { keys.keyUp = true; sendKeys(); });
+    document.getElementById('up').addEventListener('mouseup', () => { keys.keyUp = false; sendKeys(); });
+    document.getElementById('down').addEventListener('mousedown', () => { keys.keyDown = true; sendKeys(); });
+    document.getElementById('down').addEventListener('mouseup', () => { keys.keyDown = false; sendKeys(); });
+</script>
+</body>
+</html>

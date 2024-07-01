@@ -29,3 +29,17 @@ show_menu:
 show_game:
     path: /game
     controller: App\Controller\ViewController::showGame
+
+#mercure_well_known:
+#    path: /.well-known/mercure
+#    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+#    defaults:
+#        path: https://50aa-188-187-189-230.ngrok-free.app/.well-known/mercure
+
+.well_known_mercure:
+    path: /.well-known/mercure
+    controller: Symfony\Bundle\MercureBundle\Controller\HubController
+
+move:
+    path: /move
+    controller: App\Controller\MovementController::move

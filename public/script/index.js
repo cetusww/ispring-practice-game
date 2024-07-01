@@ -1,3 +1,28 @@
+const url = new URL('https://50aa-188-187-189-230.ngrok-free.app/.well-known/mercure');
+url.searchParams.append('topic', 'https://50aa-188-187-189-230.ngrok-free.app/game');
+const eventSource = new EventSource(url);
+
+eventSource.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    const keys = data.keys;
+
+    if (keys.keyLeft) {
+        console.log('left')
+    }
+    if (keys.keyRight) {
+        keys.keyRight = true
+        keys.keyLeft = false
+    }
+    if (keys.keyUp) {
+        keys.keyUp = true
+        keys.keyDown = false
+    }
+    if (keys.keyDown) {
+        keys.keyDown = true
+        keys.keyUp = false
+    }
+};
+
 const SCENE_WIDTH = window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
 
@@ -88,14 +113,13 @@ function onKeyUp(event) {
 
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
 
-
-
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
     app.canvas.addEventListener('mouseup', onAppMouseUp)
     levelCreate()
     
-    platforms.forEach(platform => {
+    platforms.forEach(platform =>
+    {
         platform.view()
     })
 
