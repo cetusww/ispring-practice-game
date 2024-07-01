@@ -88,7 +88,7 @@ function onKeyUp(event) {
     await app.init({ background: '#1099bb',  resizeTo: window });
     document.body.appendChild(app.canvas);
     await PIXI.Assets.load([
-        { alias: 'hero-group', src: '/images/hero-group.json' },
+        { alias: 'hero-group', src: '/images/hero_group.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
