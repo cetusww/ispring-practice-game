@@ -1,69 +1,69 @@
 {
   "frames": {
-    "walk1.png": {
+    "idle1.png": {
       "frame": {"x":0, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk2.png": {
+    "idle2.png": {
       "frame": {"x":587, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk3.png": {
+    "idle3.png": {
       "frame": {"x":1174, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk4.png": {
+    "idle4.png": {
       "frame": {"x":1761, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk5.png": {
+    "idle5.png": {
       "frame": {"x":2348, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk6.png": {
+    "idle6.png": {
       "frame": {"x":2935, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk7.png": {
+    "idle7.png": {
       "frame": {"x":3522, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk8.png": {
+    "idle8.png": {
       "frame": {"x":4109, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk9.png": {
+    "idle9.png": {
       "frame": {"x":4696, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "walk10.png": {
+    "idle10.png": {
       "frame": {"x":5283, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
@@ -72,7 +72,7 @@
     }
   },
   "meta": {
-    "image": "hero-walk-group.png",
+    "image": "hero_idle_group.png",
     "format": "RGBA8888",
     "size": {"w":5870, "h":707},
     "scale": "1"

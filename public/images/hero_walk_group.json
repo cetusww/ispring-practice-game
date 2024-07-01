@@ -1,69 +1,69 @@
 {
   "frames": {
-    "jump1.png": {
+    "walk1.png": {
       "frame": {"x":0, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump2.png": {
+    "walk2.png": {
       "frame": {"x":587, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump3.png": {
+    "walk3.png": {
       "frame": {"x":1174, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump4.png": {
+    "walk4.png": {
       "frame": {"x":1761, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump5.png": {
+    "walk5.png": {
       "frame": {"x":2348, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump6.png": {
+    "walk6.png": {
       "frame": {"x":2935, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump7.png": {
+    "walk7.png": {
       "frame": {"x":3522, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump8.png": {
+    "walk8.png": {
       "frame": {"x":4109, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump9.png": {
+    "walk9.png": {
       "frame": {"x":4696, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "jump10.png": {
+    "walk10.png": {
       "frame": {"x":5283, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
@@ -72,7 +72,7 @@
     }
   },
   "meta": {
-    "image": "hero-jump-group.png",
+    "image": "hero_walk_group.png",
     "format": "RGBA8888",
     "size": {"w":5870, "h":707},
     "scale": "1"
