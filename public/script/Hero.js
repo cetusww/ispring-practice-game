@@ -36,6 +36,27 @@ class Hero {
         this.currentRechargeTime = this.rechargeTime
         this.ainimateType = ''
 
+
+
+        let radius = 300
+        let blurSize = 50
+        const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({ color: 0xff0000 });
+
+        circle.filters = [new PIXI.BlurFilter(blurSize)];
+
+        const bounds = new PIXI.Rectangle(0, 0, (radius + blurSize) * 2, (radius + blurSize) * 2);
+        const texture1 = app.renderer.generateTexture({
+            target: circle,
+            style: { scaleMode: PIXI.SCALE_MODES.NEAREST },
+            resolution: 1,
+            frame: bounds,
+        });
+        this.focusTexture = new PIXI.Sprite(texture1);
+        this.focusTexture.tint = 0x000000;
+        this.focusTexture.anchor.set(0.5)
+
+
+
         this.updateAnim = function (type) {
             if (type == 'idle') {
                 this.sprite.loop = false;
@@ -94,7 +115,10 @@ class Hero {
         }
 
         this.view = function () {
+            
+            scene.addChild(this.focusTexture);
             scene.addChild(this.sprite);
+            scene.mask = this.focusTexture;
         }
 
         this.deleteView = function () {
@@ -117,6 +141,8 @@ class Hero {
         }
         this.update = function (time) {
             //console.log(this.ainimateType)
+            this.focusTexture.x = this.sprite.x
+            this.focusTexture.y = this.sprite.y
             if (keys.keyLeft) {
                 this.sprite.vx = -this.speedX
                 if (this.sprite.scale.x > 0)

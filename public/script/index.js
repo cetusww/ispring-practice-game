@@ -5,6 +5,8 @@ const scene = new PIXI.Container();
 const platforms = []
 const bullets = []
 const app = new PIXI.Application();
+//
+let background
 const hero_walk = []
 const hero_jump = []
 const hero_idle = []
@@ -72,12 +74,13 @@ function onKeyUp(event) {
 (async () =>
 {
     // Intialize the application.
-    await app.init({ background: '#1099bb',  resizeTo: window });//
+    await app.init({ background: '#000000',  resizeTo: window });//
 
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
 
     await PIXI.Assets.load([
+        { alias: 'background', src: '/images/level1-map.jpg' },
         { alias: 'hero-idle-group', src: '/images/hero-idle-group.json' },
         { alias: 'hero-walk-group', src: '/images/hero-walk-group.json' },
         { alias: 'hero-jump-group', src: '/images/hero-jump-group.json' },        
@@ -94,6 +97,23 @@ function onKeyUp(event) {
     for (let i = 0; i < 10; i++) {
         hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`))
     }
+
+
+    background = PIXI.Sprite.from('background');
+    background.anchor.set(0);
+
+
+    function resizeBackground() {
+        background.width = app.screen.width;
+        background.height = app.screen.height;
+    }
+
+    resizeBackground();
+    scene.addChild(background);
+
+
+
+
     const hero = new Hero('hero',100, 100, 6, 0)
 
     app.canvas.addEventListener('mousedown', onAppMouseDown)
