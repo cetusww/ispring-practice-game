@@ -28,6 +28,11 @@ class UserController extends AbstractController
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
 
+		if (!$newPassword)
+		{
+			return $this->redirectToRoute('signup-form');
+		}
+
 		$errors = [];
 
 		if (empty($newUsername))
@@ -76,6 +81,11 @@ class UserController extends AbstractController
 		$username = $request->get('username');
 		$password = $request->get('password');
 
+		if (!$username)
+		{
+			return $this->redirectToRoute('signin-form');
+		}
+
 		$user = $this->repository->findUserByUserName($username);
 
 		$errors = [];
@@ -97,10 +107,7 @@ class UserController extends AbstractController
 		session_start();
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $username;
-		return $this->redirectToRoute(
-			'show_menu',
-			(array)Response::HTTP_SEE_OTHER
-		);
+		return $this->redirectToRoute('show_menu');
 	}
 
 	public function signOutUser(): Response
