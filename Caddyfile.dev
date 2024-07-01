@@ -1,0 +1,38 @@
+# Learn how to configure the Mercure.rocks Hub on https://mercure.rocks/docs/hub/config
+{
+	debug
+}
+
+https://50aa-188-187-189-230.ngrok-free.app
+
+log {
+	format filter {
+		wrap console
+		fields {
+			uri query {
+				replace authorization REDACTED
+			}
+		}
+	}
+}
+
+{$EXTRA_DIRECTIVES}
+
+route {
+	encode zstd gzip
+
+	mercure {
+  		# Transport to use (default to Bolt)
+  		transport_url https://50aa-188-187-189-230.ngrok-free.app/.well-known/mercure
+  		# Publisher JWT key
+  		publisher_jwt {env.MERCURE_JWT_SECRET} {env.MERCURE_PUBLISHER_JWT_ALG}
+  		# Subscriber JWT key
+  		subscriber_jwt {env.MERCURE_JWT_SECRET} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+  		# Extra directives
+  		{$MERCURE_EXTRA_DIRECTIVES}
+  	}
+
+	redir / /.well-known/mercure/ui/
+	respond /healthz 200
+	respond "Not Found" 404
+}
