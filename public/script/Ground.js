@@ -18,7 +18,8 @@ class Ground
             scene.addChild(this.sprite);
         }
 
-        this.deleteView = function () {
+        this.deleteView = function ()
+        {
             scene.removeChild(this.sprite);
         }
     }

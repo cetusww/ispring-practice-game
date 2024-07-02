@@ -5,6 +5,13 @@ const scene = new PIXI.Container();
 const platforms = []
 const bullets = []
 const app = new PIXI.Application();
+//
+let background
+const hero_walk = []
+const hero_jump = []
+const hero_idle = []
+const keys =
+{
 
 const keys =
 {
@@ -13,7 +20,7 @@ const keys =
     keyLeft: false,
     keyRight: false,
 }
-let mouse =
+const mouse =
 {
     isDownLeft: false,
     positionX: 0,
@@ -42,7 +49,8 @@ function onAppMouseUp(event)
     }
 }
 
-function onKeyDown(event) {
+function onKeyDown(event)
+{
     if (event.keyCode === 37)
     {
         keys.keyLeft = true;
@@ -64,7 +72,8 @@ function onKeyDown(event) {
         keys.keyUp = false;
     }
 }
-function onKeyUp(event) {
+function onKeyUp(event)
+{
     if (event.keyCode === 37)
     {
         keys.keyLeft = false;
@@ -85,48 +94,56 @@ function onKeyUp(event) {
 
 (async () =>
 {
-    await app.init({ background: '#1099bb',  resizeTo: window });
+    await app.init({ background: '#000000',  resizeTo: window });
     document.body.appendChild(app.canvas);
 
-    let assets = [
+    await PIXI.Assets.load([
         { alias: 'background', src: '/images/level1-map.jpg' },
-        { alias: 'hero-group', src: '/images/hero_group.json' },
+        { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
+        { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
+        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
         { alias: 'hero', src: '/images/hero.svg' },
-        { alias: 'bullet', src: '/images/bullet.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
+        { alias: 'bullet', src: '/images/bullet.svg' },
+    ])
+    for (let i = 0; i < 10; i++)
+    {
+        hero_idle.push(PIXI.Texture.from(`idle${1 + i}.png`));
+    }
+    for (let i = 0; i < 10; i++)
+    {
+        hero_walk.push(PIXI.Texture.from(`walk${1 + i}.png`));
+    }
+    for (let i = 0; i < 10; i++)
+    {
+        hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`));
+    }
 
-    ]
+    const background = PIXI.Sprite.from('background');
+    background.anchor.set(0);
 
-    await PIXI.Assets.load(assets);
-    addBackground(app);
+    function resizeBackground()
+    {
+        background.width = app.screen.width;
+        background.height = app.screen.height;
+    }
 
-    const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
+    resizeBackground();
+    scene.addChild(background);
 
-
-
-    app.canvas.addEventListener('mousedown', onAppMouseDown)
-    app.canvas.addEventListener('mousemove', onAppMouseMove)
-    app.canvas.addEventListener('mouseup', onAppMouseUp)
-    levelCreate()
-
-    platforms.forEach(platform => {
-        platform.view()
-    })
-
+    app.canvas.addEventListener('mousedown', onAppMouseDown);
+    app.canvas.addEventListener('mousemove', onAppMouseMove);
+    app.canvas.addEventListener('mouseup', onAppMouseUp);
+    levelCreate();
     app.stage.addChild(scene);
-
-    hero.view()
-    app.ticker.add((time) => {
-        hero.update(time)
-        if (hero.sprite.x > app.screen.width) {        // проверка на победу по достижении точки
-            window.location.href = "/win";
-        }
-        if (hero.sprite.x < 0) {
-            window.location.href = "/lose";
-        }
-        console.log(hero.sprite.x)
-        if (mouse.isDownLeft) {
-            hero.createBullet(mouse.positionX, mouse.positionY)
+    const hero = new Hero(100, 100, 6, 0);
+    hero.view();
+    app.ticker.add((time) =>
+    {
+        hero.update(time);
+        if (mouse.isDownLeft)
+        {
+            hero.createBullet(mouse.positionX, mouse.positionY);
         }
         let i = 0;
         while (i < bullets.length)
@@ -153,11 +170,14 @@ function moveCamera(x, y)
     {
         moveX = scene.x;
         scene.x -= moveX;
-    } else if (scene.x - x < app.screen.width - SCENE_WIDTH)
+    }
+    else if (scene.x - x < app.screen.width - SCENE_WIDTH)
     {
         moveX = (scene.x + SCENE_WIDTH - app.screen.width);
         scene.x -= moveX;
-    } else
+    }
+    scene.y += y;
+    else
     {
         scene.x -= moveX;
     }
@@ -170,10 +190,14 @@ window.addEventListener('keyup', onKeyUp);
 function levelCreate() {
     // let texture = PIXI.Texture.from('/images/ground.svg')
     let texture
-    platforms.push(new Ground(texture, app.screen.width / 2 + 350, 320, app.screen.width, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2 + 150, 450, app.screen.width, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2 - 270, 590, app.screen.width, 40))
-    platforms.push(new Ground(texture, app.screen.width / 2, 750, app.screen.width, 40))
+    platforms.push(new Ground(texture, app.screen.width / 2 + 350, 320, app.screen.width, 40));
+    platforms.push(new Ground(texture, app.screen.width / 2 + 150, 450, app.screen.width, 40));
+    platforms.push(new Ground(texture, app.screen.width / 2 - 270, 590, app.screen.width, 40));
+    platforms.push(new Ground(texture, app.screen.width / 2, 750, app.screen.width, 40));
+    platforms.forEach(platform =>
+    {
+        platform.view();
+    });
 }
 
 function addBackground(app) {
