@@ -10,8 +10,6 @@ let background
 const hero_walk = []
 const hero_jump = []
 const hero_idle = []
-const keys =
-{
 
 const keys =
 {
@@ -141,6 +139,14 @@ function onKeyUp(event)
     app.ticker.add((time) =>
     {
         hero.update(time);
+        if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
+        {
+            window.location.href = "/win";
+        }
+        if (hero.sprite.x < 0)
+        {
+            window.location.href = "/lose";
+        }
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -176,7 +182,6 @@ function moveCamera(x, y)
         moveX = (scene.x + SCENE_WIDTH - app.screen.width);
         scene.x -= moveX;
     }
-    scene.y += y;
     else
     {
         scene.x -= moveX;
@@ -218,3 +223,4 @@ function addBackground(app) {
         resizeBackground();
     });
 }
+
