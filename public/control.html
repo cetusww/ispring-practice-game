@@ -24,10 +24,10 @@
     const socket = io();
 
     const buttons = {
-        up: document.getElementById('up'),
-        down: document.getElementById('down'),
-        left: document.getElementById('left'),
-        right: document.getElementById('right')
+        keyUp: document.getElementById('up'),
+        keyDown: document.getElementById('down'),
+        keyLeft: document.getElementById('left'),
+        keyRight: document.getElementById('right')
     };
 
     for (const [direction, button] of Object.entries(buttons)) {

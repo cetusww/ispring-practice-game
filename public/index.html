@@ -4,40 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
+  <script src="script/pixi.js"></script>
+  <script src="script/Bullet.js"></script>
+  <script src="script/Hero.js"></script>
+  <script src="script/Ground.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-<canvas id="gameCanvas" width="800" height="600"></canvas>
-
-<script>
-    const socket = io();
-    const canvas = document.getElementById('gameCanvas');
-    const context = canvas.getContext('2d');
-
-    let sprite = { x: 400, y: 300 };
-    let moving = { up: false, down: false, left: false, right: false };
-
-    function drawSprite() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillRect(sprite.x, sprite.y, 50, 50);
-    }
-
-    function updatePosition() {
-        if (moving.up) sprite.y -= 5;
-        if (moving.down) sprite.y += 5;
-        if (moving.left) sprite.x -= 5;
-        if (moving.right) sprite.x += 5;
-        drawSprite();
-    }
-
-    setInterval(updatePosition, 20);
-
-    socket.on('move', (data) => {
-        const { direction, action } = data;
-        moving[direction] = action === 'down';
-    });
-
-    drawSprite();
-</script>
+<script src="script/index.js"></script>
 </body>
 </html>

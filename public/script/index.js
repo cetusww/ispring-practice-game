@@ -17,6 +17,14 @@ let mouse = {
     positionX: 0,
     positionY: 0,
 }
+
+const socket = io();
+socket.on('move', (data) =>
+{
+    const { direction, action } = data;
+    keys[direction] = action === 'down';
+});
+
 function onAppMouseDown(event) {
     if (event.button === 0) {
         mouse.isDownLeft = true
@@ -121,20 +129,6 @@ function onButtonUp(event) {
     addBackground(app);
 
     const hero = new Hero('/images/hero.svg',app.screen.width / 2, app.screen.height / 2, 7, 0)
-
-    const buttonLeft = document.getElementById('left');
-    const buttonRight = document.getElementById('right');
-    const buttonUp = document.getElementById('up');
-    const buttonDown = document.getElementById('down');
-    buttonLeft.addEventListener('mousedown', onButtonDown);
-    buttonRight.addEventListener('mousedown', onButtonDown);
-    buttonUp.addEventListener('mousedown', onButtonDown);
-    buttonDown.addEventListener('mousedown', onButtonDown);
-    buttonLeft.addEventListener('mouseup', onButtonUp);
-    buttonRight.addEventListener('mouseup', onButtonUp);
-    buttonUp.addEventListener('mouseup', onButtonUp);
-    buttonDown.addEventListener('mouseup', onButtonUp);
-
     app.canvas.addEventListener('mousedown', onAppMouseDown)
     app.canvas.addEventListener('mousemove', onAppMouseMove)
     app.canvas.addEventListener('mouseup', onAppMouseUp)
