@@ -47,7 +47,7 @@ class Hero
                 let globalPosition = this.sprite.getGlobalPosition();
                 let distance = Math.sqrt((globalPosition.x - mouseX) * (globalPosition.x - mouseX) + (globalPosition.y - mouseY) * (globalPosition.y - mouseY));
                 let vecX = (mouseX - globalPosition.x) / distance;
-                if ((this.sprite.vx > 0 && vecX >= 0) || (this.sprite.vx < 0 && vecX <= 0) || (this.sprite.vx == 0))
+                if ((this.sprite.vx > 0 && vecX >= 0) || (this.sprite.vx < 0 && vecX <= 0) || (this.sprite.vx === 0))
                 {
                     let vecY = (mouseY - globalPosition.y) / distance;
                     let angle = Math.acos(vecX);
