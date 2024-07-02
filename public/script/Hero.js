@@ -57,7 +57,7 @@ class Hero
 
         this.updateAnim = function (type)
         {
-            if (type == 'idle')
+            if (type === 'idle')
             {
                 this.sprite.loop = false;
                 this.sprite.textures = hero_idle;
@@ -65,14 +65,14 @@ class Hero
                 this.sprite.loop = true;
                 this.sprite.play();
                 this.ainimateType = 'idle';
-            } else if (type == 'walk')
+            } else if (type === 'walk')
             {
                 this.sprite.textures = hero_walk;
                 this.sprite.animationSpeed = 0.3;
                 this.sprite.loop = true;
                 this.sprite.play();
                 this.ainimateType = 'walk';
-            } else if (type == 'jump')
+            } else if (type === 'jump')
             {
                 this.sprite.textures = hero_jump;
                 this.sprite.animationSpeed = 0.3;
@@ -97,7 +97,7 @@ class Hero
                 let globalPosition = this.sprite.getGlobalPosition();
                 let distance = Math.sqrt((globalPosition.x - mouseX) * (globalPosition.x - mouseX) + (globalPosition.y - mouseY) * (globalPosition.y - mouseY));
                 let vecX = (mouseX - globalPosition.x) / distance;
-                if ((this.sprite.vx > 0 && vecX >= 0) || (this.sprite.vx < 0 && vecX <= 0) || (this.sprite.vx == 0))
+                if ((this.sprite.vx > 0 && vecX >= 0) || (this.sprite.vx < 0 && vecX <= 0) || (this.sprite.vx === 0))
                 {
                     let vecY = (mouseY - globalPosition.y) / distance;
                     let angle = Math.acos(vecX);
