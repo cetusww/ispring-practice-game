@@ -27,7 +27,7 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 10;
 
-        this.jumpPower = 12;
+        this.jumpPower = 15;
         this.doubleJump = true;
         this.gravitationPower = 0.5;
         this.weaponTime = 10;
@@ -158,11 +158,12 @@ class Hero
         }
         this.updateKey = function() 
         {
-            if (keys.keyLeft) {
+            if (keys.keyLeft)
+            {
                 this.sprite.vx = -this.speedX;
                 if (this.sprite.scale.x > 0)
                 {
-                    this.sprite.scale.x *= -1
+                    this.sprite.scale.x *= -1;
                 } 
             }
             if (keys.keyRight)
@@ -177,7 +178,8 @@ class Hero
             {
                 this.sprite.vx = 0;
             }
-            if (keys.keyUp) {
+            if (keys.keyUp)
+            {
                 if (this.isGround)
                 {
                     this.updateAnim('jump');
@@ -198,7 +200,7 @@ class Hero
         {
             if (!this.isGround)
             {
-                this.sprite.vy += this.gravitationPower * time.deltaTime;
+                this.sprite.vy += GRAVITY_ACCELERATION * time.deltaTime;
             }
             else
             {
@@ -229,6 +231,7 @@ class Hero
             
             let globalPosition = this.sprite.getGlobalPosition();
             let deltaX = globalPosition.x - app.screen.width / 2; 
+            let deltaY = globalPosition.y - app.screen.width / 2; 
             if (deltaX > this.cameraRectX && this.sprite.scale.x > 0)
             {
                 let moveX = deltaX - this.cameraRectX;
@@ -247,13 +250,29 @@ class Hero
             this.updateMove(time);
             this.updateWeapon(time);
             this.collise();
+            this.updateCollide();
         }
 
         this.collise = function ()
         {
             this.isGround = false;
+            this.updateCollide();
+            if (this.collideLeft < 0)
+            {
+                this.sprite.x -= this.collideLeft;
+            }
+            if (this.collideRight > SCENE_WIDTH)
+            {
+                this.sprite.x -= this.collideRight - SCENE_WIDTH;
+            }
+            if (this.collideBottom > SCENE_HEIGHT)
+            {
+                this.sprite.y -= this.collideBottom - SCENE_HEIGHT;
+                this.isGround = true;
+                this.doubleJump = true;
+            }
             if (this.sprite.vy >= 0) {
-                this.updateCollide();
+                
                 platforms.forEach(platform =>
                 {
                     if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&

@@ -2,14 +2,19 @@ const SCENE_WIDTH = window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
 
 const scene = new PIXI.Container();
-const platforms = []
-const bullets = []
+const platforms = [];
+const bullets = [];
+const fireballs = [];
+const enemys = [];
 const app = new PIXI.Application();
-//
-let background
-const hero_walk = []
-const hero_jump = []
-const hero_idle = []
+const GRAVITY_ACCELERATION = 0.98;
+let background;
+let hero;
+const hero_walk = [];
+const hero_jump = [];
+const hero_idle = [];
+const greenCapEnemyIdle = [];
+const greenCapEnemyWalk = [];
 const keys =
 {
     keyDown: false,
@@ -98,10 +103,12 @@ function onKeyUp(event)
         { alias: 'background', src: '/images/level1-map.jpg' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
-        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },        
+        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' }, 
+        { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
+        { alias: 'fireball', src: '/images/fireball.svg' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -115,17 +122,23 @@ function onKeyUp(event)
     {
         hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`));
     }
+    greenCapEnemyIdle.push(PIXI.Texture.from(`enemyIdle1.png`));
+    for (let i = 0; i < 4; i++)
+    {
+        greenCapEnemyWalk.push(PIXI.Texture.from(`enemyWalk${1 + i}.png`));
+    }
 
-    const background = PIXI.Sprite.from('background');
+    background = PIXI.Sprite.from('background');
     background.anchor.set(0);
 
     function resizeBackground()
     {
-        background.width = app.screen.width;
-        background.height = app.screen.height;
+        background.width = SCENE_WIDTH;
+        background.height = SCENE_HEIGHT;
     }
 
     resizeBackground();
+    console.log(background.height)
     scene.addChild(background);
 
     app.canvas.addEventListener('mousedown', onAppMouseDown);
@@ -133,11 +146,16 @@ function onKeyUp(event)
     app.canvas.addEventListener('mouseup', onAppMouseUp);
     levelCreate();
     app.stage.addChild(scene);
-    const hero = new Hero(100, 100, 6, 0);
+    hero = new Hero(300, 300, 6, 0);
     hero.view();
+    
     app.ticker.add((time) =>
     {
         hero.update(time);
+        enemys.forEach(enemy => 
+        {
+            enemy.update(time);  
+        })
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -153,6 +171,20 @@ function onKeyUp(event)
             {
                 bullets[i].sprite.destroy();
                 bullets.splice(i, 1);
+            }
+            i++;
+        }
+        i = 0;
+        while (i < fireballs.length)
+        {
+            if (fireballs[i].lifeTime > 0)
+            {
+                fireballs[i].update(time);
+            }
+            else
+            {
+                fireballs[i].sprite.destroy();
+                fireballs.splice(i, 1);
             }
             i++;
         }
@@ -186,14 +218,22 @@ window.addEventListener('keyup', onKeyUp)
 function levelCreate()
 {
     let texture = PIXI.Texture.from('ground');
+    enemys.push(new Enemy(300, 350, 100, 0, 150, 50));
+    enemys.push(new Enemy(900, 350, 100, 0, 150, 50));
     platforms.push(new Ground(texture, 89, 250, 178, 40));
     platforms.push(new Ground(texture, 300, 400, 178, 40));
-    platforms.push(new Ground(texture, 300, 300, 178, 40));
+    platforms.push(new Ground(texture, 700, 400, 178, 40));
+    platforms.push(new Ground(texture, 900, 400, 178, 40));
+    //platforms.push(new Ground(texture, 300, 300, 178, 40));
     platforms.push(new Ground(texture, 500, 400, 178, 40));
     platforms.push(new Ground(texture, 100, 500, 178, 40));
     platforms.forEach(platform =>
     {
         platform.view();
+    })
+    enemys.forEach(enemy => 
+    {
+        enemy.view();  
     })
 }
 
