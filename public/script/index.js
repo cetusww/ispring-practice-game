@@ -6,77 +6,91 @@ const platforms = []
 const bullets = []
 const app = new PIXI.Application();
 
-const keys = {
+const keys =
+{
     keyDown: false,
     keyUp: false,
     keyLeft: false,
     keyRight: false,
 }
-let mouse = {
+let mouse =
+{
     isDownLeft: false,
     positionX: 0,
     positionY: 0,
 }
-function onAppMouseDown(event) {
-    if (event.button === 0) {
-        mouse.isDownLeft = true
+function onAppMouseDown(event)
+{
+    if (event.button === 0)
+    {
+        mouse.isDownLeft = true;
     }
 }
-function onAppMouseMove(event) {
-    if (event.button === 0) {
-        mouse.positionX = event.clientX
-        mouse.positionY = event.clientY
+function onAppMouseMove(event)
+{
+    if (event.button === 0)
+    {
+        mouse.positionX = event.clientX;
+        mouse.positionY = event.clientY;
     }
 }
-function onAppMouseUp(event) {
-    if (event.button === 0) {
-        mouse.isDownLeft = false
+function onAppMouseUp(event)
+{
+    if (event.button === 0)
+    {
+        mouse.isDownLeft = false;
     }
 }
 
 function onKeyDown(event) {
-    if (event.keyCode === 37) {
-        keys.keyLeft = true
-        keys.keyRight = false
+    if (event.keyCode === 37)
+    {
+        keys.keyLeft = true;
+        keys.keyRight = false;
     }
-    if (event.keyCode === 39) {
-        keys.keyRight = true
-        keys.keyLeft = false
+    if (event.keyCode === 39)
+    {
+        keys.keyRight = true;
+        keys.keyLeft = false;
     }
-    if (event.keyCode === 38) {
-        keys.keyUp = true
-        keys.keyDown = false
+    if (event.keyCode === 38)
+    {
+        keys.keyUp = true;
+        keys.keyDown = false;
     }
-    if (event.keyCode === 40) {
-        keys.keyDown = true
-        keys.keyUp = false
+    if (event.keyCode === 40)
+    {
+        keys.keyDown = true;
+        keys.keyUp = false;
     }
 }
 function onKeyUp(event) {
-    if (event.keyCode === 37) {
-        keys.keyLeft = false
+    if (event.keyCode === 37)
+    {
+        keys.keyLeft = false;
     }
-    if (event.keyCode === 39) {
-        keys.keyRight = false
+    if (event.keyCode === 39)
+    {
+        keys.keyRight = false;
     }
-    if (event.keyCode === 40) {
-        keys.keyDown = false
+    if (event.keyCode === 40)
+    {
+        keys.keyDown = false;
     }
-    if (event.keyCode === 38) {
-        keys.keyUp = false
+    if (event.keyCode === 38)
+    {
+        keys.keyUp = false;
     }
 }
 
 (async () =>
 {
-    // Intialize the application.
-    await app.init({ background: '#1099bb',  resizeTo: window });//
-
-    // Then adding the application's canvas to the DOM body.
+    await app.init({ background: '#1099bb',  resizeTo: window });
     document.body.appendChild(app.canvas);
 
     let assets = [
         { alias: 'background', src: '/images/level1-map.jpg' },
+        { alias: 'hero-group', src: '/images/hero_group.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
@@ -94,7 +108,7 @@ function onKeyUp(event) {
     app.canvas.addEventListener('mousemove', onAppMouseMove)
     app.canvas.addEventListener('mouseup', onAppMouseUp)
     levelCreate()
-    
+
     platforms.forEach(platform => {
         platform.view()
     })
@@ -114,37 +128,44 @@ function onKeyUp(event) {
         if (mouse.isDownLeft) {
             hero.createBullet(mouse.positionX, mouse.positionY)
         }
-        let i = 0
-
-        while (i < bullets.length) {
-            if (bullets[i].lifeTime > 0) {
-                bullets[i].update(time)
-            } else {
-                bullets[i].sprite.destroy()
-                bullets.splice(i, 1)
+        let i = 0;
+        while (i < bullets.length)
+        {
+            if (bullets[i].lifeTime > 0)
+            {
+                bullets[i].update(time);
             }
-            i++
+            else
+            {
+                bullets[i].sprite.destroy();
+                bullets.splice(i, 1);
+            }
+            i++;
         }
     });
 })();
 
-function moveCamera(x, y) {
-    let moveX = x
-    let moveY = y
-    if (scene.x - x > 0) {
-        moveX = scene.x
-        scene.x -= moveX
-    } else if (scene.x - x < app.screen.width - SCENE_WIDTH) {
-        moveX = (scene.x + SCENE_WIDTH - app.screen.width)
-        scene.x -= moveX
-    } else {
-        scene.x -= moveX
+function moveCamera(x, y)
+{
+    let moveX = x;
+    let moveY = y;
+    if (scene.x - x > 0)
+    {
+        moveX = scene.x;
+        scene.x -= moveX;
+    } else if (scene.x - x < app.screen.width - SCENE_WIDTH)
+    {
+        moveX = (scene.x + SCENE_WIDTH - app.screen.width);
+        scene.x -= moveX;
+    } else
+    {
+        scene.x -= moveX;
     }
-    scene.y += y
+    scene.y += y;
 }
 
-window.addEventListener('keydown', onKeyDown)
-window.addEventListener('keyup', onKeyUp)
+window.addEventListener('keydown', onKeyDown);
+window.addEventListener('keyup', onKeyUp);
 
 function levelCreate() {
     // let texture = PIXI.Texture.from('/images/ground.svg')
