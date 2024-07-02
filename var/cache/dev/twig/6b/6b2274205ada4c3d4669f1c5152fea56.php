@@ -37,6 +37,7 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "signup-user-form.html.twig"));
 
+        // line 1
         yield "<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -44,13 +45,22 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
     <title>Sign Up User</title>
     <link rel=\"stylesheet\" href=\"/css/signup-style.css\">
     <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
+    <script src=\"/script/validation.js\" type=\"application/javascript\"></script>
 </head>
 <body>
-<div class=\" form\">
+<div id=\"form\" class=\" form\">
     <form action=\"/signup\" method=\"post\">
+        <span class=\"error-text\">";
+        // line 13
+        (((CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "username", [], "any", true, true, false, 13) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "username", [], "any", false, false, false, 13)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "username", [], "any", false, false, false, 13), "html", null, true)) : (yield ""));
+        yield "</span>
         <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
+        <span class=\"error-text\">";
+        // line 17
+        (((CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", true, true, false, 17) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 17)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 17), "html", null, true)) : (yield ""));
+        yield "</span>
         <div class=\"field border fill input\">
             <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
@@ -80,9 +90,17 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
     /**
      * @codeCoverageIgnore
      */
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function getDebugInfo()
     {
-        return array ();
+        return array (  62 => 17,  55 => 13,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -94,13 +112,16 @@ class __TwigTemplate_9d6f775bae3b630dfada8e50e1fd40e1 extends Template
     <title>Sign Up User</title>
     <link rel=\"stylesheet\" href=\"/css/signup-style.css\">
     <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css\" rel=\"stylesheet\">
+    <script src=\"/script/validation.js\" type=\"application/javascript\"></script>
 </head>
 <body>
-<div class=\" form\">
+<div id=\"form\" class=\" form\">
     <form action=\"/signup\" method=\"post\">
+        <span class=\"error-text\">{{ errors.username ?? '' }}</span>
         <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
+        <span class=\"error-text\">{{ errors.password ?? '' }}</span>
         <div class=\"field border fill input\">
             <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>

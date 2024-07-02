@@ -37,6 +37,7 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "signin-user-form.html.twig"));
 
+        // line 1
         yield "<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -48,9 +49,17 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
 <body>
 <div class=\" form\">
     <form action=\"/signin\" method=\"post\">
+        <span class=\"error-text\">";
+        // line 12
+        (((CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "username", [], "any", true, true, false, 12) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "username", [], "any", false, false, false, 12)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "username", [], "any", false, false, false, 12), "html", null, true)) : (yield ""));
+        yield "</span>
         <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
+        <span class=\"error-text\">";
+        // line 16
+        (((CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", true, true, false, 16) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 16)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 16), "html", null, true)) : (yield ""));
+        yield "</span>
         <div class=\"field border fill input\">
             <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
@@ -80,9 +89,17 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
     /**
      * @codeCoverageIgnore
      */
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function getDebugInfo()
     {
-        return array ();
+        return array (  61 => 16,  54 => 12,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -98,9 +115,11 @@ class __TwigTemplate_e9a2296909eb27c800ec6298545f18b5 extends Template
 <body>
 <div class=\" form\">
     <form action=\"/signin\" method=\"post\">
+        <span class=\"error-text\">{{ errors.username ?? '' }}</span>
         <div class=\"field border fill responsive input\">
             <input name=\"username\" id=\"username\" type=\"text\" placeholder=\"имя\">
         </div>
+        <span class=\"error-text\">{{ errors.password ?? '' }}</span>
         <div class=\"field border fill input\">
             <input name=\"password\" id=\"password\" type=\"password\" placeholder=\"пароль\">
         </div>
