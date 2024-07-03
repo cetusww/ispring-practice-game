@@ -383,10 +383,6 @@ class Hero
                         break;
                     }
                 }
-                // platforms.forEach(platform =>
-                // {
-                    
-                // })
             }
         } 
     }

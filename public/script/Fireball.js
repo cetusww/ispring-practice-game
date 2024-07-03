@@ -34,7 +34,8 @@ class Fireball
                 this.sprite.vy += GRAVITY_ACCELERATION * time.deltaTime; 
                 if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
                     hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y
-                ) {
+                )
+                {
                     this.lifeTime = 10;
                     this.boom = true;
                     hero.takeDamage(20);

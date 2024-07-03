@@ -37,7 +37,7 @@ class Enemy
         this.hp = 100;
 
         this.angle = 3.1415 * 30 / 180;
-        this.deadTime = 1 * 60
+        this.deadTime = 1 * FPS;
         this.updateAnim = function (type)
         {
             if (type === 'idle')
@@ -82,6 +82,7 @@ class Enemy
         this.deleteView = function ()
         {
             scene.removeChild(this.sprite);
+            scene.removeChild(this.graphics);
         }
         this.createFireball = function (heroX, heroY)
         {
@@ -104,12 +105,11 @@ class Enemy
         this.updateHp = function () {
             scene.removeChild(this.graphics);
             this.graphics = new PIXI.Graphics();
-            this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.hp / this.maxHp * this.sprite.width - 10, 5);
+            this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.hp / this.maxHp * (this.sprite.width - 10), 5);
             this.graphics.fill(0xde3249);
             this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.sprite.width - 10, 5);
             this.graphics.stroke({ width: 1, color: 0xfeeb77 });
             scene.addChild(this.graphics);
-            //scene.addChild(this.graphics);
         }
         this.takeDamage = function (damage)
         {
@@ -163,6 +163,10 @@ class Enemy
                 this.updateMove(time);
                 this.updateAggression();
                 this.updateCollide();
+            }
+            else 
+            {
+                this.deadTime -= time.deltaTime;
             }
         }
     }

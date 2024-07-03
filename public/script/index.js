@@ -1,6 +1,6 @@
 const SCENE_WIDTH = 2000//window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
-
+const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
 const bullets = [];
@@ -159,20 +159,32 @@ function onKeyUp(event)
     app.stage.addChild(scene);
     hero = new Hero(300, 300, 6, 0);
     hero.view();
-    app.ticker.maxFPS = 100;
+    app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
-        console.log(app.ticker.FPS)
         hero.update(time);
-        enemys.forEach(enemy => 
-        {
-            enemy.update(time);  
-        })
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
         }
+        
         let i = 0;
+        while (i < enemys.length)
+        {
+            if (enemys[i].deadTime > 0)
+            {
+                enemys[i].update(time);
+            }
+            else
+            {
+                enemys[i].deleteView();
+                enemys[i].sprite.destroy();
+                enemys.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        i = 0;
         while (i < bullets.length)
         {
             if (bullets[i].lifeTime > 0)
@@ -183,6 +195,7 @@ function onKeyUp(event)
             {
                 bullets[i].sprite.destroy();
                 bullets.splice(i, 1);
+                i--;
             }
             i++;
         }
@@ -197,6 +210,7 @@ function onKeyUp(event)
             {
                 fireballs[i].sprite.destroy();
                 fireballs.splice(i, 1);
+                i--;
             }
             i++;
         }

@@ -34,21 +34,25 @@ class Bullet
                 this.sprite.y += this.sprite.vy * time.deltaTime;
                 
 
-                for (let i = 0; i < enemys.length; i++) {
+                for (let i = 0; i < enemys.length; i++)
+                {
                     let enemy = enemys[i];
                     if (this.sprite.y <= enemy.collideBottom &&
                         this.sprite.y >= enemy.collideTop &&
                         this.sprite.x <= enemy.collideRight &&
                         this.sprite.x >= enemy.collideLeft
-                    ) {
+                    )
+                    {
                         this.boom = true;
                         this.lifeTime = 2;
                         enemy.takeDamage(10);
                         break;
                     }
                 }
-                if (!this.boom) {
-                    for (let i = 0; i < platforms.length; i++) {
+                if (!this.boom)
+                {
+                    for (let i = 0; i < platforms.length; i++)
+                    {
                         let platform = platforms[i];
                         if (this.sprite.y <= platform.collideBottom + this.sprite.vy &&
                             this.sprite.y >= platform.collideTop &&
