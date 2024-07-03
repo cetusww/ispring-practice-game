@@ -121,13 +121,15 @@ class Enemy
         }
         this.updateAggression = function ()
         {
-            if (hero.collideRight >= this.zoneX - this.zoneWidth - this.visibilityZoneWidth && 
-                hero.collideLeft <= this.zoneX + this.zoneWidth + this.visibilityZoneWidth &&
-                hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
-            )
+            if (!hero.dead)
             {
-                //console.log('вижу');
-                this.createFireball(hero.sprite.x, hero.sprite.y);
+                if (hero.collideRight >= this.zoneX - this.zoneWidth - this.visibilityZoneWidth && 
+                    hero.collideLeft <= this.zoneX + this.zoneWidth + this.visibilityZoneWidth &&
+                    hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
+                )
+                {
+                    this.createFireball(hero.sprite.x, hero.sprite.y);
+                }
             }
         }
         this.update = function (time)

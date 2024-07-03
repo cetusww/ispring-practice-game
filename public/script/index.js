@@ -1,4 +1,4 @@
-const SCENE_WIDTH = window.innerWidth
+const SCENE_WIDTH = 2000//window.innerWidth
 const SCENE_HEIGHT = window.innerHeight
 
 const scene = new PIXI.Container();
@@ -13,6 +13,7 @@ let hero;
 const hero_walk = [];
 const hero_jump = [];
 const hero_idle = [];
+const hero_dead = [];
 const greenCapEnemyIdle = [];
 const greenCapEnemyWalk = [];
 const keys =
@@ -21,6 +22,7 @@ const keys =
     keyUp: false,
     keyLeft: false,
     keyRight: false,
+    keyR: false,
 }
 const mouse =
 {
@@ -53,42 +55,46 @@ function onAppMouseUp(event)
 
 function onKeyDown(event)
 {
-    if (event.keyCode === 37)
+    if (event.key === 'ArrowLeft' || event.key === 'a')
     {
         keys.keyLeft = true;
         keys.keyRight = false;
     }
-    if (event.keyCode === 39)
+    if (event.key === 'ArrowRight' || event.key === 'd')
     {
         keys.keyRight = true;
         keys.keyLeft = false;
     }
-    if (event.keyCode === 38)
+    if (event.key === 'ArrowUp' || event.key === 'w')
     {
         keys.keyUp = true;
         keys.keyDown = false;
     }
-    if (event.keyCode === 40)
+    if (event.key === 'ArrowDown' || event.key === 's')
     {
         keys.keyDown = true;
         keys.keyUp = false;
     }
+    if (event.key === 'r')
+    {
+        keys.keyR = true;
+    }
 }
 function onKeyUp(event)
 {
-    if (event.keyCode === 37)
+    if (event.key === 'ArrowLeft' || event.key === 'a')
     {
         keys.keyLeft = false;
     }
-    if (event.keyCode === 39)
+    if (event.key === 'ArrowRight' || event.key === 'd')
     {
         keys.keyRight = false;
     }
-    if (event.keyCode === 40)
+    if (event.key === 'ArrowDown' || event.key === 's')
     {
         keys.keyDown = false;
     }
-    if (event.keyCode === 38)
+    if (event.key === 'ArrowUp' || event.key === 'w')
     {
         keys.keyUp = false;
     }
@@ -104,6 +110,7 @@ function onKeyUp(event)
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' }, 
+        { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' }, 
         { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
@@ -121,6 +128,10 @@ function onKeyUp(event)
     for (let i = 0; i < 10; i++)
     {
         hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`));
+    }
+    for (let i = 9; i < 10; i++)
+    {
+        hero_dead.push(PIXI.Texture.from(`dead${1 + i}.png`));
     }
     greenCapEnemyIdle.push(PIXI.Texture.from(`enemyIdle1.png`));
     for (let i = 0; i < 4; i++)

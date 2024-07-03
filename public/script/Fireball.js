@@ -38,6 +38,7 @@ class Fireball
                     //console.log('попал')
                     this.lifeTime = 10;
                     this.boom = true;
+                    hero.takeDamage(20);
                     //this.sprite.vx = 0;
                     //this.sprite.vy = 0;
                     //this.sprite.scale.x *= 2;

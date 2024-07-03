@@ -27,6 +27,8 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 10;
 
+        this.hp = 100;
+        this.dead = false;
         this.jumpPower = 15;
         this.doubleJump = true;
         this.gravitationPower = 0.5;
@@ -34,9 +36,10 @@ class Hero
         this.weaponCountBullet = 20;
         this.currentWeaponTime = 0;
         this.currentCountBullet = this.weaponCountBullet;
-        this.rechargeTime = 300;
+        this.rechargeTime = 3 * 60;
+        this.rechargeCircle = new PIXI.Graphics();
         this.currentRechargeTime = this.rechargeTime;
-        this.ainimateType = '';
+        this.animateType = '';
 
         let radius = 300;
         let blurSize = 50;
@@ -54,32 +57,44 @@ class Hero
         this.focusTexture = new PIXI.Sprite(texture1);
         this.focusTexture.tint = 0x000000;
         this.focusTexture.anchor.set(0.5);
+        
 
         this.updateAnim = function (type)
         {
-            if (type === 'idle')
+            if (type === 'idle' && this.animateType !== 'idle')
             {
                 this.sprite.loop = false;
                 this.sprite.textures = hero_idle;
                 this.sprite.animationSpeed = 0.15;
                 this.sprite.loop = true;
                 this.sprite.play();
-                this.ainimateType = 'idle';
-            } else if (type === 'walk')
+                this.animateType = 'idle';
+            } else if (type === 'walk' && this.animateType !== 'walk')
             {
                 this.sprite.textures = hero_walk;
                 this.sprite.animationSpeed = 0.3;
                 this.sprite.loop = true;
                 this.sprite.play();
-                this.ainimateType = 'walk';
+                this.animateType = 'walk';
             } else if (type === 'jump')
             {
                 this.sprite.textures = hero_jump;
                 this.sprite.animationSpeed = 0.3;
                 this.sprite.loop = false;
                 this.sprite.play();
-                this.ainimateType = 'jump';
-            }  
+                this.animateType = 'jump';
+            } else if (type === 'dead' && this.animateType !== 'dead') 
+            {
+                this.sprite.textures = hero_dead;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = false;
+                this.sprite.width = 100
+                this.sprite.height = 80
+                //this.sprite.y -= 10
+                this.sprite.play();
+                console.log('смерть');
+                this.animateType = 'dead';
+            }
         }
 
         this.updateCollide = function ()
@@ -121,12 +136,41 @@ class Hero
                 }
             }          
         }
-
+        this.updateHp = function () {
+            app.stage.removeChild(this.graphics);
+            this.graphics = new PIXI.Graphics();
+            this.graphics.rect(15, 15, this.hp * 2, 10);
+            this.graphics.fill(0xde3249);
+            this.graphics.rect(15, 15, 200, 10);
+            this.graphics.stroke({ width: 2, color: 0xfeeb77 });
+            app.stage.addChild(this.graphics);
+        }
         this.view = function ()
         {
             scene.addChild(this.focusTexture);
             scene.addChild(this.sprite);
+            this.updateHp();
             scene.mask = this.focusTexture;
+            this.countBulletText = new PIXI.Text(
+                this.currentCountBullet,
+                {
+                    fontFamily: 'Arial',
+                    fontSize: 24,
+                    fill: 0xfeeb77,
+                }
+            );
+            this.countBulletText.x = 50;
+            this.countBulletText.y = 30;
+            for (let i = 0; i < 3; i++) {
+                let bulletImg = new PIXI.Sprite(PIXI.Texture.from('bullet'));
+                bulletImg.x = 10 + 5 * (i + 1);
+                bulletImg.y = 30;
+                bulletImg.width = 15;
+                bulletImg.height = 24;
+                app.stage.addChild(bulletImg);
+            }
+            app.stage.addChild(this.countBulletText);
+            
         }
 
         this.deleteView = function ()
@@ -135,6 +179,7 @@ class Hero
         }
         this.updateWeapon = function (time)
         {
+            this.countBulletText.text = this.currentCountBullet
             if (this.currentCountBullet > 0)
             {
                 if (this.currentWeaponTime > 0)
@@ -144,9 +189,21 @@ class Hero
             }
             else
             {
+                app.stage.removeChild(this.rechargeCircle);
+                this.rechargeCircle = new PIXI.Graphics();
+                let x = 90; 
+                let y = 42; 
+                let radius = 10; 
+                let startAngle = -Math.PI / 2; 
+                let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;;
+                this.rechargeCircle.beginFill(0xfeeb77);
+                this.rechargeCircle.moveTo(x, y);
+                this.rechargeCircle.arc(x, y, radius, startAngle, endAngle); 
+                this.rechargeCircle.endFill();
+                app.stage.addChild(this.rechargeCircle);
                 if (this.currentRechargeTime > 0)
                 {
-                    this.currentRechargeTime -= time.deltaTime;
+                    this.currentRechargeTime -= time.deltaTime;  
                 }
                 else
                 {
@@ -156,8 +213,22 @@ class Hero
                 }
             }  
         }
+        this.takeDamage = function (damage)
+        {
+            this.hp -= damage;
+            if (this.hp <= 0) 
+            {
+                this.hp = 0;
+                this.dead = true;
+            }
+            this.updateHp();
+        }
         this.updateKey = function() 
         {
+            if (keys.keyR) {
+                keys.keyR = false;
+                this.currentCountBullet = 0;
+            }
             if (keys.keyLeft)
             {
                 this.sprite.vx = -this.speedX;
@@ -211,19 +282,22 @@ class Hero
                 if (!keys.keyLeft && !keys.keyRight)
                 {
                     this.sprite.vx = 0;
-                    if (this.ainimateType !== 'idle' && this.sprite.vy >= 0)
+                    if (this.sprite.vy >= 0)
                     {
                         this.updateAnim('idle');
                     }
                 }
                 else
                 {
-                    if (this.ainimateType !== 'walk' && this.sprite.vy >= 0)
+                    if (this.sprite.vy >= 0)
                     {
                         this.updateAnim('walk');
                     } 
                 }
             }
+            this.move(time);
+        }
+        this.move = function (time) {
             this.sprite.x += this.sprite.vx * time.deltaTime;
             this.sprite.y += this.sprite.vy * time.deltaTime;
             this.focusTexture.x = this.sprite.x;
@@ -246,10 +320,25 @@ class Hero
         }
         this.update = function (time)
         {
-            this.updateKey();
-            this.updateMove(time);
-            this.updateWeapon(time);
-            this.collise();
+            if (!this.dead) {
+                this.updateKey();
+                this.updateMove(time);
+                this.updateWeapon(time);
+                this.collise();
+            }
+            else
+            {
+                this.updateAnim('dead');
+                this.sprite.vx = 0;
+                if (!this.isGround)
+                {
+                    this.sprite.vy += GRAVITY_ACCELERATION / 10 * time.deltaTime;
+                } else {
+                    this.sprite.vy = 0;
+                }     
+                this.move(time);
+                this.collise();
+            }
             this.updateCollide();
         }
 
