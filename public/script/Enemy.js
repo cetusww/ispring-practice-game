@@ -1,77 +1,143 @@
-class enemy {
-    constructor(canvasSelector, imageSrc) {
-        this.canvas = document.querySelector(canvasSelector);
-        this.ctx = this.canvas.getContext('2d');
-        this.img = new Image();
-        this.img.src = imageSrc;
-        this.img.onload = () => this.init();
+class Enemy
+{
+    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight)
+    {
+        this.sprite = new PIXI.AnimatedSprite(greenCapEnemyWalk);
+        this.sprite.animationSpeed = 0.05; // Скорость анимации
+        this.sprite.loop = true; // Зацикливание анимации
+        this.sprite.play(); // Запуск анимации
 
-        this.SPRITE_WIDTH = 16;
-        this.SPRITE_HEIGHT = 18;
-        this.SCALE = 3;
-        this.SCALED_WIDTH = this.SPRITE_WIDTH * this.SCALE;
-        this.SCALED_HEIGHT = this.SPRITE_HEIGHT * this.SCALE;
+        this.sprite.x = posX;
+        this.sprite.y = posY;
+        this.sprite.width = 50;
+        this.sprite.height = 56;
 
-        this.CYCLE_LOOP = [0, 1, 0, 2];
-        this.currentLoopIndex = 0;
-        this.frameCount = 0;
+        this.collideTop = this.sprite.y - this.sprite.height / 2;
+        this.collideBottom = this.sprite.y + this.sprite.height / 2;
+        this.collideLeft = this.sprite.x - this.sprite.width / 2;
+        this.collideRight = this.sprite.x + this.sprite.width / 2;
 
-        this.characterX = 0;
-        this.characterY = 0;
+        this.sprite.anchor.set(0.5);
+        this.speedX = 2;
+        this.speedY = 0;
+        this.sprite.vx = this.speedX;
+        this.sprite.vy = 0;
 
-        this.MOVEMENT_SPEED = 10;
-        this.currentDirection = 2;
-    }
+        this.jumpPower = 12;
+        this.gravitationPower = 0.5;
 
-    init() {
-        window.requestAnimationFrame(() => this.step());
-    }
+        this.zoneWidth = zoneWidth;
+        this.zoneHeight = zoneHeight;
+        this.zoneX = posX;
+        this.zoneY = posY;
+        this.visibilityZoneWidth = visibilityZoneWidth;
+        this.visibilityZoneHeight = visibilityZoneHeight;
 
-    drawFrame(frameX, frameY, canvasX, canvasY) {
-        this.ctx.drawImage(
-            this.img,
-            frameX * this.SPRITE_WIDTH, frameY * this.SPRITE_HEIGHT, this.SPRITE_WIDTH, this.SPRITE_HEIGHT,
-            canvasX, canvasY, this.SCALED_WIDTH, this.SCALED_HEIGHT
-        );
-    }
+        this.ainimateType = '';
+        this.timeAttack = 25;
 
-    step() {
-        this.frameCount++;
-        if (this.frameCount < 15) {
-            window.requestAnimationFrame(() => this.step());
-            return;
-        }
-        this.frameCount = 0;
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.updateCharacterPosition();
-        this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], this.currentDirection, this.characterX, this.characterY);
-        this.currentLoopIndex++;
-        if (this.currentLoopIndex >= this.CYCLE_LOOP.length) {
-            this.currentLoopIndex = 0;
-        }
-        window.requestAnimationFrame(() => this.step());
-    }
-
-    updateCharacterPosition() {
-        if (this.characterX <= 0) {
-            this.currentDirection = 3;
-        } else if (this.characterX + this.SCALED_WIDTH >= this.canvas.width) {
-            this.currentDirection = 2;
-        }
-
-        switch (this.currentDirection) {
-            case 2:
-                this.characterX -= this.MOVEMENT_SPEED;
-                break;
-            case 3:
-                this.characterX += this.MOVEMENT_SPEED;
-                break;
+        this.angle = 3.1415 * 30 / 180;
+        this.updateAnim = function (type)
+        {
+            if (type === 'idle')
+            {
+                this.sprite.loop = false;
+                this.sprite.textures = hero_idle;
+                this.sprite.animationSpeed = 0.15;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.ainimateType = 'idle';
+            } else if (type === 'walk')
+            {
+                this.sprite.textures = hero_walk;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.ainimateType = 'walk';
+            } else if (type === 'jump')
+            {
+                this.sprite.textures = hero_jump;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = false;
+                this.sprite.play();
+                this.ainimateType = 'jump';
+            }  
         }
 
-        if (this.characterX < 0) {
-            this.characterX = 0;
-        } else if (this.characterX + this.SCALED_WIDTH > this.canvas.width) {
-            this.characterX = this.canvas.width - this.SCALED_WIDTH;
+        this.updateCollide = function ()
+        {
+            this.collideTop = this.sprite.y - this.sprite.height / 2;
+            this.collideBottom = this.sprite.y + this.sprite.height / 2;
+            this.collideLeft = this.sprite.x - this.sprite.width / 2;
+            this.collideRight = this.sprite.x + this.sprite.width / 2;
+        }
+
+        this.view = function ()
+        {
+            scene.addChild(this.sprite);
+        }
+
+        this.deleteView = function ()
+        {
+            scene.removeChild(this.sprite);
+        }
+        this.createFireball = function (heroX, heroY)
+        {
+            if (this.timeAttack <= 0)
+            {
+                let distanceX = heroX - this.sprite.x;
+                let tanAngle = Math.tan(this.angle);
+                let vecX = Math.sqrt(Math.abs(distanceX / 100) * GRAVITY_ACCELERATION / 2 / tanAngle);
+                let vecY = vecX * tanAngle;
+                if (distanceX < 0)
+                {
+                    vecX *= -1;
+                }
+                const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0);
+                fireball.view();
+                fireballs.push(fireball); 
+                this.timeAttack = 50;
+            }  
+        }
+
+        this.updateMove = function(time) 
+        {
+            this.sprite.x += this.sprite.vx * time.deltaTime;
+            this.updateCollide();
+            if (this.collideLeft <= this.zoneX - this.zoneWidth)
+            {
+                this.sprite.vx *= -1;
+                this.sprite.x += (this.zoneX - this.zoneWidth) - this.collideLeft;
+            }
+            else if (this.collideRight >= this.zoneX + this.zoneWidth)
+            {
+                this.sprite.vx *= -1;
+                this.sprite.x -= this.collideRight - (this.zoneX + this.zoneWidth);
+            }
+            if ((this.sprite.scale.x < 0 && this.sprite.vx > 0) || (this.sprite.scale.x > 0 && this.sprite.vx < 0))
+            {
+                this.sprite.scale.x *= -1;
+            }
+        }
+        this.updateAggression = function ()
+        {
+            if (hero.collideRight >= this.zoneX - this.zoneWidth - this.visibilityZoneWidth && 
+                hero.collideLeft <= this.zoneX + this.zoneWidth + this.visibilityZoneWidth &&
+                hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
+            )
+            {
+                //console.log('вижу');
+                this.createFireball(hero.sprite.x, hero.sprite.y);
+            }
+        }
+        this.update = function (time)
+        {
+            if (this.timeAttack > 0)
+            {
+                this.timeAttack -= 1 * time.deltaTime;
+            }
+            this.updateMove(time);
+            this.updateAggression();
         }
     }
 }
