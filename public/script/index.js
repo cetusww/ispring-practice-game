@@ -55,46 +55,46 @@ function onAppMouseUp(event)
 
 function onKeyDown(event)
 {
-    if (event.key === 'ArrowLeft' || event.key === 'a')
+    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'ф')
     {
         keys.keyLeft = true;
         keys.keyRight = false;
     }
-    if (event.key === 'ArrowRight' || event.key === 'd')
+    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'в')
     {
         keys.keyRight = true;
         keys.keyLeft = false;
     }
-    if (event.key === 'ArrowUp' || event.key === 'w')
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'ц')
     {
         keys.keyUp = true;
         keys.keyDown = false;
     }
-    if (event.key === 'ArrowDown' || event.key === 's')
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'ы')
     {
         keys.keyDown = true;
         keys.keyUp = false;
     }
-    if (event.key === 'r')
+    if (event.key === 'r' || event.key === 'к')
     {
         keys.keyR = true;
     }
 }
 function onKeyUp(event)
 {
-    if (event.key === 'ArrowLeft' || event.key === 'a')
+    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'ф')
     {
         keys.keyLeft = false;
     }
-    if (event.key === 'ArrowRight' || event.key === 'd')
+    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'в')
     {
         keys.keyRight = false;
     }
-    if (event.key === 'ArrowDown' || event.key === 's')
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'ы')
     {
         keys.keyDown = false;
     }
-    if (event.key === 'ArrowUp' || event.key === 'w')
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'ц')
     {
         keys.keyUp = false;
     }

@@ -220,6 +220,7 @@ class Hero
             {
                 this.hp = 0;
                 this.dead = true;
+                this.sprite.vy = 0;
             }
             this.updateHp();
         }
