@@ -45,7 +45,7 @@ class Bullet
                     {
                         this.boom = true;
                         this.lifeTime = 2;
-                        enemy.takeDamage(10);
+                        enemy.takeDamage(50);
                         break;
                     }
                 }

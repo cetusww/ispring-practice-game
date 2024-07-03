@@ -35,6 +35,8 @@ class Enemy
         this.currentTimeAttack = 0;
         this.maxHp = 100;
         this.hp = 100;
+        this.experience = 100;
+
 
         this.angle = 3.1415 * 30 / 180;
         this.deadTime = 1 * FPS;
@@ -153,10 +155,27 @@ class Enemy
                 }
             }
         }
+        this.dropExperience = function ()
+        {    
+            let randomCount = Math.floor(Math.random() * 5) + 2;
+            let experienceCount = Math.floor(this.experience / randomCount);
+            console.log('+', randomCount)
+            for (let i = 1; i < randomCount; i++)
+            {
+                let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, experienceCount);
+                experience.view();
+                experiences.push(experience);
+            }
+            let experience = new Experience(this.sprite.x, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
+            experience.view();
+            experiences.push(experience);
+        }
         this.update = function (time)
         {
-            if (!this.dead) {
-                if (this.currentTimeAttack > 0) {
+            if (!this.dead)
+            {
+                if (this.currentTimeAttack > 0)
+                {
                     this.currentTimeAttack -= 1 * time.deltaTime;
                 }
                 this.updateHp();

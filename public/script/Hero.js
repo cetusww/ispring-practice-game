@@ -28,6 +28,7 @@ class Hero
         this.cameraRectY = 10;
 
         this.hp = 100;
+        this.experience = 0;
         this.dead = false;
         this.jumpPower = 15;
         this.doubleJump = true;
@@ -170,7 +171,16 @@ class Hero
                 app.stage.addChild(bulletImg);
             }
             app.stage.addChild(this.countBulletText);
-            
+            // this.experienceText = new PIXI.Text(
+            //     this.currentCountBullet,
+            //     {
+            //         fontFamily: 'Arial',
+            //         fontSize: 35,
+            //         fill: 0xfeeb77,
+            //     }
+            // );
+            // this.countBulletText.x = app.screen.width - ;
+            // this.countBulletText.y = 30;
         }
 
         this.deleteView = function ()
@@ -212,6 +222,10 @@ class Hero
                     this.currentRechargeTime = this.rechargeTime;
                 }
             }  
+        }
+        this.addExperience = function(experience)
+        {
+            this.experience += experience;
         }
         this.takeDamage = function (damage)
         {

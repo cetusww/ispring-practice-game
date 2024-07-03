@@ -11,6 +11,7 @@ const GRAVITY_ACCELERATION = 0.98;
 let background;
 let hero;
 const hero_walk = [];
+const experiences = [];
 const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
@@ -113,6 +114,7 @@ function onKeyUp(event)
         { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' }, 
         { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'hero', src: '/images/hero.svg' },
+        { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
         { alias: 'fireball', src: '/images/fireball.svg' },
@@ -149,7 +151,6 @@ function onKeyUp(event)
     }
 
     resizeBackground();
-    console.log(background.height)
     scene.addChild(background);
 
     app.canvas.addEventListener('mousedown', onAppMouseDown);
@@ -177,9 +178,27 @@ function onKeyUp(event)
             }
             else
             {
+                enemys[i].dropExperience();
                 enemys[i].deleteView();
                 enemys[i].sprite.destroy();
                 enemys.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        i = 0;
+        while (i < experiences.length)
+        {
+            console.log(experiences);
+            if (!experiences[i].isTaken)
+            {
+                experiences[i].update(time);
+            }
+            else
+            {
+                experiences[i].deleteView();
+                experiences[i].sprite.destroy();
+                experiences.splice(i, 1);
                 i--;
             }
             i++;
