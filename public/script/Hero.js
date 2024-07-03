@@ -333,7 +333,7 @@ class Hero
                 this.sprite.vx = 0;
                 if (!this.isGround)
                 {
-                    this.sprite.vy += GRAVITY_ACCELERATION / 10 * time.deltaTime;
+                    this.sprite.vy += GRAVITY_ACCELERATION / 5 * time.deltaTime;
                 } else {
                     this.sprite.vy = 0;
                 }     

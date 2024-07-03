@@ -34,7 +34,8 @@ class Enemy
         this.visibilityZoneHeight = visibilityZoneHeight;
 
         this.ainimateType = '';
-        this.timeAttack = 25;
+        this.timeAttack = 50;
+        this.currentTimeAttack = 0;
 
         this.angle = 3.1415 * 30 / 180;
         this.updateAnim = function (type)
@@ -83,7 +84,7 @@ class Enemy
         }
         this.createFireball = function (heroX, heroY)
         {
-            if (this.timeAttack <= 0)
+            if (this.currentTimeAttack <= 0)
             {
                 let distanceX = heroX - this.sprite.x;
                 let tanAngle = Math.tan(this.angle);
@@ -96,7 +97,7 @@ class Enemy
                 const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0);
                 fireball.view();
                 fireballs.push(fireball); 
-                this.timeAttack = 50;
+                this.currentTimeAttack = this.timeAttack;
             }  
         }
 
@@ -134,9 +135,9 @@ class Enemy
         }
         this.update = function (time)
         {
-            if (this.timeAttack > 0)
+            if (this.currentTimeAttack > 0)
             {
-                this.timeAttack -= 1 * time.deltaTime;
+                this.currentTimeAttack -= 1 * time.deltaTime;
             }
             this.updateMove(time);
             this.updateAggression();
