@@ -23,9 +23,6 @@ class Enemy
         this.sprite.vx = this.speedX;
         this.sprite.vy = 0;
 
-        this.jumpPower = 12;
-        this.gravitationPower = 0.5;
-
         this.zoneWidth = zoneWidth;
         this.zoneHeight = zoneHeight;
         this.zoneX = posX;
@@ -36,8 +33,11 @@ class Enemy
         this.ainimateType = '';
         this.timeAttack = 50;
         this.currentTimeAttack = 0;
+        this.maxHp = 100;
+        this.hp = 100;
 
         this.angle = 3.1415 * 30 / 180;
+        this.deadTime = 1 * 60
         this.updateAnim = function (type)
         {
             if (type === 'idle')
@@ -76,6 +76,7 @@ class Enemy
         this.view = function ()
         {
             scene.addChild(this.sprite);
+            this.updateHp();
         }
 
         this.deleteView = function ()
@@ -100,7 +101,26 @@ class Enemy
                 this.currentTimeAttack = this.timeAttack;
             }  
         }
-
+        this.updateHp = function () {
+            scene.removeChild(this.graphics);
+            this.graphics = new PIXI.Graphics();
+            this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.hp / this.maxHp * this.sprite.width - 10, 5);
+            this.graphics.fill(0xde3249);
+            this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.sprite.width - 10, 5);
+            this.graphics.stroke({ width: 1, color: 0xfeeb77 });
+            scene.addChild(this.graphics);
+            //scene.addChild(this.graphics);
+        }
+        this.takeDamage = function (damage)
+        {
+            this.hp -= damage;
+            if (this.hp <= 0) 
+            {
+                this.hp = 0;
+                this.dead = true;
+            }
+            this.updateHp();
+        }
         this.updateMove = function(time) 
         {
             this.sprite.x += this.sprite.vx * time.deltaTime;
@@ -135,12 +155,15 @@ class Enemy
         }
         this.update = function (time)
         {
-            if (this.currentTimeAttack > 0)
-            {
-                this.currentTimeAttack -= 1 * time.deltaTime;
+            if (!this.dead) {
+                if (this.currentTimeAttack > 0) {
+                    this.currentTimeAttack -= 1 * time.deltaTime;
+                }
+                this.updateHp();
+                this.updateMove(time);
+                this.updateAggression();
+                this.updateCollide();
             }
-            this.updateMove(time);
-            this.updateAggression();
         }
     }
 }

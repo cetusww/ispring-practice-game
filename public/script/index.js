@@ -159,9 +159,10 @@ function onKeyUp(event)
     app.stage.addChild(scene);
     hero = new Hero(300, 300, 6, 0);
     hero.view();
-    
+    app.ticker.maxFPS = 100;
     app.ticker.add((time) =>
     {
+        console.log(app.ticker.FPS)
         hero.update(time);
         enemys.forEach(enemy => 
         {

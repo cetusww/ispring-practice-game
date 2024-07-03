@@ -362,9 +362,9 @@ class Hero
                 this.doubleJump = true;
             }
             if (this.sprite.vy >= 0) {
-                
-                platforms.forEach(platform =>
+                for (let i = 0; i < platforms.length; i++) 
                 {
+                    let platform = platforms[i];
                     if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
                         this.collideBottom >= platform.collideTop &&
                         this.collideLeft <= platform.collideRight &&
@@ -379,9 +379,14 @@ class Hero
                         } else
                         {
                             this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
-                        }     
+                        } 
+                        break;
                     }
-                })
+                }
+                // platforms.forEach(platform =>
+                // {
+                    
+                // })
             }
         } 
     }
