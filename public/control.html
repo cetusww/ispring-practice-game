@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Control</title>
+</head>
+<body>
+<button id="up">Up</button>
+<button id="down">Down</button>
+<button id="left">Left</button>
+<button id="right">Right</button>
+
+<script>
+    const ws = new WebSocket('ws://10.10.28.39:8080');
+    let isConnected = false;
+    const messageQueue = [];
+
+    ws.onopen = function() {
+        isConnected = true;
+        console.log('WebSocket connection established');
+        // Send all messages in the queue
+        while (messageQueue.length > 0) {
+            ws.send(messageQueue.shift());
+        }
+    };
+
+    ws.onerror = function(error) {
+        console.error('WebSocket Error: ' + error);
+    };
+
+    ws.onclose = function() {
+        isConnected = false;
+        console.log('WebSocket connection closed');
+    };
+
+    const sendMove = (direction) => {
+        const message = JSON.stringify({ direction });
+        if (isConnected) {
+            ws.send(message);
+        } else {
+            console.log('WebSocket is not connected yet, queueing message');
+            messageQueue.push(message);
+        }
+    };
+
+    document.getElementById('up').addEventListener('touchstart', () => sendMove('up'));
+    document.getElementById('down').addEventListener('touchstart', () => sendMove('down'));
+    document.getElementById('left').addEventListener('touchstart', () => sendMove('left'));
+    document.getElementById('right').addEventListener('touchstart', () => sendMove('right'));
+
+    document.getElementById('up').addEventListener('touchend', () => sendMove('-up'));
+    document.getElementById('down').addEventListener('touchend', () => sendMove('-down'));
+    document.getElementById('left').addEventListener('touchend', () => sendMove('-left'));
+    document.getElementById('right').addEventListener('touchend', () => sendMove('-right'));
+</script>
+</body>
+</html>

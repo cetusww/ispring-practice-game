@@ -6,6 +6,20 @@ const platforms = []
 const bullets = []
 const app = new PIXI.Application();
 
+const conn = new WebSocket('ws://10.10.28.39:8080');
+
+conn.onopen = function(e) {
+    console.log("Connection established!");
+    conn.send("Hello Server!");
+};
+
+conn.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log(data);
+    onButtonDown(data);
+    onButtonUp(data);
+};
+
 const keys =
 {
     keyDown: false,
@@ -67,7 +81,7 @@ function onKeyDown(event) {
 function onKeyUp(event) {
     if (event.keyCode === 37)
     {
-        keys.keyLeft = false;
+        keys.keyLeft  = false;
     }
     if (event.keyCode === 39)
     {
@@ -80,6 +94,47 @@ function onKeyUp(event) {
     if (event.keyCode === 38)
     {
         keys.keyUp = false;
+    }
+}
+
+function onButtonDown(data) {
+    if (data === 'left')
+    {
+        keys.keyLeft = true;
+        keys.keyRight = false;
+    }
+    if (data === 'right')
+    {
+        keys.keyRight = true;
+        keys.keyLeft = false;
+    }
+    if (data === 'up')
+    {
+        keys.keyUp = true;
+        keys.keyDown = false;
+    }
+    if (data === 'down')
+    {
+        keys.keyDown = true;
+        keys.keyUp = false;
+    }
+}
+function onButtonUp(data) {
+    if (data === '-left')
+    {
+        keys.keyLeft = false;
+    }
+    if (data === '-right')
+    {
+        keys.keyRight = false;
+    }
+    if (data === '-up')
+    {
+        keys.keyUp = false;
+    }
+    if (data === '-down')
+    {
+        keys.keyDown = false;
     }
 }
 
