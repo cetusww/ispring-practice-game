@@ -1,4 +1,4 @@
-const SCENE_WIDTH = 2000//window.innerWidth
+const SCENE_WIDTH = 2000
 const SCENE_HEIGHT = 1000
 const FPS = 60;
 const scene = new PIXI.Container();
@@ -179,20 +179,20 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(300, 300, 6, 0);
+    hero = new Hero(400, 100, 6, 0);
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
         hero.update(time);
-        if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
-        {
-            window.location.href = "/win";
-        }
-        if (hero.sprite.x < 0)
-        {
-            window.location.href = "/lose";
-        }
+        // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
+        // {
+        //     window.location.href = "/win";
+        // }
+        // if (hero.sprite.x < 0)
+        // {
+        //     window.location.href = "/lose";
+        // }
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -301,22 +301,22 @@ window.addEventListener('keyup', onKeyUp);
 
 function levelCreate()
 {
-    let texture = PIXI.Texture.from('ground');
-    enemys.push(new Enemy(300, 350, 100, 0, 150, 50));
-    enemys.push(new Enemy(900, 350, 100, 0, 150, 50));
-    platforms.push(new Ground(texture, 89, 250, 178, 40));
-    platforms.push(new Ground(texture, 300, 400, 178, 40));
-    platforms.push(new Ground(texture, 700, 400, 178, 40));
-    platforms.push(new Ground(texture, 900, 400, 178, 40));
-    //platforms.push(new Ground(texture, 300, 300, 178, 40));
-    platforms.push(new Ground(texture, 500, 400, 178, 40));
-    platforms.push(new Ground(texture, 100, 500, 178, 40));
+    let texture //= PIXI.Texture.from('ground');
+    platforms.push(new Ground(texture, 1000, 970, 2000, 40)); // пол - 0 уровень
+    platforms.push(new Ground(texture, 1790, 820, 420, 40)); // 1 уровень
+    platforms.push(new Ground(texture, 750, 750, 1500, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 1150, 570, 1700, 40)); // 3 уровень
+    platforms.push(new Ground(texture, 1320, 400, 1360, 40)); // 4 уровень
+    platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
 
+    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50));// 4 уровень
+    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50));// 4 уровень
 
-    platforms.push(new Ground(texture, 300, 600, 178, 40));
-    platforms.push(new Ground(texture, 300, 800, 178, 40));
-    platforms.push(new Ground(texture, 300, 1000, 178, 40));
-    platforms.push(new Ground(texture, 300, 1200, 178, 40));
+    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50));// 3 уровень
+    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50));// 3 уровень
+
+    enemys.push(new Enemy(350, 700, 300, 0, 300, 50));// 2 уровень
+    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50));// 2 уровень
 
     platforms.forEach(platform =>
     {

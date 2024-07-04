@@ -146,8 +146,8 @@ class Enemy
         {
             if (!hero.dead)
             {
-                if (hero.collideRight >= this.zoneX - this.zoneWidth - this.visibilityZoneWidth && 
-                    hero.collideLeft <= this.zoneX + this.zoneWidth + this.visibilityZoneWidth &&
+                if (hero.collideRight >= this.sprite.x - this.visibilityZoneWidth && 
+                    hero.collideLeft <= this.sprite.x + this.visibilityZoneWidth &&
                     hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
                 )
                 {

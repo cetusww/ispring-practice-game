@@ -38,7 +38,7 @@ class Fireball
                 {
                     this.lifeTime = 10;
                     this.boom = true;
-                    hero.takeDamage(20);
+                    hero.takeDamage(10);
                 }
                 if (!this.boom) {
                     for (let i = 0; i < platforms.length; i++) {
