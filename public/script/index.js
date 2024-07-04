@@ -6,7 +6,7 @@ const platforms = []
 const bullets = []
 const app = new PIXI.Application();
 
-const conn = new WebSocket('ws://10.10.28.39:8080');
+const conn = new WebSocket('ws://10.250.104.87:8080');
 
 conn.onopen = function(e) {
     console.log("Connection established!");

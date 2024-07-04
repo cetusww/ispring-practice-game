@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Control</title>
+  <link rel="stylesheet" href="css/joystick-style.css">
 </head>
 <body>
-<button id="up">Up</button>
-<button id="down">Down</button>
-<button id="left">Left</button>
-<button id="right">Right</button>
+<div class="joystick-container" id="joystick-container">
+  <div class="joystick" id="joystick"></div>
+</div>
 
 <script>
-    const ws = new WebSocket('ws://10.10.28.39:8080');
+    const ws = new WebSocket('ws://10.250.104.87:8080');
     let isConnected = false;
     const messageQueue = [];
 
@@ -33,7 +33,8 @@
         console.log('WebSocket connection closed');
     };
 
-    const sendMove = (direction) => {
+    function sendMove(direction)
+    {
         const message = JSON.stringify({ direction });
         if (isConnected) {
             ws.send(message);
@@ -41,17 +42,67 @@
             console.log('WebSocket is not connected yet, queueing message');
             messageQueue.push(message);
         }
-    };
+    }
 
-    document.getElementById('up').addEventListener('touchstart', () => sendMove('up'));
-    document.getElementById('down').addEventListener('touchstart', () => sendMove('down'));
-    document.getElementById('left').addEventListener('touchstart', () => sendMove('left'));
-    document.getElementById('right').addEventListener('touchstart', () => sendMove('right'));
+    const joystick = document.getElementById('joystick');
+    const joystickContainer = document.getElementById('joystick-container');
+    const sprite = document.getElementById('sprite');
 
-    document.getElementById('up').addEventListener('touchend', () => sendMove('-up'));
-    document.getElementById('down').addEventListener('touchend', () => sendMove('-down'));
-    document.getElementById('left').addEventListener('touchend', () => sendMove('-left'));
-    document.getElementById('right').addEventListener('touchend', () => sendMove('-right'));
+    let centerX = joystickContainer.offsetWidth / 2;
+    let centerY = joystickContainer.offsetHeight / 2;
+    let maxDistance = joystickContainer.offsetWidth / 2 - joystick.offsetWidth / 2;
+
+    function getJoystickPosition(event)
+    {
+        let touch = event.touches ? event.touches[0] : event;
+        let rect = joystickContainer.getBoundingClientRect();
+        let x = touch.clientX - rect.left - centerX;
+        let y = touch.clientY - rect.top - centerY;
+        let distance = Math.min(Math.sqrt(x * x + y * y), maxDistance)  ;
+        let angle = Math.atan2(y, x);
+        return {
+            x: Math.cos(angle) * distance,
+            y: Math.sin(angle) * distance
+        };
+    }
+
+    function onMove(event)
+    {
+      let pos = getJoystickPosition(event);
+      updateJoystick(pos);
+      updateDirection(pos);
+    }
+
+    function updateJoystick(position)
+    {
+        joystick.style.left = centerX + position.x + 'px';
+        joystick.style.top = centerY + position.y + 'px';
+    }
+
+    function updateDirection(pos) {
+        if (pos.x > 0) {
+            sendMove('right');
+            console.log('right');
+        } else if (pos.x < 0) {
+            sendMove('left');
+            console.log('left');
+        }
+    }
+
+    function onEnd() {
+        updateJoystick({ x: 0, y: 0 });
+        sendMove('-left');
+        sendMove('-right');
+    }
+
+    joystick.addEventListener('touchstart', function() {
+        window.addEventListener('touchmove', onMove);
+        window.addEventListener('touchend', onEnd, { once: true });
+    });
+
+    window.addEventListener('touchend', function() {
+        window.removeEventListener('touchmove', onMove);
+    });
 </script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+html, body {
+    display: flex;
+    justify-content: flex-start; /* Горизонтальное выравнивание влево */
+    align-items: flex-end;
+    height: 100%;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.joystick-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    touch-action: none;
+}
+
+.joystick {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #007BFF;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    touch-action: none;
+}
