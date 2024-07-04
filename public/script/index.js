@@ -1,5 +1,5 @@
 const SCENE_WIDTH = 2000//window.innerWidth
-const SCENE_HEIGHT = window.innerHeight
+const SCENE_HEIGHT = 1000
 const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
@@ -10,6 +10,7 @@ const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
 let hero;
+let sceneScale = 1;
 const hero_walk = [];
 const experiences = [];
 const hero_jump = [];
@@ -52,6 +53,27 @@ function onAppMouseUp(event)
     {
         mouse.isDownLeft = false;
     }
+}
+function resizeWindow()
+{
+    console.log('resize');
+    let relationshipWidth =  window.innerWidth / SCENE_WIDTH;
+    let relationshipHeight = window.innerHeight / SCENE_HEIGHT;
+    if (relationshipWidth > 1 || relationshipHeight > 1) {
+        if (relationshipWidth > relationshipHeight) {
+            sceneScale = relationshipWidth;
+        } else
+        { 
+            sceneScale = relationshipHeight;
+        }
+        scene.scale.x = sceneScale; 
+        scene.scale.y = sceneScale;
+    } else
+    {
+        sceneScale = 1;
+    }
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+    //app.init({ background: '#000000',  width: window.innerWidth, height: window.innerHeight});
 }
 
 function onKeyDown(event)
@@ -103,9 +125,9 @@ function onKeyUp(event)
 
 (async () =>
 {
-    await app.init({ background: '#000000',  resizeTo: window });
+    await app.init({ background: '#000000',  width: window.innerWidth, height: window.innerHeight});
     document.body.appendChild(app.canvas);
-
+    resizeWindow()
     await PIXI.Assets.load([
         { alias: 'background', src: '/images/level1-map.jpg' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
@@ -156,6 +178,7 @@ function onKeyUp(event)
     app.canvas.addEventListener('mousedown', onAppMouseDown);
     app.canvas.addEventListener('mousemove', onAppMouseMove);
     app.canvas.addEventListener('mouseup', onAppMouseUp);
+    window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
     hero = new Hero(300, 300, 6, 0);
@@ -244,16 +267,27 @@ function moveCamera(x, y)
         moveX = scene.x;
         scene.x -= moveX;
     }
-    else if (scene.x - x < app.screen.width - SCENE_WIDTH)
+    else if (scene.x - x < app.screen.width - SCENE_WIDTH * sceneScale)
     {
-        moveX = (scene.x + SCENE_WIDTH - app.screen.width);
+        moveX = (scene.x + SCENE_WIDTH * sceneScale - app.screen.width);
         scene.x -= moveX;
     }
     else
     {
         scene.x -= moveX;
     }
-    scene.y += y;
+    if (scene.y - y > 0)
+    {
+        moveY = scene.y;
+        scene.y -= moveY;
+    } else if (scene.y - y < app.screen.height - SCENE_HEIGHT * sceneScale)
+    {
+        moveY = (scene.y + SCENE_HEIGHT * sceneScale - app.screen.height);
+        scene.y -= moveY;
+    } else
+    {
+        scene.y -= moveY;
+    }
 }
 
 window.addEventListener('keydown', onKeyDown)
@@ -271,6 +305,13 @@ function levelCreate()
     //platforms.push(new Ground(texture, 300, 300, 178, 40));
     platforms.push(new Ground(texture, 500, 400, 178, 40));
     platforms.push(new Ground(texture, 100, 500, 178, 40));
+
+
+    platforms.push(new Ground(texture, 300, 600, 178, 40));
+    platforms.push(new Ground(texture, 300, 800, 178, 40));
+    platforms.push(new Ground(texture, 300, 1000, 178, 40));
+    platforms.push(new Ground(texture, 300, 1200, 178, 40));
+
     platforms.forEach(platform =>
     {
         platform.view();

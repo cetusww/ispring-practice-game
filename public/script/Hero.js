@@ -25,7 +25,7 @@ class Hero
         this.sprite.vy = 1;
         this.isGround = false;
         this.cameraRectX = 100;
-        this.cameraRectY = 10;
+        this.cameraRectY = 50;
 
         this.hp = 100;
         this.experience = 0;
@@ -235,7 +235,6 @@ class Hero
         this.addExperience = function(experience)
         {
             this.experience += experience;
-            this.updateExperience();
         }
         this.takeDamage = function (damage)
         {
@@ -330,17 +329,28 @@ class Hero
             
             let globalPosition = this.sprite.getGlobalPosition();
             let deltaX = globalPosition.x - app.screen.width / 2; 
-            let deltaY = globalPosition.y - app.screen.width / 2; 
-            if (deltaX > this.cameraRectX && this.sprite.scale.x > 0)
+            let deltaY = globalPosition.y - app.screen.height / 2; 
+            if (deltaX > this.cameraRectX)
             {
                 let moveX = deltaX - this.cameraRectX;
                 moveCamera(moveX, 0);
             }
 
-            if (deltaX < -this.cameraRectX && this.sprite.scale.x < 0)
+            if (deltaX < -this.cameraRectX)
             {
                 let moveX = deltaX + this.cameraRectX;
                 moveCamera(moveX, 0);
+            }
+            if (deltaY > this.cameraRectY)
+            {
+                let moveY = deltaY - this.cameraRectY;
+                moveCamera(0, moveY);
+            }
+
+            if (deltaY < -this.cameraRectY)
+            {
+                let moveY = deltaY + this.cameraRectY;
+                moveCamera(0, moveY);
             }
         }
         this.update = function (time)
@@ -364,6 +374,7 @@ class Hero
                 this.move(time);
                 this.collise();
             }
+            this.updateExperience();
             this.updateCollide();
         }
 
