@@ -56,7 +56,6 @@ function onAppMouseUp(event)
 }
 function resizeWindow()
 {
-    console.log('resize');
     let relationshipWidth =  window.innerWidth / SCENE_WIDTH;
     let relationshipHeight = window.innerHeight / SCENE_HEIGHT;
     if (relationshipWidth > 1 || relationshipHeight > 1) {
@@ -73,7 +72,6 @@ function resizeWindow()
         sceneScale = 1;
     }
     app.renderer.resize(window.innerWidth, window.innerHeight);
-    //app.init({ background: '#000000',  width: window.innerWidth, height: window.innerHeight});
 }
 
 function onKeyDown(event)
