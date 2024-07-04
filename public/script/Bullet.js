@@ -45,7 +45,7 @@ class Bullet
                     {
                         this.boom = true;
                         this.lifeTime = 2;
-                        enemy.takeDamage(50);
+                        enemy.takeDamage(20);
                         break;
                     }
                 }
@@ -54,14 +54,21 @@ class Bullet
                     for (let i = 0; i < platforms.length; i++)
                     {
                         let platform = platforms[i];
-                        if (this.sprite.y <= platform.collideBottom + this.sprite.vy &&
-                            this.sprite.y >= platform.collideTop &&
+                        if (this.sprite.y <= platform.collideBottom + Math.max(this.sprite.vy, 0) &&
+                            this.sprite.y >= platform.collideTop + Math.min(this.sprite.vy, 0) &&
                             this.sprite.x <= platform.collideRight &&
                             this.sprite.x >= platform.collideLeft
                         )
                         {
                             this.boom = true;
                             this.lifeTime = 2;
+                            if (this.sprite.vy < 0) {
+                                this.sprite.y = platform.collideBottom; 
+                            }
+                            else
+                            {
+                                this.sprite.y = platform.collideTop; 
+                            }
                             break;
                         }
                     }  

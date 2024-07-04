@@ -41,6 +41,7 @@ class Hero
         this.rechargeCircle = new PIXI.Graphics();
         this.currentRechargeTime = this.rechargeTime;
         this.animateType = '';
+        this.experienceText = null;
 
         let radius = 300;
         let blurSize = 50;
@@ -89,9 +90,8 @@ class Hero
                 this.sprite.textures = hero_dead;
                 this.sprite.animationSpeed = 0.3;
                 this.sprite.loop = false;
-                this.sprite.width = 100
-                this.sprite.height = 80
-                //this.sprite.y -= 10
+                this.sprite.width = 100;
+                this.sprite.height = 80;
                 this.sprite.play();
                 console.log('смерть');
                 this.animateType = 'dead';
@@ -137,7 +137,8 @@ class Hero
                 }
             }          
         }
-        this.updateHp = function () {
+        this.updateHp = function ()
+        {
             app.stage.removeChild(this.graphics);
             this.graphics = new PIXI.Graphics();
             this.graphics.rect(15, 15, this.hp * 2, 10);
@@ -146,6 +147,7 @@ class Hero
             this.graphics.stroke({ width: 2, color: 0xfeeb77 });
             app.stage.addChild(this.graphics);
         }
+        
         this.view = function ()
         {
             scene.addChild(this.focusTexture);
@@ -170,22 +172,29 @@ class Hero
                 bulletImg.height = 24;
                 app.stage.addChild(bulletImg);
             }
+
+            this.experienceText = new PIXI.Text(
+                this.experience,
+                {
+                    fontFamily: 'Arial',
+                    fontSize: 35,
+                    fill: 0xfeeb77,
+                }
+            );
+            this.experienceText.x = app.screen.width  - 30;
+            this.experienceText.y = 10;
+            app.stage.addChild(this.experienceText);
             app.stage.addChild(this.countBulletText);
-            // this.experienceText = new PIXI.Text(
-            //     this.currentCountBullet,
-            //     {
-            //         fontFamily: 'Arial',
-            //         fontSize: 35,
-            //         fill: 0xfeeb77,
-            //     }
-            // );
-            // this.countBulletText.x = app.screen.width - ;
-            // this.countBulletText.y = 30;
         }
 
         this.deleteView = function ()
         {
             scene.removeChild(this.sprite);
+        }
+        this.updateExperience = function ()
+        {
+            this.experienceText.text = this.experience;
+            this.experienceText.x = app.screen.width - `${this.experience}`.length * 20 - 30;
         }
         this.updateWeapon = function (time)
         {
@@ -226,6 +235,7 @@ class Hero
         this.addExperience = function(experience)
         {
             this.experience += experience;
+            this.updateExperience();
         }
         this.takeDamage = function (damage)
         {

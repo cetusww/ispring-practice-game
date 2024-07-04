@@ -189,7 +189,6 @@ function onKeyUp(event)
         i = 0;
         while (i < experiences.length)
         {
-            console.log(experiences);
             if (!experiences[i].isTaken)
             {
                 experiences[i].update(time);
