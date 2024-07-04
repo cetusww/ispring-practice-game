@@ -9,6 +9,9 @@
 <div class="joystick-container" id="joystick-container">
   <div class="joystick" id="joystick"></div>
 </div>
+<div class="buttons">
+  <button class="up" id="up">Up</button>
+</div>
 
 <script>
     const ws = new WebSocket('ws://10.250.104.87:8080');
@@ -18,7 +21,6 @@
     ws.onopen = function() {
         isConnected = true;
         console.log('WebSocket connection established');
-        // Send all messages in the queue
         while (messageQueue.length > 0) {
             ws.send(messageQueue.shift());
         }
@@ -46,7 +48,7 @@
 
     const joystick = document.getElementById('joystick');
     const joystickContainer = document.getElementById('joystick-container');
-    const sprite = document.getElementById('sprite');
+    const buttonUp = document.getElementById('up');
 
     let centerX = joystickContainer.offsetWidth / 2;
     let centerY = joystickContainer.offsetHeight / 2;
@@ -80,10 +82,13 @@
     }
 
     function updateDirection(pos) {
-        if (pos.x > 0) {
+        if (pos.x > 0)
+        {
             sendMove('right');
             console.log('right');
-        } else if (pos.x < 0) {
+        }
+        if (pos.x < 0)
+        {
             sendMove('left');
             console.log('left');
         }

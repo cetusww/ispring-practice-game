@@ -18,6 +18,7 @@ conn.onmessage = function(event) {
     console.log(data);
     onButtonDown(data);
     onButtonUp(data);
+
 };
 
 const keys =
