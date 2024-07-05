@@ -18,7 +18,8 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION !== []) {
+		if ($_SESSION !== [])
+		{
 			return $this->redirectToRoute('show_menu');
 		}
 		return $this->render('signup-user-form.html.twig');
@@ -28,7 +29,8 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION !== []) {
+		if ($_SESSION !== [])
+		{
 			return $this->redirectToRoute('show_menu');
 		}
 		return $this->render('signin-user-form.html.twig');
@@ -38,7 +40,8 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION === []) {
+		if ($_SESSION === [])
+		{
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('menu.html.twig');
@@ -46,7 +49,42 @@ class ViewController extends AbstractController
 
     public function showGame(): Response
     {
-        return $this->render('game.html.twig');
+			session_name('auth');
+			session_start();
+			if ($_SESSION === []) {
+				return $this->redirectToRoute('index');
+			}
+			return $this->render('game.html.twig');
     }
+
+		public function showLegend(): Response
+		{
+			session_name('auth');
+			session_start();
+			if ($_SESSION === []) {
+				return $this->redirectToRoute('index');
+			}
+			return $this->render('legend.html.twig');
+		}
+
+	public function showWin(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('game-win.html.twig');
+	}
+
+	public function showLose(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('game-lose.html.twig');
+	}
 
 }

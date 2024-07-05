@@ -29,3 +29,15 @@ show_menu:
 show_game:
     path: /game
     controller: App\Controller\ViewController::showGame
+
+show_legend:
+    path: /legend
+    controller: App\Controller\ViewController::showLegend
+
+show_win:
+    path: /win
+    controller: App\Controller\ViewController::showWin
+
+show_lose:
+    path: /lose
+    controller: App\Controller\ViewController::showLose

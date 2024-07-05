@@ -9,9 +9,11 @@
 <body>
 <div class=" form">
     <form action="/signin" method="post">
+        <span class="error-text">{{ errors.username ?? '' }}</span>
         <div class="field border fill responsive input">
             <input name="username" id="username" type="text" placeholder="имя">
         </div>
+        <span class="error-text">{{ errors.password ?? '' }}</span>
         <div class="field border fill input">
             <input name="password" id="password" type="password" placeholder="пароль">
         </div>

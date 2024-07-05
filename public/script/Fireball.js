@@ -34,29 +34,27 @@ class Fireball
                 this.sprite.vy += GRAVITY_ACCELERATION * time.deltaTime; 
                 if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
                     hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y
-                ) {
-                    //console.log('попал')
+                )
+                {
                     this.lifeTime = 10;
                     this.boom = true;
-                    //this.sprite.vx = 0;
-                    //this.sprite.vy = 0;
-                    //this.sprite.scale.x *= 2;
-                    //this.sprite.scale.y *= 2;
-                    //console.log(this.sprite.scale)
+                    hero.takeDamage(10);
                 }
-                platforms.forEach(platform =>
-                {
-                    if (this.sprite.y <= platform.collideBottom + this.sprite.vy &&
-                        this.sprite.y >= platform.collideTop &&
-                        this.sprite.x <= platform.collideRight &&
-                        this.sprite.x >= platform.collideLeft
-                    )
-                    {
-                        //console.log('попал')
-                        this.boom = true;
-                        this.lifeTime = 10;
-                    }
-                })
+                if (!this.boom) {
+                    for (let i = 0; i < platforms.length; i++) {
+                        let platform = platforms[i];
+                        if (this.sprite.y <= platform.collideBottom + this.sprite.vy &&
+                            this.sprite.y >= platform.collideTop &&
+                            this.sprite.x <= platform.collideRight &&
+                            this.sprite.x >= platform.collideLeft
+                        )
+                        {
+                            this.boom = true;
+                            this.lifeTime = 10;
+                            break;
+                        }
+                    }  
+                }
             }
             this.lifeTime -= time.deltaTime;
         }

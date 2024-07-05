@@ -23,9 +23,6 @@ class Enemy
         this.sprite.vx = this.speedX;
         this.sprite.vy = 0;
 
-        this.jumpPower = 12;
-        this.gravitationPower = 0.5;
-
         this.zoneWidth = zoneWidth;
         this.zoneHeight = zoneHeight;
         this.zoneX = posX;
@@ -34,9 +31,15 @@ class Enemy
         this.visibilityZoneHeight = visibilityZoneHeight;
 
         this.ainimateType = '';
-        this.timeAttack = 25;
+        this.timeAttack = 50;
+        this.currentTimeAttack = 0;
+        this.maxHp = 100;
+        this.hp = 100;
+        this.experience = 100;
+
 
         this.angle = 3.1415 * 30 / 180;
+        this.deadTime = 1 * FPS;
         this.updateAnim = function (type)
         {
             if (type === 'idle')
@@ -75,15 +78,17 @@ class Enemy
         this.view = function ()
         {
             scene.addChild(this.sprite);
+            this.updateHp();
         }
 
         this.deleteView = function ()
         {
             scene.removeChild(this.sprite);
+            scene.removeChild(this.graphics);
         }
         this.createFireball = function (heroX, heroY)
         {
-            if (this.timeAttack <= 0)
+            if (this.currentTimeAttack <= 0)
             {
                 let distanceX = heroX - this.sprite.x;
                 let tanAngle = Math.tan(this.angle);
@@ -96,10 +101,29 @@ class Enemy
                 const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0);
                 fireball.view();
                 fireballs.push(fireball); 
-                this.timeAttack = 50;
+                this.currentTimeAttack = this.timeAttack;
             }  
         }
-
+        this.updateHp = function ()
+        {
+            scene.removeChild(this.graphics);
+            this.graphics = new PIXI.Graphics();
+            this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.hp / this.maxHp * (this.sprite.width - 10), 5);
+            this.graphics.fill(0xde3249);
+            this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.sprite.width - 10, 5);
+            this.graphics.stroke({ width: 1, color: 0xfeeb77 });
+            scene.addChild(this.graphics);
+        }
+        this.takeDamage = function (damage)
+        {
+            this.hp -= damage;
+            if (this.hp <= 0) 
+            {
+                this.hp = 0;
+                this.dead = true;
+            }
+            this.updateHp();
+        }
         this.updateMove = function(time) 
         {
             this.sprite.x += this.sprite.vx * time.deltaTime;
@@ -121,23 +145,50 @@ class Enemy
         }
         this.updateAggression = function ()
         {
-            if (hero.collideRight >= this.zoneX - this.zoneWidth - this.visibilityZoneWidth && 
-                hero.collideLeft <= this.zoneX + this.zoneWidth + this.visibilityZoneWidth &&
-                hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
-            )
+            if (!hero.dead)
             {
-                //console.log('вижу');
-                this.createFireball(hero.sprite.x, hero.sprite.y);
+                if (hero.collideRight >= this.sprite.x - this.visibilityZoneWidth && 
+                    hero.collideLeft <= this.sprite.x + this.visibilityZoneWidth &&
+                    hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
+                )
+                {
+                    this.createFireball(hero.sprite.x, hero.sprite.y);
+                }
             }
+        }
+        this.dropExperience = function ()
+        {    
+            let randomCount = Math.floor(Math.random() * 5) + 2;
+            let experienceCount = Math.floor(this.experience / randomCount);
+            console.log('+', randomCount);
+            let i = -Math.floor(randomCount / 2)
+            for (i; i < randomCount -Math.floor(randomCount / 2) - 1; i++)
+            {
+                let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, experienceCount);
+                experience.view();
+                experiences.push(experience);
+            }
+            let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
+            experience.view();
+            experiences.push(experience);
         }
         this.update = function (time)
         {
-            if (this.timeAttack > 0)
+            if (!this.dead)
             {
-                this.timeAttack -= 1 * time.deltaTime;
+                if (this.currentTimeAttack > 0)
+                {
+                    this.currentTimeAttack -= 1 * time.deltaTime;
+                }
+                this.updateHp();
+                this.updateMove(time);
+                this.updateAggression();
+                this.updateCollide();
             }
-            this.updateMove(time);
-            this.updateAggression();
+            else 
+            {
+                this.deadTime -= time.deltaTime;
+            }
         }
     }
 }
