@@ -24,6 +24,7 @@ class Hero
         this.sprite.vx = 0;
         this.sprite.vy = 1;
         this.isGround = false;
+        this.isGoDown = false;
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
@@ -273,6 +274,9 @@ class Hero
             {
                 this.sprite.vx = 0;
             }
+            if (keys.keyDownDouble && this.isGoDown) {
+                this.sprite.y += 12;
+            }
             if (keys.keyUp)
             {
                 if (this.isGround)
@@ -355,7 +359,8 @@ class Hero
         }
         this.update = function (time)
         {
-            if (!this.dead) {
+            if (!this.dead)
+            {
                 this.updateKey();
                 this.updateMove(time);
                 this.updateWeapon(time);
@@ -381,6 +386,7 @@ class Hero
         this.collise = function ()
         {
             this.isGround = false;
+            this.isGoDown = false;
             this.updateCollide();
             if (this.collideLeft < 0)
             {
@@ -396,26 +402,68 @@ class Hero
                 this.isGround = true;
                 this.doubleJump = true;
             }
-            if (this.sprite.vy >= 0) {
+            if (this.sprite.vy < 0)
+            {
                 for (let i = 0; i < platforms.length; i++) 
                 {
                     let platform = platforms[i];
-                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
-                        this.collideBottom >= platform.collideTop &&
-                        this.collideLeft <= platform.collideRight &&
-                        this.collideRight >= platform.collideLeft
+                    if (this.collideTop >= platform.collideTop + this.sprite.vy &&
+                        this.collideTop <= platform.collideBottom &&
+                        this.collideRight <= platform.collideRight &&
+                        this.collideLeft >= platform.collideLeft
+                    )
+                    {
+                        this.sprite.vy = 0;
+                        this.doubleJump = false;
+                        break;
+                    }
+                }
+            }
+            if (this.sprite.vy >= 0)
+            {
+                for (let i = 0; i < woodenPlanks.length; i++) 
+                {
+                    let woodenPlank = woodenPlanks[i];
+                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
+                        this.collideBottom >= woodenPlank.collideTop &&
+                        this.sprite.x <= woodenPlank.collideRight &&
+                        this.sprite.x >= woodenPlank.collideLeft
                     )
                     {
                         this.isGround = true;
+                        this.isGoDown = true;
                         this.doubleJump = true;
                         if (this.sprite.vy > 1)
                         {
-                            this.sprite.y -= (this.collideBottom - platform.collideTop);
+                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop);
                         } else
                         {
-                            this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
+                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop) / 4;
                         } 
                         break;
+                    }
+                }
+                if (!this.isGround) {
+                    for (let i = 0; i < platforms.length; i++) 
+                    {
+                        let platform = platforms[i];
+                        if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
+                            this.collideBottom >= platform.collideTop &&
+                            this.collideLeft <= platform.collideRight &&
+                            this.collideRight >= platform.collideLeft
+                        )
+                        {
+                            this.isGround = true;
+                            this.doubleJump = true;
+                            if (this.sprite.vy > 1)
+                            {
+                                this.sprite.y -= (this.collideBottom - platform.collideTop);
+                            } else
+                            {
+                                this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
+                            } 
+                            break;
+                        }
                     }
                 }
             }
