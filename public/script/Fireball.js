@@ -1,6 +1,6 @@
 class Fireball
 {
-    constructor(texture, posX, posY, vecX, vecY, angle)
+    constructor(texture, posX, posY, vecX, vecY, angle, damage)
     {
         this.sprite = new PIXI.Sprite(PIXI.Texture.from(texture));
         this.sprite.x = posX;
@@ -15,6 +15,7 @@ class Fireball
         this.sprite.rotation += angle;
         this.lifeTime = 50;
         this.boom = false;
+        this.damage = damage + Math.floor((Math.random() - 0.5) * damage);
         this.view = function ()
         {
             scene.addChild(this.sprite);
@@ -38,7 +39,7 @@ class Fireball
                 {
                     this.lifeTime = 10;
                     this.boom = true;
-                    hero.takeDamage(0);
+                    hero.takeDamage(this.damage);
                 }
                 if (!this.boom) {
                     for (let i = 0; i < platforms.length; i++) {

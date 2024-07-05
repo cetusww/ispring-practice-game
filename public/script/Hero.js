@@ -1,6 +1,6 @@
 class Hero
 {
-    constructor(posX, posY, speedX, speedY)
+    constructor(posX, posY, speedX, speedY, experienceMax)
     {
         this.sprite = new PIXI.AnimatedSprite(hero_idle);
 
@@ -30,7 +30,9 @@ class Hero
         this.cameraRectY = 50;
 
         this.hp = 100;
+        this.hpMax = 100;
         this.experience = 0;
+        this.experienceMax = experienceMax;
         this.dead = false;
         this.jumpPower = 15;
         this.doubleJump = true;
@@ -145,22 +147,12 @@ class Hero
                 }
             }          
         }
-        this.updateHp = function ()
-        {
-            app.stage.removeChild(this.graphics);
-            this.graphics = new PIXI.Graphics();
-            this.graphics.rect(15, 15, this.hp * 2, 10);
-            this.graphics.fill(0xde3249);
-            this.graphics.rect(15, 15, 200, 10);
-            this.graphics.stroke({ width: 2, color: 0xfeeb77 });
-            app.stage.addChild(this.graphics);
-        }
         
-        this.view = function ()
-        {
+        
+        this.view = function () {
             scene.addChild(this.focusTexture);
             scene.addChild(this.sprite);
-            this.updateHp();
+            
             scene.mask = this.focusTexture;
             this.countBulletText = new PIXI.Text(
                 this.currentCountBullet,
@@ -171,38 +163,71 @@ class Hero
                 }
             );
             this.countBulletText.x = 50;
-            this.countBulletText.y = 30;
+            this.countBulletText.y = 60;
             for (let i = 0; i < 3; i++) {
                 let bulletImg = new PIXI.Sprite(PIXI.Texture.from('bullet'));
                 bulletImg.x = 10 + 5 * (i + 1);
-                bulletImg.y = 30;
+                bulletImg.y = 60;
                 bulletImg.width = 15;
                 bulletImg.height = 24;
                 app.stage.addChild(bulletImg);
             }
 
-            this.experienceText = new PIXI.Text(
-                this.experience,
-                {
-                    fontFamily: 'Arial',
-                    fontSize: 35,
-                    fill: 0xfeeb77,
-                }
-            );
+            this.experienceText = new PIXI.Text(this.experience, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.healthText = new PIXI.Text(this.hp, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.experienceTitle = new PIXI.Text('Score', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+            this.healthTitle = new PIXI.Text('Health',{ fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.healthText.x = 300
+            this.healthTitle.x = 30
+            this.healthText.y = 15
+            this.healthTitle.y = 15
+            this.experienceTitle.x = app.screen.width - 300
+            this.experienceTitle.y = 15
             this.experienceText.x = app.screen.width  - 30;
-            this.experienceText.y = 10;
+            this.experienceText.y = 15;
+            this.experienceText.anchor.set(1, 0);
+            this.healthText.anchor.set(1, 0);
             app.stage.addChild(this.experienceText);
+            app.stage.addChild(this.experienceTitle);
+            
             app.stage.addChild(this.countBulletText);
+            this.updateHp();
         }
 
         this.deleteView = function ()
         {
             scene.removeChild(this.sprite);
         }
+        this.updateHp = function ()
+        {
+            app.stage.removeChild(this.graphicsHp);
+            app.stage.removeChild(this.healthTitle);
+            app.stage.removeChild(this.healthText);
+            this.healthText.text = `${this.hp} / ${this.hpMax}`;
+            this.graphicsHp = new PIXI.Graphics();
+            this.graphicsHp.rect(15, 15, this.hp * 3, 30);
+            this.graphicsHp.fill(0xde3249);
+            this.graphicsHp.rect(15, 15, 300, 30);
+            this.graphicsHp.stroke({ width: 2, color: 0xfeeb77 });
+            app.stage.addChild(this.graphicsHp);
+            app.stage.addChild(this.healthText);
+            app.stage.addChild(this.healthTitle);
+        }
         this.updateExperience = function ()
         {
-            this.experienceText.text = this.experience;
-            this.experienceText.x = app.screen.width - `${this.experience}`.length * 20 - 30;
+            app.stage.removeChild(this.graphicsExperience);
+            app.stage.removeChild(this.experienceTitle);
+            app.stage.removeChild(this.experienceText);
+            this.graphicsExperience = new PIXI.Graphics();
+            console.log(this.experience / this.experienceMax)
+            this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, this.experience / this.experienceMax * 300, 30);
+            this.graphicsExperience.fill(0x4bb35e);
+            this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
+            this.graphicsExperience.stroke({ width: 2, color: 0xfeeb77 });
+            this.experienceText.text = `${this.experience} / ${this.experienceMax}`;
+            app.stage.addChild(this.graphicsExperience);
+            app.stage.addChild(this.experienceTitle);
+            app.stage.addChild(this.experienceText); 
         }
         this.updateWeapon = function (time)
         {
@@ -219,7 +244,7 @@ class Hero
                 app.stage.removeChild(this.rechargeCircle);
                 this.rechargeCircle = new PIXI.Graphics();
                 let x = 90; 
-                let y = 42; 
+                let y = 72; 
                 let radius = 10; 
                 let startAngle = -Math.PI / 2; 
                 let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;;
@@ -357,17 +382,21 @@ class Hero
                 let moveX = deltaX + this.cameraRectX;
                 moveCamera(moveX, 0);
             }
+            //if (this.isGround) {
+                if (deltaY < -this.cameraRectY)
+                {
+                    let moveY = (deltaY + this.cameraRectY) / 10;
+                    moveCamera(0, moveY);
+                    this.moveCamTime
+                }
+            //}
             if (deltaY > this.cameraRectY)
             {
                 let moveY = deltaY - this.cameraRectY;
                 moveCamera(0, moveY);
             }
 
-            if (deltaY < -this.cameraRectY)
-            {
-                let moveY = deltaY + this.cameraRectY;
-                moveCamera(0, moveY);
-            }
+            
         }
         this.update = function (time)
         {

@@ -206,7 +206,7 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(400, 100, 6, 0);
+    hero = new Hero(400, 100, 6, 0, 680);
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
@@ -357,14 +357,14 @@ function levelCreate()
     woodenPlanks.push(new WoodenPlank(texture, 1250, 400, 100, 40));
     platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
 
-    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50));// 4 уровень
-    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50));// 4 уровень
+    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50, 100));// 4 уровень
+    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50, 100));// 4 уровень
 
-    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50));// 3 уровень
-    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50));// 3 уровень
+    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50, 120));// 3 уровень
+    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50, 140));// 3 уровень
 
-    enemys.push(new Enemy(350, 700, 300, 0, 300, 50));// 2 уровень
-    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50));// 2 уровень
+    enemys.push(new Enemy(350, 700, 300, 0, 300, 50, 90));// 2 уровень
+    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
     woodenPlanks.forEach(woodenPlank => 
     {
         woodenPlank.view();
