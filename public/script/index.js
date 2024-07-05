@@ -122,7 +122,7 @@ function onKeyUp(event)
     }
     for (let i = 0; i < 10; i++)
     {
-        hero_jump.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
+        hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
     }
 
     const background = PIXI.Sprite.from('background');
