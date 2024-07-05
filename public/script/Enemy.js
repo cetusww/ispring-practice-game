@@ -104,7 +104,8 @@ class Enemy
                 this.currentTimeAttack = this.timeAttack;
             }  
         }
-        this.updateHp = function () {
+        this.updateHp = function ()
+        {
             scene.removeChild(this.graphics);
             this.graphics = new PIXI.Graphics();
             this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.hp / this.maxHp * (this.sprite.width - 10), 5);
