@@ -25,6 +25,7 @@ class Hero
         this.sprite.vy = 1;
         this.isGround = false;
         this.isGoDown = false;
+        this.isSeat = false;
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
@@ -101,7 +102,13 @@ class Hero
 
         this.updateCollide = function ()
         {
-            this.collideTop = this.sprite.y - this.sprite.height / 2;
+            if (this.isSeat) { 
+                this.collideTop = this.sprite.y;
+            }
+            else
+            {
+                this.collideTop = this.sprite.y - this.sprite.height / 2;
+            }
             this.collideBottom = this.sprite.y + this.sprite.height / 2 - 6;
             this.collideLeft = this.sprite.x - this.sprite.width / 2 + 10;
             this.collideRight = this.sprite.x + this.sprite.width / 2 - 10;
@@ -269,6 +276,11 @@ class Hero
                 {
                     this.sprite.scale.x *= -1;
                 } 
+            }
+            this.isSeat = false;  
+            if (keys.keyDown)
+            {
+                this.isSeat = true;    
             }
             if (!keys.keyLeft && !keys.keyRight)
             {
