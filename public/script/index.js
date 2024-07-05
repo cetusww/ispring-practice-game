@@ -212,6 +212,10 @@ function onKeyUp(event)
     app.ticker.add((time) =>
     {
         hero.update(time);
+        if (hero.deadTime < 0)
+        {
+            window.location.href = "/lose";
+        }
         // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
         // {
         //     window.location.href = "/win";

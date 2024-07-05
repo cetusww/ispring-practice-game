@@ -34,6 +34,7 @@ class Hero
         this.experience = 0;
         this.experienceMax = experienceMax;
         this.dead = false;
+        this.deadTime = 1.5 * FPS;
         this.jumpPower = 15;
         this.doubleJump = true;
         this.gravitationPower = 0.5;
@@ -409,6 +410,7 @@ class Hero
             }
             else
             {
+                this.deadTime -= time.deltaTime;
                 this.updateAnim('dead');
                 this.sprite.vx = 0;
                 if (!this.isGround)
