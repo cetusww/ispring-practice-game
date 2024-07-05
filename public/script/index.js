@@ -103,7 +103,6 @@ function onKeyUp(event)
         { alias: 'robot_idle_group', src: '/images/robot_idle_group.json' },
         { alias: 'robot_walk_group', src: '/images/robot_walk_group.json' },
         { alias: 'robot_jump_group', src: '/images/robot_jump_group.json' },
-        { alias: 'robot_dead_group', src: '/images/robot_dead_group.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
@@ -119,10 +118,6 @@ function onKeyUp(event)
     for (let i = 0; i < 10; i++)
     {
         hero_jump.push(PIXI.Texture.from(`hero_jump${1 + i}.png`));
-    }
-    for (let i = 0; i < 10; i++)
-    {
-        hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
     }
 
     const background = PIXI.Sprite.from('background');
