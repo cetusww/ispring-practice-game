@@ -98,22 +98,25 @@ function onKeyUp(event)
         { alias: 'background', src: '/images/level1-map.jpg' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
-        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },        
+        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
+        { alias: 'robot_idle_group', src: '/images/robot_idle_group.json' },
+        { alias: 'robot_walk_group', src: '/images/robot_walk_group.json' },
+        { alias: 'robot_jump_group', src: '/images/robot_jump_group.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
     ])
     for (let i = 0; i < 10; i++)
     {
-        hero_idle.push(PIXI.Texture.from(`idle${1 + i}.png`));
+        hero_idle.push(PIXI.Texture.from(`hero_idle${1 + i}.png`));
+    }
+    for (let i = 0; i < 8; i++)
+    {
+        hero_walk.push(PIXI.Texture.from(`hero_walk${1 + i}.png`));
     }
     for (let i = 0; i < 10; i++)
     {
-        hero_walk.push(PIXI.Texture.from(`walk${1 + i}.png`));
-    }
-    for (let i = 0; i < 10; i++)
-    {
-        hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`));
+        hero_jump.push(PIXI.Texture.from(`hero_jump${1 + i}.png`));
     }
 
     const background = PIXI.Sprite.from('background');

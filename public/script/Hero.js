@@ -10,7 +10,7 @@ class Hero
 
         this.sprite.x = posX;
         this.sprite.y = posY;
-        this.sprite.width = 60;
+        this.sprite.width = 70;
         this.sprite.height = 85;
 
         this.collideTop = this.sprite.y - this.sprite.height / 2;
