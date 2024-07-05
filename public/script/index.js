@@ -5,11 +5,12 @@ const scene = new PIXI.Container();
 const platforms = []
 const bullets = []
 const app = new PIXI.Application();
-//
-let background
-const hero_walk = []
-const hero_jump = []
-const hero_idle = []
+
+let background;
+const hero_walk = [];
+const hero_jump = [];
+const hero_idle = [];
+const hero_dead = [];
 const keys =
 {
     keyDown: false,

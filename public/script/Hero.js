@@ -79,7 +79,17 @@ class Hero
                 this.sprite.loop = false;
                 this.sprite.play();
                 this.ainimateType = 'jump';
-            }  
+            } else if (type === 'dead' && this.animateType !== 'dead')
+            {
+                this.sprite.textures = hero_dead;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = false;
+                this.sprite.width = 100;
+                this.sprite.height = 80;
+                this.sprite.play();
+                console.log('смерть');
+                this.animateType = 'dead';
+            }
         }
 
         this.updateCollide = function ()
