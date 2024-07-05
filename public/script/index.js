@@ -18,7 +18,11 @@ conn.onmessage = function(event) {
     console.log(data);
     onButtonDown(data);
     onButtonUp(data);
-
+    if (data.x !== undefined)
+    {
+        mouse.positionX = data.x * SCENE_WIDTH;
+        mouse.positionY = data.y * SCENE_WIDTH;
+    }
 };
 
 const keys =
@@ -119,6 +123,10 @@ function onButtonDown(data) {
         keys.keyDown = true;
         keys.keyUp = false;
     }
+    if (data === 'fire')
+    {
+        mouse.isDownLeft = true;
+    }
 }
 function onButtonUp(data) {
     if (data === '-left')
@@ -136,6 +144,10 @@ function onButtonUp(data) {
     if (data === '-down')
     {
         keys.keyDown = false;
+    }
+    if (data === '-fire')
+    {
+        mouse.isDownLeft = false;
     }
 }
 

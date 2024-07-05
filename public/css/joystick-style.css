@@ -6,11 +6,19 @@
 
 html, body {
     display: flex;
-    justify-content: flex-start; /* Горизонтальное выравнивание влево */
+    justify-content: flex-start;
     align-items: flex-end;
     height: 100%;
     margin: 0;
     background-color: #f0f0f0;
+    touch-action: manipulation;
+}
+
+.gamepad {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
 }
 
 .joystick-container {
@@ -35,10 +43,47 @@ html, body {
 }
 
 .buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    margin-left: 65vh;
+}
 
+.button {
+    width: 100px;
+    height: 100px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
 }
 
 .up {
-    width: 300px;
-    height: 300px;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.fire {
+    grid-column: 2;
+    grid-row: 2;
 }

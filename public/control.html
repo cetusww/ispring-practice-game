@@ -6,14 +6,28 @@
   <link rel="stylesheet" href="css/joystick-style.css">
 </head>
 <body>
-<div class="joystick-container" id="joystick-container">
-  <div class="joystick" id="joystick"></div>
-</div>
-<div class="buttons">
-  <button class="up" id="up">Up</button>
+<div class="gamepad">
+  <div class="joystick-container" id="joystick-container">
+    <div class="joystick" id="joystick"></div>
+  </div>
+  <div class="buttons">
+    <button class="button left" id="left">Left</button>
+    <button class="button up" id="up">Up</button>
+    <button class="button right" id="right">Right</button>
+    <button class="button down" id="down">Down</button>
+    <button class="button fire" id="fire">Fire</button>
+  </div>
 </div>
 
 <script>
+    document.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', function(event) {
+        event.preventDefault();
+    }, { passive: false });
+
     const ws = new WebSocket('ws://10.250.104.87:8080');
     let isConnected = false;
     const messageQueue = [];
@@ -48,7 +62,11 @@
 
     const joystick = document.getElementById('joystick');
     const joystickContainer = document.getElementById('joystick-container');
+    const buttonLeft = document.getElementById('left');
     const buttonUp = document.getElementById('up');
+    const buttonRight = document.getElementById('right');
+    const buttonDown = document.getElementById('down');
+    const buttonFire = document.getElementById('fire');
 
     let centerX = joystickContainer.offsetWidth / 2;
     let centerY = joystickContainer.offsetHeight / 2;
@@ -63,8 +81,8 @@
         let distance = Math.min(Math.sqrt(x * x + y * y), maxDistance)  ;
         let angle = Math.atan2(y, x);
         return {
-            x: Math.cos(angle) * distance,
-            y: Math.sin(angle) * distance
+            x: Math.floor(Math.cos(angle) * distance),
+            y: Math.floor(Math.sin(angle) * distance)
         };
     }
 
@@ -82,15 +100,18 @@
     }
 
     function updateDirection(pos) {
-        if (pos.x > 0)
+        sendMove(pos);
+    }
+
+    function updateButton(event)
+    {
+        if (event.type === 'touchstart')
         {
-            sendMove('right');
-            console.log('right');
+            sendMove(event.target.id);
         }
-        if (pos.x < 0)
+        if (event.type === 'touchend')
         {
-            sendMove('left');
-            console.log('left');
+            sendMove('-' + event.target.id);
         }
     }
 
@@ -108,6 +129,17 @@
     window.addEventListener('touchend', function() {
         window.removeEventListener('touchmove', onMove);
     });
+
+    buttonLeft.addEventListener('touchstart', updateButton);
+    buttonLeft.addEventListener('touchend', updateButton);
+    buttonUp.addEventListener('touchstart', updateButton);
+    buttonUp.addEventListener('touchend', updateButton);
+    buttonRight.addEventListener('touchstart', updateButton);
+    buttonRight.addEventListener('touchend', updateButton);
+    buttonDown.addEventListener('touchstart', updateButton);
+    buttonDown.addEventListener('touchend', updateButton);
+    buttonFire.addEventListener('touchstart', updateButton);
+    buttonFire.addEventListener('touchend', updateButton);
 </script>
 </body>
 </html>
