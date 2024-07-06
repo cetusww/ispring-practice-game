@@ -1,6 +1,6 @@
 class Enemy
 {
-    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight)
+    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight, experience)
     {
         this.sprite = new PIXI.AnimatedSprite(greenCapEnemyWalk);
         this.sprite.animationSpeed = 0.05; // Скорость анимации
@@ -35,7 +35,7 @@ class Enemy
         this.currentTimeAttack = 0;
         this.maxHp = 100;
         this.hp = 100;
-        this.experience = 100;
+        this.experience = experience;
 
 
         this.angle = 3.1415 * 30 / 180;
@@ -98,7 +98,7 @@ class Enemy
                 {
                     vecX *= -1;
                 }
-                const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0);
+                const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0, 10);
                 fireball.view();
                 fireballs.push(fireball); 
                 this.currentTimeAttack = this.timeAttack;

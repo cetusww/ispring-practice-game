@@ -3,6 +3,7 @@ const SCENE_HEIGHT = 1000
 const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
+const woodenPlanks = [];
 const bullets = [];
 const fireballs = [];
 const enemys = [];
@@ -25,6 +26,12 @@ const keys =
     keyLeft: false,
     keyRight: false,
     keyR: false,
+    keyDownDouble: false,
+}
+const doubleKeyDown =
+{
+    keyTime: 0,
+    keyClickCount: 0,
 }
 const mouse =
 {
@@ -74,6 +81,12 @@ function resizeWindow()
     app.renderer.resize(window.innerWidth, window.innerHeight);
 }
 
+function doubleClickremoveState()
+{
+    doubleKeyDown.keyClickCount = 0;
+    doubleKeyDown.keyTime = 0;
+}
+
 function onKeyDown(event)
 {
     if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'ф')
@@ -114,6 +127,20 @@ function onKeyUp(event)
     if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'ы')
     {
         keys.keyDown = false;
+        if (new Date() - doubleKeyDown.keyTime < 200 || doubleKeyDown.keyTime === 0)
+        {
+            doubleKeyDown.keyTime = new Date();
+            doubleKeyDown.keyClickCount += 1;
+        } else
+        {
+            doubleClickremoveState();
+        }
+        console.log(doubleKeyDown)
+        if (doubleKeyDown.keyClickCount === 2)
+        {
+            doubleClickremoveState();
+            keys.keyDownDouble = true;
+        }
     }
     if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'ц')
     {
@@ -179,12 +206,16 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(400, 100, 6, 0);
+    hero = new Hero(400, 100, 6, 0, 680);
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
         hero.update(time);
+        if (hero.deadTime < 0)
+        {
+            window.location.href = "/lose";
+        }
         // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
         // {
         //     window.location.href = "/win";
@@ -261,6 +292,11 @@ function onKeyUp(event)
             }
             i++;
         }
+        keys.keyDownDouble = false;
+        if (new Date() - doubleKeyDown.keyTime > 200) {
+            doubleClickremoveState();
+        }
+        
     });
 })();
 
@@ -298,26 +334,46 @@ function moveCamera(x, y)
 
 window.addEventListener('keydown', onKeyDown);
 window.addEventListener('keyup', onKeyUp);
-
+//window.addEventListener('keypress', () => {console.log('press')})
+//window.addEventListener('dblclick', doubleClick);
 function levelCreate()
 {
     let texture //= PIXI.Texture.from('ground');
     platforms.push(new Ground(texture, 1000, 970, 2000, 40)); // пол - 0 уровень
-    platforms.push(new Ground(texture, 1790, 820, 420, 40)); // 1 уровень
-    platforms.push(new Ground(texture, 750, 750, 1500, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 1150, 570, 1700, 40)); // 3 уровень
-    platforms.push(new Ground(texture, 1320, 400, 1360, 40)); // 4 уровень
+    platforms.push(new Ground(texture, 1800, 820, 400, 40)); // 1 уровень
+    platforms.push(new Ground(texture, 55, 750, 110, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 360, 750, 300, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 845, 750, 450, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 1362, 750, 285, 40)); // 2 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 160, 750, 100, 40));
+    woodenPlanks.push(new WoodenPlank(texture, 565, 750, 100, 40));
+    woodenPlanks.push(new WoodenPlank(texture, 1140, 750, 150, 40));
+    platforms.push(new Ground(texture, 55, 570, 110, 40)); // 3 уровень
+    platforms.push(new Ground(texture, 665, 570, 910, 40)); // 3 уровень
+    platforms.push(new Ground(texture, 1362, 570, 285, 40)); // 3 уровень
+    platforms.push(new Ground(texture, 1805, 570, 390, 40)); // 3 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 160, 570, 100, 40));
+    woodenPlanks.push(new WoodenPlank(texture, 1170, 570, 100, 40));
+    woodenPlanks.push(new WoodenPlank(texture, 1555, 570, 100, 40));
+    platforms.push(new Ground(texture, 965, 400, 470, 40)); // 4 уровень
+    platforms.push(new Ground(texture, 1650, 400, 700, 40)); // 4 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 680, 400, 100, 40));
+    woodenPlanks.push(new WoodenPlank(texture, 1250, 400, 100, 40));
     platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
 
-    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50));// 4 уровень
-    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50));// 4 уровень
+    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50, 100));// 4 уровень
+    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50, 100));// 4 уровень
 
-    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50));// 3 уровень
-    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50));// 3 уровень
+    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50, 120));// 3 уровень
+    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50, 140));// 3 уровень
 
-    enemys.push(new Enemy(350, 700, 300, 0, 300, 50));// 2 уровень
-    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50));// 2 уровень
-
+    enemys.push(new Enemy(350, 700, 300, 0, 300, 50, 90));// 2 уровень
+    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
+    woodenPlanks.forEach(woodenPlank => 
+    {
+        woodenPlank.view();
+    }
+    )
     platforms.forEach(platform =>
     {
         platform.view();
