@@ -132,11 +132,7 @@ function onKeyUp(event)
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
         { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
-        { alias: 'robot_idle_group', src: '/images/robot_idle_group.json' },
-        { alias: 'robot_walk_group', src: '/images/robot_walk_group.json' },
-        { alias: 'robot_jump_group', src: '/images/robot_jump_group.json' },
         { alias: 'enemy', src: '/images/green_cap_enemy.json' },
-        { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
@@ -156,7 +152,7 @@ function onKeyUp(event)
     }
     for (let i = 9; i < 10; i++)
     {
-        hero_dead.push(PIXI.Texture.from(`dead${1 + i}.png`));
+        hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
     }
     greenCapEnemyIdle.push(PIXI.Texture.from(`enemyIdle1.png`));
     for (let i = 0; i < 4; i++)
