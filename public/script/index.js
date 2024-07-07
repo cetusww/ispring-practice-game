@@ -19,7 +19,7 @@ const hero_dead = [];
 const greenCapEnemyIdle = [];
 const greenCapEnemyWalk = [];
 
-const conn = new WebSocket('ws://10.250.104.87:8080');
+const conn = new WebSocket('ws://172.20.10.9:8080');
 
 conn.onopen = function(e) {
     console.log("Connection established!");
