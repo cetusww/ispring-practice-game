@@ -18,6 +18,26 @@ const hero_idle = [];
 const hero_dead = [];
 const greenCapEnemyIdle = [];
 const greenCapEnemyWalk = [];
+
+const conn = new WebSocket('ws://10.250.104.87:8080');
+
+conn.onopen = function(e) {
+    console.log("Connection established!");
+    conn.send("Hello Server!");
+};
+
+conn.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log(data);
+    onButtonDown(data);
+    onButtonUp(data);
+    if (data.x !== undefined)
+    {
+        mouse.positionX = data.x * SCENE_WIDTH;
+        mouse.positionY = data.y * SCENE_WIDTH;
+    }
+};
+
 const keys =
 {
     keyDown: false,
@@ -118,6 +138,55 @@ function onKeyUp(event)
     if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'ц')
     {
         keys.keyUp = false;
+    }
+}
+
+function onButtonDown(data) {
+    if (data === 'left')
+    {
+        keys.keyLeft = true;
+        keys.keyRight = false;
+    }
+    if (data === 'right')
+    {
+        keys.keyRight = true;
+        keys.keyLeft = false;
+    }
+    if (data === 'up')
+    {
+        keys.keyUp = true;
+        keys.keyDown = false;
+    }
+    if (data === 'down')
+    {
+        keys.keyDown = true;
+        keys.keyUp = false;
+    }
+    if (data === 'fire')
+    {
+        mouse.isDownLeft = true;
+    }
+}
+function onButtonUp(data) {
+    if (data === '-left')
+    {
+        keys.keyLeft = false;
+    }
+    if (data === '-right')
+    {
+        keys.keyRight = false;
+    }
+    if (data === '-up')
+    {
+        keys.keyUp = false;
+    }
+    if (data === '-down')
+    {
+        keys.keyDown = false;
+    }
+    if (data === '-fire')
+    {
+        mouse.isDownLeft = false;
     }
 }
 
