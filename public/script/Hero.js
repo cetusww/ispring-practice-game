@@ -95,6 +95,7 @@ class Hero
                 this.sprite.play();
                 console.log('смерть');
                 this.animateType = 'dead';
+                window.location.href = "/lose";  // если умер, то проиграл
             }
         }
 
@@ -214,7 +215,7 @@ class Hero
                 let y = 42;
                 let radius = 10;
                 let startAngle = -Math.PI / 2;
-                let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;;
+                let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;
                 this.rechargeCircle.beginFill(0xfeeb77);
                 this.rechargeCircle.moveTo(x, y);
                 this.rechargeCircle.arc(x, y, radius, startAngle, endAngle);

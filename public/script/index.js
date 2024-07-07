@@ -135,7 +135,7 @@ function onKeyUp(event)
         { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
-        { alias: 'bullet', src: '/images/bullet.svg' },
+        { alias: 'bullet', src: '/images/bullet.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
     ])
     for (let i = 0; i < 10; i++)
@@ -184,14 +184,6 @@ function onKeyUp(event)
     app.ticker.add((time) =>
     {
         hero.update(time);
-        // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
-        // {
-        //     window.location.href = "/win";
-        // }
-        // if (hero.sprite.x < 0)
-        // {
-        //     window.location.href = "/lose";
-        // }
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -211,6 +203,10 @@ function onKeyUp(event)
                 enemies[i].sprite.destroy();
                 enemies.splice(i, 1);
                 i--;
+                if (enemies.length === 0)  // проверка победы, если все убиты
+                {
+                    window.location.href = "/win";
+                }
             }
             i++;
         }
@@ -324,25 +320,6 @@ function levelCreate()
     enemies.forEach(enemy =>
     {
         enemy.view();
-    });
-}
-
-function addBackground(app) {
-    const background = PIXI.Sprite.from('background');
-    background.anchor.set(0);
-
-
-    function resizeBackground() {
-        background.width = app.screen.width;
-        background.height = app.screen.height;
-    }
-
-    resizeBackground();
-    app.stage.addChild(background);
-
-    window.addEventListener('resize', () => {
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-        resizeBackground();
     });
 }
 
