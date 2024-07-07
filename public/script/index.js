@@ -5,7 +5,7 @@ const scene = new PIXI.Container();
 const platforms = [];
 const bullets = [];
 const fireballs = [];
-const enemys = [];
+const enemies = [];
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
@@ -202,18 +202,18 @@ function onKeyUp(event)
         }
 
         let i = 0;
-        while (i < enemys.length)
+        while (i < enemies.length)
         {
-            if (enemys[i].deadTime > 0)
+            if (enemies[i].deadTime > 0)
             {
-                enemys[i].update(time);
+                enemies[i].update(time);
             }
             else
             {
-                enemys[i].dropExperience();
-                enemys[i].deleteView();
-                enemys[i].sprite.destroy();
-                enemys.splice(i, 1);
+                enemies[i].dropExperience();
+                enemies[i].deleteView();
+                enemies[i].sprite.destroy();
+                enemies.splice(i, 1);
                 i--;
             }
             i++;
@@ -312,20 +312,20 @@ function levelCreate()
     platforms.push(new Ground(texture, 1320, 400, 1360, 40)); // 4 уровень
     platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
 
-    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50));// 4 уровень
-    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50));// 4 уровень
+    enemies.push(new Enemy(1600, 350, 300, 0, 300, 50));// 4 уровень
+    enemies.push(new Enemy(1200, 350, 300, 0, 300, 50));// 4 уровень
 
-    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50));// 3 уровень
-    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50));// 3 уровень
+    enemies.push(new Enemy(1600, 520, 300, 0, 300, 50));// 3 уровень
+    enemies.push(new Enemy(1200, 520, 300, 0, 300, 50));// 3 уровень
 
-    enemys.push(new Enemy(350, 700, 300, 0, 300, 50));// 2 уровень
-    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50));// 2 уровень
+    enemies.push(new Enemy(350, 700, 300, 0, 300, 50));// 2 уровень
+    enemies.push(new Enemy(1300, 700, 150, 0, 300, 50));// 2 уровень
 
     platforms.forEach(platform =>
     {
         platform.view();
     })
-    enemys.forEach(enemy =>
+    enemies.forEach(enemy =>
     {
         enemy.view();
     });
