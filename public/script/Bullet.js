@@ -34,9 +34,9 @@ class Bullet
                 this.sprite.y += this.sprite.vy * time.deltaTime;
                 
 
-                for (let i = 0; i < enemys.length; i++)
+                for (let i = 0; i < enemies.length; i++)
                 {
-                    let enemy = enemys[i];
+                    let enemy = enemies[i];
                     if (this.sprite.y <= enemy.collideBottom &&
                         this.sprite.y >= enemy.collideTop &&
                         this.sprite.x <= enemy.collideRight &&
