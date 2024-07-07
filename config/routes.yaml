@@ -2,6 +2,10 @@ index:
     path: /
     controller: App\Controller\ViewController::index
 
+error_not_found:
+    path: /error_not_found
+    controller: App\Controller\ViewController::showNotFoundException
+
 signup-form:
     path: /user/signup
     controller: App\Controller\ViewController::signUpUserForm
