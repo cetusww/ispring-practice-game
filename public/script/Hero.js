@@ -10,7 +10,7 @@ class Hero
 
         this.sprite.x = posX;
         this.sprite.y = posY;
-        this.sprite.width = 60;
+        this.sprite.width = 70;
         this.sprite.height = 85;
 
         this.collideTop = this.sprite.y - this.sprite.height / 2;
@@ -59,7 +59,7 @@ class Hero
         this.focusTexture = new PIXI.Sprite(texture1);
         this.focusTexture.tint = 0x000000;
         this.focusTexture.anchor.set(0.5);
-        
+
 
         this.updateAnim = function (type)
         {
@@ -85,7 +85,7 @@ class Hero
                 this.sprite.loop = false;
                 this.sprite.play();
                 this.animateType = 'jump';
-            } else if (type === 'dead' && this.animateType !== 'dead') 
+            } else if (type === 'dead' && this.animateType !== 'dead')
             {
                 this.sprite.textures = hero_dead;
                 this.sprite.animationSpeed = 0.3;
@@ -147,7 +147,7 @@ class Hero
             this.graphics.stroke({ width: 2, color: 0xfeeb77 });
             app.stage.addChild(this.graphics);
         }
-        
+
         this.view = function ()
         {
             scene.addChild(this.focusTexture);
@@ -210,19 +210,19 @@ class Hero
             {
                 app.stage.removeChild(this.rechargeCircle);
                 this.rechargeCircle = new PIXI.Graphics();
-                let x = 90; 
-                let y = 42; 
-                let radius = 10; 
-                let startAngle = -Math.PI / 2; 
+                let x = 90;
+                let y = 42;
+                let radius = 10;
+                let startAngle = -Math.PI / 2;
                 let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;;
                 this.rechargeCircle.beginFill(0xfeeb77);
                 this.rechargeCircle.moveTo(x, y);
-                this.rechargeCircle.arc(x, y, radius, startAngle, endAngle); 
+                this.rechargeCircle.arc(x, y, radius, startAngle, endAngle);
                 this.rechargeCircle.endFill();
                 app.stage.addChild(this.rechargeCircle);
                 if (this.currentRechargeTime > 0)
                 {
-                    this.currentRechargeTime -= time.deltaTime;  
+                    this.currentRechargeTime -= time.deltaTime;
                 }
                 else
                 {
@@ -239,7 +239,7 @@ class Hero
         this.takeDamage = function (damage)
         {
             this.hp -= damage;
-            if (this.hp <= 0) 
+            if (this.hp <= 0)
             {
                 this.hp = 0;
                 this.dead = true;
@@ -247,7 +247,7 @@ class Hero
             }
             this.updateHp();
         }
-        this.updateKey = function() 
+        this.updateKey = function()
         {
             if (keys.keyR) {
                 keys.keyR = false;
@@ -329,7 +329,7 @@ class Hero
 
             let globalPosition = this.sprite.getGlobalPosition();
             let deltaX = globalPosition.x - app.screen.width / 2; 
-            let deltaY = globalPosition.y - app.screen.height / 2; 
+            let deltaY = globalPosition.y - app.screen.height / 2;
             if (deltaX > this.cameraRectX)
             {
                 let moveX = deltaX - this.cameraRectX;
@@ -370,7 +370,7 @@ class Hero
                     this.sprite.vy += GRAVITY_ACCELERATION / 5 * time.deltaTime;
                 } else {
                     this.sprite.vy = 0;
-                }     
+                }
                 this.move(time);
                 this.collise();
             }
@@ -397,7 +397,7 @@ class Hero
                 this.doubleJump = true;
             }
             if (this.sprite.vy >= 0) {
-                for (let i = 0; i < platforms.length; i++) 
+                for (let i = 0; i < platforms.length; i++)
                 {
                     let platform = platforms[i];
                     if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
@@ -414,7 +414,7 @@ class Hero
                         } else
                         {
                             this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
-                        } 
+                        }
                         break;
                     }
                 }

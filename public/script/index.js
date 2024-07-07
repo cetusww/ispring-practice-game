@@ -62,10 +62,10 @@ function resizeWindow()
         if (relationshipWidth > relationshipHeight) {
             sceneScale = relationshipWidth;
         } else
-        { 
+        {
             sceneScale = relationshipHeight;
         }
-        scene.scale.x = sceneScale; 
+        scene.scale.x = sceneScale;
         scene.scale.y = sceneScale;
     } else
     {
@@ -130,8 +130,11 @@ function onKeyUp(event)
         { alias: 'background', src: '/images/level1-map.jpg' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
-        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' }, 
-        { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' }, 
+        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
+        { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
+        { alias: 'robot_idle_group', src: '/images/robot_idle_group.json' },
+        { alias: 'robot_walk_group', src: '/images/robot_walk_group.json' },
+        { alias: 'robot_jump_group', src: '/images/robot_jump_group.json' },
         { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'hero', src: '/images/hero.svg' },
         { alias: 'experience', src: '/images/experience.svg' },
@@ -141,15 +144,15 @@ function onKeyUp(event)
     ])
     for (let i = 0; i < 10; i++)
     {
-        hero_idle.push(PIXI.Texture.from(`idle${1 + i}.png`));
+        hero_idle.push(PIXI.Texture.from(`hero_idle${1 + i}.png`));
+    }
+    for (let i = 0; i < 8; i++)
+    {
+        hero_walk.push(PIXI.Texture.from(`hero_walk${1 + i}.png`));
     }
     for (let i = 0; i < 10; i++)
     {
-        hero_walk.push(PIXI.Texture.from(`walk${1 + i}.png`));
-    }
-    for (let i = 0; i < 10; i++)
-    {
-        hero_jump.push(PIXI.Texture.from(`jump${1 + i}.png`));
+        hero_jump.push(PIXI.Texture.from(`hero_jump${1 + i}.png`));
     }
     for (let i = 9; i < 10; i++)
     {
@@ -197,7 +200,7 @@ function onKeyUp(event)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
         }
-        
+
         let i = 0;
         while (i < enemys.length)
         {
@@ -322,9 +325,9 @@ function levelCreate()
     {
         platform.view();
     })
-    enemys.forEach(enemy => 
+    enemys.forEach(enemy =>
     {
-        enemy.view();  
+        enemy.view();
     });
 }
 
