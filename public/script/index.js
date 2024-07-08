@@ -1,4 +1,4 @@
-const SCENE_WIDTH = 2000
+ const SCENE_WIDTH = 2000
 const SCENE_HEIGHT = 1000
 const FPS = 60;
 const scene = new PIXI.Container();
@@ -285,10 +285,10 @@ function onKeyUp(event)
                     poisons.splice(i, 1);
                     i--;
                     if (enemies.length === 0)  // проверка победы, если все убиты
-                {
+                    {
                     window.location.href = "/win";
+                    }
                 }
-            }
                 i++;
             }
         i = 0;

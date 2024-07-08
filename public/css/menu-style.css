@@ -9,6 +9,7 @@ html {
     overflow: hidden;
 }
 body {
+    position: relative;
     height: 100%;
     background: url('../images/menu-background.jpeg') no-repeat;
     background-size: cover;
@@ -26,7 +27,7 @@ body {
 .levels-list {
     display: flex;
     justify-content: space-around;
-    margin: 30px 0 0 0;
+    margin: 50px 0 0 0;
 }
 
 .level-list__first,
@@ -43,4 +44,15 @@ body {
 
 .level-list__first {
     padding: 20px;
+}
+
+.signout {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(103, 80, 164, 1);
+    border-radius: 25px;
+    left: 20px;
+    bottom: 20px;
 }
