@@ -89,7 +89,22 @@ class Hero
                 this.sprite.play();
                 console.log('смерть');
                 this.animateType = 'dead';
+            } else if (type === 'shoot')
+            {
+                this.sprite.textures = hero_shoot;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = false;
+                this.sprite.play();
+                this.ainimateType = 'shoot';
+            } else if (type === 'walk_shoot')
+            {
+                this.sprite.textures = hero_walk_shoot;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.ainimateType = 'walk_shoot';
             }
+
         }
 
         this.updateCollide = function ()
@@ -223,13 +238,21 @@ class Hero
                     {
                         this.updateAnim('idle');
                     }
+                    if (mouse.isDownLeft)
+                    {
+                        this.updateAnim('shoot');
+                    }
                 }
                 else
                 {
-                    if (this.ainimateType !== 'walk' && this.sprite.vy >= 0)
+                    if (this.ainimateType !== 'walk' && this.sprite.vy >= 0 && !mouse.isDownLeft)
                     {
                         this.updateAnim('walk');
-                    } 
+                    }
+                    else if ((this.ainimateType === 'walk' || this.ainimateType === 'shoot') && mouse.isDownLeft)
+                    {
+                        this.updateAnim('walk_shoot');
+                    }
                 }
             }
             this.sprite.x += this.sprite.vx * time.deltaTime;

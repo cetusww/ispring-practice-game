@@ -11,6 +11,8 @@ const hero_walk = [];
 const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
+const hero_shoot = [];
+const hero_walk_shoot = [];
 const keys =
 {
     keyDown: false,
@@ -97,13 +99,11 @@ function onKeyUp(event)
 
     await PIXI.Assets.load([
         { alias: 'background', src: '/images/level1-map.jpg' },
-        { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
+        { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
-        { alias: 'robot_idle_group', src: '/images/robot_idle_group.json' },
-        { alias: 'robot_walk_group', src: '/images/robot_walk_group.json' },
-        { alias: 'robot_jump_group', src: '/images/robot_jump_group.json' },
-        { alias: 'hero', src: '/images/hero.svg' },
+        { alias: 'hero_shoot_group', src: '/images/hero_shoot_group.json' },
+        { alias: 'hero_walk_shoot_group', src: '/images/hero_walk_shoot_group.json' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.svg' },
     ])
@@ -118,6 +118,14 @@ function onKeyUp(event)
     for (let i = 0; i < 10; i++)
     {
         hero_jump.push(PIXI.Texture.from(`hero_jump${1 + i}.png`));
+    }
+    for (let i = 0; i < 4; i++)
+    {
+        hero_shoot.push(PIXI.Texture.from(`hero_shoot${1 + i}.png`));
+    }
+    for (let i = 0; i < 9; i++)
+    {
+        hero_walk_shoot.push(PIXI.Texture.from(`hero_walk_shoot${1 + i}.png`));
     }
 
     const background = PIXI.Sprite.from('background');

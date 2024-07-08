@@ -1,69 +1,69 @@
 {
   "frames": {
-    "idle1.png": {
+    "hero_idle1.png": {
       "frame": {"x":0, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle2.png": {
+    "hero_idle2.png": {
       "frame": {"x":587, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle3.png": {
+    "hero_idle3.png": {
       "frame": {"x":1174, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle4.png": {
+    "hero_idle4.png": {
       "frame": {"x":1761, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle5.png": {
+    "hero_idle5.png": {
       "frame": {"x":2348, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle6.png": {
+    "hero_idle6.png": {
       "frame": {"x":2935, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle7.png": {
+    "hero_idle7.png": {
       "frame": {"x":3522, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle8.png": {
+    "hero_idle8.png": {
       "frame": {"x":4109, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle9.png": {
+    "hero_idle9.png": {
       "frame": {"x":4696, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":587, "h":707},
       "sourceSize": {"w":587, "h":707}
     },
-    "idle10.png": {
+    "hero_idle10.png": {
       "frame": {"x":5283, "y":0, "w":587, "h":707},
       "rotated": false,
       "trimmed": true,
