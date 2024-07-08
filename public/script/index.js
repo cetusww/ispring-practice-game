@@ -160,7 +160,7 @@ function onKeyUp(event)
     document.body.appendChild(app.canvas);
     resizeWindow()
     await PIXI.Assets.load([
-        { alias: 'background', src: '/images/level1-map.jpg' },
+        { alias: 'background', src: '/images/first_level_map.jpg' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },

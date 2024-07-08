@@ -5,5 +5,5 @@ when@test:
     twig:
         strict_variables: true
 
-framework:
-    error_controller: 'App\Controller\ErrorController::show'
+#framework:
+#    error_controller: 'App\Controller\ErrorController::show'

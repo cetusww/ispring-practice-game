@@ -23,10 +23,11 @@ class UserController extends AbstractController
 		return $this->render('signup_user_form.html.twig');
 	}
 
-	public function signUpUser(Request $request, SessionInterface $session): Response
+	public function signUpUser(Request $request): Response
 	{
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
+    $user = $this->repository->findUserByUserName($newUsername);
 
 		$errors = [];
 
@@ -42,7 +43,7 @@ class UserController extends AbstractController
 		{
 			$errors['password'] = 'Пароль должен содержать не менее 6 символов.';
 		}
-		if ($this->repository->findUserByUserName($newUsername))
+		if ($user)
 		{
 			$errors['username'] = 'Пользователь с таким именем уже существует.';
 		}
@@ -57,6 +58,7 @@ class UserController extends AbstractController
 			null,
 			$newUsername,
 			$hashedPassword,
+			$user->getLevel(),
 		);
 
 		$this->repository->saveUserToDatabase($user);
@@ -104,6 +106,7 @@ class UserController extends AbstractController
 		session_start();
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $username;
+		$_SESSION['level'] = $user->getLevel();
 		return $this->redirectToRoute('show_legend');
 	}
 

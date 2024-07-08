@@ -49,7 +49,7 @@ class ViewController extends AbstractController
 		{
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('menu.html.twig');
+		return $this->render('menu.html.twig', ['level' => $_SESSION['level']]);
 	}
 
     public function showFirstLevel(): Response
@@ -89,7 +89,7 @@ class ViewController extends AbstractController
 			if ($_SESSION === []) {
 				return $this->redirectToRoute('signin-form');
 			}
-			return $this->render('.html.twig');
+			return $this->render('legend.html.twig');
 		}
 
 	public function showWin(): Response
