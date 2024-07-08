@@ -30,7 +30,7 @@ class Hero
         this.cameraRectY = 50;
 
         this.hpMax = 100;
-        this.hp = this.hpMax; 
+        this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
         this.dead = false;
@@ -100,13 +100,28 @@ class Hero
                 this.sprite.play();
                 console.log('смерть');
                 this.animateType = 'dead';
+            } else if (type === 'shoot')
+            {
+                this.sprite.textures = hero_shoot;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = false;
+                this.sprite.play();
+                this.ainimateType = 'shoot';
+            } else if (type === 'walk_shoot')
+            {
+                this.sprite.textures = hero_walk_shoot;
+                this.sprite.animationSpeed = 0.3;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.ainimateType = 'walk_shoot';
                 window.location.href = "/lose";  // если умер, то проиграл
             }
+
         }
 
         this.updateCollide = function ()
         {
-            if (this.isSeat) { 
+            if (this.isSeat) {
                 this.collideTop = this.sprite.y;
             }
             else
@@ -149,11 +164,11 @@ class Hero
                 }
             }          
         }
-        
+
         this.view = function () {
             scene.addChild(this.focusTexture);
             scene.addChild(this.sprite);
-            
+
             scene.mask = this.focusTexture;
             this.countBulletText = new PIXI.Text(
                 this.currentCountBullet,
@@ -190,7 +205,7 @@ class Hero
             this.healthText.anchor.set(1, 0);
             app.stage.addChild(this.experienceText);
             app.stage.addChild(this.experienceTitle);
-            
+
             app.stage.addChild(this.countBulletText);
             this.updateHp();
         }
@@ -228,7 +243,7 @@ class Hero
             this.experienceText.text = `${this.experience} / ${this.experienceMax}`;
             app.stage.addChild(this.graphicsExperience);
             app.stage.addChild(this.experienceTitle);
-            app.stage.addChild(this.experienceText); 
+            app.stage.addChild(this.experienceText);
         }
         this.updateWeapon = function (time)
         {
@@ -244,10 +259,10 @@ class Hero
             {
                 app.stage.removeChild(this.rechargeCircle);
                 this.rechargeCircle = new PIXI.Graphics();
-                let x = 90; 
-                let y = 72; 
-                let radius = 10; 
-                let startAngle = -Math.PI / 2; 
+                let x = 90;
+                let y = 72;
+                let radius = 10;
+                let startAngle = -Math.PI / 2;
                 let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;;
                 this.rechargeCircle.beginFill(0xfeeb77);
                 this.rechargeCircle.moveTo(x, y);
@@ -303,10 +318,10 @@ class Hero
                     this.sprite.scale.x *= -1;
                 } 
             }
-            this.isSeat = false;  
+            this.isSeat = false;
             if (keys.keyDown)
             {
-                this.isSeat = true;    
+                this.isSeat = true;
             }
             if (!keys.keyLeft && !keys.keyRight)
             {
@@ -352,12 +367,21 @@ class Hero
                     {
                         this.updateAnim('idle');
                     }
+                    if (mouse.isDownLeft)
+                    {
+                        this.updateAnim('shoot');
+                    }
                 }
                 else
                 {
-                    if (this.sprite.vy >= 0)
+                    if (this.ainimateType !== 'walk' && this.sprite.vy >= 0 && !mouse.isDownLeft)
                     {
                         this.updateAnim('walk');
+                    }
+                    }
+                    else if ((this.ainimateType === 'walk' || this.ainimateType === 'shoot') && mouse.isDownLeft)
+                    {
+                        this.updateAnim('walk_shoot');
                     }
                 }
             }
@@ -397,7 +421,7 @@ class Hero
                 moveCamera(0, moveY);
             }
 
-            
+
         }
         this.update = function (time)
         {
@@ -428,7 +452,6 @@ class Hero
 
         this.collise = function ()
         {
-            this.isGround = false;
             this.isGoDown = false;
             this.updateCollide();
             if (this.collideLeft < 0)
@@ -447,7 +470,7 @@ class Hero
             }
             if (this.sprite.vy < 0)
             {
-                for (let i = 0; i < platforms.length; i++) 
+                for (let i = 0; i < platforms.length; i++)
                 {
                     let platform = platforms[i];
                     if (this.collideTop >= platform.collideTop + this.sprite.vy &&
@@ -464,7 +487,7 @@ class Hero
             }
             if (this.sprite.vy >= 0)
             {
-                for (let i = 0; i < woodenPlanks.length; i++) 
+                for (let i = 0; i < woodenPlanks.length; i++)
                 {
                     let woodenPlank = woodenPlanks[i];
                     if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
@@ -482,12 +505,12 @@ class Hero
                         } else
                         {
                             this.sprite.y -= (this.collideBottom - woodenPlank.collideTop) / 4;
-                        } 
+                        }
                         break;
                     }
                 }
                 if (!this.isGround) {
-                    for (let i = 0; i < platforms.length; i++) 
+                    for (let i = 0; i < platforms.length; i++)
                     {
                         let platform = platforms[i];
                         if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
@@ -504,7 +527,7 @@ class Hero
                             } else
                             {
                                 this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
-                            } 
+                            }
                             break;
                         }
                     }

@@ -19,6 +19,8 @@ const hero_idle = [];
 const hero_dead = [];
 const greenCapEnemyIdle = [];
 const greenCapEnemyWalk = [];
+const hero_shoot = [];
+const hero_walk_shoot = [];
 const keys =
 {
     keyDown: false,
@@ -155,9 +157,11 @@ function onKeyUp(event)
     resizeWindow()
     await PIXI.Assets.load([
         { alias: 'background', src: '/images/level1-map.jpg' },
-        { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
+        { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
+        { alias: 'hero_shoot_group', src: '/images/hero_shoot_group.json' },
+        { alias: 'hero_walk_shoot_group', src: '/images/hero_walk_shoot_group.json' },
         { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
         { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'experience', src: '/images/experience.svg' },
@@ -185,6 +189,14 @@ function onKeyUp(event)
     for (let i = 0; i < 4; i++)
     {
         greenCapEnemyWalk.push(PIXI.Texture.from(`enemyWalk${1 + i}.png`));
+    }
+    for (let i = 0; i < 4; i++)
+    {
+        hero_shoot.push(PIXI.Texture.from(`hero_shoot${1 + i}.png`));
+    }
+    for (let i = 0; i < 9; i++)
+    {
+        hero_walk_shoot.push(PIXI.Texture.from(`hero_walk_shoot${1 + i}.png`));
     }
 
     background = PIXI.Sprite.from('background');
@@ -299,7 +311,7 @@ function onKeyUp(event)
         if (new Date() - doubleKeyDown.keyTime > 200) {
             doubleClickremoveState();
         }
-        
+
     });
 })();
 
@@ -369,8 +381,8 @@ function levelCreate()
     woodenPlanks.push(new WoodenPlank(texture, 1140, 750, 150, 40));// 2 уровень
     platforms.push(new Ground(texture, 1800, 820, 400, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1000, 970, 2000, 40)); // пол - 0 уровень
-    
-    woodenPlanks.forEach(woodenPlank => 
+
+    woodenPlanks.forEach(woodenPlank =>
     {
         woodenPlank.view();
     }
