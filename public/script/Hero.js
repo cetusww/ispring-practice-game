@@ -29,8 +29,8 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
-        this.hp = 100;
         this.hpMax = 100;
+        this.hp = this.hpMax; 
         this.experience = 0;
         this.experienceMax = experienceMax;
         this.dead = false;
@@ -150,7 +150,6 @@ class Hero
             }          
         }
         
-        
         this.view = function () {
             scene.addChild(this.focusTexture);
             scene.addChild(this.sprite);
@@ -207,7 +206,7 @@ class Hero
             app.stage.removeChild(this.healthText);
             this.healthText.text = `${this.hp} / ${this.hpMax}`;
             this.graphicsHp = new PIXI.Graphics();
-            this.graphicsHp.rect(15, 15, this.hp * 3, 30);
+            this.graphicsHp.rect(15, 15, this.hp / this.hpMax * 300, 30);
             this.graphicsHp.fill(0xde3249);
             this.graphicsHp.rect(15, 15, 300, 30);
             this.graphicsHp.stroke({ width: 2, color: 0xfeeb77 });
