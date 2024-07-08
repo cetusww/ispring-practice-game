@@ -221,6 +221,8 @@ class Hero
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
             this.graphicsExperience.stroke({width: 2, color: 0xfeeb77});
             this.experienceText.text = `${this.experience} / ${this.experienceMax}`;
+            this.experienceTitle.x = app.screen.width - 300;
+            this.experienceText.x = app.screen.width - 30;
             app.stage.addChild(this.graphicsExperience);
             app.stage.addChild(this.experienceTitle);
             app.stage.addChild(this.experienceText);

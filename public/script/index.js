@@ -20,6 +20,7 @@ const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
 const devilWalk = [];
+const devilIdle = [];
 const batFlyHorizontal = [];
 const batFlyVertical = [];
 const hero_shoot = [];
@@ -192,10 +193,11 @@ function onKeyUp(event)
     {
         hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
     }
-    for (let i = 0; i < 4; i++)
+    for (let i = 0; i < 2; i++)
     {
         devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
     }
+    devilIdle.push(PIXI.Texture.from(`devilIdle.png`));
     for (let i = 0; i < 4; i++)
     {
         batFlyVertical.push(PIXI.Texture.from(`batFlyVertical${1 + i}.png`));
@@ -212,6 +214,7 @@ function onKeyUp(event)
     {
         hero_walk_shoot.push(PIXI.Texture.from(`hero_walk_shoot${1 + i}.png`));
     }
+
     
 
     background = PIXI.Sprite.from('background');

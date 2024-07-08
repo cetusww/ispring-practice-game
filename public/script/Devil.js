@@ -2,7 +2,7 @@ class Devil
 {
     constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight)
     {
-        this.sprite = new PIXI.AnimatedSprite(devilWalk);
+        this.sprite = new PIXI.AnimatedSprite(devilIdle);
         this.sprite.animationSpeed = 0.05; // Скорость анимации
         this.sprite.loop = true; // Зацикливание анимации
         this.sprite.play(); // Запуск анимации
@@ -39,6 +39,27 @@ class Devil
 
         this.angle = 3.1415 * 30 / 180;
         this.deadTime = 1 * FPS;
+        this.state = 0; // 0 - стоять, 1 - ходить
+        this.stateTime = Math.random() * FPS;
+        this.animateType = 'idle';
+
+        this.updateAnim = function (type) {
+            if (type === 'idle' && this.animateType !== 'idle') {
+                this.sprite.loop = false;
+                this.sprite.textures = devilIdle;
+                this.sprite.animationSpeed = 0.05;
+                this.sprite.loop = false;
+                this.sprite.play();
+                this.animateType = 'idle';
+            } else if (type === 'walk' && this.animateType !== 'walk') {
+                this.sprite.textures = devilWalk;
+                this.sprite.animationSpeed = 0.07;
+                this.sprite.loop = true;
+                this.sprite.play();
+                this.animateType = 'walk';
+            }
+        }
+
 
         this.updateCollide = function ()
         {
@@ -77,7 +98,8 @@ class Devil
                 this.currentTimeAttack = this.timeAttack;
             }  
         }
-        this.updateHp = function () {
+        this.updateHp = function ()
+        {
             scene.removeChild(this.graphics);
             this.graphics = new PIXI.Graphics();
             this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 7, this.hp / this.maxHp * (this.sprite.width - 10), 5);
@@ -98,22 +120,53 @@ class Devil
         }
         this.updateMove = function(time) 
         {
-            this.sprite.x += this.sprite.vx * time.deltaTime;
-            this.updateCollide();
-            if (this.collideLeft <= this.zoneX - this.zoneWidth)
+            
+            if (this.stateTime > 0)
             {
-                this.sprite.vx *= -1;
-                this.sprite.x += (this.zoneX - this.zoneWidth) - this.collideLeft;
+                this.stateTime -= time.deltaTime;
             }
-            else if (this.collideRight >= this.zoneX + this.zoneWidth)
+            else
             {
-                this.sprite.vx *= -1;
-                this.sprite.x -= this.collideRight - (this.zoneX + this.zoneWidth);
+                if (Math.random() > 0.4) 
+                {
+                    this.state = 1;
+                    this.stateTime = (Math.random() + 1) * 2 * FPS;
+                    this.updateAnim('walk');
+                } else
+                {
+                    this.state = 0;
+                    this.stateTime = (Math.random() + 0.5) * FPS;
+                    this.updateAnim('idle');
+                }
             }
+            console.log(this.state);
+            if (this.state === 1)
+            {
+                this.sprite.x += this.sprite.vx * time.deltaTime;
+                this.updateCollide();
+                if (this.collideLeft <= this.zoneX - this.zoneWidth)
+                {
+                    this.sprite.vx *= -1;
+                    this.sprite.x += (this.zoneX - this.zoneWidth) - this.collideLeft;
+                }
+                else if (this.collideRight >= this.zoneX + this.zoneWidth)
+                {
+                    this.sprite.vx *= -1;
+                    this.sprite.x -= this.collideRight - (this.zoneX + this.zoneWidth);
+                }
+            }
+            else
+            {
+                
+            }
+            
             if ((this.sprite.scale.x < 0 && this.sprite.vx > 0) || (this.sprite.scale.x > 0 && this.sprite.vx < 0))
             {
                 this.sprite.scale.x *= -1;
             }
+            
+            
+            
         }
         this.updateAggression = function ()
         {
@@ -125,6 +178,7 @@ class Devil
                 )
                 {
                     this.createFireball(hero.sprite.x, hero.sprite.y);
+                    //if (hero.sprite.x)
                 }
             }
         }
