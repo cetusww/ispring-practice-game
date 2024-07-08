@@ -6,6 +6,7 @@ const platforms = [];
 const bullets = [];
 const fireballs = [];
 const enemys = [];
+const devils = [];
 const bats = [];
 const poisons = [];
 
@@ -21,6 +22,7 @@ const hero_idle = [];
 const hero_dead = [];
 const greenCapEnemyIdle = [];
 const greenCapEnemyWalk = [];
+const devilWalk = [];
 const batFlyHorizontal = [];
 const batFlyVertical = [];
 
@@ -146,7 +148,7 @@ function onKeyUp(event)
         { alias: 'fireball', src: '/images/fireball.svg' },
         { alias: 'bat', src: '/images/bat_group.json' },
         { alias: 'poison', src: '/images/poison.png' },
-
+        { alias: 'devil', src: '/images/devil.json' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -168,6 +170,10 @@ function onKeyUp(event)
     for (let i = 0; i < 4; i++)
     {
         greenCapEnemyWalk.push(PIXI.Texture.from(`enemyWalk${1 + i}.png`));
+    }
+    for (let i = 0; i < 4; i++)
+    {
+        devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
     }
     for (let i = 0; i < 4; i++)
     {
@@ -233,6 +239,25 @@ function onKeyUp(event)
             i++;
         }
         i = 0;
+
+        while (i < devils.length)
+        {
+            if (devils[i].deadTime > 0)
+            {
+                devils[i].update(time);
+            }
+            else
+            {
+                devils[i].dropExperience();
+                devils[i].deleteView();
+                devils[i].sprite.destroy();
+                devils.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        i = 0;
+
         while (i < bats.length)
         {
             if (bats[i].deadTime > 0)
@@ -360,14 +385,15 @@ function levelCreate()
     
     bats.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
-    enemys.push(new Enemy(1600, 350, 300, 0, 300, 50));// 4 уровень
-    enemys.push(new Enemy(1200, 350, 300, 0, 300, 50));// 4 уровень
+    devils.push(new Devil(1600, 350, 300, 0, 300, 50));// 4 уровень
+    devils.push(new Devil(1200, 350, 300, 0, 300, 50));// 4 уровень
 
-    enemys.push(new Enemy(1600, 520, 300, 0, 300, 50));// 3 уровень
-    enemys.push(new Enemy(1200, 520, 300, 0, 300, 50));// 3 уровень
+    devils.push(new Devil(1600, 520, 300, 0, 300, 50));// 3 уровень
+    devils.push(new Devil(1200, 520, 300, 0, 300, 50));// 3 уровень
 
-    enemys.push(new Enemy(350, 700, 300, 0, 300, 50));// 2 уровень
-    enemys.push(new Enemy(1300, 700, 150, 0, 300, 50));// 2 уровень
+    devils.push(new Devil(350, 700, 300, 0, 300, 50));// 2 уровень
+    devils.push(new Devil(1300, 700, 150, 0, 300, 50));// 2 уровень
+
 
     platforms.forEach(platform =>
     {
@@ -376,6 +402,11 @@ function levelCreate()
     enemys.forEach(enemy => 
     {
         enemy.view();  
+    });
+
+    devils.forEach(devil => 
+    {
+        devil.view();  
     });
 
     bats.forEach(bat => 
