@@ -49,11 +49,11 @@ class ViewController extends AbstractController
 
     public function showGame(): Response
     {
-			session_name('auth');
-			session_start();
-			if ($_SESSION === []) {
-				return $this->redirectToRoute('index');
-			}
+//			session_name('auth');
+//			session_start();
+//			if ($_SESSION === []) {
+//				return $this->redirectToRoute('index');
+//			}
 			return $this->render('game.html.twig');
     }
 

@@ -7,6 +7,7 @@ const woodenPlanks = [];
 const bullets = [];
 const fireballs = [];
 const enemies = [];
+const arrayOfBonus = [];
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
@@ -164,6 +165,9 @@ function onKeyUp(event)
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
+        { alias: 'shield', src: '/images/shield.png' },
+        { alias: 'health', src: '/images/health.png' },
+        //{ alias: 'portal', src: '/images/portal.gif' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -295,6 +299,22 @@ function onKeyUp(event)
             }
             i++;
         }
+        i = 0;
+        while (i < arrayOfBonus.length)
+        {
+            if (!arrayOfBonus[i].isTaken)
+            {
+                arrayOfBonus[i].update(time);
+            }
+            else
+            {
+                arrayOfBonus[i].deleteView();
+                arrayOfBonus[i].sprite.destroy();
+                arrayOfBonus.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
         keys.keyDownDouble = false;
         if (new Date() - doubleKeyDown.keyTime > 200) {
             doubleClickremoveState();
@@ -341,7 +361,7 @@ window.addEventListener('keyup', onKeyUp);
 //window.addEventListener('dblclick', doubleClick);
 function levelCreate()
 {
-    let texture //= PIXI.Texture.from('ground');
+    let texture = PIXI.Texture.from('ground');
     platforms.push(new Ground(texture, 1000, 970, 2000, 40)); // пол - 0 уровень
     platforms.push(new Ground(texture, 1800, 820, 400, 40)); // 1 уровень
     platforms.push(new Ground(texture, 55, 750, 110, 40)); // 2 уровень
@@ -372,11 +392,14 @@ function levelCreate()
 
     enemies.push(new Enemy(350, 700, 300, 0, 300, 50, 90));// 2 уровень
     enemies.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
-    woodenPlanks.forEach(woodenPlank => 
+
+    arrayOfBonus.push(new Shield(450, 880, 100));
+    arrayOfBonus.push(new Shield(350, 520, 100));
+
+    woodenPlanks.forEach(woodenPlank =>
     {
         woodenPlank.view();
-    }
-    )
+    })
     platforms.forEach(platform =>
     {
         platform.view();
@@ -384,6 +407,10 @@ function levelCreate()
     enemies.forEach(enemy =>
     {
         enemy.view();
+    });
+    arrayOfBonus.forEach(bonus =>
+    {
+        bonus.view();
     });
 }
 

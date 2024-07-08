@@ -29,10 +29,11 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
-        this.hp = 100;
-        this.hpMax = 100;
+        this.hp = 10000;
+        this.hpMax = 10000;
         this.experience = 0;
         this.experienceMax = experienceMax;
+        this.activateShield = false;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
         this.jumpPower = 15;
@@ -98,7 +99,6 @@ class Hero
                 this.sprite.width = 100;
                 this.sprite.height = 80;
                 this.sprite.play();
-                console.log('смерть');
                 this.animateType = 'dead';
                 window.location.href = "/lose";  // если умер, то проиграл
             }
@@ -207,7 +207,7 @@ class Hero
             app.stage.removeChild(this.healthText);
             this.healthText.text = `${this.hp} / ${this.hpMax}`;
             this.graphicsHp = new PIXI.Graphics();
-            this.graphicsHp.rect(15, 15, this.hp * 3, 30);
+            this.graphicsHp.rect(15, 15, this.hp/this.hpMax * 300, 30);
             this.graphicsHp.fill(0xde3249);
             this.graphicsHp.rect(15, 15, 300, 30);
             this.graphicsHp.stroke({ width: 2, color: 0xfeeb77 });
@@ -221,7 +221,6 @@ class Hero
             app.stage.removeChild(this.experienceTitle);
             app.stage.removeChild(this.experienceText);
             this.graphicsExperience = new PIXI.Graphics();
-            console.log(this.experience / this.experienceMax)
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, this.experience / this.experienceMax * 300, 30);
             this.graphicsExperience.fill(0x4bb35e);
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
@@ -267,20 +266,41 @@ class Hero
                 }
             }
         }
+
         this.addExperience = function(experience)
         {
             this.experience += experience;
         }
+
+        this.addShield = function(duration)
+        {
+            this.activateShield(duration);
+            if (!activateShield)
+            {
+                this.activateShield = true;
+            } else
+            {
+                if (duration === 0)
+                {
+                    this.activateShield = false;
+                }
+            }
+            duration -= 10;
+        }
+
         this.takeDamage = function (damage)
         {
-            this.hp -= damage;
-            if (this.hp <= 0)
+            if (!this.isShieldActive)
             {
-                this.hp = 0;
-                this.dead = true;
-                this.sprite.vy = 0;
+                this.hp -= damage;
+                if (this.hp <= 0)
+                {
+                    this.hp = 0;
+                    this.dead = true;
+                    this.sprite.vy = 0;
+                }
+                this.updateHp();
             }
-            this.updateHp();
         }
         this.updateKey = function()
         {
