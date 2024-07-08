@@ -71,7 +71,7 @@ class Devil
                 {
                     vecX *= -1;
                 }
-                const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0);
+                const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0, 5);
                 fireball.view();
                 fireballs.push(fireball); 
                 this.currentTimeAttack = this.timeAttack;

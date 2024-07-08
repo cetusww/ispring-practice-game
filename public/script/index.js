@@ -387,16 +387,12 @@ function levelCreate()
     platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
     platforms.push(new Ground(texture, 965, 400, 470, 40)); // 4 уровень
     platforms.push(new Ground(texture, 1650, 400, 700, 40)); // 4 уровень
-    enemies.push(new Enemy(1600, 350, 300, 0, 300, 50, 100));// 4 уровень
-    enemies.push(new Enemy(1200, 350, 300, 0, 300, 50, 100));// 4 уровень
     woodenPlanks.push(new WoodenPlank(texture, 680, 400, 100, 40));// 4 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1250, 400, 100, 40));//4 уровень
     platforms.push(new Ground(texture, 55, 570, 110, 40)); // 3 уровень
     platforms.push(new Ground(texture, 665, 570, 910, 40)); // 3 уровень
     platforms.push(new Ground(texture, 1362, 570, 285, 40)); // 3 уровень
     platforms.push(new Ground(texture, 1805, 570, 390, 40)); // 3 уровень
-    enemies.push(new Enemy(1600, 520, 300, 0, 300, 50, 120));// 3 уровень
-    enemies.push(new Enemy(1200, 520, 300, 0, 300, 50, 140));// 3 уровень
     woodenPlanks.push(new WoodenPlank(texture, 160, 570, 100, 40));// 3 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1170, 570, 100, 40));// 3 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1555, 570, 100, 40));// 3 уровень
@@ -404,8 +400,6 @@ function levelCreate()
     platforms.push(new Ground(texture, 360, 750, 300, 40)); // 2 уровень
     platforms.push(new Ground(texture, 845, 750, 450, 40)); // 2 уровень
     platforms.push(new Ground(texture, 1362, 750, 285, 40)); // 2 уровень
-    enemies.push(new Enemy(350, 700, 300, 0, 300, 50, 90));// 2 уровень
-    enemies.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
     woodenPlanks.push(new WoodenPlank(texture, 160, 750, 100, 40));// 2 уровень
     woodenPlanks.push(new WoodenPlank(texture, 565, 750, 100, 40));// 2 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1140, 750, 150, 40));// 2 уровень
@@ -417,11 +411,6 @@ function levelCreate()
         woodenPlank.view();
     }
     )
-    platforms.push(new Ground(texture, 1790, 820, 420, 40)); // 1 уровень
-    platforms.push(new Ground(texture, 750, 750, 1500, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 1150, 570, 1700, 40)); // 3 уровень
-    platforms.push(new Ground(texture, 1320, 400, 1360, 40)); // 4 уровень
-    platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
     
     enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
