@@ -20,7 +20,7 @@ class UserController extends AbstractController
 
 	public function index(): Response
 	{
-		return $this->render('signup-user-form.html.twig');
+		return $this->render('signup_user_form.html.twig');
 	}
 
 	public function signUpUser(Request $request, SessionInterface $session): Response
@@ -49,10 +49,8 @@ class UserController extends AbstractController
 
 		if (!empty($errors))
 		{
-			return $this->render('signup-user-form.html.twig', ['errors' => $errors]);
+			return $this->render('signup_user_form.html.twig', ['errors' => $errors]);
 		}
-
-
 
 		$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 		$user = new User(
@@ -68,7 +66,7 @@ class UserController extends AbstractController
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $newUsername;
 
-		return $this->redirectToRoute('show_menu');
+		return $this->redirectToRoute('show_legend');
 	}
 
 	public function signInUser(Request $request): Response
@@ -99,14 +97,14 @@ class UserController extends AbstractController
 		}
 		if (!empty($errors))
 		{
-			return $this->render('signin-user-form.html.twig', ['errors' => $errors]);
+			return $this->render('signin_user_form.html.twig', ['errors' => $errors]);
 		}
 
 		session_name('auth');
 		session_start();
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $username;
-		return $this->redirectToRoute('show_menu');
+		return $this->redirectToRoute('show_legend');
 	}
 
 	public function signOutUser(): Response

@@ -27,7 +27,7 @@ class ViewController extends AbstractController
 		{
 			return $this->redirectToRoute('show_menu');
 		}
-		return $this->render('signup-user-form.html.twig');
+		return $this->render('signup_user_form.html.twig');
 	}
 
 	public function signInUserForm(): Response
@@ -38,7 +38,7 @@ class ViewController extends AbstractController
 		{
 			return $this->redirectToRoute('show_menu');
 		}
-		return $this->render('signin-user-form.html.twig');
+		return $this->render('signin_user_form.html.twig');
 	}
 
 	public function showMenu(): Response
@@ -52,24 +52,44 @@ class ViewController extends AbstractController
 		return $this->render('menu.html.twig');
 	}
 
-    public function showGame(): Response
+    public function showFirstLevel(): Response
     {
 			session_name('auth');
 			session_start();
 			if ($_SESSION === []) {
 				return $this->redirectToRoute('index');
 			}
-			return $this->render('game.html.twig');
+			return $this->render('first_level.html.twig');
     }
 
-		public function showLegend(): Response
+		public function showSecondLevel(): Response
 		{
 			session_name('auth');
 			session_start();
 			if ($_SESSION === []) {
 				return $this->redirectToRoute('index');
 			}
-			return $this->render('legend.html.twig');
+			return $this->render('second_level.html.twig');
+		}
+
+		public function showThirdLevel(): Response
+		{
+			session_name('auth');
+			session_start();
+			if ($_SESSION === []) {
+				return $this->redirectToRoute('index');
+			}
+			return $this->render('third_level.html.twig');
+		}
+
+		public function showLegend(): Response
+		{
+			session_name('auth');
+			session_start();
+			if ($_SESSION === []) {
+				return $this->redirectToRoute('signin-form');
+			}
+			return $this->render('.html.twig');
 		}
 
 	public function showWin(): Response
@@ -79,7 +99,7 @@ class ViewController extends AbstractController
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('game-win.html.twig');
+		return $this->render('game_win.html.twig');
 	}
 
 	public function showLose(): Response
@@ -89,7 +109,7 @@ class ViewController extends AbstractController
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('game-lose.html.twig');
+		return $this->render('game_lose.html.twig');
 	}
 
 }

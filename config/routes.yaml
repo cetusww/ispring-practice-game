@@ -30,13 +30,21 @@ show_menu:
     path: /menu
     controller: App\Controller\ViewController::showMenu
 
-show_game:
-    path: /game
-    controller: App\Controller\ViewController::showGame
-
 show_legend:
     path: /legend
     controller: App\Controller\ViewController::showLegend
+
+show_first_level:
+    path: /first-level
+    controller: App\Controller\ViewController::showFirstLevel
+
+show_second_level:
+    path: /second-level
+    controller: App\Controller\ViewController::showSecondLevel
+
+show_third_level:
+    path: /third-level
+    controller: App\Controller\ViewController::showSecondLevel
 
 show_win:
     path: /win

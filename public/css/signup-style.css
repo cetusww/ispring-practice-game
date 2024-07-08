@@ -30,13 +30,14 @@ body {
     margin: 144px 0 0 0;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 1px;
+    font: 400 22px/26px "Lora", sans-serif;
 }
 
 .button-signin {
     height: 82px;
     background-color: rgba(4, 0, 200, 1);
     margin: 0 0 38px 0;
-    font: 400 22px/26px "Miltonian Tattoo", sans-serif;
+    font: 400 22px/26px "Lora", sans-serif;
 }
 
 .button-signin:hover {
@@ -47,11 +48,11 @@ body {
     height: 82px;
     border: 1px solid rgba(255, 255, 255, 1);
     background-color: transparent;
-    font: 400 22px/26px "Miltonian Tattoo", sans-serif;
+    font: 400 22px/26px "Lora", sans-serif;
 }
 
 .form__text {
-    font: 400 22px/26px "Miltonian Tattoo", sans-serif;
+    font: 400 22px/26px "Lora", sans-serif;
     color: rgba(255, 255, 255, 1);
 }
 
