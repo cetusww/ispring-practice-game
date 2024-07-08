@@ -37,35 +37,8 @@ class Devil
         this.hp = 100;
         this.experience = 100;
 
-
         this.angle = 3.1415 * 30 / 180;
         this.deadTime = 1 * FPS;
-        // this.updateAnim = function (type)
-        // {
-        //     if (type === 'idle')
-        //     {
-        //         this.sprite.loop = false;
-        //         this.sprite.textures = hero_idle;
-        //         this.sprite.animationSpeed = 0.15;
-        //         this.sprite.loop = true;
-        //         this.sprite.play();
-        //         this.ainimateType = 'idle';
-        //     } else if (type === 'walk')
-        //     {
-        //         this.sprite.textures = hero_walk;
-        //         this.sprite.animationSpeed = 0.3;
-        //         this.sprite.loop = true;
-        //         this.sprite.play();
-        //         this.ainimateType = 'walk';
-        //     } else if (type === 'jump')
-        //     {
-        //         this.sprite.textures = hero_jump;
-        //         this.sprite.animationSpeed = 0.3;
-        //         this.sprite.loop = false;
-        //         this.sprite.play();
-        //         this.ainimateType = 'jump';
-        //     }  
-        // }
 
         this.updateCollide = function ()
         {

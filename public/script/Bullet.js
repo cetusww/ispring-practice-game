@@ -33,7 +33,6 @@ class Bullet
                 this.sprite.x += this.sprite.vx * time.deltaTime;
                 this.sprite.y += this.sprite.vy * time.deltaTime;
                 
-
                 for (let i = 0; i < enemys.length; i++)
                 {
                     let enemy = enemys[i];
