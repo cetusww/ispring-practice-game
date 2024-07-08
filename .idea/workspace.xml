@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="2024-07-01-test-dev-2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2ilkoqOfD5UjMRj8JVUaxa17BlO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="" />
+      <created>1720072730248</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1720072730248</updated>
+      <workItem from="1720072732814" duration="42846000" />
+      <workItem from="1720198689052" duration="1935000" />
+      <workItem from="1720352670698" duration="4975000" />
+      <workItem from="1720421002291" duration="14731000" />
+    </task>
+    <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
+      <option name="closed" value="true" />
+      <created>1720081758921</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1720081758921</updated>
+    </task>
+    <task id="LOCAL-00002" summary="misha-07-02-gamepad-ratchet-with-symfony сделал кнопку прыжка">
+      <option name="closed" value="true" />
+      <created>1720094904490</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1720094904490</updated>
+    </task>
+    <task id="LOCAL-00003" summary="misha-07-02-gamepad-ratchet-with-symfony доделал геймпад">
+      <option name="closed" value="true" />
+      <created>1720165161388</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720165161389</updated>
+    </task>
+    <task id="LOCAL-00004" summary="misha-07-05-new-person сделал новую текстуру для персонажа">
+      <option name="closed" value="true" />
+      <created>1720185909198</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720185909198</updated>
+    </task>
+    <task id="LOCAL-00005" summary="misha-07-05-new-person добавил в Hero условие смерти для обновления текстуры персонажа">
+      <option name="closed" value="true" />
+      <created>1720186191537</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720186191537</updated>
+    </task>
+    <task id="LOCAL-00006" summary="misha-07-05-new-person добавил alias на текстуру мёртвого персонажа">
+      <option name="closed" value="true" />
+      <created>1720186626171</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1720186626171</updated>
+    </task>
+    <task id="LOCAL-00007" summary="misha-07-05-new-person добавил картинку с мёртвым персонажем">
+      <option name="closed" value="true" />
+      <created>1720186996533</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1720186996533</updated>
+    </task>
+    <task id="LOCAL-00008" summary="misha-07-05-new-person добавил json файл с мёртвым героем">
+      <option name="closed" value="true" />
+      <created>1720187351337</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1720187351337</updated>
+    </task>
+    <task id="LOCAL-00009" summary="misha-07-05-new-person убрал alias на мёртвого персонажа">
+      <option name="closed" value="true" />
+      <created>1720198602785</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720198602785</updated>
+    </task>
+    <task id="LOCAL-00010" summary="misha-06-26-login-signup доделал валидацию, добавил страницу 404">
+      <option name="closed" value="true" />
+      <created>1720352776702</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1720352776702</updated>
+    </task>
+    <task id="LOCAL-00011" summary="2024-07-01-test-dev-2 исправил грамматическую ошибку &quot;enemys&quot; -&gt; &quot;enemies&quot;">
+      <option name="closed" value="true" />
+      <created>1720354035112</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720354035112</updated>
+    </task>
+    <task id="LOCAL-00012" summary="2024-07-01-test-dev-2 изменил внешний вид главного героя">
+      <option name="closed" value="true" />
+      <created>1720355020762</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720355020762</updated>
+    </task>
+    <task id="LOCAL-00013" summary="2024-07-01-test-dev-2 добавил отображение экранов победы и проигрыша">
+      <option name="closed" value="true" />
+      <created>1720356738798</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720356738798</updated>
+    </task>
+    <task id="LOCAL-00014" summary="2024-07-01-test-dev-2-with-gamepad смержил тестовую ветку с веткой геймпада">
+      <option name="closed" value="true" />
+      <created>1720357391708</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1720357391708</updated>
+    </task>
+    <task id="LOCAL-00015" summary="2024-07-05-shoot-animation добавил анимацию стрельбы в стоячем состоянии и при ходьбе">
+      <option name="closed" value="true" />
+      <created>1720430723877</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720430723877</updated>
+    </task>
+    <task id="LOCAL-00016" summary="2024-07-01-test-dev-2 смержил анимацию стрельбы">
+      <option name="closed" value="true" />
+      <created>1720434396048</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720434396048</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="2024-07-01-test-dev-2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево" />
+    <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony сделал кнопку прыжка" />
+    <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony доделал геймпад" />
+    <MESSAGE value="misha-07-05-new-person сделал новую текстуру для персонажа" />
+    <MESSAGE value="misha-07-05-new-person добавил в Hero условие смерти для обновления текстуры персонажа" />
+    <MESSAGE value="misha-07-05-new-person добавил alias на текстуру мёртвого персонажа" />
+    <MESSAGE value="misha-07-05-new-person добавил картинку с мёртвым персонажем" />
+    <MESSAGE value="misha-07-05-new-person добавил json файл с мёртвым героем" />
+    <MESSAGE value="misha-07-05-new-person убрал alias на мёртвого персонажа" />
+    <MESSAGE value="misha-06-26-login-signup доделал валидацию, добавил страницу 404" />
+    <MESSAGE value="2024-07-01-test-dev-2 исправил грамматическую ошибку &quot;enemys&quot; -&gt; &quot;enemies&quot;" />
+    <MESSAGE value="2024-07-01-test-dev-2 изменил внешний вид главного героя" />
+    <MESSAGE value="2024-07-01-test-dev-2 добавил отображение экранов победы и проигрыша" />
+    <MESSAGE value="2024-07-01-test-dev-2-with-gamepad смержил тестовую ветку с веткой геймпада" />
+    <MESSAGE value="2024-07-05-shoot-animation добавил анимацию стрельбы в стоячем состоянии и при ходьбе" />
+    <MESSAGE value="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
+  </component>
+</project>
