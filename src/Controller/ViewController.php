@@ -14,6 +14,11 @@ class ViewController extends AbstractController
 		return $this->render('screensaver.html.twig');
 	}
 
+	public function showNotFoundException(): Response
+	{
+		return $this->render('not_found_exception.html.twig');
+	}
+
 	public function signUpUserForm(): Response
 	{
 		session_name('auth');

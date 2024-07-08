@@ -28,11 +28,6 @@ class UserController extends AbstractController
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
 
-		if (!$newPassword)
-		{
-			return $this->redirectToRoute('signup-form');
-		}
-
 		$errors = [];
 
 		if (empty($newUsername))
@@ -81,14 +76,18 @@ class UserController extends AbstractController
 		$username = $request->get('username');
 		$password = $request->get('password');
 
-		if (!$username)
+		$errors = [];
+
+		if (empty($username))
 		{
-			return $this->redirectToRoute('signin-form');
+			$errors['username'] = 'Имя пользователя не может быть пустым.';
+		}
+		if (empty($password))
+		{
+			$errors['password'] = 'Пароль не может быть пустым.';
 		}
 
 		$user = $this->repository->findUserByUserName($username);
-
-		$errors = [];
 
 		if (!$user)
 		{
