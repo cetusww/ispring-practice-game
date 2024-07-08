@@ -7,6 +7,8 @@ const woodenPlanks = [];
 const bullets = [];
 const fireballs = [];
 const enemies = [];
+const poisons = [];
+
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
@@ -17,10 +19,12 @@ const experiences = [];
 const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
-const greenCapEnemyIdle = [];
-const greenCapEnemyWalk = [];
+const devilWalk = [];
+const batFlyHorizontal = [];
+const batFlyVertical = [];
 const hero_shoot = [];
 const hero_walk_shoot = [];
+
 const keys =
 {
     keyDown: false,
@@ -91,22 +95,22 @@ function doubleClickremoveState()
 
 function onKeyDown(event)
 {
-    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'ф')
+    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф')
     {
         keys.keyLeft = true;
         keys.keyRight = false;
     }
-    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'в')
+    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D' || event.key === 'в' || event.key === 'В')
     {
         keys.keyRight = true;
         keys.keyLeft = false;
     }
-    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'ц')
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W' || event.key === 'ц' || event.key === 'Ц')
     {
         keys.keyUp = true;
         keys.keyDown = false;
     }
-    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'ы')
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S' || event.key === 'ы' || event.key === 'Ы')
     {
         keys.keyDown = true;
         keys.keyUp = false;
@@ -118,15 +122,15 @@ function onKeyDown(event)
 }
 function onKeyUp(event)
 {
-    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'ф')
+    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф')
     {
         keys.keyLeft = false;
     }
-    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'в')
+    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D' || event.key === 'в' || event.key === 'В')
     {
         keys.keyRight = false;
     }
-    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'ы')
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S' || event.key === 'ы' || event.key === 'Ы')
     {
         keys.keyDown = false;
         if (new Date() - doubleKeyDown.keyTime < 200 || doubleKeyDown.keyTime === 0)
@@ -144,7 +148,7 @@ function onKeyUp(event)
             keys.keyDownDouble = true;
         }
     }
-    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'ц')
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W' || event.key === 'ц' || event.key === 'Ц')
     {
         keys.keyUp = false;
     }
@@ -168,6 +172,9 @@ function onKeyUp(event)
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
+        { alias: 'bat', src: '/images/bat_group.json' },
+        { alias: 'poison', src: '/images/poison.png' },
+        { alias: 'devil', src: '/images/devil.json' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -185,10 +192,17 @@ function onKeyUp(event)
     {
         hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
     }
-    greenCapEnemyIdle.push(PIXI.Texture.from(`enemyIdle1.png`));
     for (let i = 0; i < 4; i++)
     {
-        greenCapEnemyWalk.push(PIXI.Texture.from(`enemyWalk${1 + i}.png`));
+        devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
+    }
+    for (let i = 0; i < 4; i++)
+    {
+        batFlyVertical.push(PIXI.Texture.from(`batFlyVertical${1 + i}.png`));
+    }
+    for (let i = 0; i < 4; i++)
+    {
+        batFlyHorizontal.push(PIXI.Texture.from(`batFlyHorizontal${1 + i}.png`));
     }
     for (let i = 0; i < 4; i++)
     {
@@ -198,6 +212,7 @@ function onKeyUp(event)
     {
         hero_walk_shoot.push(PIXI.Texture.from(`hero_walk_shoot${1 + i}.png`));
     }
+    
 
     background = PIXI.Sprite.from('background');
     background.anchor.set(0);
@@ -254,13 +269,28 @@ function onKeyUp(event)
                 enemies[i].sprite.destroy();
                 enemies.splice(i, 1);
                 i--;
-                if (enemies.length === 0)  // проверка победы, если все убиты
+            }
+            i++;
+        }
+        i = 0;
+        while (i < poisons.length)
+            {
+                if (poisons[i].lifeTime > 0)
+                {
+                    poisons[i].update(time);
+                }
+                else
+                {
+                    poisons[i].sprite.destroy();
+                    poisons.splice(i, 1);
+                    i--;
+                    if (enemies.length === 0)  // проверка победы, если все убиты
                 {
                     window.location.href = "/win";
                 }
             }
-            i++;
-        }
+                i++;
+            }
         i = 0;
         while (i < experiences.length)
         {
@@ -387,6 +417,24 @@ function levelCreate()
         woodenPlank.view();
     }
     )
+    platforms.push(new Ground(texture, 1790, 820, 420, 40)); // 1 уровень
+    platforms.push(new Ground(texture, 750, 750, 1500, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 1150, 570, 1700, 40)); // 3 уровень
+    platforms.push(new Ground(texture, 1320, 400, 1360, 40)); // 4 уровень
+    platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
+    
+    enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
+
+    enemies.push(new Devil(1600, 350, 300, 0, 300, 50));// 4 уровень
+    enemies.push(new Devil(1200, 350, 300, 0, 300, 50));// 4 уровень
+
+    enemies.push(new Devil(1600, 520, 300, 0, 300, 50));// 3 уровень
+    enemies.push(new Devil(1200, 520, 300, 0, 300, 50));// 3 уровень
+
+    enemies.push(new Devil(350, 700, 300, 0, 300, 50));// 2 уровень
+    enemies.push(new Devil(1300, 700, 150, 0, 300, 50));// 2 уровень
+
+
     platforms.forEach(platform =>
     {
         platform.view();
@@ -394,6 +442,25 @@ function levelCreate()
     enemies.forEach(enemy =>
     {
         enemy.view();
+    });
+}
+
+function addBackground(app) {
+    const background = PIXI.Sprite.from('background');
+    background.anchor.set(0);
+
+
+    function resizeBackground() {
+        background.width = app.screen.width;
+        background.height = app.screen.height;
+    }
+
+    resizeBackground();
+    app.stage.addChild(background);
+
+    window.addEventListener('resize', () => {S
+        app.renderer.resize(window.innerWidth, window.innerHeight);
+        resizeBackground();
     });
 }
 
