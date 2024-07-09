@@ -18,6 +18,11 @@
     <div class="table__levels">
       <div class="table__first-level">
         <h3>1 уровень</h3>
+        <ul>
+          {% for user in users %}
+            <li> {{ user.username }} {{ user.scoreFirstLevel }} </li>
+          {% endfor %}
+        </ul>
       </div>
       <div class="table__second-level">
         <h3>2 уровень</h3>

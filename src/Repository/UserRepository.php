@@ -29,6 +29,11 @@ class UserRepository
 		return $this->repository->findOneBy(['username' => $username]);
 	}
 
+	public function findAllUsers(): array
+	{
+		return $this->repository->findAll();
+	}
+
 	public function getCurrentUser(): ?User
 	{
 		session_name('auth');

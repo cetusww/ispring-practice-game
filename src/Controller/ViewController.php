@@ -2,12 +2,20 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ViewController extends AbstractController
 {
+
+	private UserRepository $repository;
+
+	public function __construct(UserRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
 	public function index(): Response
 	{
@@ -109,7 +117,8 @@ class ViewController extends AbstractController
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('rating.html.twig');
+		$users = $this->repository->findAllUsers();
+		return $this->render('rating.html.twig', ['users' => $users]);
 	}
 
 	public function showLobby(): Response

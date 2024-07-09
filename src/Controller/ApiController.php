@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 
 class ApiController extends AbstractController
 {
+	private UserRepository $repository;
 	public function __construct(UserRepository $repository)
 	{
 		$this->repository = $repository;
