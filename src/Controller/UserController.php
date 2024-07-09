@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class UserController extends AbstractController
 {
@@ -59,6 +58,9 @@ class UserController extends AbstractController
 			$newUsername,
 			$hashedPassword,
 			$user->getLevel(),
+			$user->getScoreFirstLevel(),
+			$user->getScoreSecondLevel(),
+		  $user->getScoreThirdLevel(),
 		);
 
 		$this->repository->saveUserToDatabase($user);

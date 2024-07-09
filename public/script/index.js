@@ -240,16 +240,9 @@ function onKeyUp(event)
         hero.update(time);
         if (hero.deadTime < 0)
         {
+            saveScore();
             window.location.href = "/lose";
         }
-        // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
-        // {
-        //     window.location.href = "/win";
-        // }
-        // if (hero.sprite.x < 0)
-        // {
-        //     window.location.href = "/lose";
-        // }
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -271,6 +264,7 @@ function onKeyUp(event)
                 i--;
                 if (enemies.length === 0)  // проверка победы, если все убиты
                 {
+                    saveScore();
                     window.location.href = "/win";
                 }
             }
@@ -434,22 +428,19 @@ function levelCreate()
     });
 }
 
-function addBackground(app) {
-    const background = PIXI.Sprite.from('background');
-    background.anchor.set(0);
-
-
-    function resizeBackground() {
-        background.width = app.screen.width;
-        background.height = app.screen.height;
+async function saveScore()
+{
+    let data = {
+        score: hero.experience,
+        lvl: 1,
     }
-
-    resizeBackground();
-    app.stage.addChild(background);
-
-    window.addEventListener('resize', () => {S
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-        resizeBackground();
-    });
-}
+    const stringifyData = JSON.stringify(data)
+    const response = await fetch('/api/score', {
+         method: "POST",
+         body: stringifyData,
+         headers: {
+             "Content-Type": "application/json",
+         },
+     });
+ }
 

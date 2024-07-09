@@ -65,3 +65,8 @@ show_rating:
 show_lobby:
     path: /lobby
     controller: App\Controller\ViewController::showLobby
+
+api_score:
+    path: /api/score
+    controller: App\Controller\ApiController::saveScore
+    methods: POST
