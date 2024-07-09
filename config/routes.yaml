@@ -61,3 +61,7 @@ choose_level:
 show_rating:
     path: /rating
     controller: App\Controller\ViewController::showRating
+
+show_lobby:
+    path: /lobby
+    controller: App\Controller\ViewController::showLobby

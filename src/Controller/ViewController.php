@@ -112,6 +112,16 @@ class ViewController extends AbstractController
 		return $this->render('rating.html.twig');
 	}
 
+	public function showLobby(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('lobby.html.twig');
+	}
+
 	public function showWin(): Response
 	{
 		session_name('auth');
