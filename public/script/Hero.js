@@ -177,29 +177,35 @@ class Hero
             }
 
             this.experienceText = new PIXI.Text(this.experience, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.healthText = new PIXI.Text(this.hp, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.healthText = new PIXI.Text(this.hp, { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+            this.portalText = new PIXI.Text('Portal open!', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
             this.experienceTitle = new PIXI.Text('Score', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
             this.healthTitle = new PIXI.Text('Health',{ fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.healthText.x = 300
-            this.healthTitle.x = 30
-            this.healthText.y = 15
-            this.healthTitle.y = 15
-            this.experienceTitle.x = app.screen.width - 300
-            this.experienceTitle.y = 15
+            this.healthText.x = 300;
+            this.healthTitle.x = 30;
+            this.portalText.x = app.screen.width - 158;
+            this.portalText.y = 60;
+            this.healthText.y = 15;
+            this.healthTitle.y = 15;
+            this.experienceTitle.x = app.screen.width - 300;
+            this.experienceTitle.y = 15;
             this.experienceText.x = app.screen.width  - 30;
             this.experienceText.y = 15;
             this.experienceText.anchor.set(1, 0);
             this.healthText.anchor.set(1, 0);
+            this.portalText.anchor.set(0.5);
             app.stage.addChild(this.experienceText);
             app.stage.addChild(this.experienceTitle);
-            
             app.stage.addChild(this.countBulletText);
             this.updateHp();
         }
-
         this.deleteView = function ()
         {
             scene.removeChild(this.sprite);
+        }
+        this.portalTextView = function ()
+        {
+            app.stage.addChild(this.portalText);
         }
         this.updateHp = function ()
         {
@@ -227,6 +233,7 @@ class Hero
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
             this.graphicsExperience.stroke({ width: 2, color: 0xfeeb77 });
             this.experienceText.text = `${this.experience} / ${this.experienceMax}`;
+            this.portalText.x = app.screen.width - 158;
             app.stage.addChild(this.graphicsExperience);
             app.stage.addChild(this.experienceTitle);
             app.stage.addChild(this.experienceText); 

@@ -1,0 +1,46 @@
+class Portal
+{
+    constructor(posX, posY)
+    {
+        this.sprite = new PIXI.Sprite(PIXI.Texture.from('non_active_portal'));
+        this.sprite.x = posX;
+        this.sprite.y = posY;
+        this.sprite.width = 120;
+        this.sprite.height = 120;
+        this.rotateSpeed = 0.05;
+        this.sprite.anchor.set(0.5);
+        this.collideLeft = this.sprite.x - this.sprite.width / 4;
+        this.collideRight = this.sprite.x + this.sprite.width / 4;
+        this.collideTop = this.sprite.y - this.sprite.width / 4;
+        this.collideBottom = this.sprite.y + this.sprite.width / 4;
+        this.isActive = false;
+        this.view = function ()
+        {
+            scene.addChild(this.sprite);
+        }
+
+        this.deleteView = function ()
+        {
+            scene.removeChild(this.sprite);
+        }
+        this.activate = function ()
+        {
+            this.sprite.texture = PIXI.Texture.from('portal');
+            this.isActive = true;
+        }
+
+        this.update = function (time)
+        {
+            if (this.isActive)
+            {
+                if (hero.collideLeft <= this.collideRight && hero.collideRight >= this.collideLeft &&
+                    hero.collideBottom >= this.collideTop && hero.collideTop <= this.collideBottom
+                )
+                {
+                    window.location.href = "/win";
+                }
+                this.sprite.rotation += this.rotateSpeed * time.deltaTime;
+            }    
+        }
+    }
+}

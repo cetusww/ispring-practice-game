@@ -12,6 +12,7 @@ const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
 let hero;
+let portal;
 let sceneScale = 1;
 const hero_walk = [];
 const experiences = [];
@@ -167,7 +168,8 @@ function onKeyUp(event)
         { alias: 'fireball', src: '/images/fireball.svg' },
         { alias: 'shield', src: '/images/shield.png' },
         { alias: 'health', src: '/images/health.png' },
-        //{ alias: 'portal', src: '/images/portal.gif' },
+        { alias: 'portal', src: '/images/portal.png' },
+        { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -209,12 +211,20 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(400, 100, 6, 0, 680);
+    hero = new Hero(400, 150, 6, 0, 680);
+    portal = new Portal(1850, 890);
+    portal.view();
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
+        portal.update(time);
         hero.update(time);
+        if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive)
+        {
+            portal.activate();
+            hero.portalTextView();
+        }
         if (hero.deadTime < 0)
         {
             window.location.href = "/lose";
