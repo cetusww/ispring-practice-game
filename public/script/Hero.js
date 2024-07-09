@@ -24,13 +24,14 @@ class Hero
         this.sprite.vx = 0;
         this.sprite.vy = 1;
         this.isGround = false;
+        this.topGroundCam = null;
         this.isGoDown = false;
         this.isSeat = false;
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
-        this.hp = 10000;
-        this.hpMax = 10000;
+        this.hpMax = 100;
+        this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
         this.activateShield = false;
@@ -287,6 +288,11 @@ class Hero
             }
             duration -= 10;
         }
+        this.addHealth = function()
+        {
+            this.hp = Math.min(this.hpMax, Math.floor(this.hp + this.hpMax / 4));
+            this.updateHp();
+        }
 
         this.takeDamage = function (damage)
         {
@@ -404,21 +410,17 @@ class Hero
                 let moveX = deltaX + this.cameraRectX;
                 moveCamera(moveX, 0);
             }
-            //if (this.isGround) {
-                if (deltaY < -this.cameraRectY)
-                {
-                    let moveY = (deltaY + this.cameraRectY) / 10;
+            deltaY = this.topGroundCam - this.sprite.height/2 + scene.y - app.screen.height / 2;
+            if (deltaY < -this.cameraRectY) {
+                    let moveY = (deltaY + this.cameraRectY) / 20;
                     moveCamera(0, moveY);
-                    this.moveCamTime
-                }
-            //}
+            }
+            deltaY = globalPosition.y - app.screen.height / 2;
             if (deltaY > this.cameraRectY)
             {
                 let moveY = deltaY - this.cameraRectY;
                 moveCamera(0, moveY);
-            }
-
-            
+            } 
         }
         this.update = function (time)
         {
@@ -452,20 +454,20 @@ class Hero
             this.isGround = false;
             this.isGoDown = false;
             this.updateCollide();
-            if (this.collideLeft < 0)
+            if (this.collideLeft < 0 + 60)
             {
-                this.sprite.x -= this.collideLeft;
+                this.sprite.x -= this.collideLeft - 60;
             }
-            if (this.collideRight > SCENE_WIDTH)
+            if (this.collideRight > SCENE_WIDTH - 60)
             {
-                this.sprite.x -= this.collideRight - SCENE_WIDTH;
+                this.sprite.x -= this.collideRight - SCENE_WIDTH + 60;
             }
-            if (this.collideBottom > SCENE_HEIGHT)
-            {
-                this.sprite.y -= this.collideBottom - SCENE_HEIGHT;
-                this.isGround = true;
-                this.doubleJump = true;
-            }
+            // if (this.collideBottom > SCENE_HEIGHT)
+            // {
+            //     this.sprite.y -= this.collideBottom - SCENE_HEIGHT;
+            //     this.isGround = true;
+            //     this.doubleJump = true;
+            // }
             if (this.sprite.vy < 0)
             {
                 for (let i = 0; i < platforms.length; i++) 
@@ -485,51 +487,54 @@ class Hero
             }
             if (this.sprite.vy >= 0)
             {
+                let topGround = null;
                 for (let i = 0; i < woodenPlanks.length; i++) 
                 {
                     let woodenPlank = woodenPlanks[i];
-                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
+                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy* 1.5 &&
                         this.collideBottom >= woodenPlank.collideTop &&
                         this.sprite.x <= woodenPlank.collideRight &&
                         this.sprite.x >= woodenPlank.collideLeft
                     )
                     {
-                        this.isGround = true;
-                        this.isGoDown = true;
-                        this.doubleJump = true;
-                        if (this.sprite.vy > 1)
+                        if (topGround > woodenPlank.collideTop || topGround === null)
                         {
-                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop);
-                        } else
-                        {
-                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop) / 4;
-                        } 
-                        break;
-                    }
-                }
-                if (!this.isGround) {
-                    for (let i = 0; i < platforms.length; i++) 
-                    {
-                        let platform = platforms[i];
-                        if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
-                            this.collideBottom >= platform.collideTop &&
-                            this.collideLeft <= platform.collideRight &&
-                            this.collideRight >= platform.collideLeft
-                        )
-                        {
-                            this.isGround = true;
-                            this.doubleJump = true;
-                            if (this.sprite.vy > 1)
-                            {
-                                this.sprite.y -= (this.collideBottom - platform.collideTop);
-                            } else
-                            {
-                                this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
-                            } 
-                            break;
+                            topGround = woodenPlank.collideTop;
+                            this.isGoDown = true;
                         }
                     }
                 }
+                for (let i = 0; i < platforms.length; i++) 
+                {
+                    let platform = platforms[i];
+                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy * 1.5 &&
+                        this.collideBottom >= platform.collideTop &&
+                        this.collideLeft <= platform.collideRight &&
+                        this.collideRight >= platform.collideLeft
+                    )
+                    {
+                        
+                        if (topGround > platform.collideTop || topGround === null)
+                        {
+                            topGround = platform.collideTop;
+                            this.isGoDown = false;
+                        }
+                    }
+                }
+                if (topGround !== null)
+                {
+                    this.isGround = true;
+                    this.doubleJump = true;
+                    this.topGroundCam = topGround;
+                    if (this.sprite.vy > 1)
+                    {
+                        this.sprite.y -= (this.collideBottom - topGround);
+                    } else
+                    {
+                        this.sprite.y -= (this.collideBottom - topGround) / 4;
+                    } 
+                }
+                
             }
         } 
     }

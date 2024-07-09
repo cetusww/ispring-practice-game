@@ -361,7 +361,7 @@ window.addEventListener('keyup', onKeyUp);
 //window.addEventListener('dblclick', doubleClick);
 function levelCreate()
 {
-    let texture = PIXI.Texture.from('ground');
+    let texture //= PIXI.Texture.from('ground');
     platforms.push(new Ground(texture, 1000, 970, 2000, 40)); // пол - 0 уровень
     platforms.push(new Ground(texture, 1800, 820, 400, 40)); // 1 уровень
     platforms.push(new Ground(texture, 55, 750, 110, 40)); // 2 уровень
@@ -394,7 +394,9 @@ function levelCreate()
     enemies.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
 
     arrayOfBonus.push(new Shield(450, 880, 100));
+    arrayOfBonus.push(new Health(450, 520));
     arrayOfBonus.push(new Shield(350, 520, 100));
+    arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
 
     woodenPlanks.forEach(woodenPlank =>
     {
