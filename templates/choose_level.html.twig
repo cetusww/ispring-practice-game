@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/choose_level_style.css">
+</head>
+<body>
+<h1 class="center-align title">Выбор уровня</h1>
+<div class="levels-list">
+  <a class="level-list__first" href="/first-level">
+    <p>1 уровень</p>
+  </a>
+  {% if level == 2 %}
+    <a class="level-list__second" href="/second-level">
+      <p>2 уровень</p>
+    </a>
+  {% else %}
+    <div class="level-list__second">
+      <p>2 уровень</p>
+      <p>НЕДОСТУПНО</p>
+    </div>
+  {% endif %}
+  {% if level == 3 %}
+    <a class="level-list__third" href="/second-level">
+      <p>3 уровень</p>
+    </a>
+  {% else %}
+    <div class="level-list__third">
+      <p>3 уровень</p>
+      <p>НЕДОСТУПНО</p>
+    </div>
+  {% endif %}
+</div>
+<a class="previous-page" href="/menu">Вернуться</a>
+</body>
+</html>

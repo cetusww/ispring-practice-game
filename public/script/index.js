@@ -269,6 +269,10 @@ function onKeyUp(event)
                 enemies[i].sprite.destroy();
                 enemies.splice(i, 1);
                 i--;
+                if (enemies.length === 0)  // проверка победы, если все убиты
+                {
+                    window.location.href = "/win";
+                }
             }
             i++;
         }
@@ -284,10 +288,6 @@ function onKeyUp(event)
                     poisons[i].sprite.destroy();
                     poisons.splice(i, 1);
                     i--;
-                    if (enemies.length === 0)  // проверка победы, если все убиты
-                    {
-                    window.location.href = "/win";
-                    }
                 }
                 i++;
             }

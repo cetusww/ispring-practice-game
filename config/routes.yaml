@@ -53,3 +53,11 @@ show_win:
 show_lose:
     path: /lose
     controller: App\Controller\ViewController::showLose
+
+choose_level:
+    path: /choose-level
+    controller: App\Controller\ViewController::showLevels
+
+show_rating:
+    path: /rating
+    controller: App\Controller\ViewController::showRating

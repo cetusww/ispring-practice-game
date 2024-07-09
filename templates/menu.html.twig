@@ -10,30 +10,16 @@
 </head>
 <body>
   <h1 class="center-align title">Меню</h1>
-  <div class="levels-list">
-    <a class="level-list__first" href="/first-level">
-      <p>1 уровень</p>
+  <div class="options-list">
+    <a class="rating" href="/rating">
+      <p>Рейтинг</p>
     </a>
-    {% if level == 2 %}
-    <a class="level-list__second" href="/second-level">
-      <p>2 уровень</p>
+    <a class="single" href="/choose-level">
+      <p>Одиночная кампания</p>
     </a>
-    {% else %}
-    <div class="level-list__second">
-      <p>2 уровень</p>
-      <p>НЕДОСТУПНО</p>
-    </div>
-    {% endif %}
-    {% if level == 3 %}
-      <a class="level-list__third" href="/second-level">
-        <p>3 уровень</p>
-      </a>
-    {% else %}
-      <div class="level-list__third">
-        <p>3 уровень</p>
-        <p>НЕДОСТУПНО</p>
-      </div>
-    {% endif %}
+    <a class="multi" href="/lobby">
+      <p>Многопользовательский режим</p>
+    </a>
   </div>
   <a class="signout" type="submit" href="/user/signout">Выйти</a>
 </body>

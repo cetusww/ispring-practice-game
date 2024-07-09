@@ -49,48 +49,68 @@ class ViewController extends AbstractController
 		{
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('menu.html.twig', ['level' => $_SESSION['level']]);
+		return $this->render('menu.html.twig');
 	}
 
-    public function showFirstLevel(): Response
-    {
-			session_name('auth');
-			session_start();
-			if ($_SESSION === []) {
-				return $this->redirectToRoute('index');
-			}
-			return $this->render('first_level.html.twig');
-    }
-
-		public function showSecondLevel(): Response
-		{
-			session_name('auth');
-			session_start();
-			if ($_SESSION === []) {
-				return $this->redirectToRoute('index');
-			}
-			return $this->render('second_level.html.twig');
+	public function showFirstLevel(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
 		}
+		return $this->render('first_level.html.twig');
+	}
 
-		public function showThirdLevel(): Response
-		{
-			session_name('auth');
-			session_start();
-			if ($_SESSION === []) {
-				return $this->redirectToRoute('index');
-			}
-			return $this->render('third_level.html.twig');
+	public function showSecondLevel(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
 		}
+		return $this->render('second_level.html.twig');
+	}
 
-		public function showLegend(): Response
-		{
-			session_name('auth');
-			session_start();
-			if ($_SESSION === []) {
-				return $this->redirectToRoute('signin-form');
-			}
-			return $this->render('legend.html.twig');
+	public function showThirdLevel(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
 		}
+		return $this->render('third_level.html.twig');
+	}
+
+	public function showLegend(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('signin-form');
+		}
+		return $this->render('legend.html.twig');
+	}
+
+	public function showLevels(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('choose_level.html.twig', ['level' => $_SESSION['level']]);
+	}
+
+	public function showRating(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('rating.html.twig');
+	}
 
 	public function showWin(): Response
 	{

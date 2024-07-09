@@ -94,7 +94,7 @@ class Hero
                 this.sprite.play();
                 console.log('смерть');
                 this.animateType = 'dead';
-                window.location.href = "/lose";  // если умер, то проиграл
+                console.log(this.experience);
             } else if (type === 'shoot' && this.animateType !== 'shoot') {
                 this.sprite.textures = hero_shoot;
                 this.sprite.animationSpeed = 0.3;
@@ -215,7 +215,6 @@ class Hero
             app.stage.removeChild(this.experienceTitle);
             app.stage.removeChild(this.experienceText);
             this.graphicsExperience = new PIXI.Graphics();
-            console.log(this.experience / this.experienceMax)
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, this.experience / this.experienceMax * 300, 30);
             this.graphicsExperience.fill(0x4bb35e);
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
