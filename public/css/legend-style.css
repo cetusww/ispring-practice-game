@@ -25,6 +25,7 @@ body {
     max-height: 800px;
     margin: 2% auto;
     padding: 30px;
+    border-radius: 30px;
 }
 
 h1 {
