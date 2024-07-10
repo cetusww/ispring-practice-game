@@ -9,8 +9,8 @@ class Hero
 
         this.sprite.x = posX;
         this.sprite.y = posY;
-        this.sprite.width = 70;
-        this.sprite.height = 85;
+        this.sprite.width = 78;
+        this.sprite.height = 95;
 
         this.collideTop = this.sprite.y - this.sprite.height / 2;
         this.collideBottom = this.sprite.y + this.sprite.height / 2;
@@ -28,13 +28,13 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
-        this.hpMax = 100;
+        this.hpMax = 1000;
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
-        this.jumpPower = 15;
+        this.jumpPower = 16;
         this.doubleJump = true;
         this.gravitationPower = 0.5;
         this.weaponTime = 10;
@@ -47,7 +47,7 @@ class Hero
         this.animateType = '';
         this.experienceText = null;
 
-        let radius = 300;
+        let radius = 3000;
         let blurSize = 50;
         const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({color: 0xff0000});
         circle.filters = [new PIXI.BlurFilter(blurSize)];
@@ -300,7 +300,7 @@ class Hero
                 } else {
                     if (this.doubleJump && this.sprite.vy > 0) {
                         this.updateAnim('jump');
-                        this.sprite.vy = -this.jumpPower;
+                        this.sprite.vy = -this.jumpPower * 1.2;
                         this.doubleJump = false;
                     }
                 }
