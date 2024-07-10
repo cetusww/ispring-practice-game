@@ -154,6 +154,11 @@ function onKeyUp(event)
     }
 }
 
+
+let music = new Audio('/music/mistical_fon_music.mp3');
+music.play();
+
+
 (async () =>
 {
     await app.init({ background: '#000000',  width: window.innerWidth, height: window.innerHeight});
