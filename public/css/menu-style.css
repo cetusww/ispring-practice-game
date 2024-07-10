@@ -42,8 +42,11 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.level-list__first {
-    padding: 20px;
+.rating__title,
+.single__title,
+.multi__title {
+    font: 400 22px/24px "Russo One", sans-serif;
+    color: rgba(255, 255, 255, 1);
 }
 
 .signout {
@@ -59,6 +62,7 @@ body {
 }
 
 img {
-    width: 100px;
-    height: 100px;
+    border-radius: 0;
+    width: 80px;
+    height: 80px;
 }
