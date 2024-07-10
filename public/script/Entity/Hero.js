@@ -47,7 +47,7 @@ class Hero
         this.animateType = '';
         this.experienceText = null;
 
-        let radius = 3000;
+        let radius = 300;
         let blurSize = 50;
         const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({color: 0xff0000});
         circle.filters = [new PIXI.BlurFilter(blurSize)];
@@ -410,13 +410,44 @@ class Hero
                 this.isGround = true;
                 this.doubleJump = true;
             }
+            for (let i = 0; i < arrayOfWall.length; i++) {
+                let wall = arrayOfWall[i];
+
+                if (this.sprite.x + 15 >= wall.collideLeft &&
+                    this.sprite.x - 15 <= wall.collideRight &&
+                    this.collideBottom >= wall.collideTop &&
+                    this.collideBottom <= wall.collideTop + 10 + this.sprite.vy
+                )
+                {
+                    this.isGround = true;
+                    this.doubleJump = true;
+                    if (this.sprite.vy > 1) {
+                        this.sprite.y -= (this.collideBottom - wall.collideTop);
+                    } else {
+                        this.sprite.y -= (this.collideBottom - wall.collideTop) / 4;
+                    }
+                    break;
+                } else if (this.collideBottom >= wall.collideTop &&
+                    this.collideTop <= wall.collideBottom
+                )
+                {
+                    if (this.collideRight >= wall.collideLeft && this.collideRight <= wall.collideRight)
+                    {
+                        this.sprite.x += (wall.collideLeft - this.collideRight)
+                    } else if (this.collideLeft >= wall.collideLeft && this.collideLeft <= wall.collideRight)
+                    {
+                        this.sprite.x += (wall.collideRight - this.collideLeft)
+                    }
+                }
+            }
+
             if (this.sprite.vy < 0) {
                 for (let i = 0; i < platforms.length; i++) {
                     let platform = platforms[i];
                     if (this.collideTop >= platform.collideTop + this.sprite.vy &&
                         this.collideTop <= platform.collideBottom &&
-                        this.collideRight <= platform.collideRight &&
-                        this.collideLeft >= platform.collideLeft
+                        this.sprite.x <= platform.collideRight &&
+                        this.sprite.x >= platform.collideLeft
                     ) {
                         this.sprite.vy = 0;
                         this.doubleJump = false;
@@ -448,8 +479,8 @@ class Hero
                         let platform = platforms[i];
                         if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
                             this.collideBottom >= platform.collideTop &&
-                            this.collideLeft <= platform.collideRight &&
-                            this.collideRight >= platform.collideLeft
+                            this.sprite.x <= platform.collideRight &&
+                            this.sprite.x >= platform.collideLeft
                         ) {
                             this.isGround = true;
                             this.doubleJump = true;

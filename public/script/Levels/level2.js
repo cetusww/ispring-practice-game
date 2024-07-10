@@ -3,6 +3,7 @@ const SCENE_HEIGHT = 1250;
 const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
+const arrayOfWall = [];
 const woodenPlanks = [];
 const bullets = [];
 const fireballs = [];
@@ -232,7 +233,7 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(400, 100, 6, 0, 680);
+    hero = new Hero(2700, 100, 6, 0, 680);
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
@@ -383,8 +384,8 @@ window.addEventListener('keyup', onKeyUp);
 //window.addEventListener('dblclick', doubleClick);
 function levelCreate()
 {
-    let texture = PIXI.Texture.from('ground');
-    
+    let texture //= PIXI.Texture.from('ground');
+    platforms.push(new Ground(texture, 1500, 70, 3000, 40)); // потолок - 4 уровень
     platforms.push(new Ground(texture, 345, 255, 690, 40)); // 3 уровень
     woodenPlanks.push(new WoodenPlank(texture, 745, 255, 110, 40));// 3 уровень
 
@@ -406,6 +407,14 @@ function levelCreate()
 
     platforms.push(new Ground(texture, 1500, 1155, 3000, 40)); // пол - 0 уровень
 
+    arrayOfWall.push(new Wall(texture, 1262, 410, 64, 820));
+    arrayOfWall.push(new Wall(texture, 1635, 1010, 64, 320));
+    arrayOfWall.push(new Wall(texture, 2500, 265, 64, 530));
+    arrayOfWall.push(new Wall(texture, 1828, 450, 68, 160)); // высокая тумба
+    arrayOfWall.push(new Wall(texture, 2645, 790, 68, 60)); // низкая тумба
+    arrayOfWall.push(new Wall(texture, 10, 150, 64, 150)); // левая стена
+    arrayOfWall.push(new Wall(texture, 78, 730, 128, 1050)); // левая стена
+    arrayOfWall.push(new Wall(texture, 2950, 625, 128, 1250)); // правая стена
     
     
     //enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
@@ -418,7 +427,9 @@ function levelCreate()
 
     enemies.push(new Devil(350, 1105, 300, 0, 300, 50));// 0 уровень
     enemies.push(new Devil(1300, 1105, 150, 0, 300, 50));// 0 уровень
-
+    arrayOfWall.forEach(wall => {
+        wall.view();
+    })
     woodenPlanks.forEach(woodenPlank => {
         woodenPlank.view();
     });
