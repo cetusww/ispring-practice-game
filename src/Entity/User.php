@@ -9,9 +9,9 @@ class User
 		private string $username,
 		private string $password,
 		private ?int $level,
-		private string $scoreFirstLevel,
-		private string $scoreSecondLevel,
-		private string $scoreThirdLevel,
+		private ?int $scoreFirstLevel,
+		private ?int $scoreSecondLevel,
+		private ?int $scoreThirdLevel,
 	)
 	{
 	}

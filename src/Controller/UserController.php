@@ -57,10 +57,10 @@ class UserController extends AbstractController
 			null,
 			$newUsername,
 			$hashedPassword,
-			$user->getLevel(),
-			$user->getScoreFirstLevel(),
-			$user->getScoreSecondLevel(),
-		  $user->getScoreThirdLevel(),
+			1,
+			0,
+			0,
+			0,
 		);
 
 		$this->repository->saveUserToDatabase($user);
@@ -69,6 +69,7 @@ class UserController extends AbstractController
 		session_start();
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $newUsername;
+		$_SESSION['level'] = $user->getLevel();
 
 		return $this->redirectToRoute('show_legend');
 	}
