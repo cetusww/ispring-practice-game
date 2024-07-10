@@ -50,14 +50,14 @@ body {
 }
 
 h2 {
-    font: 400 30px/34px "Lora", sans-serif;
+    font: 400 30px/34px "Russo One", sans-serif;
     color: rgba(255, 255, 255, 1);
     margin: 0 0 20px 0;
 }
 
 h3 {
     color: rgba(255, 255, 255, 1);
-    font: 400 16px/20px "Lora", sans-serif;
+    font: 400 16px/20px "Russo One", sans-serif;
 }
 
 .previous-page {
@@ -65,7 +65,7 @@ h3 {
     width: 125px;
     height: 50px;
     color: rgba(255, 255, 255, 1);
-    font: 400 16px/20px "Lora", sans-serif;
+    font: 400 16px/20px "Russo One", sans-serif;
     background-color: rgba(103, 80, 164, 1);
     border-radius: 25px;
     left: 20px;
