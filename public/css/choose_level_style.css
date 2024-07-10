@@ -42,8 +42,15 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.level-list__first {
-    padding: 20px;
+.level-list__first-level-title,
+.level-list__second-level-title,
+.level-list__third-level-title {
+    font: 400 22px/24px "Russo One", sans-serif;
+}
+
+.unavailable {
+    font: 400 22px/24px "Russo One", sans-serif;
+    color: rgba(255, 0, 0, 1);
 }
 
 .previous-page {
