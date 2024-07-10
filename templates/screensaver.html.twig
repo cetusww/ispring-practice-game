@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <link href="https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/screensaver-style.css">
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
 </head>
 <body>
   <h1 class="center-align title">Demon Deliverance</h1>
-  <a class="medium padding center button-custom" type="submit" href="/legend">Продолжить</a>
+  <p class="center-align middle-align continue">Нажмите любую клавишу для продолжения...</p>
+  <script>
+      document.addEventListener('keydown', function()
+      {
+          window.location.href = '/user/signin';
+      });
+  </script>
 </body>
 </html>
