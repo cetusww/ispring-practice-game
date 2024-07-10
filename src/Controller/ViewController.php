@@ -118,6 +118,11 @@ class ViewController extends AbstractController
 			return $this->redirectToRoute('index');
 		}
 		$users = $this->repository->findAllUsers();
+
+		usort($users, function($a, $b) {
+			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
+		});
+
 		return $this->render('rating.html.twig', ['users' => $users]);
 	}
 

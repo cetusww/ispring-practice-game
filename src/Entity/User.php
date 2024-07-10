@@ -36,17 +36,17 @@ class User
 		return $this->level;
 	}
 
-	public function getScoreFirstLevel(): string
+	public function getScoreFirstLevel(): ?int
 	{
 		return $this->scoreFirstLevel;
 	}
 
-	public function getScoreSecondLevel(): string
+	public function getScoreSecondLevel(): ?int
 	{
 		return $this->scoreSecondLevel;
 	}
 
-	public function getScoreThirdLevel(): string
+	public function getScoreThirdLevel(): ?int
 	{
 		return $this->scoreThirdLevel;
 	}
