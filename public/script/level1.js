@@ -6,6 +6,7 @@ const platforms = [];
 const woodenPlanks = [];
 const bullets = [];
 const arrayOfWall = [];
+const arrayOfBonus = [];
 const fireballs = [];
 const enemies = [];
 const poisons = [];
@@ -14,6 +15,7 @@ const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
 let hero;
+let portal;
 let sceneScale = 1;
 const hero_walk = [];
 const experiences = [];
@@ -176,6 +178,10 @@ function onKeyUp(event)
         { alias: 'bat', src: '/images/bat_group.json' },
         { alias: 'poison', src: '/images/poison.png' },
         { alias: 'devil', src: '/images/devil.json' },
+        { alias: 'shield', src: '/images/shield.png' },
+        { alias: 'health', src: '/images/health.png' },
+        { alias: 'portal', src: '/images/portal.png' },
+        { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -235,11 +241,19 @@ function onKeyUp(event)
     levelCreate();
     app.stage.addChild(scene);
     hero = new Hero(400, 100, 6, 0, 680);
+    portal = new Portal(1850, 890);
+    portal.view();
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
+        portal.update(time);
         hero.update(time);
+        if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive)
+        {
+            portal.activate();
+            hero.portalTextView();
+        }
         if (hero.deadTime < 0)
         {
             window.location.href = "/lose";
@@ -339,6 +353,22 @@ function onKeyUp(event)
             }
             i++;
         }
+        i = 0;
+        while (i < arrayOfBonus.length)
+        {
+            if (!arrayOfBonus[i].isTaken)
+            {
+                arrayOfBonus[i].update(time);
+            }
+            else
+            {
+                arrayOfBonus[i].deleteView();
+                arrayOfBonus[i].sprite.destroy();
+                arrayOfBonus.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
         keys.keyDownDouble = false;
         if (new Date() - doubleKeyDown.keyTime > 200) {
             doubleClickremoveState();
@@ -411,6 +441,12 @@ function levelCreate()
     platforms.push(new Ground(texture, 2290, 1190, 540, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1280, 1400, 2560, 40)); // пол - 0 уровень
 
+    arrayOfBonus.push(new Shield(450, 880, 100));
+    arrayOfBonus.push(new Health(450, 520));
+    arrayOfBonus.push(new Shield(350, 520, 100));
+    arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
+
+
     enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
     enemies.push(new Devil(1600, 530, 300, 0, 300, 50));// 4 уровень
@@ -434,6 +470,10 @@ function levelCreate()
     enemies.forEach(enemy =>
     {
         enemy.view();
+    });
+    arrayOfBonus.forEach(bonus =>
+    {
+        bonus.view();
     });
 }
 
