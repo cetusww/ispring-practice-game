@@ -44,9 +44,9 @@ function levelCreate()
     platforms.push(new Ground(texture, 2290, 1190, 540, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1280, 1400, 2560, 40)); // пол - 0 уровень
 
-    arrayOfBonus.push(new Shield(450, 880, 100));
+    arrayOfBonus.push(new Shield(450, 880, 10));
     arrayOfBonus.push(new Health(450, 520));
-    arrayOfBonus.push(new Shield(350, 520, 100));
+    arrayOfBonus.push(new Shield(350, 520, 10));
     arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
 
 
