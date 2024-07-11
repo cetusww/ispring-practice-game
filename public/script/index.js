@@ -170,7 +170,6 @@ function onKeyUp(event)
         { alias: 'hero_shoot_group', src: '/images/hero_shoot_group.json' },
         { alias: 'hero_walk_shoot_group', src: '/images/hero_walk_shoot_group.json' },
         { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
-        { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
@@ -445,14 +444,14 @@ function levelCreate()
     arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
 
     enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
-    enemies.push(new Enemy(1600, 350, 300, 0, 300, 50, 100));// 4 уровень
-    enemies.push(new Enemy(1200, 350, 300, 0, 300, 50, 100));// 4 уровень
+    enemies.push(new Devil(1600, 350, 300, 0, 300, 50, 100));// 4 уровень
+    enemies.push(new Devil(1200, 350, 300, 0, 300, 50, 100));// 4 уровень
 
-    enemies.push(new Enemy(1600, 520, 300, 0, 300, 50, 120));// 3 уровень
-    enemies.push(new Enemy(1200, 520, 300, 0, 300, 50, 140));// 3 уровень
+    enemies.push(new Devil(1600, 520, 300, 0, 300, 50, 120));// 3 уровень
+    enemies.push(new Devil(1200, 520, 300, 0, 300, 50, 140));// 3 уровень
 
-    enemies.push(new Enemy(350, 700, 300, 0, 300, 50, 90));// 2 уровень
-    enemies.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
+    enemies.push(new Devil(350, 700, 300, 0, 300, 50, 90));// 2 уровень
+    enemies.push(new Devil(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
     woodenPlanks.forEach(woodenPlank => 
     {
         woodenPlank.view();

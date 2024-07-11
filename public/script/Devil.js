@@ -1,6 +1,6 @@
 class Devil
 {
-    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight)
+    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight, experience)
     {
         this.sprite = new PIXI.AnimatedSprite(devilIdle);
         this.sprite.animationSpeed = 0.05; // Скорость анимации
@@ -35,7 +35,7 @@ class Devil
         this.currentTimeAttack = 0;
         this.maxHp = 100;
         this.hp = 100;
-        this.experience = 100;
+        this.experience = experience;
 
         this.angle = 3.1415 * 30 / 180;
         this.deadTime = 1 * FPS;
@@ -139,7 +139,6 @@ class Devil
                     this.updateAnim('idle');
                 }
             }
-            console.log(this.state);
             if (this.state === 1)
             {
                 this.sprite.x += this.sprite.vx * time.deltaTime;
