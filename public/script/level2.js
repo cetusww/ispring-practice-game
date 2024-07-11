@@ -21,6 +21,7 @@ const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
 const devilWalk = [];
+const devilIdle = [];
 const batFlyHorizontal = [];
 const batFlyVertical = [];
 const hero_shoot = [];
@@ -168,7 +169,6 @@ function onKeyUp(event)
         { alias: 'hero_shoot_group', src: '/images/hero_shoot_group.json' },
         { alias: 'hero_walk_shoot_group', src: '/images/hero_walk_shoot_group.json' },
         { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
-        { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
@@ -197,6 +197,7 @@ function onKeyUp(event)
     {
         devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
     }
+    devilIdle.push(PIXI.Texture.from(`devilIdle.png`));
     for (let i = 0; i < 4; i++)
     {
         batFlyVertical.push(PIXI.Texture.from(`batFlyVertical${1 + i}.png`));
