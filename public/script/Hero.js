@@ -27,7 +27,7 @@ class Hero
         this.isGoDown = false;
         this.isSeat = false;
         this.cameraRectX = 100;
-        this.cameraRectY = 50;
+        this.cameraRectY = 10;
 
         this.hpMax = 100;
         this.hp = this.hpMax;
@@ -446,6 +446,7 @@ class Hero
                 this.isGround = true;
                 this.doubleJump = true;
             }
+            let topGround = null;
             for (let i = 0; i < arrayOfWall.length; i++) {
                 let wall = arrayOfWall[i];
 
@@ -455,14 +456,19 @@ class Hero
                     this.collideBottom <= wall.collideTop + 10 + this.sprite.vy
                 )
                 {
-                    this.isGround = true;
-                    this.doubleJump = true;
-                    if (this.sprite.vy > 1) {
-                        this.sprite.y -= (this.collideBottom - wall.collideTop);
-                    } else {
-                        this.sprite.y -= (this.collideBottom - wall.collideTop) / 4;
+                    if (topGround > wall.collideTop || topGround === null)
+                    {
+                        topGround = wall.collideTop;
+                        this.isGoDown = false;
                     }
-                    break;
+                    // this.isGround = true;
+                    // this.doubleJump = true;
+                    // if (this.sprite.vy > 1) {
+                    //     this.sprite.y -= (this.collideBottom - wall.collideTop);
+                    // } else {
+                    //     this.sprite.y -= (this.collideBottom - wall.collideTop) / 4;
+                    // }
+                    // break;
                 } else if (this.collideBottom >= wall.collideTop &&
                     this.collideTop <= wall.collideBottom
                 )
@@ -492,7 +498,6 @@ class Hero
                 }
             }
             if (this.sprite.vy >= 0) {
-                let topGround = null;
                 for (let i = 0; i < woodenPlanks.length; i++) {
                     let woodenPlank = woodenPlanks[i];
                     if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
@@ -501,10 +506,10 @@ class Hero
                         this.sprite.x >= woodenPlank.collideLeft
                     ) {
                         if (topGround > woodenPlank.collideTop || topGround === null)
-                            {
-                                topGround = woodenPlank.collideTop;
-                                this.isGoDown = true;
-                            }
+                        {
+                            topGround = woodenPlank.collideTop;
+                            this.isGoDown = true;
+                        }
                     }
                 }
                 for (let i = 0; i < platforms.length; i++) {
@@ -515,10 +520,10 @@ class Hero
                         this.sprite.x >= platform.collideLeft
                     ) {
                         if (topGround > platform.collideTop || topGround === null)
-                            {
-                                topGround = platform.collideTop;
-                                this.isGoDown = false;
-                            }
+                        {
+                            topGround = platform.collideTop;
+                            this.isGoDown = false;
+                        }
                     }
                 }
                 if (topGround !== null)
