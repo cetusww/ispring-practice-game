@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev смержил misha-07-09-rating" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev поправил рейтинг" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -353,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720696603059</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="2024-07-13-dev поправил рейтинг">
+      <option name="closed" value="true" />
+      <created>1720697003222</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1720697003222</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,6 +411,7 @@
     <MESSAGE value="2024-07-13-dev переименовал html карты" />
     <MESSAGE value="2024-07-13-dev смержил misha-07-08-menu-improvements" />
     <MESSAGE value="2024-07-13-dev смержил misha-07-09-rating" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev смержил misha-07-09-rating" />
+    <MESSAGE value="2024-07-13-dev поправил рейтинг" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev поправил рейтинг" />
   </component>
 </project>
