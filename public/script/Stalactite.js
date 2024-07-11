@@ -8,13 +8,10 @@ class Stalactite
         this.sprite.width = 17;
         this.sprite.height = 50;
         this.sprite.anchor.set(0.5);
+        this.zoneHeight = 100;
         this.speed = 10;
-        //this.sprite.vx = vecX * this.speed;
-        //this.sprite.vy = vecY * this.speed;
-        //this.sprite.rotation += 1.57;
-        //this.sprite.rotation += angle;
-        //this.lifeTime = 50;
         this.boom = false;
+        this.isFall = false;
         this.damage = damage + Math.floor((Math.random() - 0.5) * damage);
         this.view = function ()
         {
@@ -27,7 +24,18 @@ class Stalactite
         }
 
         this.update = function (time)
-        {         
+        {     
+            if (!this.isFall) 
+            {
+                if (this.sprite.x <= hero.collideRight && this.sprite.x >= hero.collideLeft &&
+                    this.sprite.y + this.zoneHeight <= hero.collideTop
+                )
+                if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
+                    hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y)
+                {
+                    hero.takeDamage(this.damage);
+                }
+            }
             // if (this.lifeTime > 0 && !this.boom)
             // {
             //     this.sprite.x += this.sprite.vx * time.deltaTime;

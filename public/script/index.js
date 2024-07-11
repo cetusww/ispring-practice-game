@@ -6,6 +6,7 @@ const platforms = [];
 const arrayOfWall = [];
 const arrayOfBonus = [];
 const woodenPlanks = [];
+const arrayOfStalactite = [];
 const bullets = [];
 const fireballs = [];
 const enemies = [];
