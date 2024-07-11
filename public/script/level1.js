@@ -21,6 +21,7 @@ const hero_idle = [];
 const hero_dead = [];
 const greenCapEnemyIdle = [];
 const greenCapEnemyWalk = [];
+
 const keys =
 {
     keyDown: false,

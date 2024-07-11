@@ -1,5 +1,6 @@
 class Hero
 {
+
     constructor(posX, posY, speedX, speedY, experienceMax)
     {
         this.sprite = new PIXI.AnimatedSprite(hero_idle);
@@ -203,6 +204,7 @@ class Hero
         {
             scene.removeChild(this.sprite);
         }
+        
         this.portalTextView = function ()
         {
             app.stage.addChild(this.portalText);
