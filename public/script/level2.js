@@ -61,15 +61,14 @@ function levelCreate()
 
     enemies.push(new Devil(350, 1105, 300, 0, 300, 50, 100));// 0 уровень
     enemies.push(new Devil(1300, 1105, 150, 0, 300, 50, 120));// 0 уровень
+
+    
     arrayOfWall.forEach(wall => {
         wall.view();
     })
     woodenPlanks.forEach(woodenPlank => {
         woodenPlank.view();
-    }
-    )
-    
-    enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
+    })
 
     platforms.forEach(platform =>
     {

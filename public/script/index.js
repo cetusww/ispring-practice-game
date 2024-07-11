@@ -278,10 +278,6 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     app.stage.addChild(scene);
     levelCreate();
-    
-    
-    // hero = new Hero(2700, 100, 6, 0, 680);
-    // hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
