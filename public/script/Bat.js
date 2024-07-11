@@ -107,6 +107,12 @@ class Bat
                 const poison = new Poison('poison', this.sprite.x, this.sprite.y, vecX, vecY, poisonSpeed);
                 poison.view();
                 poisons.push(poison); 
+
+                let audio = new Audio('/sounds/bat_sound.ogg');
+                audio.volume = 0.2;
+                audio.load();
+                audio.play();
+
                 this.currentTimeAttack = this.timeAttack;
             }  
         }

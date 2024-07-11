@@ -8,6 +8,8 @@ const bullets = [];
 const fireballs = [];
 const enemies = [];
 const poisons = [];
+const fires = [];
+const smokes = [];
 
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
@@ -24,6 +26,10 @@ const batFlyHorizontal = [];
 const batFlyVertical = [];
 const hero_shoot = [];
 const hero_walk_shoot = [];
+const fire_anim = [];
+const mushroom_idle = [];
+const mushroom_active = [];
+const smoke_anim = [];
 
 const keys =
 {
@@ -45,6 +51,18 @@ const mouse =
     positionX: 0,
     positionY: 0,
 }
+
+let audio = new Audio('/sounds/music.mp3');
+let music = false;
+audio.volume = 1;
+
+function startMusic()
+{
+    audio.load();
+    audio.play();
+    music = true;
+}
+
 function onAppMouseDown(event)
 {
     if (event.button === 0)
@@ -58,6 +76,10 @@ function onAppMouseMove(event)
     {
         mouse.positionX = event.clientX;
         mouse.positionY = event.clientY;
+    }
+    if (music === false)
+    {
+        startMusic();
     }
 }
 function onAppMouseUp(event)
@@ -119,6 +141,10 @@ function onKeyDown(event)
     {
         keys.keyR = true;
     }
+    if (music === false)
+    {
+        startMusic();
+    }
 }
 function onKeyUp(event)
 {
@@ -161,6 +187,8 @@ function onKeyUp(event)
     resizeWindow()
     await PIXI.Assets.load([
         { alias: 'background', src: '/images/level1-map.jpg' },
+        { alias: 'sound_on', src: '/images/sound_on.png'},
+        { alias: 'sound_off', src: '/images/sound_off.png'},
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
@@ -175,6 +203,9 @@ function onKeyUp(event)
         { alias: 'bat', src: '/images/bat_group.json' },
         { alias: 'poison', src: '/images/poison.png' },
         { alias: 'devil', src: '/images/devil.json' },
+        { alias: 'fire', src: '/images/fire.json' },
+        { alias: 'mushroom', src: '/images/mushroom.json' },
+        { alias: 'smoke', src: '/images/smoke.json' },
     ])
     for (let i = 0; i < 10; i++)
     {
@@ -212,7 +243,22 @@ function onKeyUp(event)
     {
         hero_walk_shoot.push(PIXI.Texture.from(`hero_walk_shoot${1 + i}.png`));
     }
-    
+    for (let i = 0; i < 50; i++)
+    {
+        fire_anim.push(PIXI.Texture.from(`fire${1 + i}.png`));
+    }
+    for (let i = 0; i < 14; i++)
+    {
+        mushroom_idle.push(PIXI.Texture.from(`mushroomIdle${1 + i}.png`));
+    }
+    for (let i = 0; i < 8; i++)
+    {
+        mushroom_active.push(PIXI.Texture.from(`mushroomActive${1 + i}.png`));
+    }
+    for (let i = 0; i < 13; i++)
+    {
+        smoke_anim.push(PIXI.Texture.from(`smoke${1 + i}.png`));
+    }
 
     background = PIXI.Sprite.from('background');
     background.anchor.set(0);
@@ -231,6 +277,7 @@ function onKeyUp(event)
     app.canvas.addEventListener('mouseup', onAppMouseUp);
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
+
     app.stage.addChild(scene);
     hero = new Hero(400, 100, 6, 0, 680);
     hero.view();
@@ -274,23 +321,23 @@ function onKeyUp(event)
         }
         i = 0;
         while (i < poisons.length)
+        {
+            if (poisons[i].lifeTime > 0)
             {
-                if (poisons[i].lifeTime > 0)
-                {
-                    poisons[i].update(time);
-                }
-                else
-                {
-                    poisons[i].sprite.destroy();
-                    poisons.splice(i, 1);
-                    i--;
-                    if (enemies.length === 0)  // проверка победы, если все убиты
+                poisons[i].update(time);
+            }
+            else
+            {
+                poisons[i].sprite.destroy();
+                poisons.splice(i, 1);
+                i--;
+                if (enemies.length === 0)  // проверка победы, если все убиты
                 {
                     window.location.href = "/win";
                 }
             }
-                i++;
-            }
+            i++;
+        }
         i = 0;
         while (i < experiences.length)
         {
@@ -323,6 +370,22 @@ function onKeyUp(event)
             i++;
         }
         i = 0;
+        i = 0;
+        while (i < smokes.length)
+        {
+            if (smokes[i].lifeTime > 0)
+            {
+                smokes[i].update(time);
+            }
+            else
+            {
+                smokes[i].sprite.destroy();
+                smokes.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        i = 0;
         while (i < fireballs.length)
         {
             if (fireballs[i].lifeTime > 0)
@@ -337,11 +400,14 @@ function onKeyUp(event)
             }
             i++;
         }
+        for (let i = 0; i < fires.length; i++)
+        {
+            fires[i].update();
+        }
         keys.keyDownDouble = false;
         if (new Date() - doubleKeyDown.keyTime > 200) {
             doubleClickremoveState();
         }
-
     });
 })();
 
@@ -383,7 +449,8 @@ window.addEventListener('keyup', onKeyUp);
 //window.addEventListener('dblclick', doubleClick);
 function levelCreate()
 {
-    let texture //= PIXI.Texture.from('ground');
+    let texture;
+
     platforms.push(new Ground(texture, 330, 310, 380, 40)); // 5 уровень
     platforms.push(new Ground(texture, 965, 400, 470, 40)); // 4 уровень
     platforms.push(new Ground(texture, 1650, 400, 700, 40)); // 4 уровень
@@ -414,6 +481,10 @@ function levelCreate()
     
     enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
+    fires.push(new Fire(1000, 500));// fire test
+
+    enemies.push(new Mushroom(1000, 350, 250, 220));// mushroom test
+
     enemies.push(new Devil(1600, 350, 300, 0, 300, 50));// 4 уровень
     enemies.push(new Devil(1200, 350, 300, 0, 300, 50));// 4 уровень
 
@@ -432,6 +503,12 @@ function levelCreate()
     {
         enemy.view();
     });
+
+    fires.forEach(fire =>
+    {
+        fire.view();
+    });
+
 }
 
 function addBackground(app) {
