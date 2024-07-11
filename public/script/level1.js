@@ -5,6 +5,7 @@ const scene = new PIXI.Container();
 const platforms = [];
 const woodenPlanks = [];
 const bullets = [];
+const arrayOfWall = [];
 const fireballs = [];
 const enemies = [];
 const poisons = [];
