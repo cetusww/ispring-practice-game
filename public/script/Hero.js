@@ -31,7 +31,7 @@ class Hero
 
         this.hpMax = 100;
         this.hp = this.hpMax;
-        this.experience = 400;
+        this.experience = 0;
         this.experienceMax = experienceMax;
         this.dead = false;
         this.isWin = false;

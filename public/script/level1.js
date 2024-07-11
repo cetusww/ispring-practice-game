@@ -23,7 +23,7 @@ function levelCreate()
 
     platforms.push(new Ground(texture, 1243, 580, 605, 40)); // 4 уровень
     platforms.push(new Ground(texture, 2107, 580, 905, 40)); // 4 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 885, 580, 110, 40));// 4 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 870, 580, 140, 40));// 4 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1600, 580, 110, 40));//4 уровень
 
     platforms.push(new Ground(texture, 77, 820, 154, 40)); // 3 уровень
