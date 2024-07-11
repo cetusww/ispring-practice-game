@@ -33,7 +33,6 @@ class Hero
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
-        this.activateShield = false;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
         this.jumpPower = 16;
@@ -273,34 +272,36 @@ class Hero
         }
         this.addShield = function(duration)
         {
-            this.activateShield(duration);
-            if (!activateShield)
-            {
-                this.activateShield = true;
-            } else
-            {
-                if (duration === 0)
-                {
-                    this.activateShield = false;
-                }
-            }
-            duration -= 10;
+            this.activateShield = true;
+            this.shieldDuration = duration;
+            this.shieldStartTime = performance.now();
         }
+
         this.addHealth = function()
         {
             this.hp = Math.min(this.hpMax, Math.floor(this.hp + this.hpMax / 4));
             this.updateHp();
         }
-        this.takeDamage = function (damage) {
-            this.hp -= damage;
-            if (this.hp <= 0) {
-                this.hp = 0;
-                this.dead = true;
-                this.sprite.vy = 0;
+
+        this.takeDamage = function (damage)
+        {
+            if (!this.activateShield)
+            {
+                this.hp -= damage;
+                if (this.hp <= 0)
+                {
+                    this.hp = 0;
+                    this.dead = true;
+                    this.sprite.vy = 0;
+                }
+                this.updateHp();
+            } else
+            {
+                damage = Math.max(0, damage - 10);
             }
-            this.updateHp();
         }
-        this.updateKey = function () {
+        this.updateKey = function()
+        {
             if (keys.keyR) {
                 keys.keyR = false;
                 this.currentCountBullet = 0;
@@ -429,6 +430,15 @@ class Hero
             }
             this.updateExperience();
             this.updateCollide();
+            if (this.activateShield)
+            {
+                let currentTime = performance.now();
+                let elapsedTime = (currentTime - this.shieldStartTime) / 1000;
+                if (elapsedTime >= this.shieldDuration)
+                {
+                    this.activateShield = false;
+                }
+            }
         }
 
         this.collise = function () {
