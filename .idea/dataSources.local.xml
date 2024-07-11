@@ -2,11 +2,11 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="PS-241.15989.102">
     <data-source name="@localhost" uuid="e6c37e2c-92ac-4c90-a724-8303f3a0a8c3">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL_AURORA" />
       <schema-mapping />
     </data-source>
     <data-source name="@localhost [2]" uuid="15bc7894-435a-4d51-bc1e-1ffdf09e430c">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL_AURORA" />
       <schema-mapping />
     </data-source>
   </component>

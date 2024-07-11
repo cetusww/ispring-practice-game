@@ -11,6 +11,7 @@
         </id>
         <field name="username" column="username" type="string" length="255" />
         <field name="password" column="password" type="string" length="255" />
+        <field name="level" column="level" type="integer" />
     </entity>
 
 </doctrine-mapping>

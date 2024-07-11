@@ -30,13 +30,21 @@ show_menu:
     path: /menu
     controller: App\Controller\ViewController::showMenu
 
-show_level:
-    path: /level{level}
-    controller: App\Controller\ViewController::showLevel
-
 show_legend:
     path: /legend
     controller: App\Controller\ViewController::showLegend
+
+show_first_level:
+    path: /first-level
+    controller: App\Controller\ViewController::showFirstLevel
+
+show_second_level:
+    path: /second-level
+    controller: App\Controller\ViewController::showSecondLevel
+
+show_third_level:
+    path: /third-level
+    controller: App\Controller\ViewController::showSecondLevel
 
 show_win:
     path: /win
@@ -45,3 +53,15 @@ show_win:
 show_lose:
     path: /lose
     controller: App\Controller\ViewController::showLose
+
+choose_level:
+    path: /choose-level
+    controller: App\Controller\ViewController::showLevels
+
+show_rating:
+    path: /rating
+    controller: App\Controller\ViewController::showRating
+
+show_lobby:
+    path: /lobby
+    controller: App\Controller\ViewController::showLobby

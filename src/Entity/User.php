@@ -8,6 +8,7 @@ class User
 		private ?int $id,
 		private string $username,
 		private string $password,
+		private ?int $level,
 	)
 	{
 	}
@@ -27,6 +28,11 @@ class User
 		return $this->password;
 	}
 
+	public function getLevel(): ?int
+	{
+		return $this->level;
+	}
+
 	public function setUserName(string $username): string
 	{
 		return $this->username = $username;
@@ -35,5 +41,10 @@ class User
 	public function setPassword(string $password): string
 	{
 		return $this->password = $password;
+	}
+
+	public function setLevel(int $level): int
+	{
+		return $this->level = $level;
 	}
 }

@@ -4,7 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev переименовал html карты">
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_7_4_24__8_58_AM.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/choose_level_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/rating-style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/continue_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/multiplayer_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/rating_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/restart_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/singleplayer_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/choose_level.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game_lose.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game_win.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/rating.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/third_level.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/doctrine/User.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config/doctrine/User.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/legend-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/legend-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/level1-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/first_level_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/lose-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lose-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/menu-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/menu-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/screensaver-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/signin-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/signup-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/win-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/win-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/level1-map.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/first_level_map.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Hero.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/level1.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/level1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/first_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/first_level.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game-lose.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game-win.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/legend.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/legend.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/screensaver.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/screensaver.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/second_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/second_level.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signin-user-form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin_user_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup-user-form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup_user_form.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,16 +69,113 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2024-07-01-test-dev-2" />
+        <entry key="$PROJECT_DIR$" value="misha-07-08-menu-improvements" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
     <include_path>
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mercure" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mercure-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/runtime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mercure" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mercure-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/vendor/psr/link" />
       <path value="$PROJECT_DIR$/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/react/socket" />
       <path value="$PROJECT_DIR$/vendor/react/event-loop" />
       <path value="$PROJECT_DIR$/vendor/react/dns" />
@@ -219,7 +361,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720434396048</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="2024-07-13-dev переименовал html карты">
+      <option name="closed" value="true" />
+      <created>1720694776775</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1720694776775</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,6 +415,8 @@
     <MESSAGE value="2024-07-01-test-dev-2-with-gamepad смержил тестовую ветку с веткой геймпада" />
     <MESSAGE value="2024-07-05-shoot-animation добавил анимацию стрельбы в стоячем состоянии и при ходьбе" />
     <MESSAGE value="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
+    <MESSAGE value="misha-07-08-menu-improvements добавил файлы из vendor" />
+    <MESSAGE value="2024-07-13-dev переименовал html карты" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev переименовал html карты" />
   </component>
 </project>

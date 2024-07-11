@@ -96,7 +96,6 @@ class Hero
                 this.sprite.play();
                 console.log('смерть');
                 this.animateType = 'dead';
-                window.location.href = "/lose";  // если умер, то проиграл
             } else if (type === 'shoot' && this.animateType !== 'shoot') {
                 this.sprite.textures = hero_shoot;
                 this.sprite.animationSpeed = 0.3;
@@ -207,7 +206,7 @@ class Hero
         this.deleteView = function () {
             scene.removeChild(this.sprite);
         }
-        
+
         this.portalTextView = function ()
         {
             app.stage.addChild(this.portalText);
@@ -232,7 +231,6 @@ class Hero
             app.stage.removeChild(this.experienceTitle);
             app.stage.removeChild(this.experienceText);
             this.graphicsExperience = new PIXI.Graphics();
-            // console.log(this.experience / this.experienceMax)
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, this.experience / this.experienceMax * 300, 30);
             this.graphicsExperience.fill(0x4bb35e);
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
@@ -256,7 +254,6 @@ class Hero
                 let radius = 10;
                 let startAngle = -Math.PI / 2;
                 let endAngle = startAngle + (Math.PI / 180) * Math.max(this.currentRechargeTime, 0) / this.rechargeTime * 360;
-                ;
                 this.rechargeCircle.beginFill(0xfeeb77);
                 this.rechargeCircle.moveTo(x, y);
                 this.rechargeCircle.arc(x, y, radius, startAngle, endAngle);
@@ -392,21 +389,23 @@ class Hero
                 moveCamera(moveX, 0);
             }
 
-            if (deltaX < -this.cameraRectX) {
+            if (deltaX < -this.cameraRectX)
+            {
                 let moveX = deltaX + this.cameraRectX;
                 moveCamera(moveX, 0);
             }
             deltaY = this.topGroundCam - this.sprite.height/2 + scene.y - app.screen.height / 2;
-            if (deltaY < -this.cameraRectY) {
-                    let moveY = (deltaY + this.cameraRectY) / 20;
-                    moveCamera(0, moveY);
+            if (deltaY < -this.cameraRectY)
+            {
+                let moveY = (deltaY + this.cameraRectY) / 20;
+                moveCamera(0, moveY);
             }
             deltaY = globalPosition.y - app.screen.height / 2;
             if (deltaY > this.cameraRectY)
             {
                 let moveY = deltaY - this.cameraRectY;
                 moveCamera(0, moveY);
-            } 
+            }
 
 
         }
@@ -533,7 +532,7 @@ class Hero
                     } else
                     {
                         this.sprite.y -= (this.collideBottom - topGround) / 4;
-                    } 
+                    }
                 }
             }
         }

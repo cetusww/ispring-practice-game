@@ -20,13 +20,14 @@ class UserController extends AbstractController
 
 	public function index(): Response
 	{
-		return $this->render('signup-user-form.html.twig');
+		return $this->render('signup_user_form.html.twig');
 	}
 
-	public function signUpUser(Request $request, SessionInterface $session): Response
+	public function signUpUser(Request $request): Response
 	{
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
+    $user = $this->repository->findUserByUserName($newUsername);
 
 		$errors = [];
 
@@ -42,23 +43,22 @@ class UserController extends AbstractController
 		{
 			$errors['password'] = 'Пароль должен содержать не менее 6 символов.';
 		}
-		if ($this->repository->findUserByUserName($newUsername))
+		if ($user)
 		{
 			$errors['username'] = 'Пользователь с таким именем уже существует.';
 		}
 
 		if (!empty($errors))
 		{
-			return $this->render('signup-user-form.html.twig', ['errors' => $errors]);
+			return $this->render('signup_user_form.html.twig', ['errors' => $errors]);
 		}
-
-
 
 		$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 		$user = new User(
 			null,
 			$newUsername,
 			$hashedPassword,
+			$user->getLevel(),
 		);
 
 		$this->repository->saveUserToDatabase($user);
@@ -68,7 +68,7 @@ class UserController extends AbstractController
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $newUsername;
 
-		return $this->redirectToRoute('show_menu');
+		return $this->redirectToRoute('show_legend');
 	}
 
 	public function signInUser(Request $request): Response
@@ -99,14 +99,15 @@ class UserController extends AbstractController
 		}
 		if (!empty($errors))
 		{
-			return $this->render('signin-user-form.html.twig', ['errors' => $errors]);
+			return $this->render('signin_user_form.html.twig', ['errors' => $errors]);
 		}
 
 		session_name('auth');
 		session_start();
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $username;
-		return $this->redirectToRoute('show_menu');
+		$_SESSION['level'] = $user->getLevel();
+		return $this->redirectToRoute('show_legend');
 	}
 
 	public function signOutUser(): Response

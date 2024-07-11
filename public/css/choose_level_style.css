@@ -24,15 +24,15 @@ body {
     margin: 5% 0 0 0;
 }
 
-.options-list {
+.levels-list {
     display: flex;
     justify-content: space-around;
     margin: 50px 0 0 0;
 }
 
-.rating,
-.single,
-.multi {
+.level-list__first,
+.level-list__second,
+.level-list__third {
     display: block;
     width: 300px;
     height: 200px;
@@ -42,16 +42,20 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.rating__title,
-.single__title,
-.multi__title {
+.level-list__first-level-title,
+.level-list__second-level-title,
+.level-list__third-level-title {
     font: 400 22px/24px "Russo One", sans-serif;
-    color: rgba(255, 255, 255, 1);
 }
 
-.signout {
+.unavailable {
+    font: 400 22px/24px "Russo One", sans-serif;
+    color: rgba(255, 0, 0, 1);
+}
+
+.previous-page {
     position: absolute;
-    width: 100px;
+    width: 125px;
     height: 50px;
     color: rgba(255, 255, 255, 1);
     font: 400 16px/20px "Russo One", sans-serif;
@@ -59,10 +63,4 @@ body {
     border-radius: 25px;
     left: 20px;
     bottom: 20px;
-}
-
-img {
-    border-radius: 0;
-    width: 80px;
-    height: 80px;
 }

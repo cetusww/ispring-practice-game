@@ -185,7 +185,7 @@ function onKeyUp(event)
     document.body.appendChild(app.canvas);
     resizeWindow()
     await PIXI.Assets.load([
-        { alias: 'background', src: '/images/level1-map.jpg' },
+        { alias: 'background', src: '/images/first_level_map.jpg' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
@@ -279,14 +279,6 @@ function onKeyUp(event)
         {
             window.location.href = "/lose";
         }
-        // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
-        // {
-        //     window.location.href = "/win";
-        // }
-        // if (hero.sprite.x < 0)
-        // {
-        //     window.location.href = "/lose";
-        // }
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -306,6 +298,10 @@ function onKeyUp(event)
                 enemies[i].sprite.destroy();
                 enemies.splice(i, 1);
                 i--;
+                if (enemies.length === 0)  // проверка победы, если все убиты
+                {
+                    window.location.href = "/win";
+                }
             }
             i++;
         }
@@ -321,11 +317,7 @@ function onKeyUp(event)
                     poisons[i].sprite.destroy();
                     poisons.splice(i, 1);
                     i--;
-                    if (enemies.length === 0)  // проверка победы, если все убиты
-                {
-                    window.location.href = "/win";
                 }
-            }
                 i++;
             }
         i = 0;
