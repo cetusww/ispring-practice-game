@@ -23,6 +23,7 @@ class Hero
         this.sprite.vx = 0;
         this.sprite.vy = 1;
         this.isGround = false;
+        this.topGroundCam = null;
         this.isGoDown = false;
         this.isSeat = false;
         this.cameraRectX = 100;
@@ -32,6 +33,7 @@ class Hero
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
+        this.activateShield = false;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
         this.jumpPower = 15;
@@ -92,7 +94,6 @@ class Hero
                 this.sprite.width = 100;
                 this.sprite.height = 80;
                 this.sprite.play();
-                console.log('смерть');
                 this.animateType = 'dead';
                 window.location.href = "/lose";  // если умер, то проиграл
             } else if (type === 'shoot' && this.animateType !== 'shoot') {
@@ -173,30 +174,38 @@ class Hero
             }
 
             this.experienceText = new PIXI.Text(this.experience, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.healthText = new PIXI.Text(this.hp, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.experienceTitle = new PIXI.Text('Score', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.healthTitle = new PIXI.Text('Health', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.healthText.x = 300
-            this.healthTitle.x = 30
-            this.healthText.y = 15
-            this.healthTitle.y = 15
-            this.experienceTitle.x = app.screen.width - 300
-            this.experienceTitle.y = 15
-            this.experienceText.x = app.screen.width - 30;
+            this.healthText = new PIXI.Text(this.hp, { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+            this.portalText = new PIXI.Text('Portal open!', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.experienceTitle = new PIXI.Text('Score', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+            this.healthTitle = new PIXI.Text('Health',{ fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.healthText.x = 300;
+            this.healthTitle.x = 30;
+            this.portalText.x = app.screen.width - 158;
+            this.portalText.y = 60;
+            this.healthText.y = 15;
+            this.healthTitle.y = 15;
+            this.experienceTitle.x = app.screen.width - 300;
+            this.experienceTitle.y = 15;
+            this.experienceText.x = app.screen.width  - 30;
             this.experienceText.y = 15;
             this.experienceText.anchor.set(1, 0);
             this.healthText.anchor.set(1, 0);
+            this.portalText.anchor.set(0.5);
             app.stage.addChild(this.experienceText);
             app.stage.addChild(this.experienceTitle);
-
             app.stage.addChild(this.countBulletText);
             this.updateHp();
         }
-
-        this.deleteView = function () {
+        this.deleteView = function ()
+        {
             scene.removeChild(this.sprite);
         }
-        this.updateHp = function () {
+        this.portalTextView = function ()
+        {
+            app.stage.addChild(this.portalText);
+        }
+        this.updateHp = function ()
+        {
             app.stage.removeChild(this.graphicsHp);
             app.stage.removeChild(this.healthTitle);
             app.stage.removeChild(this.healthText);
@@ -215,7 +224,6 @@ class Hero
             app.stage.removeChild(this.experienceTitle);
             app.stage.removeChild(this.experienceText);
             this.graphicsExperience = new PIXI.Graphics();
-            console.log(this.experience / this.experienceMax)
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, this.experience / this.experienceMax * 300, 30);
             this.graphicsExperience.fill(0x4bb35e);
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
@@ -223,6 +231,7 @@ class Hero
             this.experienceText.text = `${this.experience} / ${this.experienceMax}`;
             this.experienceTitle.x = app.screen.width - 300;
             this.experienceText.x = app.screen.width - 30;
+            this.portalText.x = app.screen.width - 158;
             app.stage.addChild(this.graphicsExperience);
             app.stage.addChild(this.experienceTitle);
             app.stage.addChild(this.experienceText);
@@ -256,17 +265,46 @@ class Hero
                 }
             }
         }
-        this.addExperience = function (experience) {
+
+        this.addExperience = function(experience)
+        {
             this.experience += experience;
         }
-        this.takeDamage = function (damage) {
-            this.hp -= damage;
-            if (this.hp <= 0) {
-                this.hp = 0;
-                this.dead = true;
-                this.sprite.vy = 0;
+
+        this.addShield = function(duration)
+        {
+            this.activateShield(duration);
+            if (!activateShield)
+            {
+                this.activateShield = true;
+            } else
+            {
+                if (duration === 0)
+                {
+                    this.activateShield = false;
+                }
             }
+            duration -= 10;
+        }
+        this.addHealth = function()
+        {
+            this.hp = Math.min(this.hpMax, Math.floor(this.hp + this.hpMax / 4));
             this.updateHp();
+        }
+
+        this.takeDamage = function (damage)
+        {
+            if (!this.isShieldActive)
+            {
+                this.hp -= damage;
+                if (this.hp <= 0)
+                {
+                    this.hp = 0;
+                    this.dead = true;
+                    this.sprite.vy = 0;
+                }
+                this.updateHp();
+            }
         }
         this.updateKey = function () {
             if (keys.keyR) {
@@ -361,19 +399,17 @@ class Hero
                 let moveX = deltaX + this.cameraRectX;
                 moveCamera(moveX, 0);
             }
-            //if (this.isGround) {
+            deltaY = this.topGroundCam - this.sprite.height/2 + scene.y - app.screen.height / 2;
             if (deltaY < -this.cameraRectY) {
-                let moveY = (deltaY + this.cameraRectY) / 10;
-                moveCamera(0, moveY);
-                this.moveCamTime
+                    let moveY = (deltaY + this.cameraRectY) / 20;
+                    moveCamera(0, moveY);
             }
-            //}
-            if (deltaY > this.cameraRectY) {
+            deltaY = globalPosition.y - app.screen.height / 2;
+            if (deltaY > this.cameraRectY)
+            {
                 let moveY = deltaY - this.cameraRectY;
                 moveCamera(0, moveY);
-            }
-
-
+            } 
         }
         this.update = function (time) {
             if (!this.dead) {
@@ -407,13 +443,16 @@ class Hero
             if (this.collideRight > SCENE_WIDTH) {
                 this.sprite.x -= this.collideRight - SCENE_WIDTH;
             }
-            if (this.collideBottom > SCENE_HEIGHT) {
-                this.sprite.y -= this.collideBottom - SCENE_HEIGHT;
-                this.isGround = true;
-                this.doubleJump = true;
-            }
-            if (this.sprite.vy < 0) {
-                for (let i = 0; i < platforms.length; i++) {
+            // if (this.collideBottom > SCENE_HEIGHT)
+            // {
+            //     this.sprite.y -= this.collideBottom - SCENE_HEIGHT;
+            //     this.isGround = true;
+            //     this.doubleJump = true;
+            // }
+            if (this.sprite.vy < 0)
+            {
+                for (let i = 0; i < platforms.length; i++) 
+                {
                     let platform = platforms[i];
                     if (this.collideTop >= platform.collideTop + this.sprite.vy &&
                         this.collideTop <= platform.collideBottom &&
@@ -426,44 +465,56 @@ class Hero
                     }
                 }
             }
-            if (this.sprite.vy >= 0) {
-                for (let i = 0; i < woodenPlanks.length; i++) {
+            if (this.sprite.vy >= 0)
+            {
+                let topGround = null;
+                for (let i = 0; i < woodenPlanks.length; i++) 
+                {
                     let woodenPlank = woodenPlanks[i];
-                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
+                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy* 1.5 &&
                         this.collideBottom >= woodenPlank.collideTop &&
                         this.sprite.x <= woodenPlank.collideRight &&
                         this.sprite.x >= woodenPlank.collideLeft
-                    ) {
-                        this.isGround = true;
-                        this.isGoDown = true;
-                        this.doubleJump = true;
-                        if (this.sprite.vy > 1) {
-                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop);
-                        } else {
-                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop) / 4;
-                        }
-                        break;
-                    }
-                }
-                if (!this.isGround) {
-                    for (let i = 0; i < platforms.length; i++) {
-                        let platform = platforms[i];
-                        if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
-                            this.collideBottom >= platform.collideTop &&
-                            this.collideLeft <= platform.collideRight &&
-                            this.collideRight >= platform.collideLeft
-                        ) {
-                            this.isGround = true;
-                            this.doubleJump = true;
-                            if (this.sprite.vy > 1) {
-                                this.sprite.y -= (this.collideBottom - platform.collideTop);
-                            } else {
-                                this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
-                            }
-                            break;
+                    )
+                    {
+                        if (topGround > woodenPlank.collideTop || topGround === null)
+                        {
+                            topGround = woodenPlank.collideTop;
+                            this.isGoDown = true;
                         }
                     }
                 }
+                for (let i = 0; i < platforms.length; i++) 
+                {
+                    let platform = platforms[i];
+                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy * 1.5 &&
+                        this.collideBottom >= platform.collideTop &&
+                        this.collideLeft <= platform.collideRight &&
+                        this.collideRight >= platform.collideLeft
+                    )
+                    {
+                        
+                        if (topGround > platform.collideTop || topGround === null)
+                        {
+                            topGround = platform.collideTop;
+                            this.isGoDown = false;
+                        }
+                    }
+                }
+                if (topGround !== null)
+                {
+                    this.isGround = true;
+                    this.doubleJump = true;
+                    this.topGroundCam = topGround;
+                    if (this.sprite.vy > 1)
+                    {
+                        this.sprite.y -= (this.collideBottom - topGround);
+                    } else
+                    {
+                        this.sprite.y -= (this.collideBottom - topGround) / 4;
+                    } 
+                }
+                
             }
         }
     }

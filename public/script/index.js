@@ -7,12 +7,14 @@ const woodenPlanks = [];
 const bullets = [];
 const fireballs = [];
 const enemies = [];
+const arrayOfBonus = [];
 const poisons = [];
 
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
 let hero;
+let portal;
 let sceneScale = 1;
 const hero_walk = [];
 const experiences = [];
@@ -173,6 +175,10 @@ function onKeyUp(event)
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
+        { alias: 'shield', src: '/images/shield.png' },
+        { alias: 'health', src: '/images/health.png' },
+        { alias: 'portal', src: '/images/portal.png' },
+        { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
         { alias: 'bat', src: '/images/bat_group.json' },
         { alias: 'poison', src: '/images/poison.png' },
         { alias: 'devil', src: '/images/devil.json' },
@@ -235,12 +241,20 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(400, 100, 6, 0, 680);
+    hero = new Hero(400, 150, 6, 0, 680);
+    portal = new Portal(1850, 890);
+    portal.view();
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
+        portal.update(time);
         hero.update(time);
+        if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive)
+        {
+            portal.activate();
+            hero.portalTextView();
+        }
         if (hero.deadTime < 0)
         {
             window.location.href = "/lose";
@@ -340,6 +354,22 @@ function onKeyUp(event)
             }
             i++;
         }
+        i = 0;
+        while (i < arrayOfBonus.length)
+        {
+            if (!arrayOfBonus[i].isTaken)
+            {
+                arrayOfBonus[i].update(time);
+            }
+            else
+            {
+                arrayOfBonus[i].deleteView();
+                arrayOfBonus[i].sprite.destroy();
+                arrayOfBonus.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
         keys.keyDownDouble = false;
         if (new Date() - doubleKeyDown.keyTime > 200) {
             doubleClickremoveState();
@@ -409,24 +439,24 @@ function levelCreate()
     platforms.push(new Ground(texture, 1800, 820, 400, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1000, 970, 2000, 40)); // пол - 0 уровень
 
-    woodenPlanks.forEach(woodenPlank =>
+    arrayOfBonus.push(new Shield(450, 880, 100));
+    arrayOfBonus.push(new Health(450, 520));
+    arrayOfBonus.push(new Shield(350, 520, 100));
+    arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
+
+    enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
+    enemies.push(new Enemy(1600, 350, 300, 0, 300, 50, 100));// 4 уровень
+    enemies.push(new Enemy(1200, 350, 300, 0, 300, 50, 100));// 4 уровень
+
+    enemies.push(new Enemy(1600, 520, 300, 0, 300, 50, 120));// 3 уровень
+    enemies.push(new Enemy(1200, 520, 300, 0, 300, 50, 140));// 3 уровень
+
+    enemies.push(new Enemy(350, 700, 300, 0, 300, 50, 90));// 2 уровень
+    enemies.push(new Enemy(1300, 700, 150, 0, 300, 50, 130));// 2 уровень
+    woodenPlanks.forEach(woodenPlank => 
     {
         woodenPlank.view();
-    }
-    )
-    
-    enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
-
-    enemies.push(new Devil(1600, 350, 300, 0, 300, 50));// 4 уровень
-    enemies.push(new Devil(1200, 350, 300, 0, 300, 50));// 4 уровень
-
-    enemies.push(new Devil(1600, 520, 300, 0, 300, 50));// 3 уровень
-    enemies.push(new Devil(1200, 520, 300, 0, 300, 50));// 3 уровень
-
-    enemies.push(new Devil(350, 700, 300, 0, 300, 50));// 2 уровень
-    enemies.push(new Devil(1300, 700, 150, 0, 300, 50));// 2 уровень
-
-
+    })
     platforms.forEach(platform =>
     {
         platform.view();
@@ -435,24 +465,9 @@ function levelCreate()
     {
         enemy.view();
     });
-}
-
-function addBackground(app) {
-    const background = PIXI.Sprite.from('background');
-    background.anchor.set(0);
-
-
-    function resizeBackground() {
-        background.width = app.screen.width;
-        background.height = app.screen.height;
-    }
-
-    resizeBackground();
-    app.stage.addChild(background);
-
-    window.addEventListener('resize', () => {S
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-        resizeBackground();
+    arrayOfBonus.forEach(bonus =>
+    {
+        bonus.view();
     });
 }
 

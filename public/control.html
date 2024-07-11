@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Control</title>
+  <link rel="stylesheet" href="css/joystick-style.css">
+</head>
+<body>
+<div class="gamepad">
+  <div class="joystick-container" id="joystick-container">
+    <div class="joystick" id="joystick"></div>
+  </div>
+  <div class="buttons">
+    <button class="button left" id="left">Left</button>
+    <button class="button up" id="up">Up</button>
+    <button class="button right" id="right">Right</button>
+    <button class="button down" id="down">Down</button>
+    <button class="button fire" id="fire">Fire</button>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', function(event) {
+        event.preventDefault();
+    }, { passive: false });
+
+    const ws = new WebSocket('ws://172.20.10.9:8080');
+    let isConnected = false;
+    const messageQueue = [];
+
+    ws.onopen = function() {
+        isConnected = true;
+        console.log('WebSocket connection established');
+        while (messageQueue.length > 0) {
+            ws.send(messageQueue.shift());
+        }
+    };
+
+    ws.onerror = function(error) {
+        console.error('WebSocket Error: ' + error);
+    };
+
+    ws.onclose = function() {
+        isConnected = false;
+        console.log('WebSocket connection closed');
+    };
+
+    function sendMove(direction)
+    {
+        const message = JSON.stringify({ direction });
+        if (isConnected) {
+            ws.send(message);
+        } else {
+            console.log('WebSocket is not connected yet, queueing message');
+            messageQueue.push(message);
+        }
+    }
+
+    const joystick = document.getElementById('joystick');
+    const joystickContainer = document.getElementById('joystick-container');
+    const buttonLeft = document.getElementById('left');
+    const buttonUp = document.getElementById('up');
+    const buttonRight = document.getElementById('right');
+    const buttonDown = document.getElementById('down');
+    const buttonFire = document.getElementById('fire');
+
+    let centerX = joystickContainer.offsetWidth / 2;
+    let centerY = joystickContainer.offsetHeight / 2;
+    let maxDistance = joystickContainer.offsetWidth / 2 - joystick.offsetWidth / 2;
+
+    function getJoystickPosition(event)
+    {
+        let touch = event.touches ? event.touches[0] : event;
+        let rect = joystickContainer.getBoundingClientRect();
+        let x = touch.clientX - rect.left - centerX;
+        let y = touch.clientY - rect.top - centerY;
+        let distance = Math.min(Math.sqrt(x * x + y * y), maxDistance)  ;
+        let angle = Math.atan2(y, x);
+        return {
+            x: Math.floor(Math.cos(angle) * distance),
+            y: Math.floor(Math.sin(angle) * distance)
+        };
+    }
+
+    function onMove(event)
+    {
+      let pos = getJoystickPosition(event);
+      updateJoystick(pos);
+      updateDirection(pos);
+    }
+
+    function updateJoystick(position)
+    {
+        joystick.style.left = centerX + position.x + 'px';
+        joystick.style.top = centerY + position.y + 'px';
+    }
+
+    function updateDirection(pos) {
+        sendMove(pos);
+    }
+
+    function updateButton(event)
+    {
+        if (event.type === 'touchstart')
+        {
+            sendMove(event.target.id);
+        }
+        if (event.type === 'touchend')
+        {
+            sendMove('-' + event.target.id);
+        }
+    }
+
+    function onEnd() {
+        updateJoystick({ x: 0, y: 0 });
+        sendMove('-left');
+        sendMove('-right');
+    }
+
+    joystick.addEventListener('touchstart', function() {
+        window.addEventListener('touchmove', onMove);
+        window.addEventListener('touchend', onEnd, { once: true });
+    });
+
+    window.addEventListener('touchend', function() {
+        window.removeEventListener('touchmove', onMove);
+    });
+
+    buttonLeft.addEventListener('touchstart', updateButton);
+    buttonLeft.addEventListener('touchend', updateButton);
+    buttonUp.addEventListener('touchstart', updateButton);
+    buttonUp.addEventListener('touchend', updateButton);
+    buttonRight.addEventListener('touchstart', updateButton);
+    buttonRight.addEventListener('touchend', updateButton);
+    buttonDown.addEventListener('touchstart', updateButton);
+    buttonDown.addEventListener('touchend', updateButton);
+    buttonFire.addEventListener('touchstart', updateButton);
+    buttonFire.addEventListener('touchend', updateButton);
+</script>
+</body>
+</html>
