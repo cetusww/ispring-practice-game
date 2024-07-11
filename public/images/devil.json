@@ -1,7 +1,7 @@
 {
   "frames": {
     "devilIdle.png": {
-      "frame": {"x":56, "y":152, "w":32, "h":40},
+      "frame": {"x":56, "y":150, "w":32, "h":40},
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {"x":0, "y":0, "w":32, "h":40},
