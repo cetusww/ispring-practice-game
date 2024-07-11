@@ -11,8 +11,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Service\ValidationService;
-use App\Service\UserService;
-use App\Service\SessionService;
 
 
 class UserController extends AbstractController
@@ -40,7 +38,7 @@ class UserController extends AbstractController
 
 		if (isset($result['error']))
 		{
-			return $this->render('signup-user-form.html.twig', ['errors' => $errors]);
+			return $this->render('signup-user-form.html.twig', ['error' => $result['error']]);
 		}
 
 		return $this->redirectToRoute('show_menu');
