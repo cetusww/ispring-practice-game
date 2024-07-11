@@ -47,4 +47,17 @@ class UserService
 
 		return ['user' => $user];
 	}
+
+	public function signInUser(string $username, string $password): array
+	{
+		$existingUser = $this->userRepository->findUserByUserName($username);
+		$error = $this->validationService->validateSignInData($username, $password, $existingUser);
+
+		if (!empty($error))
+		{
+			return ['error' => $error];
+		}
+
+		return ['user' => $existingUser];
+	}
 }

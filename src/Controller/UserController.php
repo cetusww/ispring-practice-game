@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Service\ValidationService;
 
 
@@ -29,7 +28,7 @@ class UserController extends AbstractController
 		return $this->render('signup-user-form.html.twig');
 	}
 
-	public function signUpUser(Request $request, SessionInterface $session): Response
+	public function signUpUser(Request $request): Response
 	{
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
@@ -41,6 +40,10 @@ class UserController extends AbstractController
 			return $this->render('signup-user-form.html.twig', ['error' => $result['error']]);
 		}
 
+		$user = $result['user'];
+		$this->sessionService->startSession();
+		$this->sessionService->setUserSession($user->getId(), $user->getUsername(), $user->getLevel());
+
 		return $this->redirectToRoute('show_menu');
 	}
 
@@ -49,44 +52,24 @@ class UserController extends AbstractController
 		$username = $request->get('username');
 		$password = $request->get('password');
 
-		$errors = [];
+		$result = $this->userService->signInUser($username, $password);
 
-		if (empty($username))
+		if (isset($result['error']))
 		{
-			$errors['username'] = 'Имя пользователя не может быть пустым.';
-		}
-		if (empty($password))
-		{
-			$errors['password'] = 'Пароль не может быть пустым.';
+			return $this->render('signin-user-form.html.twig', ['error' => $result['error']]);
 		}
 
-		$user = $this->repository->findUserByUserName($username);
+		$user = $result['user'];
+		$this->sessionService->startSession('auth');
+		$this->sessionService->setUserSession($user->getId(), $user->getUsername(), $user->getLevel());
 
-		if (!$user)
-		{
-			$errors['username'] = 'Пользователя с таким именем не существует';
-		}
-		if ($user && !$this->repository->checkPassword($user->getId(), $password))
-		{
-			$errors['password'] = 'Неверный пароль';
-		}
-		if (!empty($errors))
-		{
-			return $this->render('signin-user-form.html.twig', ['errors' => $errors]);
-		}
-
-		session_name('auth');
-		session_start();
-		$_SESSION['user_id'] = $user->getId();
-		$_SESSION['username'] = $username;
 		return $this->redirectToRoute('show_menu');
 	}
 
 	public function signOutUser(): Response
 	{
-		session_name('auth');
-		session_start();
-		session_destroy();
+		$this->sessionService->destroySession('auth');
+
 		return $this->redirectToRoute('index');
 	}
 }

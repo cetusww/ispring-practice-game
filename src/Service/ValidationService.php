@@ -3,38 +3,64 @@
 namespace App\Service;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Service\SecurityService;
 
 class ValidationService
 {
-	private UserRepository $userRepository;
+	private SecurityService $securityService;
 
-	public function __construct(UserRepository $userRepository)
+	public function __construct(SecurityService $securityService)
 	{
-		$this->userRepository = $userRepository;
+		$this->securityService = $securityService;
 	}
 	public function validateSignUpData(string $username, string $password, ?User $existingUser): array
 	{
-		$errors = [];
+		$error = [];
 
 		if (empty($username))
 		{
-			$errors['username'] = 'Имя пользователя не может быть пустым.';
+			$error['username'] = 'Имя пользователя не может быть пустым.';
 		}
 		if (empty($password))
 		{
-			$errors['password'] = 'Пароль не может быть пустым.';
+			$error['password'] = 'Пароль не может быть пустым.';
 		}
 		if (strlen($password) < 6)
 		{
-			$errors['password'] = 'Пароль должен содержать не менее 6 символов.';
+			$error['password'] = 'Пароль должен содержать не менее 6 символов.';
 		}
 
 		if ($existingUser)
 		{
-			$errors['username'] = 'Пользователь с таким именем уже существует.';
+			$error['username'] = 'Пользователь с таким именем уже существует.';
 		}
 
-		return $errors;
+		return $error;
+	}
+
+	public function validateSignInData(string $username, string $password, ?User $existingUser): array
+	{
+		$error = [];
+
+		if (empty($username))
+		{
+			$error['username'] = 'Имя пользователя не может быть пустым.';
+		}
+		if (empty($password))
+		{
+			$error['password'] = 'Пароль не может быть пустым.';
+		}
+
+		if (!$existingUser)
+		{
+			$error['username'] = 'Пользователя с таким именем не существует';
+		}
+
+		if ($existingUser && !$this->securityService->verifyPassword($password, $existingUser->getPassword()))
+		{
+			$error['password'] = 'Неверный пароль';
+		}
+
+		return $error;
 	}
 }
