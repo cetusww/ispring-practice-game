@@ -14,8 +14,6 @@ function levelCreate()
     resizeBackground();
     hero = new Hero(400, 100, 6, 0, 680);
     portal = new Portal(2300, 1300);
-    portal.view();
-    hero.view();
 
 
     let texture //= PIXI.Texture.from('ground');
@@ -48,7 +46,8 @@ function levelCreate()
     arrayOfBonus.push(new Health(450, 520));
     arrayOfBonus.push(new Shield(350, 520, 10));
     arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
-
+    let stalactite = new Stalactite(100, 100, 20);
+    stalactite.view();
 
     enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
@@ -78,6 +77,8 @@ function levelCreate()
     {
         bonus.view();
     });
+    portal.view();
+    hero.view();
 }
 
 async function saveScore()

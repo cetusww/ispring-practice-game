@@ -205,6 +205,7 @@ function onKeyUp(event)
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
+        { alias: 'stalactite', src: '/images/stalactite.png' },
         { alias: 'bat', src: '/images/bat_group.json' },
         { alias: 'poison', src: '/images/poison.png' },
         { alias: 'devil', src: '/images/devil.json' },
