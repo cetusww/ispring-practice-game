@@ -9,8 +9,8 @@ class Hero
 
         this.sprite.x = posX;
         this.sprite.y = posY;
-        this.sprite.width = 70;
-        this.sprite.height = 85;
+        this.sprite.width = 78;
+        this.sprite.height = 95;
 
         this.collideTop = this.sprite.y - this.sprite.height / 2;
         this.collideBottom = this.sprite.y + this.sprite.height / 2;
@@ -28,13 +28,13 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 50;
 
-        this.hpMax = 100;
+        this.hpMax = 1000;
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
-        this.jumpPower = 15;
+        this.jumpPower = 16;
         this.doubleJump = true;
         this.gravitationPower = 0.5;
         this.weaponTime = 10;
@@ -300,7 +300,7 @@ class Hero
                 } else {
                     if (this.doubleJump && this.sprite.vy > 0) {
                         this.updateAnim('jump');
-                        this.sprite.vy = -this.jumpPower;
+                        this.sprite.vy = -this.jumpPower * 1.2;
                         this.doubleJump = false;
                     }
                 }
@@ -410,13 +410,44 @@ class Hero
                 this.isGround = true;
                 this.doubleJump = true;
             }
+            for (let i = 0; i < arrayOfWall.length; i++) {
+                let wall = arrayOfWall[i];
+
+                if (this.sprite.x + 15 >= wall.collideLeft &&
+                    this.sprite.x - 15 <= wall.collideRight &&
+                    this.collideBottom >= wall.collideTop &&
+                    this.collideBottom <= wall.collideTop + 10 + this.sprite.vy
+                )
+                {
+                    this.isGround = true;
+                    this.doubleJump = true;
+                    if (this.sprite.vy > 1) {
+                        this.sprite.y -= (this.collideBottom - wall.collideTop);
+                    } else {
+                        this.sprite.y -= (this.collideBottom - wall.collideTop) / 4;
+                    }
+                    break;
+                } else if (this.collideBottom >= wall.collideTop &&
+                    this.collideTop <= wall.collideBottom
+                )
+                {
+                    if (this.collideRight >= wall.collideLeft && this.collideRight <= wall.collideRight)
+                    {
+                        this.sprite.x += (wall.collideLeft - this.collideRight)
+                    } else if (this.collideLeft >= wall.collideLeft && this.collideLeft <= wall.collideRight)
+                    {
+                        this.sprite.x += (wall.collideRight - this.collideLeft)
+                    }
+                }
+            }
+
             if (this.sprite.vy < 0) {
                 for (let i = 0; i < platforms.length; i++) {
                     let platform = platforms[i];
                     if (this.collideTop >= platform.collideTop + this.sprite.vy &&
                         this.collideTop <= platform.collideBottom &&
-                        this.collideRight <= platform.collideRight &&
-                        this.collideLeft >= platform.collideLeft
+                        this.sprite.x <= platform.collideRight &&
+                        this.sprite.x >= platform.collideLeft
                     ) {
                         this.sprite.vy = 0;
                         this.doubleJump = false;
@@ -448,8 +479,8 @@ class Hero
                         let platform = platforms[i];
                         if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
                             this.collideBottom >= platform.collideTop &&
-                            this.collideLeft <= platform.collideRight &&
-                            this.collideRight >= platform.collideLeft
+                            this.sprite.x <= platform.collideRight &&
+                            this.sprite.x >= platform.collideLeft
                         ) {
                             this.isGround = true;
                             this.doubleJump = true;

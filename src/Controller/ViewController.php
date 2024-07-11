@@ -52,25 +52,31 @@ class ViewController extends AbstractController
 		return $this->render('menu.html.twig');
 	}
 
-    public function showGame(): Response
+    public function showLevel(int $level): Response
     {
-//			session_name('auth');
-//			session_start();
-//			if ($_SESSION === []) {
-//				return $this->redirectToRoute('index');
-//			}
-			return $this->render('level1.html.twig');
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) 
+		{
+			return $this->redirectToRoute('index');
+		}
+		if (is_numeric($level) && ($level > 0))
+		{
+			$levelPath = 'level'.(string)$level.'.html.twig';
+			return $this->render($levelPath);
+		}
+		return $this->render('menu.html.twig');
     }
 
-		public function showLegend(): Response
-		{
-			session_name('auth');
-			session_start();
-			if ($_SESSION === []) {
-				return $this->redirectToRoute('index');
-			}
-			return $this->render('legend.html.twig');
+	public function showLegend(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
 		}
+		return $this->render('legend.html.twig');
+	}
 
 	public function showWin(): Response
 	{

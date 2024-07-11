@@ -30,9 +30,9 @@ show_menu:
     path: /menu
     controller: App\Controller\ViewController::showMenu
 
-show_game:
-    path: /game
-    controller: App\Controller\ViewController::showGame
+show_level:
+    path: /level{level}
+    controller: App\Controller\ViewController::showLevel
 
 show_legend:
     path: /legend

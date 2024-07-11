@@ -1,11 +1,11 @@
-const SCENE_WIDTH = 2560
-const SCENE_HEIGHT = 1460
+const SCENE_WIDTH = 3000;
+const SCENE_HEIGHT = 1250;
 const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
+const arrayOfWall = [];
 const woodenPlanks = [];
 const bullets = [];
-const arrayOfWall = [];
 const fireballs = [];
 const enemies = [];
 const poisons = [];
@@ -21,7 +21,6 @@ const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
 const devilWalk = [];
-const devilIdle = [];
 const batFlyHorizontal = [];
 const batFlyVertical = [];
 const hero_shoot = [];
@@ -162,13 +161,14 @@ function onKeyUp(event)
     document.body.appendChild(app.canvas);
     resizeWindow()
     await PIXI.Assets.load([
-        { alias: 'background', src: '/images/level1-map.jpg' },
+        { alias: 'background', src: '/images/level2_map.png' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
         { alias: 'hero_shoot_group', src: '/images/hero_shoot_group.json' },
         { alias: 'hero_walk_shoot_group', src: '/images/hero_walk_shoot_group.json' },
         { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
+        { alias: 'enemy', src: '/images/green_cap_enemy.json' },
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
@@ -197,7 +197,6 @@ function onKeyUp(event)
     {
         devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
     }
-    devilIdle.push(PIXI.Texture.from(`devilIdle.png`));
     for (let i = 0; i < 4; i++)
     {
         batFlyVertical.push(PIXI.Texture.from(`batFlyVertical${1 + i}.png`));
@@ -234,7 +233,7 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     levelCreate();
     app.stage.addChild(scene);
-    hero = new Hero(400, 100, 6, 0, 680);
+    hero = new Hero(2700, 100, 6, 0, 680);
     hero.view();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
@@ -386,51 +385,57 @@ window.addEventListener('keyup', onKeyUp);
 function levelCreate()
 {
     let texture //= PIXI.Texture.from('ground');
-    platforms.push(new Ground(texture, 420, 440, 470, 40)); // 5 уровень
+    platforms.push(new Ground(texture, 1500, 70, 3000, 40)); // потолок - 4 уровень
+    platforms.push(new Ground(texture, 345, 255, 690, 40)); // 3 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 745, 255, 110, 40));// 3 уровень
 
-    platforms.push(new Ground(texture, 1243, 580, 605, 40)); // 4 уровень
-    platforms.push(new Ground(texture, 2107, 580, 905, 40)); // 4 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 885, 580, 110, 40));// 4 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 1600, 580, 110, 40));//4 уровень
+    platforms.push(new Ground(texture, 345, 550, 690, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 1355, 550, 1110, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 2270, 550, 520, 40)); // 2 уровень
+    platforms.push(new Ground(texture, 2850, 550, 300, 40)); // 2 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 745, 550, 110, 40));// 2 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 1958, 550, 100, 40));// 2 уровень
 
-    platforms.push(new Ground(texture, 77, 820, 154, 40)); // 3 уровень
-    platforms.push(new Ground(texture, 857, 820, 1195, 40)); // 3 уровень
-    platforms.push(new Ground(texture, 1745, 820, 380, 40)); // 3 уровень
-    platforms.push(new Ground(texture, 2305, 820, 510, 40)); // 3 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 205, 820, 100, 40));// 3 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 1505, 820, 100, 40));// 3 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 1990, 820, 110, 40));// 3 уровень
 
-    platforms.push(new Ground(texture, 77, 1080, 154, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 465, 1080, 415, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 1080, 1080, 600, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 1740, 1080, 380, 40)); // 2 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 205, 1080, 100, 40));// 2 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 725, 1080, 110, 40));// 2 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 1465, 1080, 180, 40));// 2 уровень
-    platforms.push(new Ground(texture, 2290, 1190, 540, 40)); // 1 уровень
-    platforms.push(new Ground(texture, 1280, 1400, 2560, 40)); // пол - 0 уровень
+    platforms.push(new Ground(texture, 345, 845, 690, 40)); // 1 уровень
+    platforms.push(new Ground(texture, 1085, 845, 570, 40)); // 1 уровень
+    platforms.push(new Ground(texture, 1870, 845, 800, 40)); // 1 уровень
+    platforms.push(new Ground(texture, 2685, 845, 630, 40)); // 1 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 745, 845, 110, 40));// 1 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 1420, 845, 100, 40));// 1 уровень
+    woodenPlanks.push(new WoodenPlank(texture, 2320, 845, 100, 40));// 1 уровень
 
-    enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
+    platforms.push(new Ground(texture, 1500, 1155, 3000, 40)); // пол - 0 уровень
 
-    enemies.push(new Devil(1600, 530, 300, 0, 300, 50));// 4 уровень
-    enemies.push(new Devil(1200, 530, 300, 0, 300, 50));// 4 уровень
+    arrayOfWall.push(new Wall(texture, 1262, 410, 64, 820));
+    arrayOfWall.push(new Wall(texture, 1635, 1010, 64, 320));
+    arrayOfWall.push(new Wall(texture, 2500, 265, 64, 530));
+    arrayOfWall.push(new Wall(texture, 1828, 450, 68, 160)); // высокая тумба
+    arrayOfWall.push(new Wall(texture, 2645, 790, 68, 60)); // низкая тумба
+    arrayOfWall.push(new Wall(texture, 10, 150, 64, 150)); // левая стена
+    arrayOfWall.push(new Wall(texture, 78, 730, 128, 1050)); // левая стена
+    arrayOfWall.push(new Wall(texture, 2950, 625, 128, 1250)); // правая стена
+    
+    
+    //enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
-    enemies.push(new Devil(1600, 770, 300, 0, 300, 50));// 3 уровень
-    enemies.push(new Devil(1200, 770, 300, 0, 300, 50));// 3 уровень
+    enemies.push(new Devil(1600, 500, 300, 0, 300, 50));// 2 уровень
+    enemies.push(new Devil(1200, 500, 300, 0, 300, 50));// 2 уровень
 
-    enemies.push(new Devil(350, 1030, 300, 0, 300, 50));// 2 уровень
-    enemies.push(new Devil(1300, 1030, 150, 0, 300, 50));// 2 уровень
+    enemies.push(new Devil(1600, 795, 300, 0, 300, 50));// 1 уровень
+    enemies.push(new Devil(1200, 795, 300, 0, 300, 50));// 1 уровень
 
-    woodenPlanks.forEach(woodenPlank =>
-    {
+    enemies.push(new Devil(350, 1105, 300, 0, 300, 50));// 0 уровень
+    enemies.push(new Devil(1300, 1105, 150, 0, 300, 50));// 0 уровень
+    arrayOfWall.forEach(wall => {
+        wall.view();
+    })
+    woodenPlanks.forEach(woodenPlank => {
         woodenPlank.view();
-    })
-
-    platforms.forEach(platform =>
-    {
+    });
+    platforms.forEach(platform => {
         platform.view();
-    })
+    });
     enemies.forEach(enemy =>
     {
         enemy.view();
