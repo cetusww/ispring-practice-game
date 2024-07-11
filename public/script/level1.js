@@ -49,6 +49,19 @@ const mouse =
     positionX: 0,
     positionY: 0,
 }
+
+let audio = new Audio('/sounds/music.mp3');
+let music = false;
+audio.volume = 1;
+audio.loop = true;
+
+function startMusic()
+{
+    audio.load();
+    audio.play();
+    music = true;
+}
+
 function onAppMouseDown(event)
 {
     if (event.button === 0)
@@ -62,6 +75,10 @@ function onAppMouseMove(event)
     {
         mouse.positionX = event.clientX;
         mouse.positionY = event.clientY;
+    }
+    if (music === false)
+    {
+        startMusic();
     }
 }
 function onAppMouseUp(event)
@@ -122,6 +139,10 @@ function onKeyDown(event)
     if (event.key === 'r' || event.key === 'к')
     {
         keys.keyR = true;
+    }
+    if (music === false)
+    {
+        startMusic();
     }
 }
 function onKeyUp(event)

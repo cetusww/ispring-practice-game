@@ -57,6 +57,7 @@ const mouse =
 let audio = new Audio('/sounds/music.mp3');
 let music = false;
 audio.volume = 1;
+audio.loop = true;
 
 function startMusic()
 {
