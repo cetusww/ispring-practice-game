@@ -139,6 +139,11 @@ class Hero
                     this.currentCountBullet -= 1;
                     this.currentWeaponTime = this.weaponTime;
                     bullet.view();
+
+                    let audio = new Audio('/sounds/shoot_sound.mp3');
+                    audio.volume = 1;
+                    audio.play();
+
                     bullets.push(bullet);
                     if (vecX > 0 && this.sprite.scale.x < 0) {
                         this.sprite.scale.x *= -1;
@@ -212,7 +217,7 @@ class Hero
             app.stage.removeChild(this.graphicsHp);
             app.stage.removeChild(this.healthTitle);
             app.stage.removeChild(this.healthText);
-            this.healthText.text = `${this.hp} / ${this.hpMax}`;
+            this.healthText.text = `${Math.ceil(this.hp)} / ${this.hpMax}`;
             this.graphicsHp = new PIXI.Graphics();
             this.graphicsHp.rect(15, 15, this.hp / this.hpMax * 300, 30);
             this.graphicsHp.fill(0xde3249);
@@ -227,7 +232,7 @@ class Hero
             app.stage.removeChild(this.experienceTitle);
             app.stage.removeChild(this.experienceText);
             this.graphicsExperience = new PIXI.Graphics();
-            console.log(this.experience / this.experienceMax)
+            // console.log(this.experience / this.experienceMax)
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, this.experience / this.experienceMax * 300, 30);
             this.graphicsExperience.fill(0x4bb35e);
             this.graphicsExperience.rect(app.screen.width - 300 - 15, 15, 300, 30);
