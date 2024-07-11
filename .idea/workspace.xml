@@ -4,52 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev переименовал html карты">
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_7_4_24__8_58_AM.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/choose_level_style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/rating-style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/continue_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/multiplayer_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/rating_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/restart_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/singleplayer_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/choose_level.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/game_lose.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/game_win.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/rating.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/third_level.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/doctrine/User.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config/doctrine/User.orm.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/legend-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/legend-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/level1-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/first_level_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/lose-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lose-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/menu-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/menu-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/screensaver-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signin-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signup-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/win-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/win-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/level1-map.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/first_level_map.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Hero.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/level1.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/level1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/first_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/first_level.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game-lose.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game-win.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/legend.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/legend.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/screensaver.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/screensaver.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/second_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/second_level.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signin-user-form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin_user_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signup-user-form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup_user_form.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev смержил misha-07-08-menu-improvements" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,6 +131,19 @@
       <path value="$PROJECT_DIR$/vendor/react/socket" />
       <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/react/socket" />
       <path value="$PROJECT_DIR$/vendor/react/event-loop" />
       <path value="$PROJECT_DIR$/vendor/react/dns" />
@@ -369,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720694776775</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="2024-07-13-dev смержил misha-07-08-menu-improvements">
+      <option name="closed" value="true" />
+      <created>1720696262105</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720696262105</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,6 +393,7 @@
     <MESSAGE value="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
     <MESSAGE value="misha-07-08-menu-improvements добавил файлы из vendor" />
     <MESSAGE value="2024-07-13-dev переименовал html карты" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev переименовал html карты" />
+    <MESSAGE value="2024-07-13-dev смержил misha-07-08-menu-improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev смержил misha-07-08-menu-improvements" />
   </component>
 </project>
