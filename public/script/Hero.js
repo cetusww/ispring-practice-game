@@ -34,7 +34,6 @@ class Hero
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
-        this.activateShield = false;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
         this.jumpPower = 15;
@@ -282,19 +281,11 @@ class Hero
 
         this.addShield = function(duration)
         {
-            this.activateShield(duration);
-            if (!activateShield)
-            {
-                this.activateShield = true;
-            } else
-            {
-                if (duration === 0)
-                {
-                    this.activateShield = false;
-                }
-            }
-            duration -= 10;
+            this.activateShield = true;
+            this.shieldDuration = duration;
+            this.shieldStartTime = performance.now();
         }
+
         this.addHealth = function()
         {
             this.hp = Math.min(this.hpMax, Math.floor(this.hp + this.hpMax / 4));
@@ -303,7 +294,7 @@ class Hero
 
         this.takeDamage = function (damage)
         {
-            if (!this.isShieldActive)
+            if (!this.activateShield)
             {
                 this.hp -= damage;
                 if (this.hp <= 0)
@@ -313,6 +304,9 @@ class Hero
                     this.sprite.vy = 0;
                 }
                 this.updateHp();
+            } else
+            {
+                damage = Math.max(0, damage - 10);
             }
         }
         this.updateKey = function()
@@ -404,7 +398,7 @@ class Hero
             this.focusTexture.y = this.sprite.y;
 
             let globalPosition = this.sprite.getGlobalPosition();
-            let deltaX = globalPosition.x - app.screen.width / 2; 
+            let deltaX = globalPosition.x - app.screen.width / 2;
             let deltaY = globalPosition.y - app.screen.height / 2;
             if (deltaX > this.cameraRectX)
             {
@@ -427,7 +421,7 @@ class Hero
             {
                 let moveY = deltaY - this.cameraRectY;
                 moveCamera(0, moveY);
-            } 
+            }
         }
         this.update = function (time)
         {
@@ -454,6 +448,15 @@ class Hero
             }
             this.updateExperience();
             this.updateCollide();
+            if (this.activateShield)
+            {
+                let currentTime = performance.now();
+                let elapsedTime = (currentTime - this.shieldStartTime) / 1000;
+                if (elapsedTime >= this.shieldDuration)
+                {
+                    this.activateShield = false;
+                }
+            }
         }
 
         this.collise = function ()

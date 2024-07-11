@@ -5,9 +5,9 @@ class Shield
         this.sprite = new PIXI.Sprite(PIXI.Texture.from('shield'));
         this.sprite.x = posX;
         this.sprite.y = posY;
-        this.sprite.duration = duration;
-        this.sprite.width = 60;
-        this.sprite.height = 60;
+        this.duration = duration;
+        this.sprite.width = 40;
+        this.sprite.height = 40;
         this.speed = 0.03;
         this.sprite.vx = Math.cos(this.speed);
         this.sprite.vy = Math.sin(this.speed);
@@ -19,11 +19,13 @@ class Shield
         this.moveRight = posX + this.moveRadius;
         this.moveTop = posY - this.moveRadius;
         this.moveBottom = posY + this.moveRadius;
+        this.scaleTime = 0.4 * FPS;
+        this.currentScaleTime = this.scaleTime;
+        this.scaleStep = 0.00035;
 
         this.view = function()
         {
             scene.addChild(this.sprite);
-            console.log('Bonus view')
         }
 
         this.deleteView = function()
@@ -33,39 +35,24 @@ class Shield
 
         this.update = function(time)
         {
-            if (!this.isTaken && !this.isShieldActive)
+            if (!this.isTaken)
             {
+                if (this.currentScaleTime > 0)
+                {
+                    this.currentScaleTime -= time.deltaTime
+                    this.sprite.scale.x += this.scaleStep * time.deltaTime;
+                    this.sprite.scale.y += this.scaleStep * time.deltaTime;
+                } else
+                {
+                    this.currentScaleTime = this.scaleTime;
+                    this.scaleStep *= -1;
+                }
                 if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
                     hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y)
                 {
-                    this.activateShield = function(duration)
-                    {
-                        this.isTaken = true;
-                        this.deleteView();
-                        this.isShieldActive = true;
-                        setTimeout(() =>
-                        {
-                            this.isShieldActive = false;
-                            this.deleteView();
-                        }, duration * 1000);
-                    }
+                    hero.addShield(this.duration);
+                    this.isTaken = true;
                 }
-                this.sprite.x += this.sprite.vx * time.deltaTime;
-                this.sprite.y += this.sprite.vy * time.deltaTime;
-                if (this.sprite.x < this.moveLeft || this.sprite.x > this.moveRight)
-                {
-                    this.sprite.x -= this.sprite.vx;
-                    this.sprite.vx *= -1;
-                }
-                if (this.sprite.y < this.moveTop || this.sprite.y > this.moveBottom)
-                {
-                    this.sprite.y -= this.sprite.vy;
-                    this.sprite.vy *= -1;
-                }
-            }
-            else if (this.isShieldActive)
-            {
-                scene.addChild(this.sprite);
             }
         }
     }
