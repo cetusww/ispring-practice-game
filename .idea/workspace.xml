@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev добавил второй уровень">
-      <change beforePath="$PROJECT_DIR$/templates/screensaver.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/screensaver.html.twig" afterDir="false" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev обновил базу данных">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Portal.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Portal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -371,7 +372,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720697296239</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="2024-07-13-dev добавил переход по клику мыши">
+      <option name="closed" value="true" />
+      <created>1720698371218</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1720698371218</updated>
+    </task>
+    <task id="LOCAL-00023" summary="2024-07-13-dev обновил базу данных">
+      <option name="closed" value="true" />
+      <created>1720698564168</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1720698564168</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,6 +440,8 @@
     <MESSAGE value="2024-07-13-dev смержил misha-07-09-rating" />
     <MESSAGE value="2024-07-13-dev поправил рейтинг" />
     <MESSAGE value="2024-07-13-dev добавил второй уровень" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev добавил второй уровень" />
+    <MESSAGE value="2024-07-13-dev добавил переход по клику мыши" />
+    <MESSAGE value="2024-07-13-dev обновил базу данных" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev обновил базу данных" />
   </component>
 </project>
