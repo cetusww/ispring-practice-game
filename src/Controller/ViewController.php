@@ -54,7 +54,7 @@ class ViewController extends AbstractController
 //			if ($_SESSION === []) {
 //				return $this->redirectToRoute('index');
 //			}
-			return $this->render('game.html.twig');
+			return $this->render('level1.html.twig');
     }
 
 		public function showLegend(): Response
