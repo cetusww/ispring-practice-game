@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class UserController extends AbstractController
 {
@@ -58,7 +57,10 @@ class UserController extends AbstractController
 			null,
 			$newUsername,
 			$hashedPassword,
-			$user->getLevel(),
+			1,
+			0,
+			0,
+			0,
 		);
 
 		$this->repository->saveUserToDatabase($user);
@@ -67,6 +69,7 @@ class UserController extends AbstractController
 		session_start();
 		$_SESSION['user_id'] = $user->getId();
 		$_SESSION['username'] = $newUsername;
+		$_SESSION['level'] = $user->getLevel();
 
 		return $this->redirectToRoute('show_legend');
 	}

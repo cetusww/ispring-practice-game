@@ -29,6 +29,11 @@ class UserRepository
 		return $this->repository->findOneBy(['username' => $username]);
 	}
 
+	public function findAllUsers(): array
+	{
+		return $this->repository->findAll();
+	}
+
 	public function getCurrentUser(): ?User
 	{
 		session_name('auth');
@@ -43,5 +48,34 @@ class UserRepository
 			return true;
 		}
 		return false;
+	}
+
+	public function updateUserScore(int $userId, int $newScore, int $currentLevel): void
+	{
+		$user = $this->entityManager->getRepository(User::class)->find($userId);
+
+		if ($currentLevel === 1)
+		{
+			if ($user->getScoreFirstLevel() < $newScore)
+			{
+				$user->setScoreFirstLevel($newScore);
+			}
+		}
+		if ($currentLevel === 2)
+		{
+			if ($user->getScoreSecondLevel() < $newScore)
+			{
+				$user->setScoreSecondLevel($newScore);
+			}
+		}
+		if ($currentLevel === 3)
+		{
+			if ($user->getScoreThirdLevel() < $newScore)
+			{
+				$user->setScoreThirdLevel($newScore);
+			}
+		}
+		
+		$this->entityManager->flush();
 	}
 }

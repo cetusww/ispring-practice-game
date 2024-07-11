@@ -9,6 +9,9 @@ class User
 		private string $username,
 		private string $password,
 		private ?int $level,
+		private ?int $scoreFirstLevel,
+		private ?int $scoreSecondLevel,
+		private ?int $scoreThirdLevel,
 	)
 	{
 	}
@@ -33,6 +36,21 @@ class User
 		return $this->level;
 	}
 
+	public function getScoreFirstLevel(): ?int
+	{
+		return $this->scoreFirstLevel;
+	}
+
+	public function getScoreSecondLevel(): ?int
+	{
+		return $this->scoreSecondLevel;
+	}
+
+	public function getScoreThirdLevel(): ?int
+	{
+		return $this->scoreThirdLevel;
+	}
+
 	public function setUserName(string $username): string
 	{
 		return $this->username = $username;
@@ -46,5 +64,20 @@ class User
 	public function setLevel(int $level): int
 	{
 		return $this->level = $level;
+	}
+
+	public function setScoreFirstLevel(string $scoreFirstLevel): int
+	{
+		return $this->scoreFirstLevel = $scoreFirstLevel;
+	}
+
+	public function setScoreSecondLevel(string $scoreSecondLevel): int
+	{
+		return $this->scoreSecondLevel = $scoreSecondLevel;
+	}
+
+	public function setScoreThirdLevel(string $scoreThirdLevel): int
+	{
+		return $this->scoreThirdLevel = $scoreThirdLevel;
 	}
 }
