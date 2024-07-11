@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev поправил рейтинг" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev добавил второй уровень">
+      <change beforePath="$PROJECT_DIR$/templates/screensaver.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/screensaver.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -361,7 +363,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720697003222</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="2024-07-13-dev добавил второй уровень">
+      <option name="closed" value="true" />
+      <created>1720697296239</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1720697296239</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,6 +422,7 @@
     <MESSAGE value="2024-07-13-dev смержил misha-07-08-menu-improvements" />
     <MESSAGE value="2024-07-13-dev смержил misha-07-09-rating" />
     <MESSAGE value="2024-07-13-dev поправил рейтинг" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev поправил рейтинг" />
+    <MESSAGE value="2024-07-13-dev добавил второй уровень" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev добавил второй уровень" />
   </component>
 </project>
