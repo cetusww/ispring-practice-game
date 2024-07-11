@@ -490,14 +490,14 @@ function levelCreate()
 
     enemies.push(new Mushroom(1000, 350, 250, 220));// mushroom test
 
-    enemies.push(new Devil(1600, 500, 300, 0, 300, 50));// 2 уровень
-    enemies.push(new Devil(1200, 500, 300, 0, 300, 50));// 2 уровень
+    enemies.push(new Devil(1600, 500, 300, 0, 300, 50, 130));// 2 уровень
+    enemies.push(new Devil(1200, 500, 300, 0, 300, 50, 110));// 2 уровень
 
-    enemies.push(new Devil(1600, 795, 300, 0, 300, 50));// 1 уровень
-    enemies.push(new Devil(1200, 795, 300, 0, 300, 50));// 1 уровень
+    enemies.push(new Devil(1600, 795, 300, 0, 300, 50, 90));// 1 уровень
+    enemies.push(new Devil(1200, 795, 300, 0, 300, 50, 130));// 1 уровень
 
-    enemies.push(new Devil(350, 1105, 300, 0, 300, 50));// 0 уровень
-    enemies.push(new Devil(1300, 1105, 150, 0, 300, 50));// 0 уровень
+    enemies.push(new Devil(350, 1105, 300, 0, 300, 50, 100));// 0 уровень
+    enemies.push(new Devil(1300, 1105, 150, 0, 300, 50, 120));// 0 уровень
     arrayOfWall.forEach(wall => {
         wall.view();
     })

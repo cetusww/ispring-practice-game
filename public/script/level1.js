@@ -464,14 +464,14 @@ function levelCreate()
 
     enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
 
-    enemies.push(new Devil(1600, 530, 300, 0, 300, 50));// 4 уровень
-    enemies.push(new Devil(1200, 530, 300, 0, 300, 50));// 4 уровень
+    enemies.push(new Devil(1600, 530, 300, 0, 300, 50, 130));// 4 уровень
+    enemies.push(new Devil(1200, 530, 300, 0, 300, 50, 110));// 4 уровень
 
-    enemies.push(new Devil(1600, 770, 300, 0, 300, 50));// 3 уровень
-    enemies.push(new Devil(1200, 770, 300, 0, 300, 50));// 3 уровень
+    enemies.push(new Devil(1600, 770, 300, 0, 300, 50, 90));// 3 уровень
+    enemies.push(new Devil(1200, 770, 300, 0, 300, 50, 130));// 3 уровень
 
-    enemies.push(new Devil(350, 1030, 300, 0, 300, 50));// 2 уровень
-    enemies.push(new Devil(1300, 1030, 150, 0, 300, 50));// 2 уровень
+    enemies.push(new Devil(350, 1030, 300, 0, 300, 50, 100));// 2 уровень
+    enemies.push(new Devil(1300, 1030, 150, 0, 300, 50, 120));// 2 уровень
 
     woodenPlanks.forEach(woodenPlank =>
     {
