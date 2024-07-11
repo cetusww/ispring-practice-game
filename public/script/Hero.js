@@ -23,6 +23,7 @@ class Hero
         this.sprite.vx = 0;
         this.sprite.vy = 1;
         this.isGround = false;
+        this.topGroundCam = null;
         this.isGoDown = false;
         this.isSeat = false;
         this.cameraRectX = 100;
@@ -32,6 +33,7 @@ class Hero
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
+        this.activateShield = false;
         this.dead = false;
         this.deadTime = 1.5 * FPS;
         this.jumpPower = 16;
@@ -174,10 +176,13 @@ class Hero
 
             this.experienceText = new PIXI.Text(this.experience, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
             this.healthText = new PIXI.Text(this.hp, {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
-            this.experienceTitle = new PIXI.Text('Score', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.portalText = new PIXI.Text('Portal open!', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
+            this.experienceTitle = new PIXI.Text('Score', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
             this.healthTitle = new PIXI.Text('Health', {fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77,});
             this.healthText.x = 300
             this.healthTitle.x = 30
+            this.portalText.x = app.screen.width - 158;
+            this.portalText.y = 60;
             this.healthText.y = 15
             this.healthTitle.y = 15
             this.experienceTitle.x = app.screen.width - 300
@@ -186,6 +191,7 @@ class Hero
             this.experienceText.y = 15;
             this.experienceText.anchor.set(1, 0);
             this.healthText.anchor.set(1, 0);
+            this.portalText.anchor.set(0.5);
             app.stage.addChild(this.experienceText);
             app.stage.addChild(this.experienceTitle);
 
@@ -196,7 +202,13 @@ class Hero
         this.deleteView = function () {
             scene.removeChild(this.sprite);
         }
-        this.updateHp = function () {
+        
+        this.portalTextView = function ()
+        {
+            app.stage.addChild(this.portalText);
+        }
+        this.updateHp = function ()
+        {
             app.stage.removeChild(this.graphicsHp);
             app.stage.removeChild(this.healthTitle);
             app.stage.removeChild(this.healthText);
@@ -256,6 +268,26 @@ class Hero
         }
         this.addExperience = function (experience) {
             this.experience += experience;
+        }
+        this.addShield = function(duration)
+        {
+            this.activateShield(duration);
+            if (!activateShield)
+            {
+                this.activateShield = true;
+            } else
+            {
+                if (duration === 0)
+                {
+                    this.activateShield = false;
+                }
+            }
+            duration -= 10;
+        }
+        this.addHealth = function()
+        {
+            this.hp = Math.min(this.hpMax, Math.floor(this.hp + this.hpMax / 4));
+            this.updateHp();
         }
         this.takeDamage = function (damage) {
             this.hp -= damage;
@@ -359,17 +391,17 @@ class Hero
                 let moveX = deltaX + this.cameraRectX;
                 moveCamera(moveX, 0);
             }
-            //if (this.isGround) {
+            deltaY = this.topGroundCam - this.sprite.height/2 + scene.y - app.screen.height / 2;
             if (deltaY < -this.cameraRectY) {
-                let moveY = (deltaY + this.cameraRectY) / 10;
-                moveCamera(0, moveY);
-                this.moveCamTime
+                    let moveY = (deltaY + this.cameraRectY) / 20;
+                    moveCamera(0, moveY);
             }
-            //}
-            if (deltaY > this.cameraRectY) {
+            deltaY = globalPosition.y - app.screen.height / 2;
+            if (deltaY > this.cameraRectY)
+            {
                 let moveY = deltaY - this.cameraRectY;
                 moveCamera(0, moveY);
-            }
+            } 
 
 
         }
@@ -456,6 +488,7 @@ class Hero
                 }
             }
             if (this.sprite.vy >= 0) {
+                let topGround = null;
                 for (let i = 0; i < woodenPlanks.length; i++) {
                     let woodenPlank = woodenPlanks[i];
                     if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
@@ -463,35 +496,39 @@ class Hero
                         this.sprite.x <= woodenPlank.collideRight &&
                         this.sprite.x >= woodenPlank.collideLeft
                     ) {
-                        this.isGround = true;
-                        this.isGoDown = true;
-                        this.doubleJump = true;
-                        if (this.sprite.vy > 1) {
-                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop);
-                        } else {
-                            this.sprite.y -= (this.collideBottom - woodenPlank.collideTop) / 4;
-                        }
-                        break;
+                        if (topGround > woodenPlank.collideTop || topGround === null)
+                            {
+                                topGround = woodenPlank.collideTop;
+                                this.isGoDown = true;
+                            }
                     }
                 }
-                if (!this.isGround) {
-                    for (let i = 0; i < platforms.length; i++) {
-                        let platform = platforms[i];
-                        if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
-                            this.collideBottom >= platform.collideTop &&
-                            this.sprite.x <= platform.collideRight &&
-                            this.sprite.x >= platform.collideLeft
-                        ) {
-                            this.isGround = true;
-                            this.doubleJump = true;
-                            if (this.sprite.vy > 1) {
-                                this.sprite.y -= (this.collideBottom - platform.collideTop);
-                            } else {
-                                this.sprite.y -= (this.collideBottom - platform.collideTop) / 4;
+                for (let i = 0; i < platforms.length; i++) {
+                    let platform = platforms[i];
+                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
+                        this.collideBottom >= platform.collideTop &&
+                        this.sprite.x <= platform.collideRight &&
+                        this.sprite.x >= platform.collideLeft
+                    ) {
+                        if (topGround > platform.collideTop || topGround === null)
+                            {
+                                topGround = platform.collideTop;
+                                this.isGoDown = false;
                             }
-                            break;
-                        }
                     }
+                }
+                if (topGround !== null)
+                {
+                    this.isGround = true;
+                    this.doubleJump = true;
+                    this.topGroundCam = topGround;
+                    if (this.sprite.vy > 1)
+                    {
+                        this.sprite.y -= (this.collideBottom - topGround);
+                    } else
+                    {
+                        this.sprite.y -= (this.collideBottom - topGround) / 4;
+                    } 
                 }
             }
         }
