@@ -17,6 +17,7 @@ const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
 let hero;
+let portal;
 let sceneScale = 1;
 const hero_walk = [];
 const experiences = [];
@@ -281,21 +282,24 @@ function onKeyUp(event)
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
+        portal.update(time);
         hero.update(time);
+        if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
+        {
+            portal.activate();
+            hero.portalTextView();
+        }
         if (hero.deadTime < 0)
         {
             saveScore();
             hero.deadTime = 1000;
             window.location.href = "/lose";
         }
-        // if (hero.sprite.x > app.screen.width)  // проверка на победу по достижении точки
-        // {
-        //     window.location.href = "/win";
-        // }
-        // if (hero.sprite.x < 0)
-        // {
-        //     window.location.href = "/lose";
-        // }
+        if (hero.isWin && portal.isActive) {
+            saveScore();
+            window.location.href = "/win";
+            portal.isActive = false;
+        }
         if (mouse.isDownLeft)
         {
             hero.createBullet(mouse.positionX, mouse.positionY);
@@ -330,10 +334,6 @@ function onKeyUp(event)
                 poisons[i].sprite.destroy();
                 poisons.splice(i, 1);
                 i--;
-                if (enemies.length === 0)  // проверка победы, если все убиты
-                {
-                    window.location.href = "/win";
-                }
             }
             i++;
         }

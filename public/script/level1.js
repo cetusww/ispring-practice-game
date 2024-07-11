@@ -12,8 +12,8 @@ function levelCreate()
     }
     scene.addChild(background);
     resizeBackground();
-    hero = new Hero(400, 100, 6, 0, 680);
-    portal = new Portal(100, 100);
+    hero = new Hero(2300, 1300, 6, 0, 680);
+    portal = new Portal(2300, 1300);
     portal.view();
     hero.view();
 

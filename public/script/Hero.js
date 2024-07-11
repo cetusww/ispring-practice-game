@@ -31,9 +31,10 @@ class Hero
 
         this.hpMax = 100;
         this.hp = this.hpMax;
-        this.experience = 0;
+        this.experience = 400;
         this.experienceMax = experienceMax;
         this.dead = false;
+        this.isWin = false;
         this.deadTime = 1.5 * FPS;
         this.jumpPower = 16;
         this.doubleJump = true;

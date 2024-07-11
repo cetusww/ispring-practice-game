@@ -13,6 +13,8 @@ function levelCreate()
     scene.addChild(background);
     resizeBackground();
     hero = new Hero(2700, 100, 6, 0, 680);
+    portal = new Portal(2070, 1020);
+    portal.view();
     hero.view();
 
     let texture //= PIXI.Texture.from('ground');
