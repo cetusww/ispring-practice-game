@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev обновил базу данных">
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev поенял стили меню">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/Portal.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Portal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720698564168</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="2024-07-13-dev поенял стили меню">
+      <option name="closed" value="true" />
+      <created>1720700416916</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1720700416916</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,6 +449,7 @@
     <MESSAGE value="2024-07-13-dev добавил второй уровень" />
     <MESSAGE value="2024-07-13-dev добавил переход по клику мыши" />
     <MESSAGE value="2024-07-13-dev обновил базу данных" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev обновил базу данных" />
+    <MESSAGE value="2024-07-13-dev поенял стили меню" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-13-dev поенял стили меню" />
   </component>
 </project>
