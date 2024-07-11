@@ -11,6 +11,10 @@
         </id>
         <field name="username" column="username" type="string" length="255" />
         <field name="password" column="password" type="string" length="255" />
+        <field name="level" column="level" type="integer" />
+        <field name="scoreFirstLevel" column="score_1" type="integer" />
+        <field name="scoreSecondLevel" column="score_2" type="integer" />
+        <field name="scoreThirdLevel" column="score_3" type="integer" />
     </entity>
 
 </doctrine-mapping>

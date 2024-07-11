@@ -2,20 +2,28 @@
 
 namespace App\Controller;
 
+use App\Service\SessionService;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Service\ValidationService;
+use App\Service\UserService;
+use App\Service\SessionService;
+
 
 class UserController extends AbstractController
 {
-	private UserRepository $repository;
+	private UserService $userService;
+	private SessionService $sessionService;
 
-	public function __construct(UserRepository $repository)
+	public function __construct(UserService $userService, SessionService $sessionService)
 	{
-		$this->repository = $repository;
+		$this->userService = $userService;
+		$this->sessionService = $sessionService;
 	}
 
 	public function index(): Response
@@ -28,45 +36,12 @@ class UserController extends AbstractController
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
 
-		$errors = [];
+		$result = $this->userService->signUpUser($newUsername, $newPassword);
 
-		if (empty($newUsername))
-		{
-			$errors['username'] = 'Имя пользователя не может быть пустым.';
-		}
-		if (empty($newPassword))
-		{
-			$errors['password'] = 'Пароль не может быть пустым.';
-		}
-		if (strlen($newPassword) < 6)
-		{
-			$errors['password'] = 'Пароль должен содержать не менее 6 символов.';
-		}
-		if ($this->repository->findUserByUserName($newUsername))
-		{
-			$errors['username'] = 'Пользователь с таким именем уже существует.';
-		}
-
-		if (!empty($errors))
+		if (isset($result['error']))
 		{
 			return $this->render('signup-user-form.html.twig', ['errors' => $errors]);
 		}
-
-
-
-		$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-		$user = new User(
-			null,
-			$newUsername,
-			$hashedPassword,
-		);
-
-		$this->repository->saveUserToDatabase($user);
-
-		session_name('auth');
-		session_start();
-		$_SESSION['user_id'] = $user->getId();
-		$_SESSION['username'] = $newUsername;
 
 		return $this->redirectToRoute('show_menu');
 	}
