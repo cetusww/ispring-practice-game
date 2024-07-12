@@ -42,14 +42,20 @@ function levelCreate()
     platforms.push(new Ground(texture, 2290, 1190, 540, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1280, 1400, 2560, 40)); // пол - 0 уровень
 
+    arrayOfWall.push(new Wall(texture, 60, 730, 60, 1460)); // левая стена
+    arrayOfWall.push(new Wall(texture, 2500, 730, 60, 1460)); // правая стена
+
     arrayOfBonus.push(new Shield(450, 880, 10));
     arrayOfBonus.push(new Health(450, 520));
     arrayOfBonus.push(new Shield(350, 520, 10));
     arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
-    let stalactite = new Stalactite(100, 100, 20);
-    stalactite.view();
+    arrayOfStalactite.push(new Stalactite(150, 100, 700, 200));
+    arrayOfStalactite.push(new Stalactite(700, 100, 700, 200));
+    arrayOfStalactite.push(new Stalactite(740, 100, 700, 100));
+    arrayOfStalactite.push(new Stalactite(1300, 90, 400, 50));
+    arrayOfStalactite.push(new Stalactite(1700, 100, 400, 50));
 
-    enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
+    enemies.push(new Bat(300, 350, 200, 200, 400, 400, 130));// bat test
 
     enemies.push(new Devil(1600, 530, 300, 0, 300, 50, 130));// 4 уровень
     enemies.push(new Devil(1200, 530, 300, 0, 300, 50, 110));// 4 уровень
@@ -59,26 +65,6 @@ function levelCreate()
 
     enemies.push(new Devil(350, 1030, 300, 0, 300, 50, 100));// 2 уровень
     enemies.push(new Devil(1300, 1030, 150, 0, 300, 50, 120));// 2 уровень
-
-    woodenPlanks.forEach(woodenPlank =>
-    {
-        woodenPlank.view();
-    })
-
-    platforms.forEach(platform =>
-    {
-        platform.view();
-    })
-    enemies.forEach(enemy =>
-    {
-        enemy.view();
-    });
-    arrayOfBonus.forEach(bonus =>
-    {
-        bonus.view();
-    });
-    portal.view();
-    hero.view();
 }
 
 async function saveScore()

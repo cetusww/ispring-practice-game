@@ -1,6 +1,6 @@
 class Mushroom
 {
-    constructor(posX, posY, visibilityZoneWidth, attackZoneWidth)
+    constructor(posX, posY, visibilityZoneWidth, attackZoneWidth, experience)
     {   
         this.sprite = new PIXI.AnimatedSprite(mushroom_idle);
         this.sprite.animationSpeed = 0.03;      // Скорость анимации
@@ -25,7 +25,7 @@ class Mushroom
         this.currentTimeAttack = 0;
         this.maxHp = 200;
         this.hp = 200;
-        this.experience = 60;
+        this.experience = experience;
 
         this.animateType = '';  // left_idle, left_active, right_idle, right_active
         this.deadTime = 1 * FPS;
