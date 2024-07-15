@@ -34,6 +34,10 @@ show_legend:
     path: /legend
     controller: App\Controller\ViewController::showLegend
 
+show_next_level:
+    path: /next-level
+    controller: App\Controller\ViewController::showNextLevel
+
 show_first_level:
     path: /first-level
     controller: App\Controller\ViewController::showFirstLevel

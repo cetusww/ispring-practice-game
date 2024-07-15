@@ -57,6 +57,7 @@ class UserRepository
 		if ($user->getLevel() < $nextLevel)
 		{
 			$user->setLevel($nextLevel);
+			$_SESSION['level'] = $nextLevel;
 		}
 
 		if ($currentLevel === 1 && $user->getScoreFirstLevel() < $newScore)

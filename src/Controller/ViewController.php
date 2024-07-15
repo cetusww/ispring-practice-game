@@ -60,11 +60,34 @@ class ViewController extends AbstractController
 		return $this->render('menu.html.twig');
 	}
 
+	public function showNextLevel(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === [])
+		{
+			return $this->redirectToRoute('index');
+		}
+
+		if ($_SESSION['level'] === 2)
+		{
+			return $this->redirectToRoute('show_second_level');
+		}
+
+		if ($_SESSION['level'] === 3)
+		{
+			return $this->redirectToRoute('show_third_level');
+		}
+
+		return $this->redirectToRoute('choose_level');
+	}
+
 	public function showFirstLevel(): Response
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION === []) {
+		if ($_SESSION === [])
+		{
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('first_level.html.twig');

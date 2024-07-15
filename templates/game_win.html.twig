@@ -12,14 +12,22 @@
 <div class="main">
     <h1 class="center-align">Вы победили</h1>
     <div class="options-list">
-        <a class="options-list__restart" href="/first-level">
-            <img src="images/restart_icon.svg" alt="restart">
-            <p class="restart">Повторить</p>
-        </a>
-        <a class="options-list__continue" href="/choose-level">
-            <img src="images/continue_icon.svg" alt="continue">
-            <p class="continue">Продолжить</p>
-        </a>
+        <div class="options-list__top">
+            <a class="options-list__restart" onclick="history.back();">
+                <img src="images/restart_icon.svg" alt="restart">
+                <p class="restart">Повторить</p>
+            </a>
+            <a class="options-list__continue" href="/next-level">
+                <img src="images/continue_icon.svg" alt="continue">
+                <p class="continue">Продолжить</p>
+            </a>
+        </div>
+        <div class="options-list__bottom">
+            <a class="options-list__continue" href="/choose-level">
+                <img src="images/home_icon.svg" alt="home">
+                <p class="continue">Выбор уровня</p>
+            </a>
+        </div>
     </div>
 </div>
 </body>
