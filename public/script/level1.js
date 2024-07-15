@@ -80,11 +80,17 @@ function levelCreate()
     });
 }
 
-async function saveScore()
+async function saveScore(isWin)
 {
+    let nextLevel = 1;
+    if (isWin)
+    {
+        nextLevel = 2;
+    }
     let data = {
         score: hero.experience,
-        lvl: 1,
+        currentLvl: 1,
+        nextLvl: nextLevel,
     }
     const stringifyData = JSON.stringify(data)
     const response = await fetch('/api/score', {

@@ -1,5 +1,3 @@
-// const SCENE_WIDTH = 3000;
-// const SCENE_HEIGHT = 1250;
 const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
@@ -291,12 +289,12 @@ function onKeyUp(event)
         }
         if (hero.deadTime < 0)
         {
-            saveScore();
+            saveScore(hero.isWin);
             hero.deadTime = 1000;
             window.location.href = "/lose";
         }
         if (hero.isWin && portal.isActive) {
-            saveScore();
+            saveScore(hero.isWin);
             window.location.href = "/win";
             portal.isActive = false;
         }
