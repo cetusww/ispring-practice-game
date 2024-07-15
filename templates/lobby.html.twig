@@ -10,5 +10,46 @@
 </head>
 <body>
 Здесь будет лобби
+<script>
+  const ws = new WebSocket('ws://localhost:8080');
+  let isConnected = false;
+  const messageQueue = [];
+
+  ws.onopen = function() {
+      isConnected = true;
+      console.log('WebSocket connection established');
+      while (messageQueue.length > 0) {
+          ws.send(messageQueue.shift());
+      }
+      ws.send(JSON.stringify({'userdata': {'username': 'ersulov05', 'host': 'ersulov05',},}))
+  };
+
+  ws.onerror = function(error) {
+      console.error('WebSocket Error: ' + error);
+  };
+
+  ws.onclose = function() {
+      isConnected = false;
+      console.log('WebSocket connection closed');
+      sendMessage('close');
+  };
+
+  ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log(data);
+  };
+
+  function sendMessage(msg)
+  {
+      const message = JSON.stringify({ msg });
+      if (isConnected) {
+          ws.send(message);
+      } else {
+          console.log('WebSocket is not connected yet, queueing message');
+          messageQueue.push(message);
+      }
+  }
+  let timerId = setInterval(() => {sendMessage('PING')}, 5000);
+</script>
 </body>
 </html>

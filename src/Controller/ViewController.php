@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Repository\LobbyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,10 +12,13 @@ class ViewController extends AbstractController
 {
 
 	private UserRepository $repository;
+	private LobbyRepository $lobbyRepository;
 
-	public function __construct(UserRepository $repository)
+
+	public function __construct(UserRepository $repository, LobbyRepository $lobbyRepository)
 	{
 		$this->repository = $repository;
+		$this->lobbyRepository = $lobbyRepository;
 	}
 
 	public function index(): Response
@@ -126,14 +130,27 @@ class ViewController extends AbstractController
 		return $this->render('rating.html.twig', ['users' => $users]);
 	}
 
-	public function showLobby(): Response
+	public function showLobby(Request $request): Response
 	{
 		session_name('auth');
 		session_start();
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('lobby.html.twig');
+		$hostUserName = $request->get('host');
+		$lobby = $this->lobbyRepository->findLobbyByHostUserName($hostUserName);
+		return $this->render('lobby.html.twig', ['lobby' => $lobby]);
+	}
+
+	public function showMultiplayer(): Response
+	{
+		session_name('auth');
+		session_start();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+		$lobby = $this->lobbyRepository->findAllLobby();
+		return $this->render('multiplayer.html.twig', ['lobby' => $lobby]);
 	}
 
 	public function showWin(): Response
