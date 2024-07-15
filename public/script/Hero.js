@@ -29,7 +29,7 @@ class Hero
         this.cameraRectX = 100;
         this.cameraRectY = 10;
 
-        this.hpMax = 1000;
+        this.hpMax = 100;
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
@@ -49,7 +49,7 @@ class Hero
         this.animateType = '';
         this.experienceText = null;
 
-        let radius = 1350;
+        let radius = 350;
         let blurSize = 200;
         const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({color: 0xff0000});
         circle.filters = [new PIXI.BlurFilter(blurSize)];

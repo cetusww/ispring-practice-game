@@ -20,6 +20,7 @@ class Stalactite
         this.boom = false;
         this.isFall = false;
         this.lifeTime = 0;
+        this.dangerTime = 0.1 * FPS;
 
         this.view = function ()
         {
@@ -76,66 +77,65 @@ class Stalactite
                 )
                 {
                     this.isFall = true;
+                    this.dangerTime = 0.25 * FPS;
                 }
             } else if (!this.boom)
             {
                 this.sprite.y += this.sprite.vy * time.deltaTime;
                 this.sprite.vy += GRAVITY_ACCELERATION / 8 * time.deltaTime;
                 this.updateCollide();
-                if (this.sprite.x <= hero.collideRight &&
-                    this.sprite.x >= hero.collideLeft &&
-                    this.collideBottom >= hero.collideTop &&
-                    this.collideTop <= hero.collideBottom
-                )
-                {
-                    this.boom = true;
-                    console.log(this.sprite.vy)
-                    hero.takeDamage(this.damage * this.danger + this.sprite.vy);
-                    this.lifeTime = 0.5 * FPS;
-                }
+                if (this.dangerTime <= 0) {
+                    if (this.sprite.x <= hero.collideRight &&
+                        this.sprite.x >= hero.collideLeft &&
+                        this.collideBottom >= hero.collideTop &&
+                        this.collideTop <= hero.collideBottom
+                    ) {
+                        this.boom = true;
+                        console.log(this.sprite.vy)
+                        hero.takeDamage(this.damage * this.danger + this.sprite.vy);
+                        this.lifeTime = 0.5 * FPS;
+                    }
 
-                for (let i = 0; i < platforms.length; i++)
-                {
-                    if (this.boom) {break;}
-                    let platform = platforms[i];
-                    if (this.collideTop <= platform.collideBottom + Math.max(this.sprite.vy, 0) &&
-                        this.collideBottom >= platform.collideTop &&
-                        this.sprite.x <= platform.collideRight &&
-                        this.sprite.x >= platform.collideLeft
-                    )
-                    {
-                        this.boom = true;
-                        this.lifeTime = 2 * FPS;
+                    for (let i = 0; i < platforms.length; i++) {
+                        if (this.boom) { break; }
+                        let platform = platforms[i];
+                        if (this.collideTop <= platform.collideBottom + Math.max(this.sprite.vy, 0) &&
+                            this.collideBottom >= platform.collideTop &&
+                            this.sprite.x <= platform.collideRight &&
+                            this.sprite.x >= platform.collideLeft
+                        ) {
+                            this.boom = true;
+                            this.lifeTime = 2 * FPS;
+                        }
                     }
-                } 
-                for (let i = 0; i < woodenPlanks.length; i++)
-                {
-                    if (this.boom) {break;}
-                    let woodenPlank = woodenPlanks[i];
-                    if (this.collideTop <= woodenPlank.collideBottom + Math.max(this.sprite.vy, 0) &&
-                        this.collideBottom >= woodenPlank.collideTop &&
-                        this.sprite.x <= woodenPlank.collideRight &&
-                        this.sprite.x >= woodenPlank.collideLeft
-                    )
-                    {
-                        this.boom = true;
-                        this.lifeTime = 2 * FPS;
+                    for (let i = 0; i < woodenPlanks.length; i++) {
+                        if (this.boom) { break; }
+                        let woodenPlank = woodenPlanks[i];
+                        if (this.collideTop <= woodenPlank.collideBottom + Math.max(this.sprite.vy, 0) &&
+                            this.collideBottom >= woodenPlank.collideTop &&
+                            this.sprite.x <= woodenPlank.collideRight &&
+                            this.sprite.x >= woodenPlank.collideLeft
+                        ) {
+                            this.boom = true;
+                            this.lifeTime = 2 * FPS;
+                        }
                     }
-                } 
-                for (let i = 0; i < arrayOfWall.length; i++)
-                {
-                    if (this.boom) {break;}
-                    let wall = arrayOfWall[i];
-                    if (this.collideTop <= wall.collideBottom + Math.max(this.sprite.vy, 0) &&
-                        this.collideBottom >= wall.collideTop &&
-                        this.sprite.x <= wall.collideRight &&
-                        this.sprite.x >= wall.collideLeft
-                    )
-                    {
-                        this.boom = true;
-                        this.lifeTime = 2 * FPS;
+                    for (let i = 0; i < arrayOfWall.length; i++) {
+                        if (this.boom) { break; }
+                        let wall = arrayOfWall[i];
+                        if (this.collideTop <= wall.collideBottom + Math.max(this.sprite.vy, 0) &&
+                            this.collideBottom >= wall.collideTop &&
+                            this.sprite.x <= wall.collideRight &&
+                            this.sprite.x >= wall.collideLeft
+                        ) {
+                            this.boom = true;
+                            this.lifeTime = 2 * FPS;
+                        }
                     }
-                } 
+                } else
+                {
+                    this.dangerTime -= time.deltaTime;
+                }
             } else
             {
                 if (this.lifeTime < 0)

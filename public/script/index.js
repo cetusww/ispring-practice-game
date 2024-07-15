@@ -450,9 +450,11 @@ function levelView()
     {
         platform.view();
     })
+    let experienceMax = 0;
     enemies.forEach(enemy =>
     {
         enemy.view();
+        experienceMax += enemy.experience;
     });
     arrayOfBonus.forEach(bonus =>
     {
@@ -467,6 +469,7 @@ function levelView()
         fire.view();
     });
     portal.view();
+    hero.experienceMax = experienceMax;
     hero.view();
 }
 

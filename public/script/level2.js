@@ -12,7 +12,7 @@ function levelCreate()
     }
     scene.addChild(background);
     resizeBackground();
-    hero = new Hero(100, 100, 6, 0, 680);
+    hero = new Hero(250, 100, 6, 0, 680);
     portal = new Portal(2070, 1020);
 
     let texture //= PIXI.Texture.from('ground');
@@ -47,11 +47,21 @@ function levelCreate()
     arrayOfWall.push(new Wall(texture, 78, 730, 128, 1050)); // левая стена
     arrayOfWall.push(new Wall(texture, 2950, 625, 128, 1250)); // правая стена
     
-    
-    //enemies.push(new Bat(300, 350, 200, 200, 400, 400));// bat test
-    //fires.push(new Fire(1000, 500));// fire test
+    arrayOfBonus.push(new Shield(200, 1105, 10));
+    arrayOfBonus.push(new Shield(2800, 1105, 10));
+    arrayOfBonus.push(new Health(100, 160));
+    arrayOfBonus.push(new Health(200, 500));
+    arrayOfBonus.push(new Health(1350, 500));
+    arrayOfBonus.push(new Health(2750, 500));
 
-    //enemies.push(new Mushroom(1000, 350, 250, 220));// mushroom test
+
+    arrayOfStalactite.push(new Stalactite(900, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(1170, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(1700, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(2200, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(2700, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(2560, 60, 700, 200));
+
 
     enemies.push(new Devil(500, 500, 300, 0, 300, 50, 130));// 2 уровень
     enemies.push(new Bat(1000, 320, 180, 150, 300, 300, 140));// bat 
