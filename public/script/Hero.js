@@ -49,8 +49,8 @@ class Hero
         this.animateType = '';
         this.experienceText = null;
 
-        let radius = 300;
-        let blurSize = 50;
+        let radius = 350;
+        let blurSize = 200;
         const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({color: 0xff0000});
         circle.filters = [new PIXI.BlurFilter(blurSize)];
         const bounds = new PIXI.Rectangle(0, 0, (radius + blurSize) * 2, (radius + blurSize) * 2);
@@ -416,7 +416,7 @@ class Hero
                 this.updateKey();
                 this.updateMove(time);
                 this.updateWeapon(time);
-                this.collise();
+                this.collise(time);
             } else {
                 this.deadTime -= time.deltaTime;
                 this.updateAnim('dead');
@@ -427,7 +427,7 @@ class Hero
                     this.sprite.vy = 0;
                 }
                 this.move(time);
-                this.collise();
+                this.collise(time);
             }
             this.updateExperience();
             this.updateCollide();
@@ -442,7 +442,7 @@ class Hero
             }
         }
 
-        this.collise = function () {
+        this.collise = function (time) {
             this.isGround = false;
             this.isGoDown = false;
             this.updateCollide();
@@ -464,7 +464,7 @@ class Hero
                 if (this.sprite.x + 15 >= wall.collideLeft &&
                     this.sprite.x - 15 <= wall.collideRight &&
                     this.collideBottom >= wall.collideTop &&
-                    this.collideBottom <= wall.collideTop + 10 + this.sprite.vy
+                    this.collideBottom <= wall.collideTop + 10 + this.sprite.vy * time.deltaTime
                 )
                 {
                     if (topGround > wall.collideTop || topGround === null)
@@ -472,14 +472,6 @@ class Hero
                         topGround = wall.collideTop;
                         this.isGoDown = false;
                     }
-                    // this.isGround = true;
-                    // this.doubleJump = true;
-                    // if (this.sprite.vy > 1) {
-                    //     this.sprite.y -= (this.collideBottom - wall.collideTop);
-                    // } else {
-                    //     this.sprite.y -= (this.collideBottom - wall.collideTop) / 4;
-                    // }
-                    // break;
                 } else if (this.collideBottom >= wall.collideTop &&
                     this.collideTop <= wall.collideBottom
                 )
@@ -497,7 +489,7 @@ class Hero
             if (this.sprite.vy < 0) {
                 for (let i = 0; i < platforms.length; i++) {
                     let platform = platforms[i];
-                    if (this.collideTop >= platform.collideTop + this.sprite.vy &&
+                    if (this.collideTop >= platform.collideTop + this.sprite.vy * time.deltaTime &&
                         this.collideTop <= platform.collideBottom &&
                         this.sprite.x <= platform.collideRight &&
                         this.sprite.x >= platform.collideLeft
@@ -511,7 +503,7 @@ class Hero
             if (this.sprite.vy >= 0) {
                 for (let i = 0; i < woodenPlanks.length; i++) {
                     let woodenPlank = woodenPlanks[i];
-                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy &&
+                    if (this.collideBottom <= woodenPlank.collideBottom + this.sprite.vy* time.deltaTime &&
                         this.collideBottom >= woodenPlank.collideTop &&
                         this.sprite.x <= woodenPlank.collideRight &&
                         this.sprite.x >= woodenPlank.collideLeft
@@ -525,7 +517,7 @@ class Hero
                 }
                 for (let i = 0; i < platforms.length; i++) {
                     let platform = platforms[i];
-                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy &&
+                    if (this.collideBottom <= platform.collideBottom + this.sprite.vy * time.deltaTime&&
                         this.collideBottom >= platform.collideTop &&
                         this.sprite.x <= platform.collideRight &&
                         this.sprite.x >= platform.collideLeft

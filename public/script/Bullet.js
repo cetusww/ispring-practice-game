@@ -13,7 +13,7 @@ class Bullet
         this.sprite.vy = vecY * this.speed;
         this.sprite.rotation += 1.57;
         this.sprite.rotation += angle;
-        this.lifeTime = 0.5 * FPS;
+        this.lifeTime = 0.6 * FPS;
         this.boom = false;
 
         this.view = function ()

@@ -1,6 +1,6 @@
 class Bat
 {
-    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight)
+    constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight, experience)
     {
         this.sprite = new PIXI.AnimatedSprite(batFlyHorizontal);
         this.sprite.animationSpeed = 0.1; // Скорость анимации
@@ -34,7 +34,7 @@ class Bat
         this.currentTimeAttack = 0;
         this.maxHp = 300;
         this.hp = 300;
-        this.experience = 100;
+        this.experience = experience;
 
         this.animateType = '';
         this.deadTime = 1 * FPS;
