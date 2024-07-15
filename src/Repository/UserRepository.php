@@ -50,30 +50,26 @@ class UserRepository
 		return false;
 	}
 
-	public function updateUserScore(int $userId, int $newScore, int $currentLevel): void
+	public function updateUserScore(int $userId, int $newScore, int $currentLevel, int $nextLevel): void
 	{
 		$user = $this->entityManager->getRepository(User::class)->find($userId);
 
-		if ($currentLevel === 1)
+		if ($user->getLevel() < $nextLevel)
 		{
-			if ($user->getScoreFirstLevel() < $newScore)
-			{
-				$user->setScoreFirstLevel($newScore);
-			}
+			$user->setLevel($nextLevel);
 		}
-		if ($currentLevel === 2)
+
+		if ($currentLevel === 1 && $user->getScoreFirstLevel() < $newScore)
 		{
-			if ($user->getScoreSecondLevel() < $newScore)
-			{
-				$user->setScoreSecondLevel($newScore);
-			}
+			$user->setScoreFirstLevel($newScore);
 		}
-		if ($currentLevel === 3)
+		if ($currentLevel === 2 && $user->getScoreSecondLevel() < $newScore)
 		{
-			if ($user->getScoreThirdLevel() < $newScore)
-			{
-				$user->setScoreThirdLevel($newScore);
-			}
+			$user->setScoreSecondLevel($newScore);
+		}
+		if ($currentLevel === 3 && $user->getScoreThirdLevel() < $newScore)
+		{
+			$user->setScoreThirdLevel($newScore);
 		}
 		
 		$this->entityManager->flush();
