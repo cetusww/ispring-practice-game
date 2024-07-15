@@ -22,7 +22,7 @@ class ApiController extends AbstractController
 
 		$data = json_decode($request->getContent(), true);
 
-		$this->repository->updateUserScore($_SESSION['user_id'], $data['score'], $data['lvl']);
+		$this->repository->updateUserScore($_SESSION['user_id'], $data['score'], $data['currentLvl'], $data['nextLvl']);
 
 		return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
 	}

@@ -107,6 +107,10 @@ class ViewController extends AbstractController
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
+
+		$user = $this->repository->findUserByUserName($_SESSION['username']);
+		$_SESSION['level'] = $user->getLevel();
+
 		return $this->render('choose_level.html.twig', ['level' => $_SESSION['level']]);
 	}
 

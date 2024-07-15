@@ -1,5 +1,3 @@
-// const SCENE_WIDTH = 3000;
-// const SCENE_HEIGHT = 1250;
 const FPS = 60;
 const scene = new PIXI.Container();
 const platforms = [];
@@ -281,7 +279,7 @@ function onKeyUp(event)
     window.addEventListener('resize', () => { resizeWindow() });
     app.stage.addChild(scene);
     levelCreate();
-    levelView(); 
+    levelView();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) =>
     {
@@ -436,7 +434,7 @@ function gameLoop(time)
         doubleClickremoveState();
     }
 }
-function levelView() 
+function levelView()
 {
     arrayOfWall.forEach(wall => {
         wall.view();

@@ -101,11 +101,17 @@ function levelCreate()
     // enemies.push(new Devil(1300, 1105, 150, 0, 300, 50, 120));// 0 уровень
 }
 
-async function saveScore()
+async function saveScore(isWin)
 {
+    let nextLevel = 2;
+    if (isWin)
+    {
+        nextLevel = 3;
+    }
     let data = {
         score: hero.experience,
-        lvl: 2,
+        currentLvl: 2,
+        nextLvl: nextLevel,
     }
     const stringifyData = JSON.stringify(data)
     const response = await fetch('/api/score', {
@@ -114,6 +120,6 @@ async function saveScore()
          headers: {
              "Content-Type": "application/json",
          },
-     });
- }
+    });
+}
 
