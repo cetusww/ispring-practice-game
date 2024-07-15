@@ -299,12 +299,12 @@ function gameLoop(time)
     }
     if (hero.deadTime < 0)
     {
-        saveScore();
+        saveScore(hero.isWin);
         hero.deadTime = 1000;
         window.location.href = "/lose";
     }
     if (hero.isWin && portal.isActive) {
-        saveScore();
+        saveScore(hero.isWin);
         window.location.href = "/win";
         portal.isActive = false;
     }
