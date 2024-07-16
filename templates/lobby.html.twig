@@ -57,7 +57,7 @@
           messageQueue.push(message);
       }
   }
-  let timerId = setInterval(() => {sendMessage('PING')}, 5000);
+  let timerId = setInterval(() => {ws.send(JSON.stringify({'userdata': {'username': username, 'host': host, 'lobby_id': lobbyId},}))}, 5000);
 </script>
 </body>
 </html>
