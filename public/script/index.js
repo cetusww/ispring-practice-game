@@ -196,6 +196,7 @@ function onKeyUp(event)
     await PIXI.Assets.load([
         { alias: 'level1_map', src: '/images/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/level2_map.png' },
+        { alias: 'level3_map', src: '/images/level2_map.png' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
