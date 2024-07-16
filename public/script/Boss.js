@@ -306,7 +306,17 @@ class Boss
                 if (this.currentTimeUltaAttack <= 700) 
                 {
                     this.createShot(hero.sprite.x, hero.sprite.y);
-                }      
+                }
+                if (this.hp <= 0.3 * this.maxHp)
+                {
+                    this.timeShotAttack = 60;      //частота генерации одиночных выстрелов
+                    this.timeUltaAttack = 660;      //частота генерации ульты 
+                }
+                else if (this.hp <= 0.6 * this.maxHp)
+                {
+                    this.timeShotAttack = 80;      //частота генерации одиночных выстрелов
+                    this.timeUltaAttack = 720;      //частота генерации ульты
+                }    
                 // this.spawnDevils();        
                 // if (this.hp <= 0.98 * this.maxHp && wave1 === false)
                 // {
