@@ -1,14 +1,26 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Lobby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/lobby_style.css">
+  <title>Lobbies</title>
 </head>
 <body>
-Здесь будет лобби
+<h1>Доступные Лобби</h1>
+<ul>
+  {% for lobby in lobbies %}
+    <li>Лобби {{ lobby.hostUsername }}
+      {% if lobby.connectedUsername is null %}
+        <form action="{{ path('join_lobby', {id: lobby.id}) }}" method="get">
+          <button type="submit">Подключиться</button>
+        </form>
+      {% else %}
+        (Full)
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+<form action="{{ path('create_lobby') }}" method="get">
+  <button type="submit">Создать новое лобби</button>
+</form>
 </body>
 </html>

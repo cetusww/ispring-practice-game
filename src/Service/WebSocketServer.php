@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Service;
 
-use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
-class HeroController implements MessageComponentInterface {
+use Ratchet\ConnectionInterface;
+
+class WebSocketServer implements MessageComponentInterface
+{
 	protected \SplObjectStorage $clients;
 
 	public function __construct() {
@@ -19,18 +21,11 @@ class HeroController implements MessageComponentInterface {
 
 	public function onMessage(ConnectionInterface $from, $msg): void
 	{
-		if (!$msg) {
-			echo "Invalid message\n";
-		}
-		echo "Received message: $msg\n";  // Отладочное сообщение
-		$data = json_decode($msg, true);
-
-		$direction = $data['direction'];
-
-		$newDirection = json_encode($direction);
-
 		foreach ($this->clients as $client) {
-			$client->send($newDirection);
+			echo $msg;
+			if ($from !== $client) {
+				$client->send($msg);
+			}
 		}
 	}
 

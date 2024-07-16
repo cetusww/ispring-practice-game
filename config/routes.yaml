@@ -62,11 +62,23 @@ show_rating:
     path: /rating
     controller: App\Controller\ViewController::showRating
 
-show_lobby:
-    path: /lobby
-    controller: App\Controller\ViewController::showLobby
-
 api_score:
     path: /api/score
     controller: App\Controller\ApiController::saveScore
     methods: POST
+
+lobby:
+    path: /lobby
+    controller: App\Controller\LobbyController::index
+
+create_lobby:
+    path: /lobby/create
+    controller: App\Controller\LobbyController::create
+
+join_lobby:
+    path: /lobby/join/{id}
+    controller: App\Controller\LobbyController::join
+
+game:
+    path: /game/{id}
+    controller: App\Controller\GameController::index

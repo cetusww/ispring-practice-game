@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game</title>
+  <script src="/script/pixi.js"></script>
+  <script src="/script/Bullet.js"></script>
+  <script src="/script/Experience.js"></script>
+  <script src="/script/Fireball.js"></script>
+  <script src="/script/Stalactite.js"></script>
+  <script src="/script/Hero.js"></script>
+  <script src="/script/Enemy.js"></script>
+  <script src="/script/Devil.js"></script>
+  <script src="/script/Bat.js"></script>
+  <script src="/script/Poison.js"></script>
+  <script src="/script/Ground.js"></script>
+  <script src="/script/WoodenPlank.js"></script>
+  <script src="/script/Shield.js"></script>
+  <script src="/script/Health.js"></script>
+  <script src="/script/Portal.js"></script>
+  <script src="/script/level1.js"></script>
+  <script src="/script/Wall.js"></script>
+</head>
+<body>
+<script src="/script/index_multiplayer.js"></script>
+</body>
+</html>
+
+{#
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game</title>
+  <style>
+      #player1, #player2 {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+      }
+      #player1 { background: red; }
+      #player2 { background: blue; }
+  </style>
+</head>
+<body>
+<div id="player1"></div>
+<div id="player2"></div>
+
+<script>
+    const ws = new WebSocket('ws://127.0.0.1:8080');
+    const player1 = document.getElementById('player1');
+    const player2 = document.getElementById('player2');
+
+    let playerId = '{{ hostUsername }}' === '{{ app.user.username }}' ? 1 : 2;
+
+    ws.onopen = () => {
+        console.log('Connected to WebSocket server');
+    };
+
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.playerId === 1) {
+            player1.style.left = data.x + 'px';
+            player1.style.top = data.y + 'px';
+        } else {
+            player2.style.left = data.x + 'px';
+            player2.style.top = data.y + 'px';
+        }
+    };
+
+    window.addEventListener('keydown', (e) => {
+        let x = playerId === 1 ? player1.offsetLeft : player2.offsetLeft;
+        let y = playerId === 1 ? player1.offsetTop : player2.offsetTop;
+
+        switch (e.key) {
+            case 'ArrowUp': y -= 5; break;
+            case 'ArrowDown': y += 5; break;
+            case 'ArrowLeft': x -= 5; break;
+            case 'ArrowRight': x += 5; break;
+        }
+
+        ws.send(JSON.stringify({ playerId, x, y }));
+    });
+</script>
+</body>
+</html>#}

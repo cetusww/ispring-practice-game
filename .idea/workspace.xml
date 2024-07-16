@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev поенял стили меню">
+      <change afterPath="$PROJECT_DIR$/config/doctrine/Lobby.orm.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/script/index_multiplayer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Command/WebSocketServerCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/LobbyController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Lobby.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/LobbyRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/WebSocketServer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HeroController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lobby.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,13 +33,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="misha-07-08-menu-improvements" />
+        <entry key="$PROJECT_DIR$" value="misha-07-15-new-win-and-lose-screens" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -202,6 +216,7 @@
       <workItem from="1720198689052" duration="1935000" />
       <workItem from="1720352670698" duration="4975000" />
       <workItem from="1720421002291" duration="14731000" />
+      <workItem from="1721110477697" duration="8588000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
