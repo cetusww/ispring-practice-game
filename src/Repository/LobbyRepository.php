@@ -24,6 +24,12 @@ class LobbyRepository
 		return $lobby->getId();
 	}
 
+	public function deleteLobby(Lobby $lobby): void
+	{
+		$this->entityManager->remove($lobby);
+        $this->entityManager->flush();
+	}
+
 	public function findLobbyByHostUserName(string $username): ?Lobby
 	{
 		return $this->repository->findOneBy(['hostUsername' => $username]);

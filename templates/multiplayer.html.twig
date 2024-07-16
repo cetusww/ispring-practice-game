@@ -12,7 +12,7 @@
 Существующие лобби
 <ul class="existing-lobby">
   {% for lobbyItem in lobby %}
-    <li> Лобби {{ lobbyItem.getHostUsername }} {{lobbyItem.getConnectedUsername}} {% if lobbyItem.getConnectedUsername == null %} 1 / 2 {% else %} 2 / 2 {% endif %} <a href="/lobby/connect{{ lobbyItem.getHostUsername }}">Подключиться</a></li>
+    <li> Лобби {{ lobbyItem.getHostUsername }} {{lobbyItem.getConnectedUsername}} {% if lobbyItem.getConnectedUsername == null %} 1 / 2 {% else %} 2 / 2 {% endif %} <a href="/lobby/connect{{ lobbyItem.getId }}">Подключиться</a></li>
   {% endfor %}
 </ul>
 <a class="lobby-create-link" href="/lobby/create">Создать лобби</a>

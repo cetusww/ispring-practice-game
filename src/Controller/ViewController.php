@@ -118,6 +118,7 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
+		
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
@@ -134,12 +135,14 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION === []) {
+		$username = $_SESSION['username'] ?? null;
+		if ($username === null) {
 			return $this->redirectToRoute('index');
 		}
-		$hostUserName = $request->get('host');
-		$lobby = $this->lobbyRepository->findLobbyByHostUserName($hostUserName);
-		return $this->render('lobby.html.twig', ['lobby' => $lobby]);
+		$lobbyId = $request->get('id');
+		$lobby = $this->lobbyRepository->findLobbyById($lobbyId);
+		//добавить проверку на полное лобби
+		return $this->render('lobby.html.twig', ['lobby' => $lobby, 'username' => $username]);
 	}
 
 	public function showMultiplayer(): Response

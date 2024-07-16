@@ -5,18 +5,32 @@ use App\Entity\Lobby;
 use App\Repository\LobbyRepository;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
-use Symfony\Component\HttpFoundation\Response;
 class HeroController implements MessageComponentInterface {
 	protected \SplObjectStorage $clients;
-	$entityManager = $container->get(EntityManagerInterface::class);
-	public LobbyRepository $lobbyRepository = new LobbyRepository();
-
+	//public LobbyRepository $lobbyRepository;
+	// const HOST = 'localhost';
+	// const USERNAME = 'yogurt';
+	// const PASSWORD = 'pAssw0rd#';
+	// const DATABASE = 'ispring_practice';
 	public array $arrayOfUsers = [];
+	public \mysqli $conn;// = new \mysqli(HOST, USERNAME, PASSWORD, DATABASE);
 
-	public function __construct(LobbyRepository $lobbyRepository) {
+	public function createDBConnection(): void {
+  
+		$this->conn = new \mysqli('localhost', 'yogurt', 'pAssw0rd#', 'ispring_practice');
+		if ($this->conn->connect_error) {
+		  echo "ConnectionDB failed: " . $this->conn->connect_error;
+		} else
+		{
+			echo "ConnectedDB successfully\n";
+		}
+	  }
+
+
+	public function __construct() {
 		$this->clients = new \SplObjectStorage;
-		$this->lobbyRepository = $lobbyRepository;
-		
+		//$this->lobbyRepository = $lobbyRepository;
+		$this->createDBConnection();
 	}
 
 	public function onOpen(ConnectionInterface $conn): void
@@ -35,8 +49,13 @@ class HeroController implements MessageComponentInterface {
 		if (isset($data['userdata']))
 		{
 			$userdata = $data['userdata'];
-			$this->arrayOfUsers[$from->resourceId] = ['username' => $userdata['username'], 'host' => $userdata['host']];
-			var_dump($this->arrayOfUsers);
+			$this->arrayOfUsers[$from->resourceId] = 
+			[
+				'username' => $userdata['username'], 
+				'host' => $userdata['host'],
+				'lobby_id' => $userdata['lobby_id'],
+			];
+			//var_dump($this->arrayOfUsers);
 		}
 		
 		//echo $data['msg'];
@@ -58,21 +77,44 @@ class HeroController implements MessageComponentInterface {
 		// }
 	}
 
-	public function onClose(ConnectionInterface $conn): Response
+	public function onClose(ConnectionInterface $conn): void
 	{
 		
 
 		$this->clients->detach($conn);
 		$id = $conn->resourceId;
 		echo "Connection {$id} has disconnected\n";
+		$this->disconnectLobby($id);
 		//var_dump($this->arrayOfUsers);
-		$lobbyHost = $this->arrayOfUsers[$id]['host'];
-		echo $lobbyHost;
-		return $this->redirectToRoute('index');
+		
+		//header("Location: http://localhost:8000/index", False);
+		//header("Location: /lobby/disconnect$lobbyId", True, 301);
+		//return $this->redirectToRoute('index');
 
 		//$lobby = $this->lobbyRepository->findLobbyByHostUserName((string)$lobbyHost);
 		//var_dump($lobby);
 	}
+
+	public function disconnectLobby(int $userId): void
+	{
+		
+		$lobbyId = $this->arrayOfUsers[$userId]['lobby_id'];
+		$lobbyHost =  $this->arrayOfUsers[$userId]['host'];
+		$lobbyUsername =  $this->arrayOfUsers[$userId]['username'];
+		if ($lobbyHost === $lobbyUsername)
+		{
+			//if ($)
+			echo 'lobby deleted';
+			$sql = "DELETE FROM lobby WHERE id = '$lobbyId'";
+			$this->conn->query($sql);
+			
+		}
+		echo 'lobby deleted';
+		//$sql = "SELECT * FROM lobby";
+		//$result =$this->conn->query($sql);
+		//var_dump($result->fetch_assoc());
+	}
+
 
 	public function onError(ConnectionInterface $conn, \Exception $e): void
 	{

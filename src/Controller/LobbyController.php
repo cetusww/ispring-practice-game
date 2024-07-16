@@ -40,8 +40,8 @@ class LobbyController extends AbstractController
 			);
 			$lobbyId = $this->lobbyRepository->saveLobbyToDatabase($lobby);
 		}
-		$lobbyHost = $lobby->getHostUserName();
-		return $this->redirectToRoute('show_lobby', ["host" => $lobbyHost]);
+		$lobbyId = $lobby->getId();
+		return $this->redirectToRoute('show_lobby', ["id" => $lobbyId]);
 	}
 	public function connectLobby(Request $request): Response
 	{
@@ -51,20 +51,50 @@ class LobbyController extends AbstractController
 		if ($username === null) {
 			return $this->redirectToRoute('index');
 		}
-		$lobbyHost = $request->get('host');
-		$lobby = $this->lobbyRepository->findLobbyByHostUserName($lobbyHost);
+		$lobbyId = (int)$request->get('id');
+		$lobby = $this->lobbyRepository->findLobbyById($lobbyId);
 		if ($lobby === null)
 		{
 			return $this->redirectToRoute('show_multiplayer');
 		}
+		$lobbyHost = $lobby->getHostUserName();
 		if ($lobbyHost === $username) 
 		{
-			return $this->redirectToRoute('show_lobby', ["host" => $lobbyHost]);
+			return $this->redirectToRoute('show_lobby', ["id" => $lobbyId]);
 		} else
 		{
 			$lobby->setConnectedUserName($username);
 			$this->lobbyRepository->saveLobbyToDatabase($lobby);
-			return $this->redirectToRoute('show_lobby', ["host" => $lobbyHost]);
+			return $this->redirectToRoute('show_lobby', ["id" => $lobbyId]);
+		}		
+	}
+
+	public function disconnectLobby(Request $request): Response
+	{
+		session_name('auth');
+		session_start();
+		$username = $_SESSION['username'] ?? null;
+		if ($username === null) {
+			return $this->redirectToRoute('index');
+		}
+		$lobbyId = (int)$request->get('id');
+		$lobby = $this->lobbyRepository->findLobbyById($lobbyId);
+		if ($lobby === null)
+		{
+			return $this->redirectToRoute('show_multiplayer');
+		}
+		$lobbyHost = $lobby->getHostUserName();
+		if ($lobbyHost === $username) 
+		{
+			$this->lobbyRepository->deleteLobby($lobby);
+			return $this->redirectToRoute('show_multiplayer');
+			//return $this->redirectToRoute('show_lobby', ["id" => $lobbyId]);
+		} else
+		{
+			$lobby->setConnectedUserName(null);
+			$this->lobbyRepository->saveLobbyToDatabase($lobby);
+			return $this->redirectToRoute('show_multiplayer');
+			//return $this->redirectToRoute('show_lobby', ["id" => $lobbyId]);
 		}		
 	}
 }

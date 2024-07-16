@@ -7,10 +7,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/lobby_style.css">
+  <input type="hidden" id="lobby-id" value="{{ lobby.getId }}">
+  <input type="hidden" id="lobby-host" value="{{ lobby.getHostUserName }}">
+  <input type="hidden" id="username" value="{{ username }}">
 </head>
 <body>
 Здесь будет лобби
 <script>
+    host = document.getElementById('lobby-host').value
+    //connectedUsername = document.getElementById('lobby-username').value
+    lobbyId = document.getElementById('lobby-id').value
+    username = document.getElementById('username').value
+    console.log(username)
   const ws = new WebSocket('ws://localhost:8080');
   let isConnected = false;
   const messageQueue = [];
@@ -21,7 +29,7 @@
       while (messageQueue.length > 0) {
           ws.send(messageQueue.shift());
       }
-      ws.send(JSON.stringify({'userdata': {'username': 'ersulov05', 'host': 'ersulov05',},}))
+      ws.send(JSON.stringify({'userdata': {'username': username, 'host': host, 'lobby_id': lobbyId},}))
   };
 
   ws.onerror = function(error) {

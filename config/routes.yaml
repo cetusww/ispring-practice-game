@@ -67,11 +67,16 @@ create_lobby:
     controller: App\Controller\LobbyController::createLobby
 
 connect_lobby:
-    path: /lobby/connect{host}
+    path: /lobby/connect{id}
     controller: App\Controller\LobbyController::connectLobby
 
+
+disconnect_lobby:
+    path: /lobby/disconnect{id}
+    controller: App\Controller\LobbyController::disconnectLobby
+
 show_lobby:
-    path: /lobby{host}
+    path: /lobby{id}
     controller: App\Controller\ViewController::showLobby
 
 show_multiplayer:
