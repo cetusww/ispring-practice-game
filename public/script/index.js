@@ -11,6 +11,7 @@ const enemies = [];
 const poisons = [];
 const fires = [];
 const smokes = [];
+const shots = [];
 
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
@@ -33,6 +34,9 @@ const fire_anim = [];
 const mushroom_idle = [];
 const mushroom_active = [];
 const smoke_anim = [];
+const boss_idle = [];
+const boss_walk = [];
+const boss_dead = [];
 
 const keys =
 {
@@ -192,8 +196,6 @@ function onKeyUp(event)
     await PIXI.Assets.load([
         { alias: 'level1_map', src: '/images/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/level2_map.png' },
-        { alias: 'sound_on', src: '/images/sound_on.png'},
-        { alias: 'sound_off', src: '/images/sound_off.png'},
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
@@ -215,7 +217,10 @@ function onKeyUp(event)
         { alias: 'health', src: '/images/health.png' },
         { alias: 'portal', src: '/images/portal.png' },
         { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
+        { alias: 'boss', src: '/images/boss.json' },
+        { alias: 'shot', src: '/images/shot.png' },
     ])
+
     for (let i = 0; i < 10; i++)
     {
         hero_idle.push(PIXI.Texture.from(`hero_idle${1 + i}.png`));
@@ -269,9 +274,18 @@ function onKeyUp(event)
     {
         smoke_anim.push(PIXI.Texture.from(`smoke${1 + i}.png`));
     }
-
-   
-    
+    for (let i = 0; i < 4; i++)
+    {
+        boss_idle.push(PIXI.Texture.from(`bossIdle${1 + i}.png`));
+    }
+    for (let i = 0; i < 8; i++)
+    {
+        boss_walk.push(PIXI.Texture.from(`bossWalk${1 + i}.png`));
+    }
+    for (let i = 0; i < 8; i++)
+    {
+        boss_dead.push(PIXI.Texture.from(`bossDead${1 + i}.png`));
+    }
 
     app.canvas.addEventListener('mousedown', onAppMouseDown);
     app.canvas.addEventListener('mousemove', onAppMouseMove);
