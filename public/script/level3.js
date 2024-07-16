@@ -1,8 +1,8 @@
-const SCENE_WIDTH = 3000;
-const SCENE_HEIGHT = 1250;
+const SCENE_WIDTH = 2880;
+const SCENE_HEIGHT = 1920;
 function levelCreate()
 {
-    background = PIXI.Sprite.from('level2_map');
+    background = PIXI.Sprite.from('level3_map');
     background.anchor.set(0);
 
     function resizeBackground()
@@ -15,44 +15,47 @@ function levelCreate()
     hero = new Hero(250, 100, 6, 0, 680);
     portal = new Portal(2070, 1020);
 
-    let texture //= PIXI.Texture.from('ground');
-    platforms.push(new Ground(texture, 1500, 70, 3000, 40)); // потолок - 4 уровень
-    platforms.push(new Ground(texture, 345, 255, 690, 40)); // 3 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 745, 255, 110, 40));// 3 уровень
-
-    platforms.push(new Ground(texture, 345, 550, 690, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 1355, 550, 1110, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 2270, 550, 520, 40)); // 2 уровень
-    platforms.push(new Ground(texture, 2850, 550, 300, 40)); // 2 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 745, 550, 110, 40));// 2 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 1958, 550, 100, 40));// 2 уровень
+    let texture = PIXI.Texture.from('ground');
 
 
-    platforms.push(new Ground(texture, 345, 845, 690, 40)); // 1 уровень
-    platforms.push(new Ground(texture, 1085, 845, 570, 40)); // 1 уровень
-    platforms.push(new Ground(texture, 1870, 845, 800, 40)); // 1 уровень
-    platforms.push(new Ground(texture, 2685, 845, 630, 40)); // 1 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 745, 845, 110, 40));// 1 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 1420, 845, 100, 40));// 1 уровень
-    woodenPlanks.push(new WoodenPlank(texture, 2320, 845, 100, 40));// 1 уровень
+    arrayOfWall.push(new Wall(texture, 170, 1205, 64, 720)); //слева снизу
+    arrayOfWall.push(new Wall(texture, 110, 430, 64, 810)); //слева сверху
+    arrayOfWall.push(new Wall(texture, 2800, 770, 64, 1500)); //справа сверху
+    arrayOfWall.push(new Wall(texture, 2635, 1530, 64, 130)); //справа снизу
 
-    platforms.push(new Ground(texture, 1500, 1155, 3000, 40)); // пол - 0 уровень
+    platforms.push(new Ground(texture, 1925, 467, 160, 40)); // 7 уровень
+    platforms.push(new Ground(texture, 1080, 467, 160, 40)); // 7 уровень
 
-    arrayOfWall.push(new Wall(texture, 1262, 410, 64, 820));
-    arrayOfWall.push(new Wall(texture, 1635, 1010, 64, 320));
-    arrayOfWall.push(new Wall(texture, 2500, 265, 64, 530));
-    arrayOfWall.push(new Wall(texture, 1828, 450, 68, 160)); // высокая тумба
-    arrayOfWall.push(new Wall(texture, 2645, 790, 68, 60)); // низкая тумба
-    arrayOfWall.push(new Wall(texture, 10, 150, 64, 150)); // левая стена
-    arrayOfWall.push(new Wall(texture, 78, 730, 128, 1050)); // левая стена
-    arrayOfWall.push(new Wall(texture, 2950, 625, 128, 1250)); // правая стена
+    platforms.push(new Ground(texture, 2185, 635, 170, 40)); // 6 уровень
+    platforms.push(new Ground(texture, 912, 635, 170, 40)); // 6 уровень
+
+    platforms.push(new Ground(texture, 250, 850, 215, 40)); // 5 уровень
+
+    platforms.push(new Ground(texture, 250, 850, 215, 40)); // 4 уровень
+    platforms.push(new Ground(texture, 1475, 880, 1620, 40)); // 4 уровень
     
-    arrayOfBonus.push(new Shield(200, 1105, 10));
-    arrayOfBonus.push(new Shield(2800, 1105, 10));
-    arrayOfBonus.push(new Health(100, 160));
-    arrayOfBonus.push(new Health(200, 500));
-    arrayOfBonus.push(new Health(1350, 500));
-    arrayOfBonus.push(new Health(2750, 500));
+    platforms.push(new Ground(texture, 652, 1305, 95, 40)); // 3 уровень
+    platforms.push(new Ground(texture, 2585, 1005, 240, 40)); // 3 уровень
+
+    platforms.push(new Ground(texture, 2470, 1250, 380, 40)); // 2 уровень
+
+    platforms.push(new Ground(texture, 2720, 1450, 270, 40)); // 1 уровень
+
+    platforms.push(new Ground(texture, 1450, 1590, 2880, 40)); // пол - 0 уровень
+
+    arrayOfBonus.push(new Shield(655, 1250, 20))
+    arrayOfBonus.push(new Shield(2725, 750, 20))
+    arrayOfBonus.push(new Shield(915, 560, 20))
+
+    arrayOfBonus.push(new Health(260, 1520));
+    arrayOfBonus.push(new Health(2725, 1380));
+    
+    // arrayOfBonus.push(new Shield(200, 1105, 10));
+    // arrayOfBonus.push(new Shield(2800, 1105, 10));
+    // arrayOfBonus.push(new Health(100, 160));
+    // arrayOfBonus.push(new Health(200, 500));
+    // arrayOfBonus.push(new Health(1350, 500));
+    // arrayOfBonus.push(new Health(2750, 500));
 
 
     // arrayOfStalactite.push(new Stalactite(900, 60, 700, 200));
@@ -62,7 +65,7 @@ function levelCreate()
     // arrayOfStalactite.push(new Stalactite(2700, 60, 700, 200));
     // arrayOfStalactite.push(new Stalactite(2560, 60, 700, 200));
 
-    enemies.push(new Boss(500, 400, 300)); //boss test
+    enemies.push(new Boss(1440, 1490, 700)); //boss test
 
     // enemies.push(new Devil(500, 500, 300, 0, 300, 50, 130));// 2 уровень
     // enemies.push(new Bat(1000, 320, 180, 150, 300, 300, 140));// bat 
@@ -104,10 +107,10 @@ function levelCreate()
 
 async function saveScore(isWin)
 {
-    let nextLevel = 2;
+    let nextLevel = 3;
     if (isWin)
     {
-        nextLevel = 3;
+        nextLevel = 4;
     }
     let data = {
         score: hero.experience,

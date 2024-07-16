@@ -49,7 +49,7 @@ class Hero
         this.animateType = '';
         this.experienceText = null;
 
-        let radius = 350;
+        let radius = 3000;
         let blurSize = 200;
         const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({color: 0xff0000});
         circle.filters = [new PIXI.BlurFilter(blurSize)];

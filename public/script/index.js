@@ -196,7 +196,7 @@ function onKeyUp(event)
     await PIXI.Assets.load([
         { alias: 'level1_map', src: '/images/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/level2_map.png' },
-        { alias: 'level3_map', src: '/images/level2_map.png' },
+        { alias: 'level3_map', src: '/images/level3_map.png' },
         { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
         { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
         { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
@@ -416,6 +416,21 @@ function gameLoop(time)
         {
             fireballs[i].sprite.destroy();
             fireballs.splice(i, 1);
+            i--;
+        }
+        i++;
+    }
+    i = 0;
+    while (i < shots.length)
+    {
+        if (shots[i].lifeTime > 0)
+        {
+            shots[i].update(time);
+        }
+        else
+        {
+            shots[i].sprite.destroy();
+            shots.splice(i, 1);
             i--;
         }
         i++;

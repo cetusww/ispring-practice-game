@@ -168,7 +168,7 @@ class Boss
                 let shotSpeed = this.shotSpeed
                 let deg;
 
-                for(deg = 10; deg <= 170; deg += 20)   //генерация веера из фаерболлов в полуокружности с шагом в 20 градусов
+                for(deg = 0; deg <= 180; deg += 10)   //генерация веера из фаерболлов в полуокружности с шагом в 20 градусов
                 {
                     let angleCos = Math.cos(deg * Math.PI / 180);
                     let angleSin = - Math.sin(deg * Math.PI / 180);
@@ -309,8 +309,8 @@ class Boss
                 }
                 if (this.hp <= 0.3 * this.maxHp)
                 {
-                    this.timeShotAttack = 60;      //частота генерации одиночных выстрелов
-                    this.timeUltaAttack = 660;      //частота генерации ульты 
+                    this.timeShotAttack = 50;      //частота генерации одиночных выстрелов
+                    this.timeUltaAttack = 650;      //частота генерации ульты 
                 }
                 else if (this.hp <= 0.6 * this.maxHp)
                 {
