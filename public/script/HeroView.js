@@ -100,15 +100,28 @@ class HeroView
             this.graphics.stroke({ width: 1, color: 0xfeeb77 });
             scene.addChild(this.graphics);
         }
+        this.addShield = function(duration)
+        {
+            this.activateShield = true;
+            this.shieldDuration = duration;
+            this.shieldStartTime = performance.now();
+        }
         this.takeDamage = function (damage)
         {
-            this.hp -= damage;
-            if (this.hp <= 0) 
+            if (!this.activateShield)
             {
-                this.hp = 0;
-                this.dead = true;
+                this.hp -= damage;
+                if (this.hp <= 0)
+                {
+                    this.hp = 0;
+                    this.dead = true;
+                    this.sprite.vy = 0;
+                }
+                this.updateHp();
+            } else
+            {
+                damage = Math.max(0, damage - 10);
             }
-            this.updateHp();
         }
         this.updateMove = function(x, y) 
         {             

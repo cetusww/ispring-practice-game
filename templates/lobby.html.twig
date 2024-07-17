@@ -71,7 +71,7 @@
             hero.restart();
             if (state['state'] === 'start') 
             {
-                //window.location.href = "/win";
+                window.location.href = "/win";
             }  
         }
         state = data['state'];
@@ -144,9 +144,11 @@
     }
     if (state['state'] === 'ready' && +state['time'] + 5000 <= Date.now())
     {
-        state['state'] = 'start'
+        state['state'] = 'start';
+        hero.addShield(10);
+        heroView.addShield(10);
     }
-  }, 10);
+  }, 15);
 </script>
 </body>
 </html>
