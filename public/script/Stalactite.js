@@ -64,7 +64,7 @@ class Stalactite
                         this.sprite.width += this.stepWidth;
                         this.currentTimeHeight = this.timeHeight;
                         this.danger += 0.04; 
-                        console.log(this.danger, this.stepWidth, this.sprite.width);
+                        // console.log(this.danger, this.stepWidth, this.sprite.width);
                     } else
                     {
                         this.currentTimeHeight -= time.deltaTime;

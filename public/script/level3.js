@@ -55,7 +55,7 @@ function levelCreate()
     arrayOfStalactite.push(new Stalactite(1100, 503, 700, 200));
     arrayOfStalactite.push(new Stalactite(1950, 503, 700, 200));
 
-    enemies.push(new Boss(1440, 1490, 700));
+    enemies.push(new Boss(1440, 1490, 700, 500, 500));
 }
 
 async function saveScore(isWin)

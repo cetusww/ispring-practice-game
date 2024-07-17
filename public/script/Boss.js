@@ -1,5 +1,5 @@
 class Boss {
-    constructor(posX, posY, zoneWidth) {
+    constructor(posX, posY, zoneWidth, visibilityZoneWidth, visibilityZoneHeight) {
         this.sprite = new PIXI.AnimatedSprite(boss_idle);
         this.sprite.animationSpeed = 0.1; // Скорость анимации
         this.sprite.loop = true;          // Зацикливание анимации
@@ -22,6 +22,9 @@ class Boss {
 
         this.zoneX = posX;
         this.zoneY = posY;
+        this.visibilityZoneWidth = visibilityZoneWidth;
+        this.visibilityZoneHeight = visibilityZoneHeight;
+        
 
         this.shotSpeed = 7;
 
@@ -245,17 +248,22 @@ class Boss {
 
         this.updateAggression = function () {
             if (!hero.dead) {
-                this.createUlta();
-                if (this.currentTimeUltaAttack <= 700) {
-                    this.createShot(hero.sprite.x, hero.sprite.y);
-                }
-                if (this.hp <= 0.3 * this.maxHp) {
-                    this.timeShotAttack = 60;      //частота генерации одиночных выстрелов
-                    this.timeUltaAttack = 660;      //частота генерации ульты 
-                }
-                else if (this.hp <= 0.6 * this.maxHp) {
-                    this.timeShotAttack = 80;      //частота генерации одиночных выстрелов
-                    this.timeUltaAttack = 720;      //частота генерации ульты
+                if (hero.collideRight >= this.sprite.x - this.visibilityZoneWidth &&
+                    hero.collideLeft <= this.sprite.x + this.visibilityZoneWidth &&
+                    hero.collideBottom >= this.sprite.y - this.visibilityZoneHeight &&
+                    hero.collideTop <= this.sprite.y + this.visibilityZoneHeight) {
+                    this.createUlta();
+                    if (this.currentTimeUltaAttack <= 700) {
+                        this.createShot(hero.sprite.x, hero.sprite.y);
+                    }
+                    if (this.hp <= 0.3 * this.maxHp) {
+                        this.timeShotAttack = 60;      //частота генерации одиночных выстрелов
+                        this.timeUltaAttack = 660;      //частота генерации ульты 
+                    }
+                    else if (this.hp <= 0.6 * this.maxHp) {
+                        this.timeShotAttack = 80;      //частота генерации одиночных выстрелов
+                        this.timeUltaAttack = 720;      //частота генерации ульты
+                    }
                 }
                 if (enemies.length < 2) {
                     this.spawnDevils();
