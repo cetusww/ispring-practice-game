@@ -67,7 +67,7 @@ async function saveScore(isWin)
     }
     let data = {
         score: hero.experience,
-        currentLvl: 2,
+        currentLvl: 3,
         nextLvl: nextLevel,
     }
     const stringifyData = JSON.stringify(data)

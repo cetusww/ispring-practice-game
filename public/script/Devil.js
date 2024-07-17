@@ -183,19 +183,22 @@ class Devil
         }
         this.dropExperience = function ()
         {    
-            let randomCount = Math.floor(Math.random() * 5) + 2;
-            let experienceCount = Math.floor(this.experience / randomCount);
-            console.log('+', randomCount);
-            let i = -Math.floor(randomCount / 2)
-            for (i; i < randomCount -Math.floor(randomCount / 2) - 1; i++)
+            if (this.experience > 0)
             {
-                let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, experienceCount);
+                let randomCount = Math.floor(Math.random() * 5) + 2;
+                let experienceCount = Math.floor(this.experience / randomCount);
+                console.log('+', randomCount);
+                let i = -Math.floor(randomCount / 2)
+                for (i; i < randomCount -Math.floor(randomCount / 2) - 1; i++)
+                {
+                    let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, experienceCount);
+                    experience.view();
+                    experiences.push(experience);
+                }
+                let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
                 experience.view();
                 experiences.push(experience);
             }
-            let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
-            experience.view();
-            experiences.push(experience);
         }
         this.update = function (time)
         {
