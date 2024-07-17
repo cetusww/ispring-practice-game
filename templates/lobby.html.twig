@@ -30,12 +30,12 @@
 
 </head>
 <body>
-<div class="main">
+<div class="main" id="main">
   <div class="players-preview">
     <img class="players-preview__player" id="player" src="images/hero.png">
     <img class="players-preview__opponent" id="opponent"src="images/hero.png">
   </div>
-  <button class="ready-button" id="ready-button" disabled>Готов</button>
+  <div class="countdown" id="countdown">Бой через 5 секунд</div>
   <div id="preloader">
     <p class="awaiting-text">Ожидание игрока...</p>
     <div class="loader"></div>
@@ -45,7 +45,9 @@
 
 <script src="script/multiplayerIndex.js"></script>
 <script>
-    const readyButton = document.getElementById('ready-button');
+    const countdown = document.getElementById('countdown');
+    const allCanvas = document.getElementsByTagName('canvas');
+    const lobby = document.getElementById('main');
     const opponentPreview = document.getElementById('opponent');
     const preloader = document.getElementById('preloader');
     let username = document.getElementById('username').value;
@@ -75,7 +77,7 @@
 
   ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
-    if (data == 'kick')
+    if (data === 'kick')
     {
         window.location.href = "/menu";
     }
@@ -83,10 +85,11 @@
     {
 		opponentPreview.style.display = 'block';
 		preloader.style.display = 'none';
-		readyButton.removeAttribute('disabled');
-		console.log('connection');
+        countdown.style.display = 'block';
         if (data['state']['state'] === 'stop')
         {
+            opponentPreview.style.display = 'none';
+            preloader.style.display = 'block';
             hero.restart();
             if (state['state'] === 'start')
             {
@@ -157,15 +160,21 @@
 
   setInterval(() =>
   {
+    countdown.innerHTML = `Бой через ${Math.ceil((state['time'] - Date.now() + 4000) / 1000)} секунд`;
     if (state['state'] === 'start')
     {
-        transmitData()
+        for (let canvas of allCanvas)
+        {
+            canvas.style.display = 'block';
+        }
+        lobby.style.display = 'none';
+        transmitData();
     }
-    if (state['state'] === 'ready' && +state['time'] + 5000 <= Date.now())
+    if (state['state'] === 'ready' && +state['time'] + 4000 <= Date.now())
     {
         state['state'] = 'start'
     }
-  }, 10);
+  }, 1000);
 </script>
 </body>
 </html>
