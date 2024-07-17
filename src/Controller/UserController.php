@@ -2,19 +2,25 @@
 
 namespace App\Controller;
 
+use App\Service\SessionService;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Service\ValidationService;
+
 
 class UserController extends AbstractController
 {
-	private UserRepository $repository;
+	private UserService $userService;
+	private SessionService $sessionService;
 
-	public function __construct(UserRepository $repository)
+	public function __construct(UserService $userService, SessionService $sessionService)
 	{
-		$this->repository = $repository;
+		$this->userService = $userService;
+		$this->sessionService = $sessionService;
 	}
 
 	public function index(): Response
@@ -26,52 +32,19 @@ class UserController extends AbstractController
 	{
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
-    $user = $this->repository->findUserByUserName($newUsername);
 
-		$errors = [];
+		$result = $this->userService->signUpUser($newUsername, $newPassword);
 
-		if (empty($newUsername))
+		if (isset($result['error']))
 		{
-			$errors['username'] = 'Имя пользователя не может быть пустым.';
-		}
-		if (empty($newPassword))
-		{
-			$errors['password'] = 'Пароль не может быть пустым.';
-		}
-		if (strlen($newPassword) < 6)
-		{
-			$errors['password'] = 'Пароль должен содержать не менее 6 символов.';
-		}
-		if ($user)
-		{
-			$errors['username'] = 'Пользователь с таким именем уже существует.';
+			return $this->render('signup-user-form.html.twig', ['error' => $result['error']]);
 		}
 
-		if (!empty($errors))
-		{
-			return $this->render('signup_user_form.html.twig', ['errors' => $errors]);
-		}
+		$user = $result['user'];
+		$this->sessionService->startSession();
+		$this->sessionService->setUserSession($user->getId(), $user->getUsername(), $user->getLevel());
 
-		$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-		$user = new User(
-			null,
-			$newUsername,
-			$hashedPassword,
-			1,
-			0,
-			0,
-			0,
-		);
-
-		$this->repository->saveUserToDatabase($user);
-
-		session_name('auth');
-		session_start();
-		$_SESSION['user_id'] = $user->getId();
-		$_SESSION['username'] = $newUsername;
-		$_SESSION['level'] = $user->getLevel();
-
-		return $this->redirectToRoute('show_legend');
+		return $this->redirectToRoute('show_menu');
 	}
 
 	public function signInUser(Request $request): Response
@@ -79,45 +52,24 @@ class UserController extends AbstractController
 		$username = $request->get('username');
 		$password = $request->get('password');
 
-		$errors = [];
+		$result = $this->userService->signInUser($username, $password);
 
-		if (empty($username))
+		if (isset($result['error']))
 		{
-			$errors['username'] = 'Имя пользователя не может быть пустым.';
-		}
-		if (empty($password))
-		{
-			$errors['password'] = 'Пароль не может быть пустым.';
+			return $this->render('signin-user-form.html.twig', ['error' => $result['error']]);
 		}
 
-		$user = $this->repository->findUserByUserName($username);
+		$user = $result['user'];
+		$this->sessionService->startSession('auth');
+		$this->sessionService->setUserSession($user->getId(), $user->getUsername(), $user->getLevel());
 
-		if (!$user)
-		{
-			$errors['username'] = 'Пользователя с таким именем не существует';
-		}
-		if ($user && !$this->repository->checkPassword($user->getId(), $password))
-		{
-			$errors['password'] = 'Неверный пароль';
-		}
-		if (!empty($errors))
-		{
-			return $this->render('signin_user_form.html.twig', ['errors' => $errors]);
-		}
-
-		session_name('auth');
-		session_start();
-		$_SESSION['user_id'] = $user->getId();
-		$_SESSION['username'] = $username;
-		$_SESSION['level'] = $user->getLevel();
-		return $this->redirectToRoute('show_legend');
+		return $this->redirectToRoute('show_menu');
 	}
 
 	public function signOutUser(): Response
 	{
-		session_name('auth');
-		session_start();
-		session_destroy();
+		$this->sessionService->destroySession('auth');
+
 		return $this->redirectToRoute('index');
 	}
 }

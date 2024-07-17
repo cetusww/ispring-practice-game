@@ -3,18 +3,23 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Service\SessionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use App\Service\SecurityService;
 
 class UserRepository
 {
 
 	private EntityManagerInterface $entityManager;
 	private EntityRepository $repository;
-	public function __construct(EntityManagerInterface $entityManager)
+	private SecurityService $securityService;
+
+	public function __construct(EntityManagerInterface $entityManager, SecurityService $securityService)
 	{
 		$this->entityManager = $entityManager;
 		$this->repository = $entityManager->getRepository(User::class);
+		$this->securityService = $securityService;
 	}
 
 	public function saveUserToDatabase(User $user): int
@@ -41,15 +46,6 @@ class UserRepository
 		return $this->repository->findOneBy(['id' => $_SESSION['user_id']]);
 	}
 
-	public function checkPassword(int $userId, string $password): bool
-	{
-		$user = $this->repository->findOneBy(['id' => $userId]);
-		if (password_verify($password, $user->getPassword())) {
-			return true;
-		}
-		return false;
-	}
-
 	public function updateUserScore(int $userId, int $newScore, int $currentLevel, int $nextLevel): void
 	{
 		$user = $this->entityManager->getRepository(User::class)->find($userId);
@@ -71,7 +67,7 @@ class UserRepository
 		{
 			$user->setScoreThirdLevel($newScore);
 		}
-		
+
 		$this->entityManager->flush();
 	}
 }
