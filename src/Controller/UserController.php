@@ -7,9 +7,6 @@ use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\User;
-use App\Repository\UserRepository;
-use App\Service\ValidationService;
 
 
 class UserController extends AbstractController
@@ -37,11 +34,11 @@ class UserController extends AbstractController
 
 		if (isset($result['error']))
 		{
-			return $this->render('signup-user-form.html.twig', ['error' => $result['error']]);
+			return $this->render('signup_user_form.html.twig', ['error' => $result['error']]);
 		}
 
 		$user = $result['user'];
-		$this->sessionService->startSession();
+		$this->sessionService->startSession('auth');
 		$this->sessionService->setUserSession($user->getId(), $user->getUsername(), $user->getLevel());
 
 		return $this->redirectToRoute('show_menu');
@@ -56,7 +53,7 @@ class UserController extends AbstractController
 
 		if (isset($result['error']))
 		{
-			return $this->render('signin-user-form.html.twig', ['error' => $result['error']]);
+			return $this->render('signin_user_form.html.twig', ['error' => $result['error']]);
 		}
 
 		$user = $result['user'];

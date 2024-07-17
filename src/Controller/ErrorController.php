@@ -12,7 +12,8 @@ class ErrorController extends AbstractController
 	{
 		$exception = $this->get('request_stack')->getCurrentRequest()->attributes->get('exception');
 
-		if ($exception instanceof NotFoundHttpException) {
+		if ($exception instanceof NotFoundHttpException)
+        {
 			return $this->redirectToRoute('error_not_found');
 		}
 

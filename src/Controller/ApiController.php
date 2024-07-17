@@ -2,27 +2,36 @@
 
 namespace App\Controller;
 
+use App\Service\SessionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Service\UserService;
 
 class ApiController extends AbstractController
 {
-	private UserRepository $repository;
-	public function __construct(UserRepository $repository)
+	private UserRepository $userRepository;
+    private SessionService $sessionService;
+    private UserService $userService;
+	public function __construct(UserRepository $userRepository, SessionService $sessionService, UserService $userService)
 	{
-		$this->repository = $repository;
+		$this->userRepository = $userRepository;
+        $this->sessionService = $sessionService;
+        $this->userService = $userService;
 	}
 	public function saveScore(Request $request): Response
 	{
-		session_name('auth');
-		session_start();
+        $this->sessionService->startSession('auth');
 
 		$data = json_decode($request->getContent(), true);
 
-		$this->repository->updateUserScore($_SESSION['user_id'], $data['score'], $data['currentLvl'], $data['nextLvl']);
+        $user = $this->userRepository->findUserByUserName($_SESSION['username']);
+
+        $this->userService->setUserLevel($user, $data['nextLvl']);
+        $this->userService->setUserScore($user, $data['currentLvl'], $data['score']);
+
+		$this->userRepository->updateUserProgress($user);
 
 		return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
 	}

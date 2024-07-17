@@ -4,20 +4,15 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Service\SecurityService;
-use App\Service\ValidationService;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class UserService
 {
 	private UserRepository $userRepository;
 	private ValidationService $validationService;
-  private SecurityService $securityService;
-	public function __construct(UserRepository $repository, ValidationService $validationService, SecurityService $securityService)
+    private SecurityService $securityService;
+	public function __construct(UserRepository $userRepository, ValidationService $validationService, SecurityService $securityService)
 	{
-		$this->userRepository = $repository;
+		$this->userRepository = $userRepository;
 		$this->validationService = $validationService;
 		$this->securityService = $securityService;
 	}
@@ -60,4 +55,40 @@ class UserService
 
 		return ['user' => $existingUser];
 	}
+
+    public function getSortedUsers(): array
+    {
+        $users = $this->userRepository->findAllUsers();
+
+        usort($users, function($a, $b)
+        {
+            return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
+        });
+
+        return $users;
+    }
+
+    public function setUserScore(User $user, int $currentLevel, int $newScore): void
+    {
+        if ($currentLevel === 1 && $user->getScoreFirstLevel() < $newScore)
+        {
+            $user->setScoreFirstLevel($newScore);
+        }
+        if ($currentLevel === 2 && $user->getScoreSecondLevel() < $newScore)
+        {
+            $user->setScoreSecondLevel($newScore);
+        }
+        if ($currentLevel === 3 && $user->getScoreThirdLevel() < $newScore)
+        {
+            $user->setScoreThirdLevel($newScore);
+        }
+    }
+
+    public function setUserLevel(User $user, int $nextLevel): void
+    {
+        if ($user->getLevel() < $nextLevel)
+        {
+            $user->setLevel($nextLevel);
+        }
+    }
 }

@@ -2,19 +2,25 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\SessionService;
+use App\Repository\UserRepository;
 
 class ViewController extends AbstractController
 {
 
-	private UserRepository $repository;
+	private UserService $userService;
+    private SessionService $sessionService;
+    private UserRepository $userRepository;
 
-	public function __construct(UserRepository $repository)
+	public function __construct(UserService $userService, SessionService $sessionService, UserRepository $userRepository)
 	{
-		$this->repository = $repository;
+		$this->userService = $userService;
+        $this->sessionService = $sessionService;
+        $this->userRepository = $userRepository;
 	}
 
 	public function index(): Response
@@ -29,8 +35,7 @@ class ViewController extends AbstractController
 
 	public function signUpUserForm(): Response
 	{
-		session_name('auth');
-		session_start();
+        $this->sessionService->startSession('auth');
 		if ($_SESSION !== [])
 		{
 			return $this->redirectToRoute('show_menu');
@@ -40,8 +45,7 @@ class ViewController extends AbstractController
 
 	public function signInUserForm(): Response
 	{
-		session_name('auth');
-		session_start();
+        $this->sessionService->startSession('auth');
 		if ($_SESSION !== [])
 		{
 			return $this->redirectToRoute('show_menu');
@@ -51,8 +55,7 @@ class ViewController extends AbstractController
 
 	public function showMenu(): Response
 	{
-		session_name('auth');
-		session_start();
+        $this->sessionService->startSession('auth');
 		if ($_SESSION === [])
 		{
 			return $this->redirectToRoute('index');
@@ -62,9 +65,9 @@ class ViewController extends AbstractController
 
 	public function showFirstLevel(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('first_level.html.twig');
@@ -72,9 +75,9 @@ class ViewController extends AbstractController
 
 	public function showSecondLevel(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('second_level.html.twig');
@@ -82,9 +85,9 @@ class ViewController extends AbstractController
 
 	public function showThirdLevel(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('third_level.html.twig');
@@ -92,49 +95,44 @@ class ViewController extends AbstractController
 
 	public function showLegend(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
-			return $this->redirectToRoute('signin-form');
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
+			return $this->redirectToRoute('signin_form');
 		}
 		return $this->render('legend.html.twig');
 	}
 
 	public function showLevels(): Response
 	{
-		session_name('auth');
-		session_start();
+        $this->sessionService->startSession('auth');
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
 
-		$user = $this->repository->findUserByUserName($_SESSION['username']);
-		$_SESSION['level'] = $user->getLevel();
+		$_SESSION['level'] = $this->userRepository->getUserCurrentLevel($_SESSION['username']);
 
 		return $this->render('choose_level.html.twig', ['level' => $_SESSION['level']]);
 	}
 
 	public function showRating(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
-		$users = $this->repository->findAllUsers();
 
-		usort($users, function($a, $b) {
-			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
-		});
+		$users = $this->userService->getSortedUsers();
 
 		return $this->render('rating.html.twig', ['users' => $users]);
 	}
 
 	public function showLobby(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('lobby.html.twig');
@@ -142,9 +140,9 @@ class ViewController extends AbstractController
 
 	public function showWin(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('game_win.html.twig');
@@ -152,12 +150,11 @@ class ViewController extends AbstractController
 
 	public function showLose(): Response
 	{
-		session_name('auth');
-		session_start();
-		if ($_SESSION === []) {
+        $this->sessionService->startSession('auth');
+		if ($_SESSION === [])
+        {
 			return $this->redirectToRoute('index');
 		}
 		return $this->render('game_lose.html.twig');
 	}
-
 }
