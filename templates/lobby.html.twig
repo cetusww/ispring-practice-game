@@ -7,18 +7,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/lobby_style.css">
-  <input type="hidden" id="lobby-id" value="{{ lobby.getId }}">
-  <input type="hidden" id="lobby-host" value="{{ lobby.getHostUserName }}">
   <input type="hidden" id="username" value="{{ username }}">
+
+
+  <script src="script/pixi.js"></script>
+  <script src="script/Bullet.js"></script>
+  <script src="script/Experience.js"></script>
+  <script src="script/Fireball.js"></script>
+  <script src="script/Stalactite.js"></script>
+  <script src="script/Hero.js"></script>
+  <script src="script/HeroView.js"></script>
+  <script src="script/Enemy.js"></script>
+  <script src="script/Devil.js"></script>
+  <script src="script/Bat.js"></script>
+  <script src="script/Poison.js"></script>
+  <script src="script/Ground.js"></script>
+  <script src="script/WoodenPlank.js"></script>
+  <script src="script/Shield.js"></script>
+  <script src="script/Health.js"></script>
+  <script src="script/Portal.js"></script>
+  <script src="script/multiplayerLevel.js"></script>
+  <script src="script/Wall.js"></script>
+
 </head>
 <body>
+    <script src="script/multiplayerIndex.js"></script>
 Здесь будет лобби
 <script>
-    host = document.getElementById('lobby-host').value
-    //connectedUsername = document.getElementById('lobby-username').value
-    lobbyId = document.getElementById('lobby-id').value
     username = document.getElementById('username').value
-    console.log(username)
   const ws = new WebSocket('ws://localhost:8080');
   let isConnected = false;
   const messageQueue = [];
@@ -29,7 +45,7 @@
       while (messageQueue.length > 0) {
           ws.send(messageQueue.shift());
       }
-      ws.send(JSON.stringify({'userdata': {'username': username, 'host': host, 'lobby_id': lobbyId},}))
+      ws.send(JSON.stringify({'username': username}))
   };
 
   ws.onerror = function(error) {
@@ -44,6 +60,17 @@
 
   ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
+    if (data == 'kick')
+    {
+        window.location.href = "/menu";
+    }
+    if ('opponentupdate' in data)
+    {
+        let playerdata = data['opponentupdate'];
+        heroView.updateMove(playerdata['x'], playerdata['y']);
+        heroView.updateAnim(playerdata['animatetype']);
+        heroView.sprite.scale.x = playerdata['scalex'];
+    }
     console.log(data);
   };
 
@@ -57,7 +84,18 @@
           messageQueue.push(message);
       }
   }
-  let timerId = setInterval(() => {ws.send(JSON.stringify({'userdata': {'username': username, 'host': host, 'lobby_id': lobbyId},}))}, 5000);
+  //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
+  let transferData = setInterval(() => 
+  {
+    data = 
+    {
+        x: hero.sprite.x,
+        y: hero.sprite.y,
+        animatetype: hero.animateType,
+        scalex: hero.sprite.scale.x,
+    }
+    ws.send(JSON.stringify({'playerdata': data}))
+  }, 10);
 </script>
 </body>
 </html>

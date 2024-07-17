@@ -7,31 +7,11 @@ use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 class HeroController implements MessageComponentInterface {
 	protected \SplObjectStorage $clients;
-	//public LobbyRepository $lobbyRepository;
-	// const HOST = 'localhost';
-	// const USERNAME = 'yogurt';
-	// const PASSWORD = 'pAssw0rd#';
-	// const DATABASE = 'ispring_practice';
-	public array $arrayOfLobby = [];
 	public array $arrayOfUsers = [];
-	public \mysqli $conn;// = new \mysqli(HOST, USERNAME, PASSWORD, DATABASE);
-
-	public function createDBConnection(): void {
-  
-		$this->conn = new \mysqli('localhost', 'yogurt', 'pAssw0rd#', 'ispring_practice');
-		if ($this->conn->connect_error) {
-		  echo "ConnectionDB failed: " . $this->conn->connect_error;
-		} else
-		{
-			echo "ConnectedDB successfully\n";
-		}
-	  }
 
 
 	public function __construct() {
 		$this->clients = new \SplObjectStorage;
-		//$this->lobbyRepository = $lobbyRepository;
-		$this->createDBConnection();
 	}
 
 	public function onOpen(ConnectionInterface $conn): void
@@ -47,50 +27,54 @@ class HeroController implements MessageComponentInterface {
 		}
 		echo "Received message: $msg\n";  // Отладочное сообщение
 		$data = json_decode($msg, true);
-		if (isset($data['userdata']))
+		if (isset($data['username']))
 		{
-			$userdata = $data['userdata'];
-			$this->arrayOfUsers[$from->resourceId] = 
-				[
-					'username' => $userdata['username'], 
-					'lobby_id' => $userdata['lobby_id'],
-				];
-			if (isset($this->arrayOfLobby[$userdata['lobby_id']]))
+			if (count($this->arrayOfUsers) === 2)
 			{
-				if ($this->arrayOfLobby[$userdata['lobby_id']]['host']['name'] === $userdata['username'])
-				{
-					$this->arrayOfLobby[$userdata['lobby_id']]['host'] = ['name' => $userdata['username'], 'id' => $from->resourceId];	
-				} else
-				{
-					$this->arrayOfLobby[$userdata['lobby_id']]['connected'] = ['name' => $userdata['username'], 'id' => $from->resourceId];
-				}
-				$this->arrayOfLobby[$userdata['lobby_id']]['lobby_date'] = time();
-				var_dump($this->arrayOfLobby);
-			} else
-			{
-				echo 'false';
-				$this->arrayOfLobby[$userdata['lobby_id']] = 
-				[
-					'host' => ['name' => $userdata['username'], 'id' => $from->resourceId],
-					'connected' => ['name' => null, 'id' => null], 
-					'lobby_date' => time(),
-				];
+				$from->send(json_encode('kick'));
 			}
-			// if ($userdata['host'] == $userdata['username'])
-			// {
-			// 	$this->arrayOfLobby[$userdata['lobby_id']] = 
-			// 	[
-			// 		'host' => ['name' => $userdata['host'], 'id' => $from->resourceId],
-			// 		'username' => $userdata['username'], 
-			// 		'host' => $userdata['host'],
-			// 		'lobby_id' => $userdata['lobby_id'],
-			// 		'lobby_date' => time(),
-			// 	];
-			// }
+			else
+			{
+				$this->arrayOfUsers[$from->resourceId] = $data['username'];
+				if (count($this->arrayOfUsers) === 2)
+				{
+					//$keys = array_keys($this->arrayOfUsers);
+					$players = [];
+					foreach ($this->clients as $client) {
+						$players[] = ['user' => $client, 'name' => $this->arrayOfUsers[$client->resourceId]];
+					}
+					$players[0]['user']->send(json_encode(['state' => 'ready', 'opponentname' => $players[1]['name']]));
+					$players[1]['user']->send(json_encode(['state' => 'ready', 'opponentname' => $players[0]['name']]));
+				}
+			}
 			
-			//var_dump($this->arrayOfUsers);
 		}
-		
+		if (isset($data['playerdata'])) 
+		{
+			$playerData = $data['playerdata'];
+			foreach ($this->clients as $client) {
+				if ($client->resourceId !== $from->resourceId)
+				{
+					$client->send(json_encode(
+					[
+						'opponentupdate' => 
+						[
+							'x' => $playerData['x'], 
+							'y' => $playerData['y'],
+							'animatetype' => $playerData['animatetype'],
+							'scalex' => $playerData['scalex'],
+						]
+					]));
+				}
+			}
+		}
+		if (isset($data['msg'])) 
+		{
+			if ($data['msg'] == 'PING') 
+			{
+				$from->send(json_encode('Server Pong'));
+			}
+		}
 		//echo $data['msg'];
 		//if ($data['msg'])
 		// if ($data['msg'] == 'PING')
@@ -112,66 +96,14 @@ class HeroController implements MessageComponentInterface {
 
 	public function onClose(ConnectionInterface $conn): void
 	{
-		
-
 		$this->clients->detach($conn);
 		$id = $conn->resourceId;
 		echo "Connection {$id} has disconnected\n";
-		$this->disconnectLobby($id);
-		//var_dump($this->arrayOfUsers);
-		
-		//header("Location: http://localhost:8000/index", False);
-		//header("Location: /lobby/disconnect$lobbyId", True, 301);
-		//return $this->redirectToRoute('index');
-
-		//$lobby = $this->lobbyRepository->findLobbyByHostUserName((string)$lobbyHost);
-		//var_dump($lobby);
-	}
-
-	public function disconnectLobby(int $userId): void
-	{
-		$lobbyId = $this->arrayOfUsers[$userId]['lobby_id'];
-		$username =  $this->arrayOfUsers[$userId]['username'];
-		$lobbyHost =  $this->arrayOfLobby[$lobbyId]['host']['name'];
-		$lobbyConnected = $this->arrayOfLobby[$lobbyId]['connected']['name'];
-		echo $this->arrayOfLobby[$lobbyId]['lobby_date'];
-		if ($username === $lobbyHost) 
-		{
-			if ($lobbyConnected === null)
-			{
-				unset($this->arrayOfLobby[$lobbyId]);
-			}
-			else
-			{
-				$this->arrayOfLobby[$lobbyId]['host'] = $this->arrayOfLobby[$lobbyId]['connected'];
-				$this->arrayOfLobby[$lobbyId]['connected'] = ['name' => null, 'id' => null];
-			}
+		unset($this->arrayOfUsers[$id]);
+		foreach ($this->clients as $client) {
+			$client->send(json_encode(['state' => 'stop']));
 		}
-		else
-		{
-			$this->arrayOfLobby[$lobbyId]['connected'] = ['name' => null, 'id' => null];
-		}
-		unset($this->arrayOfUsers[$userId]);
-
-
-		//sleep(15);
-		// $lobbyId = $this->arrayOfUsers[$userId]['lobby_id'];
-		// $lobbyHost =  $this->arrayOfUsers[$userId]['host'];
-		// $lobbyUsername =  $this->arrayOfUsers[$userId]['username'];
-		// if ($lobbyHost === $lobbyUsername)
-		// {
-		// 	//if ($)
-		// 	echo 'lobby deleted';
-		// 	$sql = "DELETE FROM lobby WHERE id = '$lobbyId'";
-		// 	$this->conn->query($sql);
-			
-		// }
-		echo 'lobby deleted';
-		//$sql = "SELECT * FROM lobby";
-		//$result =$this->conn->query($sql);
-		//var_dump($result->fetch_assoc());
 	}
-
 
 	public function onError(ConnectionInterface $conn, \Exception $e): void
 	{

@@ -149,11 +149,11 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION === []) {
+		$username = $_SESSION['username'] ?? null;
+		if ($username === null) {
 			return $this->redirectToRoute('index');
 		}
-		$lobby = $this->lobbyRepository->findAllLobby();
-		return $this->render('multiplayer.html.twig', ['lobby' => $lobby]);
+		return $this->render('lobby.html.twig', ['username' => $username]);
 	}
 
 	public function showWin(): Response
