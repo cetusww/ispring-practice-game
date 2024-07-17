@@ -7,6 +7,10 @@ class Hero
         this.sprite.loop = true; // Зацикливание анимации
         this.sprite.play(); // Запуск анимации
 
+        this.posX = posX;
+        this.posY = posY;
+
+
         this.sprite.x = posX;
         this.sprite.y = posY;
         this.sprite.width = 78;
@@ -66,7 +70,14 @@ class Hero
         this.focusTexture.tint = 0x000000;
         this.focusTexture.anchor.set(0.5);
 
-
+        this.restart = function () {
+            this.updateAnim('idle')
+            this.sprite.x = this.posX;
+            this.sprite.y = this.posY;
+            this.hp = this.hpMax;
+            this.sprite.vx = 0;
+            this.sprite.vy = 0;
+        }
         this.updateAnim = function (type) {
             if (type === 'idle' && this.animateType !== 'idle') {
                 this.sprite.loop = false;

@@ -38,13 +38,13 @@ class HeroController implements MessageComponentInterface {
 				$this->arrayOfUsers[$from->resourceId] = $data['username'];
 				if (count($this->arrayOfUsers) === 2)
 				{
-					//$keys = array_keys($this->arrayOfUsers);
 					$players = [];
 					foreach ($this->clients as $client) {
 						$players[] = ['user' => $client, 'name' => $this->arrayOfUsers[$client->resourceId]];
 					}
-					$players[0]['user']->send(json_encode(['state' => 'ready', 'opponentname' => $players[1]['name']]));
-					$players[1]['user']->send(json_encode(['state' => 'ready', 'opponentname' => $players[0]['name']]));
+					$time = microtime(true) * 1000;
+					$players[0]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[1]['name']]));
+					$players[1]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[0]['name']]));
 				}
 			}
 			
@@ -61,8 +61,11 @@ class HeroController implements MessageComponentInterface {
 						[
 							'x' => $playerData['x'], 
 							'y' => $playerData['y'],
+							'hp' => $playerData['hp'],
 							'animatetype' => $playerData['animatetype'],
 							'scalex' => $playerData['scalex'],
+							'opponentbullets' => $playerData['herobullets'],
+							'damage' => $playerData['damage'],
 						]
 					]));
 				}
@@ -75,23 +78,6 @@ class HeroController implements MessageComponentInterface {
 				$from->send(json_encode('Server Pong'));
 			}
 		}
-		//echo $data['msg'];
-		//if ($data['msg'])
-		// if ($data['msg'] == 'PING')
-		// {
-		// 	$direction = 'Server Pong';
-		// 	$newDirection = json_encode($direction);
-		// 	$from->send($newDirection);
-		// }
-		// else {
-		// 	$direction = 'Server Pong';
-
-		// 	$newDirection = json_encode($direction);
-		// 	foreach ($this->clients as $client) {
-		// 		$client->send($newDirection);
-				
-		// 	}
-		// }
 	}
 
 	public function onClose(ConnectionInterface $conn): void
@@ -100,8 +86,9 @@ class HeroController implements MessageComponentInterface {
 		$id = $conn->resourceId;
 		echo "Connection {$id} has disconnected\n";
 		unset($this->arrayOfUsers[$id]);
+		$time = microtime(true) * 1000;
 		foreach ($this->clients as $client) {
-			$client->send(json_encode(['state' => 'stop']));
+			$client->send(json_encode(['state' => ['state' => 'stop', 'time' => $time]]));
 		}
 	}
 

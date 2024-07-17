@@ -5,7 +5,10 @@ const arrayOfWall = [];
 const arrayOfBonus = [];
 const woodenPlanks = [];
 const arrayOfStalactite = [];
+const removeBullets = [];
 const bullets = [];
+const opponentBullets = [];
+
 const fireballs = [];
 const enemies = [];
 const poisons = [];
@@ -15,8 +18,15 @@ const smokes = [];
 const app = new PIXI.Application();
 const GRAVITY_ACCELERATION = 0.98;
 let background;
+let state =
+{
+    'state': 'stop',
+    'time': 0,
+};
 let hero;
 let heroView;
+let opponentDamage = 0;
+let arrayOfOpponent = [heroView];
 let portal;
 let sceneScale = 1;
 const hero_walk = [];
@@ -206,14 +216,8 @@ function onKeyUp(event)
         { alias: 'bullet', src: '/images/bullet.png' },
         { alias: 'hero_beacon', src: '/images/hero_beacon.png' },
         { alias: 'enemy_beacon', src: '/images/enemy_beacon.png' },
-        { alias: 'fireball', src: '/images/fireball.svg' },
         { alias: 'stalactite', src: '/images/stalactite.png' },
-        { alias: 'bat', src: '/images/bat_group.json' },
-        { alias: 'poison', src: '/images/poison.png' },
-        { alias: 'devil', src: '/images/devil.json' },
         { alias: 'fire', src: '/images/fire.json' },
-        { alias: 'mushroom', src: '/images/mushroom.json' },
-        { alias: 'smoke', src: '/images/smoke.json' },
         { alias: 'shield', src: '/images/shield.png' },
         { alias: 'health', src: '/images/health.png' },
         { alias: 'portal', src: '/images/portal.png' },
@@ -237,19 +241,6 @@ function onKeyUp(event)
     }
     for (let i = 0; i < 4; i++)
     {
-        devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
-    }
-    devilIdle.push(PIXI.Texture.from(`devilIdle.png`));
-    for (let i = 0; i < 4; i++)
-    {
-        batFlyVertical.push(PIXI.Texture.from(`batFlyVertical${1 + i}.png`));
-    }
-    for (let i = 0; i < 4; i++)
-    {
-        batFlyHorizontal.push(PIXI.Texture.from(`batFlyHorizontal${1 + i}.png`));
-    }
-    for (let i = 0; i < 4; i++)
-    {
         hero_shoot.push(PIXI.Texture.from(`hero_shoot${1 + i}.png`));
     }
     for (let i = 0; i < 9; i++)
@@ -259,18 +250,6 @@ function onKeyUp(event)
     for (let i = 0; i < 50; i++)
     {
         fire_anim.push(PIXI.Texture.from(`fire${1 + i}.png`));
-    }
-    for (let i = 0; i < 14; i++)
-    {
-        mushroom_idle.push(PIXI.Texture.from(`mushroomIdle${1 + i}.png`));
-    }
-    for (let i = 0; i < 8; i++)
-    {
-        mushroom_active.push(PIXI.Texture.from(`mushroomActive${1 + i}.png`));
-    }
-    for (let i = 0; i < 13; i++)
-    {
-        smoke_anim.push(PIXI.Texture.from(`smoke${1 + i}.png`));
     }
 
     app.canvas.addEventListener('mousedown', onAppMouseDown);
@@ -287,150 +266,92 @@ function onKeyUp(event)
     });
 })();
 
-
 function gameLoop(time)
 {
-    // portal.update(time);
-    hero.update(time);
-    heroView.update(time);
-    hero.updateMap();
-    // if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
-    // {
-    //     portal.activate();
-    //     // hero.portalTextView();
-    // }
-    if (hero.deadTime < 0)
+    if (state['state'] === 'start')
     {
-        saveScore();
-        hero.deadTime = 1000;
-        window.location.href = "/lose";
+        portal.update(time);
+        hero.update(time);
+        heroView.update(time);
+        hero.updateMap();
+        arrayOfOpponent = [heroView];
+        if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
+        {
+            portal.activate();
+            hero.portalTextView();
+        }
+        if (hero.deadTime < 0)
+        {
+            saveScore();
+            hero.deadTime = 1000;
+            window.location.href = "/lose";
+        }
+        if (hero.isWin && portal.isActive) {
+            saveScore();
+            window.location.href = "/win";
+            portal.isActive = false;
+        }
+        if (mouse.isDownLeft)
+        {
+            hero.createBullet(mouse.positionX, mouse.positionY);
+        }
+        let i = 0;
+        while (i < experiences.length)
+        {
+            if (!experiences[i].isTaken)
+            {
+                experiences[i].update(time);
+            }
+            else
+            {
+                experiences[i].deleteView();
+                experiences[i].sprite.destroy();
+                experiences.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        i = 0;
+        while (i < bullets.length)
+        {
+            if (bullets[i].lifeTime > 0)
+            {
+                bullets[i].update(time);
+                opponentDamage = opponentDamage + bullets[i].updateCollideOpponent(heroView);
+            }
+            else
+            {
+                bullets[i].sprite.destroy();
+                bullets.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        for (let i = 0; i < fires.length; i++)
+        {
+            fires[i].update();
+        }
+        i = 0;
+        while (i < arrayOfBonus.length)
+        {
+            if (!arrayOfBonus[i].isTaken)
+            {
+                arrayOfBonus[i].update(time);
+            }
+            else
+            {
+                arrayOfBonus[i].deleteView();
+                arrayOfBonus[i].sprite.destroy();
+                arrayOfBonus.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        arrayOfStalactite.forEach(stalactite =>
+        {
+            stalactite.update(time);
+        });
     }
-    if (hero.isWin && portal.isActive) {
-        saveScore();
-        window.location.href = "/win";
-        portal.isActive = false;
-    }
-    if (mouse.isDownLeft)
-    {
-        hero.createBullet(mouse.positionX, mouse.positionY);
-    }
-    let i = 0;
-    while (i < enemies.length)
-    {
-        if (enemies[i].deadTime > 0)
-        {
-            enemies[i].update(time);
-        }
-        else
-        {
-            enemies[i].dropExperience();
-            enemies[i].deleteView();
-            enemies[i].sprite.destroy();
-            enemies.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < poisons.length)
-    {
-        if (poisons[i].lifeTime > 0)
-        {
-            poisons[i].update(time);
-        }
-        else
-        {
-            poisons[i].sprite.destroy();
-            poisons.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < experiences.length)
-    {
-        if (!experiences[i].isTaken)
-        {
-            experiences[i].update(time);
-        }
-        else
-        {
-            experiences[i].deleteView();
-            experiences[i].sprite.destroy();
-            experiences.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < bullets.length)
-    {
-        if (bullets[i].lifeTime > 0)
-        {
-            bullets[i].update(time);
-        }
-        else
-        {
-            bullets[i].sprite.destroy();
-            bullets.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < smokes.length)
-    {
-        if (smokes[i].lifeTime > 0)
-        {
-            smokes[i].update(time);
-        }
-        else
-        {
-            smokes[i].sprite.destroy();
-            smokes.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < fireballs.length)
-    {
-        if (fireballs[i].lifeTime > 0)
-        {
-            fireballs[i].update(time);
-        }
-        else
-        {
-            fireballs[i].sprite.destroy();
-            fireballs.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    for (let i = 0; i < fires.length; i++)
-    {
-        fires[i].update();
-    }
-    i = 0;
-    while (i < arrayOfBonus.length)
-    {
-        if (!arrayOfBonus[i].isTaken)
-        {
-            arrayOfBonus[i].update(time);
-        }
-        else
-        {
-            arrayOfBonus[i].deleteView();
-            arrayOfBonus[i].sprite.destroy();
-            arrayOfBonus.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    arrayOfStalactite.forEach(stalactite =>
-    {
-        stalactite.update(time);
-    });
     keys.keyDownDouble = false;
     if (new Date() - doubleKeyDown.keyTime > 200) {
         doubleClickremoveState();
@@ -450,12 +371,6 @@ function levelView()
     {
         platform.view();
     })
-    let experienceMax = 0;
-    enemies.forEach(enemy =>
-    {
-        enemy.view();
-        experienceMax += enemy.experience;
-    });
     arrayOfBonus.forEach(bonus =>
     {
         bonus.view();
@@ -468,8 +383,7 @@ function levelView()
     {
         fire.view();
     });
-    // portal.view();
-    hero.experienceMax = experienceMax;
+    portal.view();
     heroView.view();
     hero.view();
     hero.updateMap();
