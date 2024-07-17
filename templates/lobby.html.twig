@@ -48,7 +48,7 @@
     const readyButton = document.getElementById('ready-button');
     const opponentPreview = document.getElementById('opponent');
     const preloader = document.getElementById('preloader');
-     username = document.getElementById('username').value;
+    let username = document.getElementById('username').value;
     const ws = new WebSocket('ws://localhost:8080');
     let isConnected = false;
     const messageQueue = [];
@@ -66,59 +66,106 @@
         console.error('WebSocket Error: ' + error);
     };
 
-    ws.onclose = function() {
-        isConnected = false;
-        console.log('WebSocket connection closed');
-        sendMessage('close');
-    };
+  ws.onclose = function() {
+      isConnected = false;
+      console.log('WebSocket connection closed');
+      sendMessage('close');
+      window.location.href = "/menu";
+  };
 
-    ws.onmessage = function(event) {
-      const data = JSON.parse(event.data);
-      if (data === 'kick')
-      {
-          window.location.href = "/menu";
-      }
-
-      if ('state' in data)
-      {
-          opponentPreview.style.display = 'block';
-          preloader.style.display = 'none';
-          readyButton.removeAttribute('disabled');
-          console.log('connection');
-      }
-
-      if ('opponentupdate' in data)
-      {
-          let playerdata = data['opponentupdate'];
-          heroView.updateMove(playerdata['x'], playerdata['y']);
-          heroView.updateAnim(playerdata['animatetype']);
-          heroView.sprite.scale.x = playerdata['scalex'];
-      }
-      // console.log(data);
-    };
-
-    function sendMessage(msg)
+  ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    if (data == 'kick')
     {
-        const message = JSON.stringify({ msg });
-        if (isConnected) {
-            ws.send(message);
-        } else {
-            console.log('WebSocket is not connected yet, queueing message');
-            messageQueue.push(message);
-        }
+        window.location.href = "/menu";
     }
-    //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
-    let transferData = setInterval(() =>
+    if ('state' in data)
     {
-      data =
-      {
-          x: hero.sprite.x,
-          y: hero.sprite.y,
-          animatetype: hero.animateType,
-          scalex: hero.sprite.scale.x,
+		opponentPreview.style.display = 'block';
+		preloader.style.display = 'none';
+		readyButton.removeAttribute('disabled');
+		console.log('connection');
+        if (data['state']['state'] === 'stop')
+        {
+            hero.restart();
+            if (state['state'] === 'start')
+            {
+                //window.location.href = "/win";
+            }
+        }
+        state = data['state'];
+    }
+    if ('opponentupdate' in data)
+    {
+        let playerdata = data['opponentupdate'];
+        heroView.updateMove(playerdata['x'], playerdata['y']);
+        heroView.updateAnim(playerdata['animatetype']);
+        heroView.sprite.scale.x = playerdata['scalex'];
+        heroView.hp = playerdata['hp'];
+        hero.takeDamage(playerdata['damage']);
+        for (let i = 0; i < opponentBullets.length; i++)
+        {
+            opponentBullets[0].sprite.destroy();
+            opponentBullets.splice(0, 1);
+        }
+
+        playerdata['opponentbullets'].forEach( bullet =>
+        {
+            let b = new Bullet(null, bullet['x'], bullet['y'], 0, 0, bullet['angle']);
+            b.view();
+            opponentBullets.push(b);
+        });
+
+    }
+    //console.log(data);
+  };
+
+  function sendMessage(msg)
+  {
+      const message = JSON.stringify({ msg });
+      if (isConnected) {
+          ws.send(message);
+      } else {
+          console.log('WebSocket is not connected yet, queueing message');
+          window.location.href = "/menu";
+          messageQueue.push(message);
       }
-      ws.send(JSON.stringify({'playerdata': data}))
-    }, 10);
+  }
+  //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
+
+  function transmitData()
+  {
+    bulletsdata = [];
+    bullets.forEach(bullet => {
+        bulletsdata.push({'x': bullet.sprite.x, 'y':bullet.sprite.y, 'angle': bullet.angle})
+    });
+    data =
+    {
+        x: hero.sprite.x,
+        y: hero.sprite.y,
+        hp: hero.hp,
+        animatetype: hero.animateType,
+        scalex: hero.sprite.scale.x,
+        herobullets: bulletsdata,
+        damage: opponentDamage,
+    }
+    ws.send(JSON.stringify({'playerdata': data}))
+    opponentDamage = 0;
+  }
+
+
+
+  setInterval(() =>
+  {
+    if (state['state'] === 'start')
+    {
+        transmitData()
+    }
+    if (state['state'] === 'ready' && +state['time'] + 5000 <= Date.now())
+    {
+        state['state'] = 'start'
+    }
+  }, 10);
 </script>
 </body>
 </html>
