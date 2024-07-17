@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="css/lobby_style.css">
   <input type="hidden" id="username" value="{{ username }}">
 
-
   <script src="script/pixi.js"></script>
   <script src="script/Bullet.js"></script>
   <script src="script/Experience.js"></script>
@@ -31,71 +30,95 @@
 
 </head>
 <body>
-    <script src="script/multiplayerIndex.js"></script>
-Здесь будет лобби
+<div class="main">
+  <div class="players-preview">
+    <img class="players-preview__player" id="player" src="images/hero.png">
+    <img class="players-preview__opponent" id="opponent"src="images/hero.png">
+  </div>
+  <button class="ready-button" id="ready-button" disabled>Готов</button>
+  <div id="preloader">
+    <p class="awaiting-text">Ожидание игрока...</p>
+    <div class="loader"></div>
+  </div>
+</div>
+
+
+<script src="script/multiplayerIndex.js"></script>
 <script>
-    username = document.getElementById('username').value
-  const ws = new WebSocket('ws://localhost:8080');
-  let isConnected = false;
-  const messageQueue = [];
+    const readyButton = document.getElementById('ready-button');
+    const opponentPreview = document.getElementById('opponent');
+    const preloader = document.getElementById('preloader');
+     username = document.getElementById('username').value;
+    const ws = new WebSocket('ws://localhost:8080');
+    let isConnected = false;
+    const messageQueue = [];
 
-  ws.onopen = function() {
-      isConnected = true;
-      console.log('WebSocket connection established');
-      while (messageQueue.length > 0) {
-          ws.send(messageQueue.shift());
+    ws.onopen = function() {
+        isConnected = true;
+        console.log('WebSocket connection established');
+        while (messageQueue.length > 0) {
+            ws.send(messageQueue.shift());
+        }
+        ws.send(JSON.stringify({'username': username}))
+    };
+
+    ws.onerror = function(error) {
+        console.error('WebSocket Error: ' + error);
+    };
+
+    ws.onclose = function() {
+        isConnected = false;
+        console.log('WebSocket connection closed');
+        sendMessage('close');
+    };
+
+    ws.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      if (data === 'kick')
+      {
+          window.location.href = "/menu";
       }
-      ws.send(JSON.stringify({'username': username}))
-  };
 
-  ws.onerror = function(error) {
-      console.error('WebSocket Error: ' + error);
-  };
-
-  ws.onclose = function() {
-      isConnected = false;
-      console.log('WebSocket connection closed');
-      sendMessage('close');
-  };
-
-  ws.onmessage = function(event) {
-    const data = JSON.parse(event.data);
-    if (data == 'kick')
-    {
-        window.location.href = "/menu";
-    }
-    if ('opponentupdate' in data)
-    {
-        let playerdata = data['opponentupdate'];
-        heroView.updateMove(playerdata['x'], playerdata['y']);
-        heroView.updateAnim(playerdata['animatetype']);
-        heroView.sprite.scale.x = playerdata['scalex'];
-    }
-    console.log(data);
-  };
-
-  function sendMessage(msg)
-  {
-      const message = JSON.stringify({ msg });
-      if (isConnected) {
-          ws.send(message);
-      } else {
-          console.log('WebSocket is not connected yet, queueing message');
-          messageQueue.push(message);
+      if ('state' in data)
+      {
+          opponentPreview.style.display = 'block';
+          preloader.style.display = 'none';
+          readyButton.removeAttribute('disabled');
+          console.log('connection');
       }
-  }
-  //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
-  let transferData = setInterval(() => 
-  {
-    data = 
+
+      if ('opponentupdate' in data)
+      {
+          let playerdata = data['opponentupdate'];
+          heroView.updateMove(playerdata['x'], playerdata['y']);
+          heroView.updateAnim(playerdata['animatetype']);
+          heroView.sprite.scale.x = playerdata['scalex'];
+      }
+      // console.log(data);
+    };
+
+    function sendMessage(msg)
     {
-        x: hero.sprite.x,
-        y: hero.sprite.y,
-        animatetype: hero.animateType,
-        scalex: hero.sprite.scale.x,
+        const message = JSON.stringify({ msg });
+        if (isConnected) {
+            ws.send(message);
+        } else {
+            console.log('WebSocket is not connected yet, queueing message');
+            messageQueue.push(message);
+        }
     }
-    ws.send(JSON.stringify({'playerdata': data}))
-  }, 10);
+    //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
+    let transferData = setInterval(() =>
+    {
+      data =
+      {
+          x: hero.sprite.x,
+          y: hero.sprite.y,
+          animatetype: hero.animateType,
+          scalex: hero.sprite.scale.x,
+      }
+      ws.send(JSON.stringify({'playerdata': data}))
+    }, 10);
 </script>
 </body>
 </html>
