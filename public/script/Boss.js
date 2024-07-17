@@ -33,36 +33,33 @@ class Boss
         this.timeUltaAttack = 800;      //частота генерации ульты (веера из выстрелов)
         this.currentTimeUltaAttack = 800;
  
-        // this.timeSpawnDevils = 100;     //частота спавна демонов   //сделать спавн тремя волнами в зависимости от хп босса wawe1, wwavw2. wawe 3 boolean
-        // this.currentTimeSpawnDevils = 100;
+        this.timeSpawnDevils = 3000;     //частота спавна демонов   //сделать спавн тремя волнами в зависимости от хп босса wawe1, wwavw2. wawe 3 boolean
+        this.currentTimeSpawnDevils = 100;
 
-        // let devilZoneWidth = 100;        //зона передвижения для демонов
-        // let devilZoneHeight = 0;
+        this.devilZoneWidth = 200;        //зона передвижения для демонов
+        this.devilZoneHeight = 0;
 
-        // let wave1 = false;        //флаги для трёх волн спавна демонов
-        // let wave2 = false;
-        // let wave3 = false;
+        this.devilSpawnPlace = {       // точки спавна демонов
+            1: {
+                x:1200,
+                y:830,
+                engaged: false,
+            },
+            2: {
+                x:1800,
+                y:830,
+                engaged: false,
+            },
+            3: {
+                x:2470,
+                y:1215,
+                engaged: false,
+            },
+        };
 
-        // const devilSpawnPlace = {       // точки спавна демонов
-        //     1: {
-        //         x:1200,
-        //         y:500,
-        //         // engaged: false,
-        //     },
-        //     2: {
-        //         x:1600,
-        //         y:500,
-        //         // engaged: false,
-        //     },
-        //     3: {
-        //         x:800,
-        //         y:500,
-        //         // engaged: false,
-        //     },
-        // };
-
-        this.maxHp = 100;
-        this.hp = 100;
+        this.maxHp = 1000;
+        this.hp = 1000;
+        this.experience = 50; //всего из босса выпадает 1000 опыта
 
         this.animateType = 'idle';
         this.deadTime = 3 * FPS;
@@ -189,58 +186,35 @@ class Boss
             }  
         }
 
-        // this.spawnDevils = function ()
-        // {
-        //     let q = Math.floor(Math.random() * 10 / 4 + 1);  // принимает рандомные значения с 1 по 3
-            
-        //     for(let c = 0; c < q; c++)
-        //     {
-        //         let spawned = false;
-        //         while (spawned === false)
-        //         {
-        //             let placeNum = Math.floor(Math.random() * 10 / 4 + 1); // принимает рандомные значения с 1 по 3
-        //             if (devilSpawnPlace[placeNum].engaged === false)
-        //             {
-        //                 const devil = new Devil(devilSpawnPlace[placeNum].x, devilSpawnPlace[placeNum].y, devilZoneWidth, devilZoneHeight, 500, 50, 130);
-        //                 devil.view();
-        //                 enemies.push(devil);
-        //                 devilSpawnPlace[placeNum].engaged = true;
-        //                 spawned = true;
-        //             }
-        //         }
-        //     }
-        // }
-
-        // this.spawnDevils = function ()
-        // {
-        //     // let q = Math.floor(Math.random() * 10 / 4 + 1);  // принимает рандомные значения с 1 по 3
-        //     for(let placeNum = 1; placeNum < 4; c++)
-        //     {
-        //         const devil = new Devil(devilSpawnPlace[placeNum].x, devilSpawnPlace[placeNum].y, devilZoneWidth, devilZoneHeight, 500, 50, 130);
-        //         devil.view();
-        //         enemies.push(devil);
-        //     }
-        // }
-
-        // this.spawnDevils = function ()
-        // {
-        //     if (this.currentTimeSpawnDevils <= 0)
-        //     {
-        //         let spawned = false;
-        //         while (spawned === false)
-        //         {
-        //             let placeNum = Math.floor(Math.random() * 10 / 4 + 1); // принимает рандомные значения с 1 по 3
-        //             if (devilSpawnPlace[placeNum].engaged === false)
-        //             {
-        //                 const devil = new Devil(devilSpawnPlace[placeNum].x, devilSpawnPlace[placeNum].y, devilZoneWidth, devilZoneHeight, 500, 50, 130);
-        //                 devil.view();
-        //                 enemies.push(devil);
-        //                 devilSpawnPlace[placeNum].engaged = true;
-        //                 spawned = true;
-        //             }
-        //         }   
-        //     }  
-        // }
+        this.spawnDevils = function ()
+        {
+            if (this.currentTimeSpawnDevils <= 0) 
+            {
+                let q = Math.floor(Math.random() * 10 / 4 + 1);  // принимает рандомные значения с 1 по 3
+                
+                for(let c = 0; c < q; c++)
+                {
+                    let spawned = false;
+                    while (spawned === false)
+                    {
+                        let placeNum = Math.floor(Math.random() * 10 / 4 + 1); // принимает рандомные значения с 1 по 3
+                        if (this.devilSpawnPlace[placeNum].engaged === false)
+                        {
+                            const devil = new Devil(this.devilSpawnPlace[placeNum].x, this.devilSpawnPlace[placeNum].y, this.devilZoneWidth, this.devilZoneHeight, 500, 50, 130);
+                            devil.view();
+                            enemies.push(devil);
+                            this.devilSpawnPlace[placeNum].engaged = true;
+                            spawned = true;
+                        }
+                    }
+                }
+                for(let placeNum = 1; placeNum < 4; placeNum++)
+                {
+                    this.devilSpawnPlace[placeNum].engaged = false;
+                }
+                this.currentTimeSpawnDevils = this.timeSpawnDevils
+            }
+        }
 
         this.takeDamage = function (damage)
         {
@@ -309,48 +283,29 @@ class Boss
                 }
                 if (this.hp <= 0.3 * this.maxHp)
                 {
-                    this.timeShotAttack = 50;      //частота генерации одиночных выстрелов
-                    this.timeUltaAttack = 650;      //частота генерации ульты 
+                    this.timeShotAttack = 60;      //частота генерации одиночных выстрелов
+                    this.timeUltaAttack = 660;      //частота генерации ульты 
                 }
                 else if (this.hp <= 0.6 * this.maxHp)
                 {
                     this.timeShotAttack = 80;      //частота генерации одиночных выстрелов
                     this.timeUltaAttack = 720;      //частота генерации ульты
-                }    
-                // this.spawnDevils();        
-                // if (this.hp <= 0.98 * this.maxHp && wave1 === false)
-                // {
-                //     this.spawnDevils();
-                //     wave1 === true;
-                // } 
-                // else if (this.hp <= 0.64 * this.maxHp && wave2 === false)
-                // {
-                //     this.spawnDevils();
-                //     wave2 === true;
-                // }
-                // else if (this.hp <= 0.31 * this.maxHp && wave3 === false)
-                // {
-                //     this.spawnDevils();
-                //     wave3 === true;
-                // }             
+                } 
+                if (enemies.length < 2) 
+                {
+                    this.spawnDevils(); 
+                }          
             }
         }
 
         this.dropExperience = function ()
         {    
-            let randomCount = Math.floor(Math.random() * 5) + 2;
-            let experienceCount = Math.floor(this.experience / randomCount);
-            console.log('+', randomCount);
-            let i = -Math.floor(randomCount / 2)
-            for (i; i < randomCount -Math.floor(randomCount / 2) - 1; i++)
+            for (let i = 1; i < 21; i++)
             {
-                let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, experienceCount);
+                let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience);
                 experience.view();
                 experiences.push(experience);
             }
-            let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
-            experience.view();
-            experiences.push(experience);
         }
         
         this.update = function (time)
@@ -365,10 +320,10 @@ class Boss
                 {
                     this.currentTimeUltaAttack -= 1 * time.deltaTime;
                 }
-                // if (this.currentTimeSpawnDevils > 0)
-                // {
-                //     this.currentTimeSpawnDevils -= 1 * time.deltaTime;
-                // } 
+                if (this.currentTimeSpawnDevils > 0)
+                {
+                    this.currentTimeSpawnDevils -= 1 * time.deltaTime;
+                } 
                 this.updateHp();
                 this.updateCollide();
                 this.updateMove(time);

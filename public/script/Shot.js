@@ -51,8 +51,7 @@ class Shot
                     {
                         this.lifeTime = 10;
                         this.boom = true;
-                        // hero.takeDamage(15);
-                        hero.takeDamage(0);
+                        hero.takeDamage(10);
                     }  
                 }
             }
