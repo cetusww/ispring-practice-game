@@ -14,7 +14,7 @@ function levelCreate()
     resizeBackground();
     hero = new Hero(250, 100, 6, 0, 680);
     heroView = new HeroView(250, 100);
-    portal = new Portal(2070, 1020);
+    // portal = new Portal(2070, 1020);
 
     let texture //= PIXI.Texture.from('ground');
     platforms.push(new Ground(texture, 1500, 70, 3000, 40)); // потолок - 4 уровень

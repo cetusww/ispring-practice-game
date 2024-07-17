@@ -204,6 +204,8 @@ function onKeyUp(event)
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
+        { alias: 'hero_beacon', src: '/images/hero_beacon.png' },
+        { alias: 'enemy_beacon', src: '/images/enemy_beacon.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
         { alias: 'stalactite', src: '/images/stalactite.png' },
         { alias: 'bat', src: '/images/bat_group.json' },
@@ -288,14 +290,15 @@ function onKeyUp(event)
 
 function gameLoop(time)
 {
-    portal.update(time);
+    // portal.update(time);
     hero.update(time);
     heroView.update(time);
-    if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
-    {
-        portal.activate();
-        hero.portalTextView();
-    }
+    hero.updateMap();
+    // if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
+    // {
+    //     portal.activate();
+    //     // hero.portalTextView();
+    // }
     if (hero.deadTime < 0)
     {
         saveScore();
@@ -465,10 +468,11 @@ function levelView()
     {
         fire.view();
     });
-    portal.view();
+    // portal.view();
     hero.experienceMax = experienceMax;
     heroView.view();
     hero.view();
+    hero.updateMap();
 }
 
 
