@@ -26,4 +26,16 @@ class ApiController extends AbstractController
 
 		return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
 	}
+
+    public function saveMultiplayerScore(Request $request): Response
+    {
+        session_name('auth');
+        session_start();
+
+        $data = json_decode($request->getContent(), true);
+
+        $this->repository->updateUserMultiplayerProgress($data['username'], $data['opponentname']);
+
+        return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
+    }
 }

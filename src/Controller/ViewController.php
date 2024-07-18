@@ -122,14 +122,19 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
-		
+
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
+
+        $usersMultiplayer = $this->repository->findAllUsers();
 		$usersFirstLevel = $this->repository->findAllUsers();
         $usersSecondLevel = $this->repository->findAllUsers();
         $usersThirdLevel = $this->repository->findAllUsers();
 
+        usort($usersMultiplayer, function($a, $b) {
+            return $b->getMultiplayerRatio() - $a->getMultiplayerRatio();
+        });
 		usort($usersFirstLevel, function($a, $b) {
 			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
 		});
@@ -140,7 +145,7 @@ class ViewController extends AbstractController
             return $b->getScoreThirdLevel() - $a->getScoreThirdLevel();
         });
 
-		return $this->render('rating.html.twig', ['usersFirstLevel' => $usersFirstLevel, 'usersSecondLevel' => $usersSecondLevel, 'usersThirdLevel' => $usersThirdLevel]);
+		return $this->render('rating.html.twig', ['usersMultiplayer' => $usersMultiplayer, 'usersFirstLevel' => $usersFirstLevel, 'usersSecondLevel' => $usersSecondLevel, 'usersThirdLevel' => $usersThirdLevel]);
 	}
 
 	public function showLobby(Request $request): Response

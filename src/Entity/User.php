@@ -12,6 +12,9 @@ class User
 		private ?int $scoreFirstLevel,
 		private ?int $scoreSecondLevel,
 		private ?int $scoreThirdLevel,
+        private ?int $multiplayerAll,
+        private ?int $multiplayerWin,
+        private ?int $multiplayerRatio,
 	)
 	{
 	}
@@ -51,6 +54,21 @@ class User
 		return $this->scoreThirdLevel;
 	}
 
+    public function getMultiplayerAll(): ?int
+    {
+        return $this->multiplayerAll;
+    }
+
+    public function getMultiplayerWin(): ?int
+    {
+        return $this->multiplayerWin;
+    }
+
+    public function getMultiplayerRatio(): ?int
+    {
+        return $this->multiplayerRatio;
+    }
+
 	public function setUserName(string $username): string
 	{
 		return $this->username = $username;
@@ -80,4 +98,19 @@ class User
 	{
 		return $this->scoreThirdLevel = $scoreThirdLevel;
 	}
+
+    public function setMultiplayerAll(int $multiplayerAll): int
+    {
+        return $this->multiplayerAll = $multiplayerAll;
+    }
+
+    public function setMultiplayerWin(int $multiplayerWin): int
+    {
+        return $this->multiplayerWin = $multiplayerWin;
+    }
+
+    public function setMultiplayerRatio(int $multiplayerRatio): int
+    {
+        return $this->multiplayerRatio = $multiplayerRatio;
+    }
 }
