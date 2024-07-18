@@ -8,15 +8,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ErrorController extends AbstractController
 {
-	public function show(): Response
-	{
-		$exception = $this->get('request_stack')->getCurrentRequest()->attributes->get('exception');
+    public function show(): Response
+    {
+        $exception = $this->get('request_stack')->getCurrentRequest()->attributes->get('exception');
 
-		if ($exception instanceof NotFoundHttpException)
+        if ($exception instanceof NotFoundHttpException)
         {
-			return $this->redirectToRoute('error_not_found');
-		}
+            return $this->redirectToRoute('error_not_found');
+        }
 
-		return new Response('Something went wrong!', 500);
-	}
+        return new Response('Something went wrong!', 500);
+    }
 }

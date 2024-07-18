@@ -9,39 +9,39 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository
 {
-	private EntityManagerInterface $entityManager;
-	private EntityRepository $repository;
+    private EntityManagerInterface $entityManager;
+    private EntityRepository $repository;
     private SessionService $sessionService;
 
-	public function __construct(EntityManagerInterface $entityManager, SessionService $sessionService)
-	{
-		$this->entityManager = $entityManager;
-		$this->repository = $entityManager->getRepository(User::class);
+    public function __construct(EntityManagerInterface $entityManager, SessionService $sessionService)
+    {
+        $this->entityManager = $entityManager;
+        $this->repository = $entityManager->getRepository(User::class);
         $this->sessionService = $sessionService;
-	}
+    }
 
-	public function saveUserToDatabase(User $user): int
-	{
-		$this->entityManager->persist($user);
-		$this->entityManager->flush();
-		return $user->getId();
-	}
+    public function saveUserToDatabase(User $user): int
+    {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        return $user->getId();
+    }
 
-	public function findUserByUserName(string $username): ?User
-	{
-		return $this->repository->findOneBy(['username' => $username]);
-	}
+    public function findUserByUserName(string $username): ?User
+    {
+        return $this->repository->findOneBy(['username' => $username]);
+    }
 
-	public function findAllUsers(): array
-	{
-		return $this->repository->findAll();
-	}
+    public function findAllUsers(): array
+    {
+        return $this->repository->findAll();
+    }
 
-	public function getCurrentUser(): ?User
-	{
+    public function getCurrentUser(): ?User
+    {
         $this->sessionService->startSession('auth');
-		return $this->repository->findOneBy(['id' => $_SESSION['user_id']]);
-	}
+        return $this->repository->findOneBy(['id' => $_SESSION['user_id']]);
+    }
 
     public function getUserCurrentLevel(string $username): int
     {
@@ -49,9 +49,9 @@ class UserRepository
         return $user->getLevel();
     }
 
-	public function updateUserProgress(User $user): void
-	{
+    public function updateUserProgress(User $user): void
+    {
         $this->entityManager->persist($user);
-		$this->entityManager->flush();
-	}
+        $this->entityManager->flush();
+    }
 }

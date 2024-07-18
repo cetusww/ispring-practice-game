@@ -7,61 +7,61 @@ use App\Repository\UserRepository;
 
 class UserService
 {
-	private UserRepository $userRepository;
-	private ValidationService $validationService;
+    private UserRepository $userRepository;
+    private ValidationService $validationService;
     private SecurityService $securityService;
-	public function __construct(UserRepository $userRepository, ValidationService $validationService, SecurityService $securityService)
-	{
-		$this->userRepository = $userRepository;
-		$this->validationService = $validationService;
-		$this->securityService = $securityService;
-	}
 
-	public function signUpUser(string $username, string $password): array
-	{
-		$existingUser = $this->userRepository->findUserByUserName($username);
-		$error = $this->validationService->validateSignUpData($username, $password, $existingUser);
+    public function __construct(UserRepository $userRepository, ValidationService $validationService, SecurityService $securityService)
+    {
+        $this->userRepository = $userRepository;
+        $this->validationService = $validationService;
+        $this->securityService = $securityService;
+    }
 
-		if (!empty($error))
-		{
-			return ['error' => $error];
-		}
+    public function signUpUser(string $username, string $password): array
+    {
+        $existingUser = $this->userRepository->findUserByUserName($username);
+        $error = $this->validationService->validateSignUpData($username, $password, $existingUser);
 
-		$hashedPassword = $this->securityService->hashPassword($password);
-		$user = new User(
-			null,
-			$username,
-			$hashedPassword,
-			1,
-			0,
-			0,
-			0,
-		);
+        if (!empty($error))
+        {
+            return ['error' => $error];
+        }
 
-		$this->userRepository->saveUserToDatabase($user);
+        $hashedPassword = $this->securityService->hashPassword($password);
+        $user = new User(
+            null,
+            $username,
+            $hashedPassword,
+            1,
+            0,
+            0,
+            0,
+        );
 
-		return ['user' => $user];
-	}
+        $this->userRepository->saveUserToDatabase($user);
 
-	public function signInUser(string $username, string $password): array
-	{
-		$existingUser = $this->userRepository->findUserByUserName($username);
-		$error = $this->validationService->validateSignInData($username, $password, $existingUser);
+        return ['user' => $user];
+    }
 
-		if (!empty($error))
-		{
-			return ['error' => $error];
-		}
+    public function signInUser(string $username, string $password): array
+    {
+        $existingUser = $this->userRepository->findUserByUserName($username);
+        $error = $this->validationService->validateSignInData($username, $password, $existingUser);
 
-		return ['user' => $existingUser];
-	}
+        if (!empty($error))
+        {
+            return ['error' => $error];
+        }
+
+        return ['user' => $existingUser];
+    }
 
     public function getSortedUsers(): array
     {
         $users = $this->userRepository->findAllUsers();
 
-        usort($users, function($a, $b)
-        {
+        usort($users, function ($a, $b) {
             return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
         });
 

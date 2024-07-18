@@ -11,28 +11,30 @@ use App\Service\UserService;
 
 class ApiController extends AbstractController
 {
-	private UserRepository $userRepository;
+    private UserRepository $userRepository;
     private SessionService $sessionService;
     private UserService $userService;
-	public function __construct(UserRepository $userRepository, SessionService $sessionService, UserService $userService)
-	{
-		$this->userRepository = $userRepository;
+
+    public function __construct(UserRepository $userRepository, SessionService $sessionService, UserService $userService)
+    {
+        $this->userRepository = $userRepository;
         $this->sessionService = $sessionService;
         $this->userService = $userService;
-	}
-	public function saveScore(Request $request): Response
-	{
+    }
+
+    public function saveScore(Request $request): Response
+    {
         $this->sessionService->startSession('auth');
 
-		$data = json_decode($request->getContent(), true);
+        $data = json_decode($request->getContent(), true);
 
         $user = $this->userRepository->findUserByUserName($_SESSION['username']);
 
         $this->userService->setUserLevel($user, $data['nextLvl']);
         $this->userService->setUserScore($user, $data['currentLvl'], $data['score']);
 
-		$this->userRepository->updateUserProgress($user);
+        $this->userRepository->updateUserProgress($user);
 
-		return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
-	}
+        return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
+    }
 }
