@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="css/lobby_style.css">
   <input type="hidden" id="username" value="{{ username }}">
 
-
   <script src="script/pixi.js"></script>
   <script src="script/Bullet.js"></script>
   <script src="script/Experience.js"></script>
   <script src="script/Fireball.js"></script>
   <script src="script/Stalactite.js"></script>
   <script src="script/Hero.js"></script>
+  <script src="script/Fire.js"></script>
   <script src="script/HeroView.js"></script>
   <script src="script/Enemy.js"></script>
   <script src="script/Devil.js"></script>
@@ -31,25 +31,45 @@
 
 </head>
 <body>
-    <script src="script/multiplayerIndex.js"></script>
+<div class="main" id="main">
+  <div class="players-preview">
+    <img class="players-preview__player" id="player" src="images/hero.png">
+    <img class="players-preview__opponent" id="opponent"src="images/hero.png">
+  </div>
+  <div class="countdown" id="countdown">Бой через 5 секунд</div>
+  <div id="preloader">
+    <p class="awaiting-text">Ожидание игрока...</p>
+    <div class="loader"></div>
+  </div>
+</div>
+
+
+<script src="script/multiplayerIndex.js"></script>
 <script>
-    let username = document.getElementById('username').value
+    //var w = new Worker("script/multiplayerIndex.js");
+    const countdown = document.getElementById('countdown');
+    const allCanvas = document.getElementsByTagName('canvas');
+    const lobby = document.getElementById('main');
+    const opponentPreview = document.getElementById('opponent');
+    const preloader = document.getElementById('preloader');
+    let username = document.getElementById('username').value;
+    let opponentname = 'bot';
     const ws = new WebSocket('ws://localhost:8080');
     let isConnected = false;
     const messageQueue = [];
 
-  ws.onopen = function() {
-      isConnected = true;
-      console.log('WebSocket connection established');
-      while (messageQueue.length > 0) {
-          ws.send(messageQueue.shift());
-      }
-      ws.send(JSON.stringify({'username': username}))
-  };
+    ws.onopen = function() {
+        isConnected = true;
+        console.log('WebSocket connection established');
+        while (messageQueue.length > 0) {
+            ws.send(messageQueue.shift());
+        }
+        ws.send(JSON.stringify({'username': username}))
+    };
 
-  ws.onerror = function(error) {
-      console.error('WebSocket Error: ' + error);
-  };
+    ws.onerror = function(error) {
+        console.error('WebSocket Error: ' + error);
+    };
 
   ws.onclose = function() {
       isConnected = false;
@@ -60,30 +80,55 @@
 
   ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
-    if (data == 'kick')
+    if (data === 'kick')
     {
         window.location.href = "/menu";
     }
+    if (data == 'lose')
+    {
+        window.location.href = "/lose";
+    }
     if ('state' in data)
     {
+		opponentPreview.style.display = 'block';
+		preloader.style.display = 'none';
+        countdown.style.display = 'block';
         if (data['state']['state'] === 'stop')
         {
+            opponentPreview.style.display = 'none';
+            preloader.style.display = 'block';
             hero.restart();
-            if (state['state'] === 'start') 
+            if (state['state'] === 'start' || state['state'] === 'win') 
             {
+                saveScore();
                 window.location.href = "/win";
             }  
         }
         state = data['state'];
     }
-    if ('opponentupdate' in data)
+    if ('opponentname' in data)
     {
+        opponentname = data['opponentname'];
+    }
+    if ('opponentupdate' in data)
+    { 
         let playerdata = data['opponentupdate'];
         heroView.updateMove(playerdata['x'], playerdata['y']);
         heroView.updateAnim(playerdata['animatetype']);
         heroView.sprite.scale.x = playerdata['scalex'];
         heroView.hp = playerdata['hp'];
         hero.takeDamage(playerdata['damage']);
+        //removeBonusId.push(arrayOfBonus[i]);
+        
+        playerdata['removebonus'].forEach(id => {
+            for (let i = 0; i < arrayOfBonus.length; i++) {
+                if (arrayOfBonus[i].id == id) {
+                    arrayOfBonus[i].sprite.destroy();
+                    arrayOfBonus.splice(i, 1);
+                    break
+                }
+            }  
+        });
         for (let i = 0; i < opponentBullets.length; i++)
         {
             opponentBullets[0].sprite.destroy();
@@ -113,13 +158,18 @@
       }
   }
   //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
-
   function transmitData()
   {
     bulletsdata = [];
     bullets.forEach(bullet => {
         bulletsdata.push({'x': bullet.sprite.x, 'y':bullet.sprite.y, 'angle': bullet.angle})
     });
+    let lose = false;
+    if (heroView.hp <= 0)
+    {
+        lose = true;
+        state['state'] = 'win';
+    }
     data = 
     {
         x: hero.sprite.x,
@@ -128,25 +178,40 @@
         animatetype: hero.animateType,
         scalex: hero.sprite.scale.x,
         herobullets: bulletsdata,
+        removebonus: removeBonusId,
         damage: opponentDamage, 
+        opponentlose: lose,
     }
+    removeBonusId = [];
     ws.send(JSON.stringify({'playerdata': data}))
     opponentDamage = 0;
   }
 
 
 
-  setInterval(() => 
+  setInterval(() =>
   {
+    countdown.innerHTML = `Бой через ${Math.ceil((state['time'] - Date.now() + 4000) / 1000)} секунд`;
     if (state['state'] === 'start')
     {
-        transmitData()
+        for (let canvas of allCanvas)
+        {
+            canvas.style.display = 'block';
+        }
+        lobby.style.display = 'none';
+        transmitData();
     }
-    if (state['state'] === 'ready' && +state['time'] + 5000 <= Date.now())
+    if (state['state'] === 'ready' && heroView.name === 'bot')
     {
-        state['state'] = 'start'
+        heroView.name = opponentname;
     }
-  }, 10);
+    if (state['state'] === 'ready' && +state['time'] + 4000 <= Date.now())
+    {
+        state['state'] = 'start';
+        hero.addShield(5);
+        heroView.addShield(5);
+    }
+  }, 15);
 </script>
 </body>
 </html>

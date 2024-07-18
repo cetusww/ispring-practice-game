@@ -292,7 +292,7 @@ function gameLoop(time)
 {
     portal.update(time);
     hero.update(time);
-    if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
+    if (hero.experience >= hero.experienceMax * 0.85 && !portal.isActive && !hero.isWin)
     {
         portal.activate();
         hero.portalTextView();
@@ -436,6 +436,7 @@ function gameLoop(time)
 }
 function levelView()
 {
+    portal.view();
     arrayOfWall.forEach(wall => {
         wall.view();
     })
@@ -466,7 +467,7 @@ function levelView()
     {
         fire.view();
     });
-    portal.view();
+    
     hero.experienceMax = experienceMax;
     hero.view();
 }
