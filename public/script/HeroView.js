@@ -152,6 +152,15 @@ class HeroView
             //this.updateMove(x, y);
             this.updateName();
             this.updateCollide();
+            if (this.activateShield)
+            {
+                let currentTime = performance.now();
+                let elapsedTime = (currentTime - this.shieldStartTime) / 1000;
+                if (elapsedTime >= this.shieldDuration)
+                {
+                    this.activateShield = false;
+                }
+            }
         }
         else 
         {

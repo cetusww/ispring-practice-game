@@ -346,6 +346,9 @@ class Hero
         if (keys.keyDownDouble && this.isGoDown) {
             this.sprite.y += 12;
         }
+        if (this.animateType === 'jump') {
+            this.animateType = 'fly';
+        }
         if (keys.keyUp) {
             if (this.isGround) {
                 this.updateAnim('jump');

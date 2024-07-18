@@ -34,6 +34,7 @@
 <body>
     <script src="script/multiplayerIndex.js"></script>
 <script>
+    var w = new Worker("script/multiplayerIndex.js");
     let username = document.getElementById('username').value;
     let opponentname = 'bot';
     const ws = new WebSocket('ws://localhost:8080');
@@ -66,12 +67,16 @@
     {
         window.location.href = "/menu";
     }
+    if (data == 'lose')
+    {
+        window.location.href = "/lose";
+    }
     if ('state' in data)
     {
         if (data['state']['state'] === 'stop')
         {
             hero.restart();
-            if (state['state'] === 'start') 
+            if (state['state'] === 'start' || state['state'] === 'win') 
             {
                 saveScore();
                 window.location.href = "/win";
@@ -84,23 +89,24 @@
         opponentname = data['opponentname'];
     }
     if ('opponentupdate' in data)
-    {
+    { 
         let playerdata = data['opponentupdate'];
         heroView.updateMove(playerdata['x'], playerdata['y']);
         heroView.updateAnim(playerdata['animatetype']);
         heroView.sprite.scale.x = playerdata['scalex'];
         heroView.hp = playerdata['hp'];
         hero.takeDamage(playerdata['damage']);
-        removeBonusId.push(arrayOfBonus[i]);
+        //removeBonusId.push(arrayOfBonus[i]);
         
-        // playerdata['removebonus'].forEach(id => {
-        //     for (let i = 0; i < arrayOfBonus.length; i++) {
-        //         if (arrayOfBonus[i].id == id) {
-        //             arrayOfBonus.splice(i, 1);
-        //             break
-        //         }
-        //     }  
-        // });
+        playerdata['removebonus'].forEach(id => {
+            for (let i = 0; i < arrayOfBonus.length; i++) {
+                if (arrayOfBonus[i].id == id) {
+                    arrayOfBonus[i].sprite.destroy();
+                    arrayOfBonus.splice(i, 1);
+                    break
+                }
+            }  
+        });
         for (let i = 0; i < opponentBullets.length; i++)
         {
             opponentBullets[0].sprite.destroy();
@@ -136,6 +142,12 @@
     bullets.forEach(bullet => {
         bulletsdata.push({'x': bullet.sprite.x, 'y':bullet.sprite.y, 'angle': bullet.angle})
     });
+    let lose = false;
+    if (heroView.hp <= 0)
+    {
+        lose = true;
+        state['state'] = 'win';
+    }
     data = 
     {
         x: hero.sprite.x,
@@ -146,7 +158,9 @@
         herobullets: bulletsdata,
         removebonus: removeBonusId,
         damage: opponentDamage, 
+        opponentlose: lose,
     }
+    removeBonusId = [];
     ws.send(JSON.stringify({'playerdata': data}))
     opponentDamage = 0;
   }
@@ -166,8 +180,8 @@
     if (state['state'] === 'ready' && +state['time'] + 5000 <= Date.now())
     {
         state['state'] = 'start';
-        hero.addShield(10);
-        heroView.addShield(10);
+        hero.addShield(5);
+        heroView.addShield(5);
     }
   }, 15);
 </script>

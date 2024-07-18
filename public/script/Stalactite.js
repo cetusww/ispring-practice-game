@@ -66,8 +66,6 @@ class Stalactite
         {     
             if (!this.isFall) 
             {
-                //console.log('update stalactite')
-                //console.log(this.danger, this.stepWidth, this.sprite.width);
                 if (this.sprite.height < this.maxHeight)
                 {
                     if (this.currentTimeHeight < 0)
@@ -76,7 +74,6 @@ class Stalactite
                         this.sprite.width += this.stepWidth;
                         this.currentTimeHeight = this.timeHeight;
                         this.danger += 0.04; 
-                        console.log(this.danger, this.stepWidth, this.sprite.width);
                     } else
                     {
                         this.currentTimeHeight -= time.deltaTime;
@@ -103,7 +100,6 @@ class Stalactite
                         this.collideTop <= hero.collideBottom
                     ) {
                         this.boom = true;
-                        console.log(this.sprite.vy)
                         hero.takeDamage(this.damage * this.danger + this.sprite.vy);
                         this.lifeTime = 0.5 * FPS;
                     }

@@ -48,12 +48,12 @@ function levelCreate()
     arrayOfWall.push(new Wall(texture, 78, 730, 128, 1050)); // левая стена
     arrayOfWall.push(new Wall(texture, 2950, 625, 128, 1250)); // правая стена
     
-    // arrayOfBonus.push(new Shield(200, 1105, 10));
-    // arrayOfBonus.push(new Shield(2800, 1105, 10));
-    // arrayOfBonus.push(new Health(100, 160));
-    // arrayOfBonus.push(new Health(200, 500));
-    // arrayOfBonus.push(new Health(1350, 500));
-    // arrayOfBonus.push(new Health(2750, 500));
+    arrayOfBonus.push(new Shield(200, 1105, 10));
+    arrayOfBonus.push(new Shield(2800, 1105, 10));
+    arrayOfBonus.push(new Health(100, 160));
+    arrayOfBonus.push(new Health(200, 500));
+    arrayOfBonus.push(new Health(1350, 500));
+    arrayOfBonus.push(new Health(2750, 500));
 
 
     arrayOfStalactite.push(new Stalactite(900, 60, 700, 200));

@@ -8,7 +8,7 @@ use Ratchet\MessageComponentInterface;
 class HeroController implements MessageComponentInterface {
 	protected \SplObjectStorage $clients;
 	public array $arrayOfUsers = [];
-
+	public array $lobbyNames = [];
 
 	public function __construct() {
 		$this->clients = new \SplObjectStorage;
@@ -25,11 +25,20 @@ class HeroController implements MessageComponentInterface {
 		if (!$msg) {
 			echo "Invalid message\n";
 		}
-		echo "Received message: $msg\n";  // Отладочное сообщение
+		//echo "Received message: $msg\n";  // Отладочное сообщение
 		$data = json_decode($msg, true);
+		$kick = false;
 		if (isset($data['username']))
 		{
-			if (count($this->arrayOfUsers) === 2)
+			if (count($this->arrayOfUsers) === 1)
+			{
+				$keys = array_keys($this->arrayOfUsers);
+				if ($this->arrayOfUsers[$keys[0]] === $data['username'])
+				{
+					$kick = true;
+				}
+			}	
+			if (count($this->arrayOfUsers) === 2 || $kick)
 			{
 				$from->send(json_encode('kick'));
 			}
@@ -55,19 +64,27 @@ class HeroController implements MessageComponentInterface {
 			foreach ($this->clients as $client) {
 				if ($client->resourceId !== $from->resourceId)
 				{
-					$client->send(json_encode(
-					[
-						'opponentupdate' => 
+					if ($playerData['opponentlose'] == 'true')
+					{
+						$client->send(json_encode('lose'));
+						echo 'lose';
+					} else
+					{
+						$client->send(json_encode(
 						[
-							'x' => $playerData['x'], 
-							'y' => $playerData['y'],
-							'hp' => $playerData['hp'],
-							'animatetype' => $playerData['animatetype'],
-							'scalex' => $playerData['scalex'],
-							'opponentbullets' => $playerData['herobullets'],
-							'damage' => $playerData['damage'],
-						]
-					]));
+							'opponentupdate' => 
+							[
+								'x' => $playerData['x'], 
+								'y' => $playerData['y'],
+								'hp' => $playerData['hp'],
+								'animatetype' => $playerData['animatetype'],
+								'scalex' => $playerData['scalex'],
+								'opponentbullets' => $playerData['herobullets'],
+								'removebonus' => $playerData['removebonus'],
+								'damage' => $playerData['damage'],
+							]
+						]));
+					}
 				}
 			}
 		}
