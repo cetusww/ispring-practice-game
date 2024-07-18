@@ -7,6 +7,10 @@ class Hero
         this.sprite.loop = true; // Зацикливание анимации
         this.sprite.play(); // Запуск анимации
 
+        this.posX = posX;
+        this.posY = posY;
+
+
         this.sprite.x = posX;
         this.sprite.y = posY;
         this.sprite.width = 78;
@@ -66,7 +70,14 @@ class Hero
         this.focusTexture.tint = 0x000000;
         this.focusTexture.anchor.set(0.5);
 
-
+        this.restart = function () {
+            this.updateAnim('idle')
+            this.sprite.x = this.posX;
+            this.sprite.y = this.posY;
+            this.hp = this.hpMax;
+            this.sprite.vx = 0;
+            this.sprite.vy = 0;
+        }
         this.updateAnim = function (type) {
             if (type === 'idle' && this.animateType !== 'idle') {
                 this.sprite.loop = false;
@@ -240,6 +251,46 @@ class Hero
             app.stage.addChild(this.experienceTitle);
             app.stage.addChild(this.experienceText);
         }
+
+        this.updateMap = function () {
+            let screenRatio = background.height / background.width;
+            let mapWidth = 350;
+            let mapHeight = mapWidth * screenRatio;
+            let positionRatio = mapWidth / background.width;
+
+            app.stage.removeChild(this.graphicsMapFrame);
+            app.stage.removeChild(this.graphicsMap);
+            app.stage.removeChild(this.heroBeacon);
+            app.stage.removeChild(this.enemyBeacon);
+
+            this.graphicsMapFrame = new PIXI.Graphics();  // рамка для карты
+            this.graphicsMapFrame.rect(app.screen.width - mapWidth - 10, 12, mapWidth, mapHeight);
+            this.graphicsMapFrame.stroke({width: 4, color: 0xfeeb77});
+
+            this.graphicsMap = new PIXI.Sprite(PIXI.Texture.from('level2_map'));  // карта
+            this.graphicsMap.x = app.screen.width - mapWidth - 10;
+            this.graphicsMap.y = 12;
+            this.graphicsMap.width = mapWidth;
+            this.graphicsMap.height = mapHeight;
+
+            this.heroBeacon = new PIXI.Sprite(PIXI.Texture.from('hero_beacon')); // маячок игрока
+            this.heroBeacon.x = app.screen.width - mapWidth - 20 + this.sprite.x * positionRatio;
+            this.heroBeacon.y = 2 + this.sprite.y * positionRatio;
+            this.heroBeacon.width = 15;
+            this.heroBeacon.height = 15;
+
+            this.enemyBeacon = new PIXI.Sprite(PIXI.Texture.from('enemy_beacon')); // маячок соперника
+            this.enemyBeacon.x = app.screen.width - mapWidth - 20 + heroView.sprite.x * positionRatio;
+            this.enemyBeacon.y = 2 + heroView.sprite.y * positionRatio;
+            this.enemyBeacon.width = 15;
+            this.enemyBeacon.height = 15;
+
+            app.stage.addChild(this.graphicsMapFrame);
+            app.stage.addChild(this.graphicsMap);
+            app.stage.addChild(this.enemyBeacon);
+            app.stage.addChild(this.heroBeacon);
+        }
+
         this.updateWeapon = function (time) {
             this.countBulletText.text = this.currentCountBullet
             if (this.currentCountBullet > 0) {

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Repository\LobbyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,10 +12,13 @@ class ViewController extends AbstractController
 {
 
 	private UserRepository $repository;
+	private LobbyRepository $lobbyRepository;
 
-	public function __construct(UserRepository $repository)
+
+	public function __construct(UserRepository $repository, LobbyRepository $lobbyRepository)
 	{
 		$this->repository = $repository;
+		$this->lobbyRepository = $lobbyRepository;
 	}
 
 	public function index(): Response
@@ -118,6 +122,7 @@ class ViewController extends AbstractController
 	{
 		session_name('auth');
 		session_start();
+		
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
@@ -130,14 +135,29 @@ class ViewController extends AbstractController
 		return $this->render('rating.html.twig', ['users' => $users]);
 	}
 
-	public function showLobby(): Response
+	public function showLobby(Request $request): Response
 	{
 		session_name('auth');
 		session_start();
-		if ($_SESSION === []) {
+		$username = $_SESSION['username'] ?? null;
+		if ($username === null) {
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('lobby.html.twig');
+		$lobbyId = $request->get('id');
+		$lobby = $this->lobbyRepository->findLobbyById($lobbyId);
+		//добавить проверку на полное лобби
+		return $this->render('lobby.html.twig', ['lobby' => $lobby, 'username' => $username]);
+	}
+
+	public function showMultiplayer(): Response
+	{
+		session_name('auth');
+		session_start();
+		$username = $_SESSION['username'] ?? null;
+		if ($username === null) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('lobby.html.twig', ['username' => $username]);
 	}
 
 	public function showWin(): Response

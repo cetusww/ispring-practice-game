@@ -9,7 +9,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="username" column="username" type="string" length="255" />
+        <field name="username" column="username" type="string" length="255" unique="true"/>
         <field name="password" column="password" type="string" length="255" />
         <field name="level" column="level" type="integer" />
         <field name="scoreFirstLevel" column="score_1" type="integer" />
