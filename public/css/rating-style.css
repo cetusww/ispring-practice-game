@@ -61,6 +61,7 @@ body {
     font: 800 16px/20px 'Russo One', sans-serif;
     padding: 10px;
     text-align: center;
+    overflow: auto;
 }
 
 h2 {
@@ -80,6 +81,14 @@ h3 {
     margin: 0 0 0 25px;
     font: 800 16px/20px "Russo One", sans-serif;
     color: rgba(255, 255, 255, 1);
+}
+
+.table__multi-list {
+    overflow: auto;
+}
+
+.table__score {
+    float: right;
 }
 
 .previous-page {
