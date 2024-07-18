@@ -121,13 +121,21 @@ class ViewController extends AbstractController
 		if ($_SESSION === []) {
 			return $this->redirectToRoute('index');
 		}
-		$users = $this->repository->findAllUsers();
+		$usersFirstLevel = $this->repository->findAllUsers();
+        $usersSecondLevel = $this->repository->findAllUsers();
+        $usersThirdLevel = $this->repository->findAllUsers();
 
-		usort($users, function($a, $b) {
+		usort($usersFirstLevel, function($a, $b) {
 			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
 		});
+        usort($usersSecondLevel, function($a, $b) {
+            return $b->getScoreSecondLevel() - $a->getScoreSecondLevel();
+        });
+        usort($usersThirdLevel, function($a, $b) {
+            return $b->getScoreThirdLevel() - $a->getScoreThirdLevel();
+        });
 
-		return $this->render('rating.html.twig', ['users' => $users]);
+		return $this->render('rating.html.twig', ['usersFirstLevel' => $usersFirstLevel, 'usersSecondLevel' => $usersSecondLevel, 'usersThirdLevel' => $usersThirdLevel]);
 	}
 
 	public function showLobby(): Response

@@ -19,16 +19,26 @@
       <div class="table__first-level">
         <h3>1 уровень</h3>
         <ol class="table__list">
-          {% for user in users %}
+          {% for user in usersFirstLevel %}
             <li> {{ user.username }}: {{ user.scoreFirstLevel }} </li>
           {% endfor %}
         </ol>
       </div>
       <div class="table__second-level">
         <h3>2 уровень</h3>
+        <ol class="table__list">
+          {% for user in usersSecondLevel %}
+            <li> {{ user.username }}: {{ user.scoreSecondLevel }} </li>
+          {% endfor %}
+        </ol>
       </div>
       <div class="table__third-level">
         <h3>3 уровень</h3>
+        <ol class="table__list">
+          {% for user in usersThirdLevel %}
+            <li> {{ user.username }}: {{ user.scoreThirdLevel }} </li>
+          {% endfor %}
+        </ol>
       </div>
     </div>
   </div>
