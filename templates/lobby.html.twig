@@ -47,6 +47,11 @@
 <script src="script/multiplayerIndex.js"></script>
 <script>
     //var w = new Worker("script/multiplayerIndex.js");
+    const countdown = document.getElementById('countdown');
+    const allCanvas = document.getElementsByTagName('canvas');
+    const lobby = document.getElementById('main');
+    const opponentPreview = document.getElementById('opponent');
+    const preloader = document.getElementById('preloader');
     let username = document.getElementById('username').value;
     let opponentname = 'bot';
     const ws = new WebSocket('ws://localhost:8080');

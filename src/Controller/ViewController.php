@@ -11,12 +11,13 @@ use App\Service\SessionService;
 class ViewController extends AbstractController
 {
 
-	private UserRepository $repository;
+	private UserRepository $userRepository;
+	private SessionService $sessionService;
 
-
-	public function __construct(UserRepository $repository)
+	public function __construct(SessionService $sessionService, UserRepository $userRepository)
 	{
-		$this->repository = $repository;
+		$this->sessionService = $sessionService;
+		$this->userRepository = $userRepository;
 	}
 
     public function index(): Response
