@@ -78,3 +78,8 @@ api_score:
     path: /api/score
     controller: App\Controller\ApiController::saveScore
     methods: POST
+
+api_multiplayer_score:
+    path: /api/multiplayer-score
+    controller: App\Controller\ApiController::saveMultiplayerScore
+    methods: POST

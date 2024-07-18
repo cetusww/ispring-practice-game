@@ -98,7 +98,7 @@
             opponentPreview.style.display = 'none';
             preloader.style.display = 'block';
             hero.restart();
-            if (state['state'] === 'start' || state['state'] === 'win') 
+            if (state['state'] === 'start' || state['state'] === 'win')
             {
                 saveScore();
                 window.location.href = "/win";
@@ -111,7 +111,7 @@
         opponentname = data['opponentname'];
     }
     if ('opponentupdate' in data)
-    { 
+    {
         let playerdata = data['opponentupdate'];
         heroView.updateMove(playerdata['x'], playerdata['y']);
         heroView.updateAnim(playerdata['animatetype']);
@@ -127,7 +127,7 @@
                     arrayOfBonus.splice(i, 1);
                     break
                 }
-            }  
+            }
         });
         for (let i = 0; i < opponentBullets.length; i++)
         {
@@ -170,7 +170,7 @@
         lose = true;
         state['state'] = 'win';
     }
-    data = 
+    data =
     {
         x: hero.sprite.x,
         y: hero.sprite.y,

@@ -101,7 +101,7 @@ async function saveScore()
         'opponentname': opponentname,
     }
     const stringifyData = JSON.stringify(data)
-    const response = await fetch('/api/multiplayer_score', {
+    const response = await fetch('/api/multiplayer-score', {
          method: "POST",
          body: stringifyData,
          headers: {

@@ -4,17 +4,19 @@ namespace App\Entity;
 
 class User
 {
-    public function __construct(
-        private ?int $id,
-        private string $username,
-        private string $password,
-        private ?int $level,
-        private ?int $scoreFirstLevel,
-        private ?int $scoreSecondLevel,
-        private ?int $scoreThirdLevel,
-    )
-    {
-    }
+	public function __construct(
+		private ?int $id,
+		private string $username,
+		private string $password,
+		private ?int $level,
+		private ?int $scoreFirstLevel,
+		private ?int $scoreSecondLevel,
+		private ?int $scoreThirdLevel,
+        private ?int $multiplayerAll,
+        private ?int $multiplayerWin,
+	)
+	{
+	}
 
     public function getId(): ?int
     {
@@ -51,10 +53,20 @@ class User
         return $this->scoreThirdLevel;
     }
 
-    public function setUserName(string $username): string
+    public function getMultiplayerAll(): ?int
     {
-        return $this->username = $username;
+        return $this->multiplayerAll;
     }
+
+    public function getMultiplayerWin(): ?int
+    {
+        return $this->multiplayerWin;
+    }
+
+	public function setUserName(string $username): string
+	{
+		return $this->username = $username;
+	}
 
     public function setPassword(string $password): string
     {
@@ -76,8 +88,18 @@ class User
         return $this->scoreSecondLevel = $scoreSecondLevel;
     }
 
-    public function setScoreThirdLevel(string $scoreThirdLevel): int
+	public function setScoreThirdLevel(string $scoreThirdLevel): int
+	{
+		return $this->scoreThirdLevel = $scoreThirdLevel;
+	}
+
+    public function setMultiplayerAll(int $multiplayerAll): int
     {
-        return $this->scoreThirdLevel = $scoreThirdLevel;
+        return $this->multiplayerAll = $multiplayerAll;
+    }
+
+    public function setMultiplayerWin(int $multiplayerWin): int
+    {
+        return $this->multiplayerWin = $multiplayerWin;
     }
 }

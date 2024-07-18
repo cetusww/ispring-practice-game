@@ -134,33 +134,57 @@ class ViewController extends AbstractController
         return $this->render('choose_level.html.twig', ['level' => $_SESSION['level']]);
     }
 
-    public function showRating(): Response
-    {
-        $this->sessionService->startSession('auth');
-        if ($_SESSION === [])
-        {
-            return $this->redirectToRoute('index');
-        }
-        $users = $this->userRepository->findAllUsers();
+	public function showRating(): Response
+	{
+		session_name('auth');
+		session_start();
 
-        usort($users, function ($a, $b) {
-            return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
+		if ($_SESSION === []) {
+			return $this->redirectToRoute('index');
+		}
+
+        $usersMultiplayer = $this->repository->findAllUsers();
+		$usersFirstLevel = $this->repository->findAllUsers();
+        $usersSecondLevel = $this->repository->findAllUsers();
+        $usersThirdLevel = $this->repository->findAllUsers();
+
+        usort($usersMultiplayer, function($a, $b) {
+
+            $aAll = $a->getMultiplayerAll();
+            $aWin = $a->getMultiplayerWin();
+
+            $bAll = $b->getMultiplayerAll();
+            $bWin = $b->getMultiplayerWin();
+
+            $aRatio = $aAll > 0 ? $aWin / $aAll : 0;
+            $bRatio = $bAll > 0 ? $bWin / $bAll : 0;
+
+            return $bRatio <=> $aRatio;
         });
 
-        return $this->render('rating.html.twig', ['users' => $users]);
-    }
+		usort($usersFirstLevel, function($a, $b) {
+			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
+		});
+        usort($usersSecondLevel, function($a, $b) {
+            return $b->getScoreSecondLevel() - $a->getScoreSecondLevel();
+        });
+        usort($usersThirdLevel, function($a, $b) {
+            return $b->getScoreThirdLevel() - $a->getScoreThirdLevel();
+        });
 
-    public function showMultiplayer(): Response
-    {
-        session_name('auth');
-        session_start();
-        $username = $_SESSION['username'] ?? null;
-        if ($username === null)
-        {
-            return $this->redirectToRoute('index');
-        }
-        return $this->render('lobby.html.twig', ['username' => $username]);
-    }
+		return $this->render('rating.html.twig', ['usersMultiplayer' => $usersMultiplayer, 'usersFirstLevel' => $usersFirstLevel, 'usersSecondLevel' => $usersSecondLevel, 'usersThirdLevel' => $usersThirdLevel]);
+	}
+
+	public function showMultiplayer(): Response
+	{
+		session_name('auth');
+		session_start();
+		$username = $_SESSION['username'] ?? null;
+		if ($username === null) {
+			return $this->redirectToRoute('index');
+		}
+		return $this->render('lobby.html.twig', ['username' => $username]);
+	}
 
     public function showWin(): Response
     {

@@ -35,6 +35,10 @@ body {
     padding: 20px;
 }
 
+.table__ratio {
+    float: right;
+}
+
 .table__single {
     width: 55vw;
     height: 85vh;
@@ -53,7 +57,11 @@ body {
 .table__third-level {
     width: 30%;
     background-color: rgba(61, 61, 61, 0.8);
+    color: rgba(255, 255, 255, 1);
+    font: 800 16px/20px 'Russo One', sans-serif;
     padding: 10px;
+    text-align: center;
+    overflow: auto;
 }
 
 h2 {
@@ -63,15 +71,20 @@ h2 {
 }
 
 h3 {
-    color: rgba(255, 255, 255, 1);
+    display: block;
     font: 800 16px/20px "Russo One", sans-serif;
     margin: 0 0 10px 0;
 }
 
 .table__list {
+    text-align: left;
+    margin: 0 0 0 25px;
+    font: 800 16px/20px "Russo One", sans-serif;
     color: rgba(255, 255, 255, 1);
-    margin: 0 0 0 17px;
-    font: 400 16px/20px "Russo One", sans-serif;
+}
+
+.table__multi-list {
+    overflow: auto;
 }
 
 .previous-page {

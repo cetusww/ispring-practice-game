@@ -54,4 +54,17 @@ class UserRepository
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
+
+    public function updateUserMultiplayerProgress(string $username, string $opponentName): void
+    {
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+        $opponent = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $opponentName]);
+
+        $user->setMultiplayerAll($user->getMultiplayerAll() + 1);
+        $user->setMultiplayerWin($user->getMultiplayerWin() + 1);
+
+        $opponent->setMultiplayerAll($opponent->getMultiplayerAll() + 1);
+
+        $this->entityManager->flush();
+    }
 }
