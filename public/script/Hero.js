@@ -145,7 +145,7 @@ class Hero {
                 if (vecY < 0) {
                     angle *= -1;
                 }
-                let bullet = new Bullet('bullet', this.sprite.x, this.sprite.y, vecX, vecY, angle);
+                let bullet = new Bullet(this.sprite.x, this.sprite.y, vecX, vecY, angle);
                 this.currentCountBullet -= 1;
                 this.currentWeaponTime = this.weaponTime;
                 bullet.view();
