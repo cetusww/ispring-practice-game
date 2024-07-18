@@ -1,7 +1,5 @@
-class Portal
-{
-    constructor(posX, posY)
-    {
+class Portal {
+    constructor(posX, posY) {
         this.sprite = new PIXI.Sprite(PIXI.Texture.from('non_active_portal'));
         this.sprite.x = posX;
         this.sprite.y = posY;
@@ -14,34 +12,30 @@ class Portal
         this.collideTop = this.sprite.y - this.sprite.width / 4;
         this.collideBottom = this.sprite.y + this.sprite.width / 4;
         this.isActive = false;
-        this.view = function ()
-        {
-            scene.addChild(this.sprite);
-        }
+    }
 
-        this.deleteView = function ()
-        {
-            scene.removeChild(this.sprite);
-        }
-        this.activate = function ()
-        {
-            this.sprite.texture = PIXI.Texture.from('portal');
-            this.isActive = true;
-        }
+    view() {
+        scene.addChild(this.sprite);
+    }
 
-        this.update = function (time)
-        {
-            if (this.isActive)
-            {
-                if (hero.collideLeft <= this.collideRight && hero.collideRight >= this.collideLeft &&
-                    hero.collideBottom >= this.collideTop && hero.collideTop <= this.collideBottom
-                )
-                {
-                    //window.location.href = "/win";
-                    hero.isWin = true;
-                }
-                this.sprite.rotation += this.rotateSpeed * time.deltaTime;
-            }    
+    deleteView() {
+        scene.removeChild(this.sprite);
+    }
+
+    activate() {
+        this.sprite.texture = PIXI.Texture.from('portal');
+        this.isActive = true;
+    }
+
+    update(time) {
+        if (this.isActive) {
+            if (hero.collideLeft <= this.collideRight && hero.collideRight >= this.collideLeft &&
+                hero.collideBottom >= this.collideTop && hero.collideTop <= this.collideBottom
+            ) {
+                //window.location.href = "/win";
+                hero.isWin = true;
+            }
+            this.sprite.rotation += this.rotateSpeed * time.deltaTime;
         }
     }
 }

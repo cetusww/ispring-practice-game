@@ -1,7 +1,5 @@
-class Health
-{
-    constructor(posX, posY)
-    {
+class Health {
+    constructor(posX, posY) {
         this.sprite = new PIXI.Sprite(PIXI.Texture.from('health'));
         this.sprite.x = posX;
         this.sprite.y = posY;
@@ -21,37 +19,30 @@ class Health
         this.scaleTime = 0.4 * FPS;
         this.currentScaleTime = this.scaleTime;
         this.scaleStep = 0.00035;
+    }
 
-        this.view = function()
-        {
-            scene.addChild(this.sprite);
-        }
+    view() {
+        scene.addChild(this.sprite);
+    }
 
-        this.deleteView = function()
-        {
-            scene.removeChild(this.sprite);
-        }
+    deleteView() {
+        scene.removeChild(this.sprite);
+    }
 
-        this.update = function(time)
-        {
-            if (!this.isTaken)
-            {
-                if (this.currentScaleTime > 0)
-                {
-                    this.currentScaleTime -= time.deltaTime
-                    this.sprite.scale.x += this.scaleStep * time.deltaTime;
-                    this.sprite.scale.y += this.scaleStep * time.deltaTime;
-                } else
-                {
-                    this.currentScaleTime = this.scaleTime;
-                    this.scaleStep *= -1;
-                }
-                if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
-                    hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y)
-                {
-                    hero.addHealth();
-                    this.isTaken = true;
-                }
+    update(time) {
+        if (!this.isTaken) {
+            if (this.currentScaleTime > 0) {
+                this.currentScaleTime -= time.deltaTime
+                this.sprite.scale.x += this.scaleStep * time.deltaTime;
+                this.sprite.scale.y += this.scaleStep * time.deltaTime;
+            } else {
+                this.currentScaleTime = this.scaleTime;
+                this.scaleStep *= -1;
+            }
+            if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
+                hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y) {
+                hero.addHealth();
+                this.isTaken = true;
             }
         }
     }
