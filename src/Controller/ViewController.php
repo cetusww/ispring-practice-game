@@ -143,10 +143,10 @@ class ViewController extends AbstractController
 			return $this->redirectToRoute('index');
 		}
 
-        $usersMultiplayer = $this->repository->findAllUsers();
-		$usersFirstLevel = $this->repository->findAllUsers();
-        $usersSecondLevel = $this->repository->findAllUsers();
-        $usersThirdLevel = $this->repository->findAllUsers();
+        $usersMultiplayer = $this->userRepository->findAllUsers();
+		$usersFirstLevel = $this->userRepository->findAllUsers();
+        $usersSecondLevel = $this->userRepository->findAllUsers();
+        $usersThirdLevel = $this->userRepository->findAllUsers();
 
         usort($usersMultiplayer, function($a, $b) {
 
