@@ -16,6 +16,7 @@
   <script src="script/Fireball.js"></script>
   <script src="script/Stalactite.js"></script>
   <script src="script/Hero.js"></script>
+  <script src="script/Fire.js"></script>
   <script src="script/HeroView.js"></script>
   <script src="script/Enemy.js"></script>
   <script src="script/Devil.js"></script>
@@ -33,7 +34,8 @@
 <body>
     <script src="script/multiplayerIndex.js"></script>
 <script>
-    let username = document.getElementById('username').value
+    let username = document.getElementById('username').value;
+    let opponentname = 'bot';
     const ws = new WebSocket('ws://localhost:8080');
     let isConnected = false;
     const messageQueue = [];
@@ -71,10 +73,15 @@
             hero.restart();
             if (state['state'] === 'start') 
             {
+                saveScore();
                 window.location.href = "/win";
             }  
         }
         state = data['state'];
+    }
+    if ('opponentname' in data)
+    {
+        opponentname = data['opponentname'];
     }
     if ('opponentupdate' in data)
     {
@@ -84,6 +91,16 @@
         heroView.sprite.scale.x = playerdata['scalex'];
         heroView.hp = playerdata['hp'];
         hero.takeDamage(playerdata['damage']);
+        removeBonusId.push(arrayOfBonus[i]);
+        
+        // playerdata['removebonus'].forEach(id => {
+        //     for (let i = 0; i < arrayOfBonus.length; i++) {
+        //         if (arrayOfBonus[i].id == id) {
+        //             arrayOfBonus.splice(i, 1);
+        //             break
+        //         }
+        //     }  
+        // });
         for (let i = 0; i < opponentBullets.length; i++)
         {
             opponentBullets[0].sprite.destroy();
@@ -113,7 +130,6 @@
       }
   }
   //let timerId = setInterval(() => {sendMessage('PING')}, 5000);
-
   function transmitData()
   {
     bulletsdata = [];
@@ -128,6 +144,7 @@
         animatetype: hero.animateType,
         scalex: hero.sprite.scale.x,
         herobullets: bulletsdata,
+        removebonus: removeBonusId,
         damage: opponentDamage, 
     }
     ws.send(JSON.stringify({'playerdata': data}))
@@ -141,6 +158,10 @@
     if (state['state'] === 'start')
     {
         transmitData()
+    }
+    if (state['state'] === 'ready' && heroView.name === 'bot')
+    {
+        heroView.name = opponentname;
     }
     if (state['state'] === 'ready' && +state['time'] + 5000 <= Date.now())
     {

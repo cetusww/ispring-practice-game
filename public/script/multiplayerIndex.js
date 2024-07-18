@@ -3,6 +3,7 @@ const scene = new PIXI.Container();
 const platforms = [];
 const arrayOfWall = [];
 const arrayOfBonus = [];
+let removeBonusId = [];
 const woodenPlanks = [];
 const arrayOfStalactite = [];
 const removeBullets = [];
@@ -268,25 +269,20 @@ function gameLoop(time)
 {
     if (state['state'] === 'start')
     {
-        portal.update(time);
+        //portal.update(time);
         hero.update(time);
         heroView.update(time);
         arrayOfOpponent = [heroView];
-        if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
-        {
-            portal.activate();
-            hero.portalTextView();
-        }
+        // if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
+        // {
+        //     portal.activate();
+        //     hero.portalTextView();
+        // }
         if (hero.deadTime < 0)
         {
-            saveScore();
+            //saveScore();
             hero.deadTime = 1000;
             window.location.href = "/lose";
-        }
-        if (hero.isWin && portal.isActive) {
-            saveScore();
-            window.location.href = "/win";
-            portal.isActive = false;
         }
         if (mouse.isDownLeft)
         {
@@ -339,6 +335,7 @@ function gameLoop(time)
             {
                 arrayOfBonus[i].deleteView();
                 arrayOfBonus[i].sprite.destroy();
+                removeBonusId.push(arrayOfBonus[i].id);
                 arrayOfBonus.splice(i, 1);
                 i--;
             }
@@ -368,19 +365,26 @@ function levelView()
     {
         platform.view();
     })
+    for (let i = 0; i < arrayOfBonus.length; i++)
+    {
+        arrayOfBonus[i].view();
+        arrayOfBonus[i].id = i;
+    }
     arrayOfBonus.forEach(bonus =>
     {
-        bonus.view();
+       
+
     });
     arrayOfStalactite.forEach(stalactite =>
     {
+        stalactite.random = false;
         stalactite.view();
     });
     fires.forEach(fire =>
     {
         fire.view();
     });
-    portal.view();
+    //portal.view();
     heroView.view();
     hero.view();
 }

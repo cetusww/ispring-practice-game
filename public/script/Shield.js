@@ -22,6 +22,7 @@ class Shield
         this.scaleTime = 0.4 * FPS;
         this.currentScaleTime = this.scaleTime;
         this.scaleStep = 0.00035;
+        this.id = 0;
 
         this.view = function()
         {
