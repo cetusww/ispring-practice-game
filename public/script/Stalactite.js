@@ -21,6 +21,7 @@ class Stalactite
         this.isFall = false;
         this.lifeTime = 0;
         this.dangerTime = 0.1 * FPS;
+        this.random = true;
 
         this.view = function ()
         {
@@ -34,13 +35,23 @@ class Stalactite
             this.sprite.y = this.posY;
             this.sprite.x = this.posX;
             this.danger = this.beginDanger;
-            this.timeHeight = (Math.random() + 0.5) * FPS;
-            this.currentTimeHeight = this.timeHeight;
+            
             this.sprite.width = this.minWidth;
             this.sprite.height = this.minHeight;
             this.sprite.vy = 0;
-            this.fallDanger = (Math.random() * 0.7) + 0.5;
-            this.damage = (Math.random() * 5) + 5;
+            if (this.random)
+            {
+                this.timeHeight = (Math.random() + 0.5) * FPS;
+                this.fallDanger = (Math.random() * 0.7) + 0.5;
+                this.damage = (Math.random() * 5) + 5;
+            } else
+            {
+                this.timeHeight = 0.5 * FPS;
+                this.fallDanger = 0.8;
+                this.damage = 7;
+            }
+            this.currentTimeHeight = this.timeHeight;
+            
         }
         this.deleteView = function ()
         {
@@ -55,7 +66,8 @@ class Stalactite
         {     
             if (!this.isFall) 
             {
-                
+                //console.log('update stalactite')
+                //console.log(this.danger, this.stepWidth, this.sprite.width);
                 if (this.sprite.height < this.maxHeight)
                 {
                     if (this.currentTimeHeight < 0)
@@ -82,7 +94,7 @@ class Stalactite
             } else if (!this.boom)
             {
                 this.sprite.y += this.sprite.vy * time.deltaTime;
-                this.sprite.vy += GRAVITY_ACCELERATION / 8 * time.deltaTime;
+                this.sprite.vy += GRAVITY_ACCELERATION / 6 * time.deltaTime;
                 this.updateCollide();
                 if (this.dangerTime <= 0) {
                     if (this.sprite.x <= hero.collideRight &&

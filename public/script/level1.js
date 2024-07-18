@@ -55,7 +55,7 @@ function levelCreate()
     arrayOfStalactite.push(new Stalactite(1300, 90, 400, 50));
     arrayOfStalactite.push(new Stalactite(1700, 100, 400, 50));
 
-    enemies.push(new Bat(300, 350, 200, 200, 400, 400, 130));// bat test
+    enemies.push(new Bat(480, 600, 310, 100, 300, 200, 130));// bat test
 
     enemies.push(new Devil(1600, 530, 300, 0, 300, 50, 130));// 4 уровень
     enemies.push(new Devil(1200, 530, 300, 0, 300, 50, 110));// 4 уровень
@@ -65,6 +65,11 @@ function levelCreate()
 
     enemies.push(new Devil(350, 1030, 300, 0, 300, 50, 100));// 2 уровень
     enemies.push(new Devil(1300, 1030, 150, 0, 300, 50, 120));// 2 уровень
+
+
+    enemies.push(new Devil(450, 1350, 400, 0, 300, 50, 160));// 2 уровень
+    enemies.push(new Devil(1300, 1350, 500, 0, 300, 50, 90));// 2 уровень
+    enemies.push(new Devil(2000, 1350, 400, 0, 300, 50, 90));// 2 уровень
 }
 
 async function saveScore()

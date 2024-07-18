@@ -60,15 +60,6 @@ class Devil
             }
         }
 
-
-        this.updateCollide = function ()
-        {
-            this.collideTop = this.sprite.y - this.sprite.height / 2;
-            this.collideBottom = this.sprite.y + this.sprite.height / 2;
-            this.collideLeft = this.sprite.x - this.sprite.width / 2;
-            this.collideRight = this.sprite.x + this.sprite.width / 2;
-        }
-
         this.view = function ()
         {
             scene.addChild(this.sprite);
@@ -215,5 +206,13 @@ class Devil
                 this.deadTime -= time.deltaTime;
             }
         }
+    }
+
+    updateCollide()
+    {
+        this.collideTop = this.sprite.y - this.sprite.height / 2;
+        this.collideBottom = this.sprite.y + this.sprite.height / 2;
+        this.collideLeft = this.sprite.x - this.sprite.width / 2;
+        this.collideRight = this.sprite.x + this.sprite.width / 2;
     }
 }
