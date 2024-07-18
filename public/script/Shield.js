@@ -1,7 +1,5 @@
-class Shield
-{
-    constructor(posX, posY, duration)
-    {
+class Shield {
+    constructor(posX, posY, duration) {
         this.sprite = new PIXI.Sprite(PIXI.Texture.from('shield'));
         this.sprite.x = posX;
         this.sprite.y = posY;
@@ -23,37 +21,30 @@ class Shield
         this.currentScaleTime = this.scaleTime;
         this.scaleStep = 0.00035;
         this.id = 0;
+    }    
 
-        this.view = function()
-        {
-            scene.addChild(this.sprite);
-        }
+    view() {
+        scene.addChild(this.sprite);
+    }
 
-        this.deleteView = function()
-        {
-            scene.removeChild(this.sprite);
-        }
+    deleteView() {
+        scene.removeChild(this.sprite);
+    }
 
-        this.update = function(time)
-        {
-            if (!this.isTaken)
-            {
-                if (this.currentScaleTime > 0)
-                {
-                    this.currentScaleTime -= time.deltaTime
-                    this.sprite.scale.x += this.scaleStep * time.deltaTime;
-                    this.sprite.scale.y += this.scaleStep * time.deltaTime;
-                } else
-                {
-                    this.currentScaleTime = this.scaleTime;
-                    this.scaleStep *= -1;
-                }
-                if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
-                    hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y)
-                {
-                    hero.addShield(this.duration);
-                    this.isTaken = true;
-                }
+    update(time) {
+        if (!this.isTaken) {
+            if (this.currentScaleTime > 0) {
+                this.currentScaleTime -= time.deltaTime
+                this.sprite.scale.x += this.scaleStep * time.deltaTime;
+                this.sprite.scale.y += this.scaleStep * time.deltaTime;
+            } else {
+                this.currentScaleTime = this.scaleTime;
+                this.scaleStep *= -1;
+            }
+            if (hero.collideLeft <= this.sprite.x && hero.collideRight >= this.sprite.x &&
+                hero.collideBottom >= this.sprite.y && hero.collideTop <= this.sprite.y) {
+                hero.addShield(this.duration);
+                this.isTaken = true;
             }
         }
     }

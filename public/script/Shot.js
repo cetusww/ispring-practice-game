@@ -1,15 +1,15 @@
-class Poison {
-    constructor(texture, posX, posY, vecX, vecY, poisonSpeed) {
+class Shot {
+    constructor(texture, posX, posY, vecX, vecY, shotSpeed) {
         this.sprite = new PIXI.Sprite(PIXI.Texture.from(texture));
         this.sprite.x = posX;
         this.sprite.y = posY;
-        this.sprite.width = 25;
-        this.sprite.height = 25;
+        this.sprite.width = 40;
+        this.sprite.height = 40;
         this.sprite.anchor.set(0.5);
-        this.speed = poisonSpeed;
+        this.speed = shotSpeed;
         this.sprite.vx = vecX * this.speed;
         this.sprite.vy = vecY * this.speed;
-        this.lifeTime = 50;
+        this.lifeTime = 100;
 
         this.boom = false;
     }
@@ -44,7 +44,7 @@ class Poison {
                 ) {
                     this.lifeTime = 10;
                     this.boom = true;
-                    hero.takeDamage(15);
+                    hero.takeDamage(10);
                 }
             }
         }

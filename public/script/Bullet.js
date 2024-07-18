@@ -17,11 +17,11 @@ class Bullet
         this.lifeTime = 0.6 * FPS;
         this.id = (new Date().getTime) * Math.random();
         this.boom = false;
+    }
 
-        this.view = function ()
-        {
-            scene.addChild(this.sprite);
-        }
+    view() {
+        scene.addChild(this.sprite);
+    }
 
         this.deleteView = function ()
         {

@@ -48,7 +48,7 @@ show_second_level:
 
 show_third_level:
     path: /third-level
-    controller: App\Controller\ViewController::showSecondLevel
+    controller: App\Controller\ViewController::showThirdLevel
 
 show_win:
     path: /win
