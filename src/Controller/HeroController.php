@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Lobby;
+use App\Repository\LobbyRepository;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 class HeroController implements MessageComponentInterface {
 	protected \SplObjectStorage $clients;
+	public array $arrayOfUsers = [];
+
 
 	public function __construct() {
 		$this->clients = new \SplObjectStorage;
@@ -24,20 +27,69 @@ class HeroController implements MessageComponentInterface {
 		}
 		echo "Received message: $msg\n";  // Отладочное сообщение
 		$data = json_decode($msg, true);
-
-		$direction = $data['direction'];
-
-		$newDirection = json_encode($direction);
-
-		foreach ($this->clients as $client) {
-			$client->send($newDirection);
+		if (isset($data['username']))
+		{
+			if (count($this->arrayOfUsers) === 2)
+			{
+				$from->send(json_encode('kick'));
+			}
+			else
+			{
+				$this->arrayOfUsers[$from->resourceId] = $data['username'];
+				if (count($this->arrayOfUsers) === 2)
+				{
+					$players = [];
+					foreach ($this->clients as $client) {
+						$players[] = ['user' => $client, 'name' => $this->arrayOfUsers[$client->resourceId]];
+					}
+					$time = microtime(true) * 1000;
+					$players[0]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[1]['name']]));
+					$players[1]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[0]['name']]));
+				}
+			}
+			
+		}
+		if (isset($data['playerdata'])) 
+		{
+			$playerData = $data['playerdata'];
+			foreach ($this->clients as $client) {
+				if ($client->resourceId !== $from->resourceId)
+				{
+					$client->send(json_encode(
+					[
+						'opponentupdate' => 
+						[
+							'x' => $playerData['x'], 
+							'y' => $playerData['y'],
+							'hp' => $playerData['hp'],
+							'animatetype' => $playerData['animatetype'],
+							'scalex' => $playerData['scalex'],
+							'opponentbullets' => $playerData['herobullets'],
+							'damage' => $playerData['damage'],
+						]
+					]));
+				}
+			}
+		}
+		if (isset($data['msg'])) 
+		{
+			if ($data['msg'] == 'PING') 
+			{
+				$from->send(json_encode('Server Pong'));
+			}
 		}
 	}
 
 	public function onClose(ConnectionInterface $conn): void
 	{
 		$this->clients->detach($conn);
-		echo "Connection {$conn->resourceId} has disconnected\n";
+		$id = $conn->resourceId;
+		echo "Connection {$id} has disconnected\n";
+		unset($this->arrayOfUsers[$id]);
+		$time = microtime(true) * 1000;
+		foreach ($this->clients as $client) {
+			$client->send(json_encode(['state' => ['state' => 'stop', 'time' => $time]]));
+		}
 	}
 
 	public function onError(ConnectionInterface $conn, \Exception $e): void
