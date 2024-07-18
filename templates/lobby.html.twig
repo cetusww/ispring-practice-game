@@ -90,9 +90,6 @@
     }
     if ('state' in data)
     {
-		opponentPreview.style.display = 'block';
-		preloader.style.display = 'none';
-        countdown.style.display = 'block';
         if (data['state']['state'] === 'stop')
         {
             opponentPreview.style.display = 'none';
@@ -191,7 +188,7 @@
 
   setInterval(() =>
   {
-    countdown.innerHTML = `Бой через ${Math.ceil((state['time'] - Date.now() + 4000) / 1000)} секунд`;
+   
     if (state['state'] === 'start')
     {
         for (let canvas of allCanvas)
@@ -204,6 +201,13 @@
     if (state['state'] === 'ready' && heroView.name === 'bot')
     {
         heroView.name = opponentname;
+    }
+    if (state['state'] === 'ready')
+    {
+        opponentPreview.style.display = 'block';
+		preloader.style.display = 'none';
+        countdown.style.display = 'block';
+        countdown.innerHTML = `Бой через ${Math.ceil((state['time'] - Date.now() + 4000) / 1000)} секунд`;
     }
     if (state['state'] === 'ready' && +state['time'] + 4000 <= Date.now())
     {
