@@ -20,6 +20,8 @@ class Health {
         this.currentScaleTime = this.scaleTime;
         this.scaleStep = 0.00035;
         this.id = 0;
+    }
+    
 
     view() {
         scene.addChild(this.sprite);
