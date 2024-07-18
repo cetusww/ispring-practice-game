@@ -87,10 +87,6 @@ h3 {
     overflow: auto;
 }
 
-.table__score {
-    float: right;
-}
-
 .previous-page {
     position: absolute;
     width: 125px;
