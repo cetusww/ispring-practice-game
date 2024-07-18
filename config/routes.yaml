@@ -62,19 +62,6 @@ show_rating:
     path: /rating
     controller: App\Controller\ViewController::showRating
 
-create_lobby:
-    path: /lobby/create
-    controller: App\Controller\LobbyController::createLobby
-
-connect_lobby:
-    path: /lobby/connect{id}
-    controller: App\Controller\LobbyController::connectLobby
-
-
-disconnect_lobby:
-    path: /lobby/disconnect{id}
-    controller: App\Controller\LobbyController::disconnectLobby
-
 show_lobby:
     path: /lobby{id}
     controller: App\Controller\ViewController::showLobby

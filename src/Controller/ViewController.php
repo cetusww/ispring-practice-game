@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use App\Repository\LobbyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,13 +11,11 @@ class ViewController extends AbstractController
 {
 
 	private UserRepository $repository;
-	private LobbyRepository $lobbyRepository;
 
 
-	public function __construct(UserRepository $repository, LobbyRepository $lobbyRepository)
+	public function __construct(UserRepository $repository)
 	{
 		$this->repository = $repository;
-		$this->lobbyRepository = $lobbyRepository;
 	}
 
 	public function index(): Response
@@ -129,20 +126,6 @@ class ViewController extends AbstractController
 		});
 
 		return $this->render('rating.html.twig', ['users' => $users]);
-	}
-
-	public function showLobby(Request $request): Response
-	{
-		session_name('auth');
-		session_start();
-		$username = $_SESSION['username'] ?? null;
-		if ($username === null) {
-			return $this->redirectToRoute('index');
-		}
-		$lobbyId = $request->get('id');
-		$lobby = $this->lobbyRepository->findLobbyById($lobbyId);
-		//добавить проверку на полное лобби
-		return $this->render('lobby.html.twig', ['lobby' => $lobby, 'username' => $username]);
 	}
 
 	public function showMultiplayer(): Response
