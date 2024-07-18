@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use App\Repository\LobbyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,13 +11,11 @@ class ViewController extends AbstractController
 {
 
 	private UserRepository $repository;
-	private LobbyRepository $lobbyRepository;
 
 
-	public function __construct(UserRepository $repository, LobbyRepository $lobbyRepository)
+	public function __construct(UserRepository $repository)
 	{
 		$this->repository = $repository;
-		$this->lobbyRepository = $lobbyRepository;
 	}
 
 	public function index(): Response
@@ -133,8 +130,19 @@ class ViewController extends AbstractController
         $usersThirdLevel = $this->repository->findAllUsers();
 
         usort($usersMultiplayer, function($a, $b) {
-            return $b->getMultiplayerRatio() - $a->getMultiplayerRatio();
+
+            $aAll = $a->getMultiplayerAll();
+            $aWin = $a->getMultiplayerWin();
+
+            $bAll = $b->getMultiplayerAll();
+            $bWin = $b->getMultiplayerWin();
+
+            $aRatio = $aAll > 0 ? $aWin / $aAll : 0;
+            $bRatio = $bAll > 0 ? $bWin / $bAll : 0;
+
+            return $bRatio <=> $aRatio;
         });
+
 		usort($usersFirstLevel, function($a, $b) {
 			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
 		});
@@ -146,20 +154,6 @@ class ViewController extends AbstractController
         });
 
 		return $this->render('rating.html.twig', ['usersMultiplayer' => $usersMultiplayer, 'usersFirstLevel' => $usersFirstLevel, 'usersSecondLevel' => $usersSecondLevel, 'usersThirdLevel' => $usersThirdLevel]);
-	}
-
-	public function showLobby(Request $request): Response
-	{
-		session_name('auth');
-		session_start();
-		$username = $_SESSION['username'] ?? null;
-		if ($username === null) {
-			return $this->redirectToRoute('index');
-		}
-		$lobbyId = $request->get('id');
-		$lobby = $this->lobbyRepository->findLobbyById($lobbyId);
-		//добавить проверку на полное лобби
-		return $this->render('lobby.html.twig', ['lobby' => $lobby, 'username' => $username]);
 	}
 
 	public function showMultiplayer(): Response

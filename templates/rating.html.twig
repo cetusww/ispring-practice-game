@@ -12,6 +12,18 @@
 <div class="table">
     <div class="table__multi">
         <h2>Многопользовательский режим</h2>
+        <ol class="table__list">
+            {% set userInTable = false %}
+            {% for user in usersMultiplayer %}
+                {% if user.multiplayerAll != 0 %}
+                    {% set userInTable = true %}
+                    <li> <span>{{ user.username }}:</span> <span class="table__ratio">{{ (user.multiplayerWin / user.multiplayerAll) | number_format(2, '.', '') }}</span> </li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+        {% if not userInTable %}
+            <span class="table__placeholder">Рейтинга пока нет((</span>
+        {% endif %}
     </div>
     <div class="table__single">
         <h2>Однопользовательский режим</h2>

@@ -26,7 +26,7 @@ class UserController extends AbstractController
 	{
 		$newPassword = $request->get('password');
 		$newUsername = $request->get('username');
-    $user = $this->repository->findUserByUserName($newUsername);
+        $user = $this->repository->findUserByUserName($newUsername);
 
 		$errors = [];
 
@@ -61,6 +61,9 @@ class UserController extends AbstractController
 			0,
 			0,
 			0,
+            0,
+            0,
+            0,
 		);
 
 		$this->repository->saveUserToDatabase($user);

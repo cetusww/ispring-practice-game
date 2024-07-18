@@ -14,7 +14,6 @@ class User
 		private ?int $scoreThirdLevel,
         private ?int $multiplayerAll,
         private ?int $multiplayerWin,
-        private ?int $multiplayerRatio,
 	)
 	{
 	}
@@ -64,11 +63,6 @@ class User
         return $this->multiplayerWin;
     }
 
-    public function getMultiplayerRatio(): ?int
-    {
-        return $this->multiplayerRatio;
-    }
-
 	public function setUserName(string $username): string
 	{
 		return $this->username = $username;
@@ -107,10 +101,5 @@ class User
     public function setMultiplayerWin(int $multiplayerWin): int
     {
         return $this->multiplayerWin = $multiplayerWin;
-    }
-
-    public function setMultiplayerRatio(int $multiplayerRatio): int
-    {
-        return $this->multiplayerRatio = $multiplayerRatio;
     }
 }

@@ -17,7 +17,6 @@
         <field name="scoreThirdLevel" column="score_3" type="integer" />
         <field name="multiplayerAll" column="multiplayer_all" type="integer" />
         <field name="multiplayerWin" column="multiplayer_win" type="integer" />
-        <field name="multiplayerRatio" column="multiplayer_ratio" type="integer" />
     </entity>
 
 </doctrine-mapping>

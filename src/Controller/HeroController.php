@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Lobby;
-use App\Repository\LobbyRepository;
+
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 class HeroController implements MessageComponentInterface {

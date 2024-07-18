@@ -82,12 +82,8 @@ class UserRepository
 
         $user->setMultiplayerAll($user->getMultiplayerAll() + 1);
         $user->setMultiplayerWin($user->getMultiplayerWin() + 1);
-        $ratio = (float)$user->getMultiplayerWin() / $user->getMultiplayerAll();
-        $user->setMultiplayerRatio($ratio);
 
         $opponent->setMultiplayerAll($opponent->getMultiplayerAll() + 1);
-        $ratio = (float)$opponent->getMultiplayerWin() / $opponent->getMultiplayerAll();
-        $user->setMultiplayerRatio($ratio);
 
         $this->entityManager->flush();
     }
