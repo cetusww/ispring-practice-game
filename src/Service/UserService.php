@@ -37,6 +37,8 @@ class UserService
             0,
             0,
             0,
+            0,
+            0,
         );
 
         $this->userRepository->saveUserToDatabase($user);
