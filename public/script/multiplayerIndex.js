@@ -270,7 +270,7 @@ function gameLoop(time)
 {
     if (state['state'] === 'start')
     {
-        portal.update(time);
+        // portal.update(time);
         hero.update(time);
         heroView.update(time);
         hero.updateMap();
@@ -383,7 +383,7 @@ function levelView()
     {
         fire.view();
     });
-    portal.view();
+    // portal.view();
     heroView.view();
     hero.view();
     hero.updateMap();
