@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
+use App\Repository\LobbyRepository;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -122,8 +124,11 @@ class ViewController extends AbstractController
         {
 			return $this->redirectToRoute('index');
 		}
+		$users = $this->repository->findAllUsers();
 
-		$users = $this->userService->getSortedUsers();
+		usort($users, function($a, $b) {
+			return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
+		});
 
 		return $this->render('rating.html.twig', ['users' => $users]);
 	}
@@ -135,7 +140,7 @@ class ViewController extends AbstractController
         {
 			return $this->redirectToRoute('index');
 		}
-		return $this->render('lobby.html.twig');
+		return $this->render('lobby.html.twig', ['username' => $username]);
 	}
 
 	public function showWin(): Response
