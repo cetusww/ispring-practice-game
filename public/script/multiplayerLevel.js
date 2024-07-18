@@ -48,20 +48,20 @@ function levelCreate()
     arrayOfWall.push(new Wall(texture, 78, 730, 128, 1050)); // левая стена
     arrayOfWall.push(new Wall(texture, 2950, 625, 128, 1250)); // правая стена
     
-    // arrayOfBonus.push(new Shield(200, 1105, 10));
-    // arrayOfBonus.push(new Shield(2800, 1105, 10));
-    // arrayOfBonus.push(new Health(100, 160));
-    // arrayOfBonus.push(new Health(200, 500));
-    // arrayOfBonus.push(new Health(1350, 500));
-    // arrayOfBonus.push(new Health(2750, 500));
+    arrayOfBonus.push(new Shield(200, 1105, 10));
+    arrayOfBonus.push(new Shield(2800, 1105, 10));
+    arrayOfBonus.push(new Health(100, 160));
+    arrayOfBonus.push(new Health(200, 500));
+    arrayOfBonus.push(new Health(1350, 500));
+    arrayOfBonus.push(new Health(2750, 500));
 
 
-    // arrayOfStalactite.push(new Stalactite(900, 60, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(1170, 60, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(1700, 60, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(2200, 60, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(2700, 60, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(2560, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(900, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(1170, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(1700, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(2200, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(2700, 60, 700, 200));
+    arrayOfStalactite.push(new Stalactite(2560, 60, 700, 200));
 
 
     // enemies.push(new Devil(500, 500, 300, 0, 300, 50, 130));// 2 уровень
@@ -78,7 +78,7 @@ function levelCreate()
 
     // enemies.push(new Mushroom(1000, 795, 300, 250, 130));// mushroom test 1 уровень
     // enemies.push(new Devil(400, 795, 200, 0, 300, 50, 130));// 1 уровень
-    // fires.push(new Fire(630, 780)); //1 уровень
+    fires.push(new Fire(630, 780)); //1 уровень
 
     // enemies.push(new Devil(1800, 795, 300, 0, 300, 50, 130));// 1 уровень
     // enemies.push(new Devil(2100, 795, 400, 0, 300, 50, 130));// 1 уровень
@@ -87,21 +87,21 @@ function levelCreate()
 
     // enemies.push(new Mushroom(400, 1105, 300, 250, 130));// mushroom test 0 уровень
     // enemies.push(new Devil(800, 1105, 300, 0, 300, 50, 130));// 0 уровень
-    // fires.push(new Fire(1200, 1100)); //0 уровень
+    fires.push(new Fire(1200, 1100)); //0 уровень
     // enemies.push(new Bat(1450, 1000, 60, 100, 250, 120, 130));// bat 
     // enemies.push(new Mushroom(2700, 1105, 300, 250, 130));// mushroom test 0 уровень
     // enemies.push(new Devil(2100, 1105, 300, 0, 300, 50, 130));// 0 уровень
-    // fires.push(new Fire(2500, 1100)); //0 уровень
+    fires.push(new Fire(2500, 1100)); //0 уровень
 }
 
 async function saveScore()
 {
     let data = {
-        score: hero.experience,
-        lvl: 2,
+        'username': username, 
+        'opponentname': opponentname,
     }
     const stringifyData = JSON.stringify(data)
-    const response = await fetch('/api/score', {
+    const response = await fetch('/api/multiplayer_score', {
          method: "POST",
          body: stringifyData,
          headers: {
