@@ -1,5 +1,6 @@
 const SCENE_WIDTH = 3000;
 const SCENE_HEIGHT = 1250;
+const HEROPOS = [2800, 100]
 function levelCreate()
 {
     background = PIXI.Sprite.from('level2_map');
@@ -13,7 +14,8 @@ function levelCreate()
     scene.addChild(background);
     resizeBackground();
     hero = new Hero(250, 100, 6, 0, 680);
-    heroView = new HeroView(250, 100);
+    
+    heroView = new HeroView(HEROPOS[0], HEROPOS[1]);
     // portal = new Portal(2070, 1020);
 
     let texture //= PIXI.Texture.from('ground');

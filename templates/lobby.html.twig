@@ -103,6 +103,12 @@
         }
         state = data['state'];
     }
+    if ('heropos' in data)
+    {
+        hero.sprite.x = HEROPOS[0];
+        hero.sprite.y = HEROPOS[1];
+        console.log('+')
+    }
     if ('opponentname' in data)
     {
         opponentname = data['opponentname'];
