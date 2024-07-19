@@ -12,7 +12,7 @@ html, body {
 
 body {
     position: relative;
-    background: url('../images/legend-background.png') no-repeat;
+    background: url('../images/Background/legend_background.png') no-repeat;
     background-size: cover;
 }
 

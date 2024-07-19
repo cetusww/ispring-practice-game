@@ -18,7 +18,7 @@ html {
 body {
     position: relative;
     height: 100%;
-    background: url('../images/menu-background.jpeg') no-repeat;
+    background: url('../images/Background/menu_background.jpeg') no-repeat;
     background-size: cover;
 }
 

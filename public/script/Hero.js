@@ -32,7 +32,7 @@ class Hero {
         this.cameraRectX = 100;
         this.cameraRectY = 10;
 
-        this.hpMax = 100;
+        this.hpMax = 10000000000000000000000000;
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
