@@ -52,7 +52,7 @@ class HeroController implements MessageComponentInterface {
 						$players[] = ['user' => $client, 'name' => $this->arrayOfUsers[$client->resourceId]];
 					}
 					$time = microtime(true) * 1000;
-					$players[0]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[1]['name']]));
+					$players[0]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[1]['name'], 'heropos' => true]));
 					$players[1]['user']->send(json_encode(['state' => ['state' => 'ready', 'time' => $time], 'opponentname' => $players[0]['name']]));
 				}
 			}

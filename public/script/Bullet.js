@@ -54,21 +54,6 @@ class Bullet {
             this.sprite.x += this.sprite.vx * time.deltaTime;
             this.sprite.y += this.sprite.vy * time.deltaTime;
 
-            // for (let i = 0; i < arrayOfOpponent.length; i++)
-            // {
-            //     let opponent = arrayOfOpponent[i];
-            //     if (this.sprite.y <= opponent.collideBottom &&
-            //         this.sprite.y >= opponent.collideTop &&
-            //         this.sprite.x <= opponent.collideRight &&
-            //         this.sprite.x >= opponent.collideLeft
-            //     )
-            //     {
-            //         this.boom = true;
-            //         this.lifeTime = 2;
-            //         //opponent.takeDamage(10);
-            //         break;
-            //     }
-            // }
             for (let i = 0; i < enemies.length; i++) {
                 let enemy = enemies[i];
                 if (this.sprite.y <= enemy.collideBottom &&
@@ -98,6 +83,20 @@ class Bullet {
                         else {
                             this.sprite.y = platform.collideTop;
                         }
+                        break;
+                    }
+                }
+            }
+            if (!this.boom) {
+                for (let i = 0; i < arrayOfWall.length; i++) {
+                    let wall = arrayOfWall[i];
+                    if (this.sprite.y <= wall.collideBottom + Math.max(this.sprite.vy, 0) &&
+                        this.sprite.y >= wall.collideTop + Math.min(this.sprite.vy, 0) &&
+                        this.sprite.x <= wall.collideRight &&
+                        this.sprite.x >= wall.collideLeft
+                    ) {
+                        this.boom = true;
+                        this.lifeTime = 2;
                         break;
                     }
                 }

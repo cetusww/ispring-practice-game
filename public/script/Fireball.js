@@ -50,6 +50,20 @@ class Fireball {
                     }
                 }
             }
+            if (!this.boom) {
+                for (let i = 0; i < arrayOfWall.length; i++) {
+                    let wall = arrayOfWall[i];
+                    if (this.sprite.y <= wall.collideBottom + Math.max(this.sprite.vy, 0) &&
+                        this.sprite.y >= wall.collideTop + Math.min(this.sprite.vy, 0) &&
+                        this.sprite.x <= wall.collideRight &&
+                        this.sprite.x >= wall.collideLeft
+                    ) {
+                        this.boom = true;
+                        this.lifeTime = 2;
+                        break;
+                    }
+                }
+            }
         }
         this.lifeTime -= time.deltaTime;
     }
