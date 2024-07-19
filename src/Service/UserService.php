@@ -61,13 +61,35 @@ class UserService
 
     public function getSortedUsers(): array
     {
-        $users = $this->userRepository->findAllUsers();
+        $usersMultiplayer = $this->userRepository->findAllUsers();
+        $usersFirstLevel = $this->userRepository->findAllUsers();
+        $usersSecondLevel = $this->userRepository->findAllUsers();
+        $usersThirdLevel = $this->userRepository->findAllUsers();
 
-        usort($users, function ($a, $b) {
+        usort($usersMultiplayer, function ($a, $b) {
+
+            $aAll = $a->getMultiplayerAll();
+            $aWin = $a->getMultiplayerWin();
+
+            $bAll = $b->getMultiplayerAll();
+            $bWin = $b->getMultiplayerWin();
+
+            $aRatio = $aAll > 0 ? $aWin / $aAll : 0;
+            $bRatio = $bAll > 0 ? $bWin / $bAll : 0;
+
+            return $bRatio <=> $aRatio;
+        });
+        usort($usersFirstLevel, function ($a, $b) {
             return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
         });
+        usort($usersSecondLevel, function ($a, $b) {
+            return $b->getScoreSecondLevel() - $a->getScoreSecondLevel();
+        });
+        usort($usersThirdLevel, function ($a, $b) {
+            return $b->getScoreThirdLevel() - $a->getScoreThirdLevel();
+        });
 
-        return $users;
+        return ['multiplayer' => $usersMultiplayer, 'first' => $usersFirstLevel, 'second' => $usersSecondLevel, 'third' => $usersThirdLevel];
     }
 
     public function setUserScore(User $user, int $currentLevel, int $newScore): void
