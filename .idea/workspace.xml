@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней">
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev убрал лишние переменные и коментарии">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/server.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/script/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Hero.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HeroController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HeroController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UserService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +225,7 @@
       <workItem from="1720421002291" duration="14731000" />
       <workItem from="1721202483528" duration="193000" />
       <workItem from="1721202713803" duration="5379000" />
-      <workItem from="1721333447285" duration="5887000" />
+      <workItem from="1721333447285" duration="7352000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
@@ -428,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721333556882</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="2024-07-20-dev убрал лишние переменные и коментарии">
+      <option name="closed" value="true" />
+      <created>1721375685425</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1721375685425</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +452,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/andrei-07-15-multiplayer-test" />
+                        <option value="2024-07-20-dev" />
                       </list>
                     </value>
                   </entry>
@@ -458,8 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony сделал кнопку прыжка" />
-    <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony доделал геймпад" />
     <MESSAGE value="misha-07-05-new-person сделал новую текстуру для персонажа" />
     <MESSAGE value="misha-07-05-new-person добавил в Hero условие смерти для обновления текстуры персонажа" />
     <MESSAGE value="misha-07-05-new-person добавил alias на текстуру мёртвого персонажа" />
@@ -484,6 +489,7 @@
     <MESSAGE value="2024-07-13-dev поенял стили меню" />
     <MESSAGE value="misha-07-16-lobby-layout убрал кнопку &quot;Готов&quot;. Сделал обратный отсчёт в 5 секунд после присоединения второго игрока" />
     <MESSAGE value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
+    <MESSAGE value="2024-07-20-dev убрал лишние переменные и коментарии" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-20-dev убрал лишние переменные и коментарии" />
   </component>
 </project>

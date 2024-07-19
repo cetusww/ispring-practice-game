@@ -146,36 +146,9 @@ class ViewController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
-        $usersMultiplayer = $this->userRepository->findAllUsers();
-        $usersFirstLevel = $this->userRepository->findAllUsers();
-        $usersSecondLevel = $this->userRepository->findAllUsers();
-        $usersThirdLevel = $this->userRepository->findAllUsers();
+        $sortedUsers = $this->userService->getSortedUsers();
 
-        usort($usersMultiplayer, function ($a, $b) {
-
-            $aAll = $a->getMultiplayerAll();
-            $aWin = $a->getMultiplayerWin();
-
-            $bAll = $b->getMultiplayerAll();
-            $bWin = $b->getMultiplayerWin();
-
-            $aRatio = $aAll > 0 ? $aWin / $aAll : 0;
-            $bRatio = $bAll > 0 ? $bWin / $bAll : 0;
-
-            return $bRatio <=> $aRatio;
-        });
-
-        usort($usersFirstLevel, function ($a, $b) {
-            return $b->getScoreFirstLevel() - $a->getScoreFirstLevel();
-        });
-        usort($usersSecondLevel, function ($a, $b) {
-            return $b->getScoreSecondLevel() - $a->getScoreSecondLevel();
-        });
-        usort($usersThirdLevel, function ($a, $b) {
-            return $b->getScoreThirdLevel() - $a->getScoreThirdLevel();
-        });
-
-        return $this->render('rating.html.twig', ['usersMultiplayer' => $usersMultiplayer, 'usersFirstLevel' => $usersFirstLevel, 'usersSecondLevel' => $usersSecondLevel, 'usersThirdLevel' => $usersThirdLevel]);
+        return $this->render('rating.html.twig', ['usersMultiplayer' => $sortedUsers['multiplayer'], 'usersFirstLevel' => $sortedUsers['first'], 'usersSecondLevel' => $sortedUsers['second'], 'usersThirdLevel' => $sortedUsers['third']]);
     }
 
     public function showMultiplayer(): Response
