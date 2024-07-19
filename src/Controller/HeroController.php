@@ -82,6 +82,7 @@ class HeroController implements MessageComponentInterface {
 								'opponentbullets' => $playerData['herobullets'],
 								'removebonus' => $playerData['removebonus'],
 								'damage' => $playerData['damage'],
+								'shield' => $playerData['shield'], 
 							]
 						]));
 					}

@@ -215,6 +215,7 @@ function onKeyUp(event)
         { alias: 'mushroom', src: '/images/mushroom.json' },
         { alias: 'smoke', src: '/images/smoke.json' },
         { alias: 'shield', src: '/images/shield.png' },
+        { alias: 'shield_active', src: '/images/shield_active.png'},
         { alias: 'health', src: '/images/health.png' },
         { alias: 'portal', src: '/images/portal.png' },
         { alias: 'non_active_portal', src: '/images/non_active_portal.png' },

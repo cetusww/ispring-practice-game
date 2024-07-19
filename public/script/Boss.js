@@ -55,6 +55,26 @@ class Boss {
                 y: 1215,
                 engaged: false,
             },
+            4: {
+                x: 700,
+                y: 1540,
+                engaged: false,
+            },
+            5: {
+                x: 1200,
+                y: 1540,
+                engaged: false,
+            },
+            6: {
+                x: 1700,
+                y: 1540,
+                engaged: false,
+            },
+            7: {
+                x: 2200,
+                y: 1540,
+                engaged: false,
+            },
         };
 
         this.maxHp = 1200;
@@ -177,14 +197,38 @@ class Boss {
         }
     }
 
+    // spawnDevils() {
+    //     if (this.currentTimeSpawnDevils <= 0) {
+    //         let q = Math.floor(Math.random() * 7 + 1);  // принимает рандомные значения с 1 по 7
+
+    //         for (let c = 0; c < q; c++) {
+    //             let spawned = false;
+    //             while (spawned === false) {
+    //                 let placeNum = Math.floor(Math.random() * 7 + 1); // принимает рандомные значения с 1 по 7
+    //                 if (this.devilSpawnPlace[placeNum].engaged === false) {
+    //                     const devil = new Devil(this.devilSpawnPlace[placeNum].x, this.devilSpawnPlace[placeNum].y, this.devilZoneWidth, this.devilZoneHeight, 500, 50, 0);
+    //                     devil.view();
+    //                     enemies.push(devil);
+    //                     this.devilSpawnPlace[placeNum].engaged = true;
+    //                     spawned = true;
+    //                 }
+    //             }
+    //         }
+    //         for (let placeNum = 1; placeNum <= q; placeNum++) {
+    //             this.devilSpawnPlace[placeNum].engaged = false;
+    //         }
+    //         this.currentTimeSpawnDevils = this.timeSpawnDevils
+    //     }
+    // }
+
     spawnDevils() {
         if (this.currentTimeSpawnDevils <= 0) {
-            let q = Math.floor(Math.random() * 10 / 4 + 1);  // принимает рандомные значения с 1 по 3
+            let q = Math.floor(Math.random() * 3 + 1);  // принимает рандомные значения с 1 по 3
 
             for (let c = 0; c < q; c++) {
                 let spawned = false;
                 while (spawned === false) {
-                    let placeNum = Math.floor(Math.random() * 10 / 4 + 1); // принимает рандомные значения с 1 по 3
+                    let placeNum = Math.floor(Math.random() * 3 + 1); // принимает рандомные значения с 1 по 3
                     if (this.devilSpawnPlace[placeNum].engaged === false) {
                         const devil = new Devil(this.devilSpawnPlace[placeNum].x, this.devilSpawnPlace[placeNum].y, this.devilZoneWidth, this.devilZoneHeight, 500, 50, 0);
                         devil.view();
@@ -194,7 +238,12 @@ class Boss {
                     }
                 }
             }
-            for (let placeNum = 1; placeNum < 4; placeNum++) {
+            for (let c = 4; c < 8; c++) {
+                const devil = new Devil(this.devilSpawnPlace[c].x, this.devilSpawnPlace[c].y, this.devilZoneWidth, this.devilZoneHeight, 500, 50, 0);
+                devil.view();
+                enemies.push(devil);
+            }
+            for (let placeNum = 1; placeNum <= 7; placeNum++) {
                 this.devilSpawnPlace[placeNum].engaged = false;
             }
             this.currentTimeSpawnDevils = this.timeSpawnDevils

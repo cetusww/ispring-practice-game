@@ -220,6 +220,7 @@ function onKeyUp(event)
         { alias: 'stalactite', src: '/images/stalactite.png' },
         { alias: 'fire', src: '/images/fire.json' },
         { alias: 'shield', src: '/images/shield.png' },
+        { alias: 'shield_active', src: '/images/shield_active.png'},
         { alias: 'health', src: '/images/health.png' },
         { alias: 'portal', src: '/images/portal.png' },
         { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
