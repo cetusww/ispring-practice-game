@@ -140,7 +140,7 @@
 
         playerdata['opponentbullets'].forEach( bullet =>
         {
-            let b = new Bullet(null, bullet['x'], bullet['y'], 0, 0, bullet['angle']);
+            let b = new Bullet(bullet['x'], bullet['y'], 0, 0, bullet['angle']);
             b.view();
             opponentBullets.push(b);
         });
