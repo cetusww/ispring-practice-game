@@ -7,7 +7,6 @@ use Ratchet\MessageComponentInterface;
 class HeroController implements MessageComponentInterface {
 	protected \SplObjectStorage $clients;
 	public array $arrayOfUsers = [];
-	public array $lobbyNames = [];
 
     public function __construct()
     {
@@ -25,7 +24,7 @@ class HeroController implements MessageComponentInterface {
 		if (!$msg) {
 			echo "Invalid message\n";
 		}
-		//echo "Received message: $msg\n";  // Отладочное сообщение
+
 		$data = json_decode($msg, true);
 		$kick = false;
 		if (isset($data['username']))

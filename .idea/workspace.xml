@@ -4,38 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev поенял стили меню">
-      <change afterPath="$PROJECT_DIR$/src/Service/ViewService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/first_level_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/level_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/joystick-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/joystick_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/legend-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/legend_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/lose-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lose_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/menu-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/menu_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/rating-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/rating_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/screensaver-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signin-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signup-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/win-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/win_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/server.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Hero.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HeroController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HeroController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UserService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/first_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/first_level.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game_lose.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game_lose.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game_win.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game_win.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/legend.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/legend.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rating.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rating.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/screensaver.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/screensaver.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/second_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/second_level.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signin_user_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin_user_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signup_user_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup_user_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/third_level.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/third_level.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/lobby_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lobby_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game_win.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game_win.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/lobby.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rating.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rating.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,9 +38,7 @@
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/mercure" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
       <path value="$PROJECT_DIR$/vendor/symfony/mercure-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
@@ -129,9 +101,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/mercure" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
       <path value="$PROJECT_DIR$/vendor/symfony/mercure-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
@@ -202,6 +172,8 @@
       <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -213,19 +185,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/yogurt/Documents/projects/ispring-practice-game/public/images&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/yogurt/Documents/projects/ispring-practice-game/public/images",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/images" />
@@ -253,6 +226,7 @@
       <workItem from="1720421002291" duration="14731000" />
       <workItem from="1721202483528" duration="193000" />
       <workItem from="1721202713803" duration="5379000" />
+      <workItem from="1721333447285" duration="5887000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
@@ -446,7 +420,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720700416916</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней">
+      <option name="closed" value="true" />
+      <created>1721333556882</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1721333556882</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,7 +458,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево" />
     <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony сделал кнопку прыжка" />
     <MESSAGE value="misha-07-02-gamepad-ratchet-with-symfony доделал геймпад" />
     <MESSAGE value="misha-07-05-new-person сделал новую текстуру для персонажа" />
@@ -502,6 +483,7 @@
     <MESSAGE value="2024-07-13-dev обновил базу данных" />
     <MESSAGE value="2024-07-13-dev поенял стили меню" />
     <MESSAGE value="misha-07-16-lobby-layout убрал кнопку &quot;Готов&quot;. Сделал обратный отсчёт в 5 секунд после присоединения второго игрока" />
-    <option name="LAST_COMMIT_MESSAGE" value="misha-07-16-lobby-layout убрал кнопку &quot;Готов&quot;. Сделал обратный отсчёт в 5 секунд после присоединения второго игрока" />
+    <MESSAGE value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
   </component>
 </project>
