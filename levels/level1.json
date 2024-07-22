@@ -1,0 +1,13 @@
+{
+  "id": "level1",
+  "name": "Level 1",
+  "background": {
+    "texture": "first_level_map.jpg",
+    "width": 1920,
+    "height": 1080,
+    "x": 0,
+    "y": 0
+  },
+  "entities": []
+}
+
