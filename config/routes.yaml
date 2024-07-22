@@ -58,6 +58,14 @@ show_lose:
     path: /lose
     controller: App\Controller\ViewController::showLose
 
+show_win_multiplayer:
+    path: /win-multiplayer
+    controller: App\Controller\ViewController::showWinMultiplayer
+
+show_lose_multiplayer:
+    path: /lose-multiplayer
+    controller: App\Controller\ViewController::showLoseMultiplayer
+
 choose_level:
     path: /choose-level
     controller: App\Controller\ViewController::showLevels

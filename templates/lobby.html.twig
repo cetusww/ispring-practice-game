@@ -86,7 +86,7 @@
     }
     if (data == 'lose')
     {
-        window.location.href = "/lose";
+        window.location.href = "/lose-multiplayer";
     }
     if ('state' in data)
     {
@@ -98,7 +98,7 @@
             if (state['state'] === 'start' || state['state'] === 'win')
             {
                 saveScore();
-                window.location.href = "/win";
+                window.location.href = "/win-multiplayer";
             }  
         }
         state = data['state'];

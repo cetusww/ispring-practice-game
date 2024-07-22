@@ -181,4 +181,24 @@ class ViewController extends AbstractController
         }
         return $this->render('game_lose.html.twig');
     }
+
+    public function showWinMultiplayer(): Response
+    {
+        $this->sessionService->startSession('auth');
+        if ($_SESSION === [])
+        {
+            return $this->redirectToRoute('index');
+        }
+        return $this->render('game_win_multiplayer.html.twig');
+    }
+
+    public function showLoseMultiplayer(): Response
+    {
+        $this->sessionService->startSession('auth');
+        if ($_SESSION === [])
+        {
+            return $this->redirectToRoute('index');
+        }
+        return $this->render('game_lose_multiplayer.html.twig');
+    }
 }
