@@ -153,8 +153,7 @@ class ViewController extends AbstractController
 
     public function showMultiplayer(): Response
     {
-        session_name('auth');
-        session_start();
+        $this->sessionService->startSession('auth');
         $username = $_SESSION['username'] ?? null;
         if ($username === null)
         {

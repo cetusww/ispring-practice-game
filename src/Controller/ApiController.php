@@ -37,8 +37,8 @@ class ApiController extends AbstractController
 
         $this->userRepository->updateUserProgress($user);
 
-		return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
-	}
+        return new Response('Score updated successfully for user id ' . $_SESSION['user_id']);
+    }
 
     public function saveMultiplayerScore(Request $request): Response
     {

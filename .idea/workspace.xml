@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/server.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HeroController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MultiplayerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/SessionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SessionService.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -479,7 +487,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="2024-07-20-dev" />
+                        <option value="misha-07-19-images-improvements" />
                       </list>
                     </value>
                   </entry>
