@@ -50,19 +50,19 @@ img {
 }
 
 .awaiting-text {
-    margin: 10px 0 0 0;
-    font: 400 20px/24px "Russo One", sans-serif;
+    margin: 10px 0 10px 0;
+    font: 400 50px/54px "Russo One", sans-serif;
     color: rgba(255, 255, 255, 1);
 }
 
 
 .loader {
     margin: 0 auto;
-    border: 4px solid rgba(255, 255, 255, 1);
-    border-top: 4px solid rgba(103, 80, 164, 1);
+    border: 8px solid rgba(255, 255, 255, 1);
+    border-top: 8px solid rgba(103, 80, 164, 1);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     animation: spin 1s linear infinite;
 }
 
