@@ -330,6 +330,20 @@ class Hero {
         this.shieldStartTime = performance.now();
     }
 
+    shieldView() {
+        this.shieldImage = new PIXI.Sprite(PIXI.Texture.from('shield_active')); // отображение щита
+        this.shieldImage.x = this.sprite.x - 9;
+        this.shieldImage.y = this.sprite.y;
+        this.shieldImage.anchor.set(0.5);
+        this.shieldImage.width = 180;
+        this.shieldImage.height = 180;
+        scene.addChild(this.shieldImage);
+    }
+
+    shieldDeleteView() {
+        scene.removeChild(this.shieldImage);
+    }
+
     addHealth() {
         this.hp = Math.min(this.hpMax, Math.floor(this.hp + this.hpMax / 4));
         this.updateHp();
@@ -468,11 +482,18 @@ class Hero {
         }
         this.updateExperience();
         this.updateCollide();
+
+        this.shieldDeleteView();
         if (this.activateShield) {
+
             let currentTime = performance.now();
             let elapsedTime = (currentTime - this.shieldStartTime) / 1000;
+        
+            this.shieldView();
+            
             if (elapsedTime >= this.shieldDuration) {
                 this.activateShield = false;
+                this.shieldDeleteView();
             }
         }
     }

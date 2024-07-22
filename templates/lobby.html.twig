@@ -140,13 +140,17 @@
 
         playerdata['opponentbullets'].forEach( bullet =>
         {
-            let b = new Bullet(null, bullet['x'], bullet['y'], 0, 0, bullet['angle']);
+            let b = new Bullet(bullet['x'], bullet['y'], 0, 0, bullet['angle']);
             b.view();
             opponentBullets.push(b);
         });
 
+        heroView.activateShield = false;
+        if (playerdata['shield'] === 'true')
+        {
+            heroView.activateShield = true;
+        } 
     }
-    //console.log(data);
   };
 
   function sendMessage(msg)
@@ -184,6 +188,7 @@
         removebonus: removeBonusId,
         damage: opponentDamage, 
         opponentlose: lose,
+        shield: String(hero.activateShield),
     }
     removeBonusId = [];
     ws.send(JSON.stringify({'playerdata': data}))
