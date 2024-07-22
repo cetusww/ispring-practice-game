@@ -64,7 +64,7 @@
         while (messageQueue.length > 0) {
             ws.send(messageQueue.shift());
         }
-        ws.send(JSON.stringify({'username': username}))
+        setTimeout(() => {ws.send(JSON.stringify({'username': username}))}, 1000)
     };
 
     ws.onerror = function(error) {
