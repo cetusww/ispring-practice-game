@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
 </head>
 <body>
-<div class=" form">
+<div class="form">
     <form action="/signin" method="post">
         {% if (error.username is defined) or (error.password is defined) %}
             <div class="snackbar error top active">
@@ -16,7 +16,7 @@
                     {{ error.username }}<br>
                 {% endif %}
                 {% if error.password is defined %}
-                     {{ error.password }}<br>
+                    {{ error.password }}<br>
                 {% endif %}
             </div>
         {% endif %}
