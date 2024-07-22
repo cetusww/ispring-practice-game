@@ -5,7 +5,147 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-13-dev поенял стили меню">
+      <change afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/green_cap_enemy.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/green_cap_enemy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/level1-map.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Enemy1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RigidBody.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SpriteComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/EntityFactory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/GameController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/LevelParser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/Loader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/ScreenManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ecs/ECS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/systems/SpriteSystem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/StageManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.override.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/doctrine/User.orm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/cache.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine_migrations.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/preload.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/framework.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/user.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20240711113912.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/control.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/choose_level_style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/first_level_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/level1-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/legend-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/legend-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/lose-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lose-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/menu-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/menu-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/rating-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/screensaver-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/signin-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/signup-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/win-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/win-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/bat_group.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/bat_group.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/continue_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/devil.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/devil.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/experience.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/experience.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/fire.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/fire.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/fireball.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/fireball.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/first_level_map.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/ground.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/ground.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/health.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_dead_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero_dead_group.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_idle_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero_idle_group.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_jump_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero_jump_group.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_shoot_group.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_shoot_group.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero_walk_group.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_shoot_group.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_shoot_group.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/level2_map.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/multiplayer_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/mushroom.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/mushroom.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/non_active_portal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/play-button.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/play-button.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/poison.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/portal.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/portal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/rating_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/restart_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/shield.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/singleplayer_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/smoke.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/smoke.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sound_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sound_on.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/stalactite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Bat.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Bullet.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Bullet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Devil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Enemy.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Enemy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Experience.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Experience.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Fire.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Fireball.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Fireball.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Ground.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Ground.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Health.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Hero.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Mushroom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Poison.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Portal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Shield.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Smoke.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Stalactite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/Wall.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/WoodenPlank.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/level1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/level2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/pixi.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/pixi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sounds/bat_sound.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sounds/music.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sounds/shipenie.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sounds/shoot_sound.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sounds/vyistrel.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ApiController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ErrorController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HeroController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/choose_level.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/first_level.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game_lose.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game_win.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/legend.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lobby.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/menu.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/not_found_exception.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rating.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/screensaver.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/second_level.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signin_user_form.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup_user_form.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/third_level.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,16 +160,20 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="misha-07-08-menu-improvements" />
+        <entry key="$PROJECT_DIR$" value="ann-07-15-test_dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
     <include_path>
@@ -166,13 +310,19 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2ilkoqOfD5UjMRj8JVUaxa17BlO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;07-22-front&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/ispring-practice-game&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -182,11 +332,15 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\ispring-practice-game" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
-        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.14808.18" />
       </set>
     </attachedChunks>
   </component>
@@ -202,6 +356,22 @@
       <workItem from="1720198689052" duration="1935000" />
       <workItem from="1720352670698" duration="4975000" />
       <workItem from="1720421002291" duration="14731000" />
+      <workItem from="1721125612937" duration="96000" />
+      <workItem from="1721223310886" duration="140000" />
+      <workItem from="1721281479214" duration="1618000" />
+      <workItem from="1721321872633" duration="1243000" />
+      <workItem from="1721327264785" duration="654000" />
+      <workItem from="1721338461424" duration="13000" />
+      <workItem from="1721338599880" duration="1219000" />
+      <workItem from="1721384140344" duration="1095000" />
+      <workItem from="1721387205812" duration="630000" />
+      <workItem from="1721389479424" duration="3090000" />
+      <workItem from="1721476073685" duration="982000" />
+      <workItem from="1721505809410" duration="699000" />
+      <workItem from="1721506796191" duration="41000" />
+      <workItem from="1721541176407" duration="101000" />
+      <workItem from="1721626890425" duration="2013000" />
+      <workItem from="1721628964569" duration="824000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />

@@ -4,10 +4,12 @@
     text-decoration: none;
     box-sizing: border-box;
 }
+
 html {
     height: 100%;
     overflow: hidden;
 }
+
 body {
     height: 100%;
     background: url('../images/win-background.png') no-repeat;
@@ -19,31 +21,17 @@ body {
     width: 700px;
     height: 50%;
     margin: 5% auto 0 auto;
-    border-radius: 30px;
     padding: 30px;
 }
 
 h1 {
-    font: 400 50px/100px "Russo One", sans-serif;
-    color: rgba(255, 255, 255, 1);
-    margin: 0 0 20px 0;
-}
-
-.options-list {
-    display: flex;
-    justify-content: space-around;
-    font: 400 30px/34px "Russo One", sans-serif;
+    font: 400 50px/100px "Miltonian Tattoo", sans-serif;
     color: rgba(255, 255, 255, 1);
 }
 
-.options-list__restart,
-.options-list__continue {
+.continue {
     display: block;
+    color: rgba(255, 255, 255, 1);
+    font: 400 20px/24px sans-serif;
     text-align: center;
-}
-
-img {
-    border-radius: 0;
-    width: 70px;
-    height: 70px;
 }
