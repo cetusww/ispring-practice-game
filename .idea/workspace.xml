@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/screensaver_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/signin_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/signup_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ValidationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ValidationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signin_user_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin_user_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup_user_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup_user_form.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2024-07-20-dev" />
+        <entry key="$PROJECT_DIR$" value="2024-07-27-dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

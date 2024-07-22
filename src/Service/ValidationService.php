@@ -18,22 +18,33 @@ class ValidationService
     {
         $error = [];
 
-        if (empty($username))
+        if (strlen($username) < 3)
         {
-            $error['username'] = 'Имя пользователя не может быть пустым.';
+            $error['username'] = 'Имя пользователя должно содержать минимум 3 символа';
         }
+
+        if (strlen($username) > 9)
+        {
+            $error['username'] = 'Имя пользователя должно содержать максимум 9 символов';
+        }
+
+        if (preg_match('/[^a-zA-Zа-яА-Я0-9]/u', $username)) {
+            $error['username'] = 'Имя пользователя не должно содержать специальные символы';
+        }
+
         if (empty($password))
         {
-            $error['password'] = 'Пароль не может быть пустым.';
+            $error['password'] = 'Пароль не может быть пустым';
         }
+
         if (strlen($password) < 6)
         {
-            $error['password'] = 'Пароль должен содержать не менее 6 символов.';
+            $error['password'] = 'Пароль должен содержать не менее 6 символов';
         }
 
         if ($existingUser)
         {
-            $error['username'] = 'Пользователь с таким именем уже существует.';
+            $error['username'] = 'Пользователь с таким именем уже существует';
         }
 
         return $error;
@@ -43,13 +54,9 @@ class ValidationService
     {
         $error = [];
 
-        if (empty($username))
-        {
-            $error['username'] = 'Имя пользователя не может быть пустым.';
-        }
         if (empty($password))
         {
-            $error['password'] = 'Пароль не может быть пустым.';
+            $error['password'] = 'Пароль не может быть пустым';
         }
 
         if (!$existingUser)

@@ -10,11 +10,19 @@
 <body>
 <div class=" form">
     <form action="/signin" method="post">
-        <span class="error-text">{{ error.username ?? '' }}</span>
+        {% if (error.username is defined) or (error.password is defined) %}
+            <div class="snackbar error top active">
+                {% if error.username is defined %}
+                    {{ error.username }}<br>
+                {% endif %}
+                {% if error.password is defined %}
+                     {{ error.password }}<br>
+                {% endif %}
+            </div>
+        {% endif %}
         <div class="field border fill responsive input">
-            <input name="username" id="username" type="text" placeholder="имя">
+            <input name="username" id="username" type="text" placeholder="имя" maxlength="9">
         </div>
-        <span class="error-text">{{ error.password ?? '' }}</span>
         <div class="field border fill input">
             <input name="password" id="password" type="password" placeholder="пароль">
         </div>

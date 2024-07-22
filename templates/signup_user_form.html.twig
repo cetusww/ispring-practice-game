@@ -10,13 +10,21 @@
 <body>
 <div id="form" class=" form">
     <form action="/signup" method="post">
-        <span class="error-text">{{ error.username ?? '' }}</span>
+        {% if (error.username is defined) or (error.password is defined) %}
+            <div class="snackbar error top active">
+                {% if error.username is defined %}
+                    {{ error.username }}<br>
+                {% endif %}
+                {% if error.password is defined %}
+                    {{ error.password }}<br>
+                {% endif %}
+            </div>
+        {% endif %}
         <div class="field border fill responsive input">
-            <input name="username" id="username" type="text" placeholder="имя">
+            <input name="username" id="username" type="text" placeholder="имя" maxlength="9">
         </div>
-        <span class="error-text">{{ error.password ?? '' }}</span>
         <div class="field border fill input">
-            <input name="password" id="password" type="password" placeholder="пароль">
+            <input name="password" id="password" type="password" placeholder="пароль" maxlength="9">
         </div>
         <button class="small-round responsive button-signin" type="submit">зарегистрироваться</button>
     </form>
