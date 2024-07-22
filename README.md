@@ -1,1 +1,0 @@
-# ispring-practice-game

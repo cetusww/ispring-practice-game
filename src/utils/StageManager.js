@@ -8,8 +8,4 @@ export class StageManager {
     static addChild(child) {
         this.app.stage.addChild(child);
     }
-
-    static removeChild(child) {
-        this.app.stage.addChild(child);
-    }
 }

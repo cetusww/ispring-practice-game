@@ -5,7 +5,8 @@ export class Component {
 }
 
 export class Entity {
-    constructor() {
+    constructor(id) {
+        this.id = id;
         this.components = new Map();
         this.componentTypes = new Set();
     }
@@ -27,10 +28,6 @@ export class Entity {
     hasComponent(ComponentClass) {
         return this.componentTypes.has(ComponentClass);
     }
-
-    setID(id) {
-        this.id = id;
-    }
 }
 
 export class System {
@@ -45,48 +42,41 @@ export class System {
     }
 
     //предназначен для переопределения в производных системах
-    update(deltaTime) {
-    }
+    update() {}
 
     //проверяет, есть ли у сущности все необходимые компоненты, указанные в requiredComponents
     matchEntity(entity) {
         return this.requiredComponents.every(ComponentClass => entity.hasComponent(ComponentClass));
     }
 
-    tryAddEntity(entity) {
+    addEntity(entity) {
         if (this.matchEntity(entity) && !this.entities.includes(entity)) {
             this.entities.push(entity);
-            this.onEntityEnterCache(entity);
         }
     }
 
     removeEntity(entity) {
         const index = this.entities.indexOf(entity);
-        if (index !== -1) {
-            this.onEntityLeaveCache(entity);
+        if (index !== -1)
+        {
             this.entities.splice(index, 1);
         }
     }
-
-    onEntityEnterCache(entity) {
-    }
-
-    onEntityLeaveCache(entity) {
-    }
 }
 
-export class World {
+export class World
+{
     constructor() {
         this.entities = new Map();
         this.systems = [];
         this.nextEntityId = 1;
     }
 
-    addEntity(entity) {
-        entity.setID(this.nextEntityId++);
+    createEntity() {
+        const entity = new Entity(this.nextEntityId++);
         this.entities.set(entity.id, entity);
         for (const system of this.systems) {
-            system.tryAddEntity(entity);
+            system.addEntity(entity);
         }
         return entity;
     }
@@ -105,7 +95,7 @@ export class World {
         this.systems.push(system);
         system.init(this);
         for (const entity of this.entities.values()) {
-            system.tryAddEntity(entity);
+            system.addEntity(entity);
         }
     }
 
@@ -118,7 +108,7 @@ export class World {
     updateEntityComponents(entity) {
         for (const system of this.systems) {
             if (system.matchEntity(entity)) {
-                system.tryAddEntity(entity);
+                system.addEntity(entity);
             } else {
                 system.removeEntity(entity);
             }
