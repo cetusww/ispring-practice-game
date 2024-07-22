@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-22-win-and-lose-for-multiplayer сделал экраны победы и поражения для мультиплеера, добавил муршруты на них">
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/lobby_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lobby_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/lobby.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -489,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721633556855</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта">
+      <option name="closed" value="true" />
+      <created>1721634217118</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1721634217118</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,7 +528,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-07-05-new-person убрал alias на мёртвого персонажа" />
     <MESSAGE value="misha-06-26-login-signup доделал валидацию, добавил страницу 404" />
     <MESSAGE value="2024-07-01-test-dev-2 исправил грамматическую ошибку &quot;enemys&quot; -&gt; &quot;enemies&quot;" />
     <MESSAGE value="2024-07-01-test-dev-2 изменил внешний вид главного героя" />
@@ -544,6 +552,7 @@
     <MESSAGE value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
     <MESSAGE value="main исправил количество жизней" />
     <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer сделал экраны победы и поражения для мультиплеера, добавил муршруты на них" />
-    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-win-and-lose-for-multiplayer сделал экраны победы и поражения для мультиплеера, добавил муршруты на них" />
+    <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта" />
+    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта" />
   </component>
 </project>
