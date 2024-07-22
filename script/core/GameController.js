@@ -1,9 +1,8 @@
-import {World} from '/src/ecs/ECS.js';
-import {BackgroundSystem} from '/src/systems/BackgroundSystem.js';
-import {Loader} from '/src/core/Loader.js';
-/*import {LevelParser} from '/src/core/LevelParser.js';*/
-import {StageManager} from '/src/utils/StageManager.js';
-import level1Data from '../../levels/level1.json';
+import {World} from '../ecs/ECS';
+import {BackgroundSystem} from '../systems/BackgroundSystem.js';
+import {Loader} from './Loader';
+import {StageManager} from '../utils/StageManager.js';
+import level1Data from '../../gamedata/levels/level1.json';
 import * as PIXI from 'pixijs';
 
 export class GameController {

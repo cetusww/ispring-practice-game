@@ -1,4 +1,4 @@
-import {Component} from '/src/ecs/ECS.js';
+import {Component} from '/script/ecs/ECS.js';
 import * as PIXI from 'pixijs';
 import {StageManager} from "../utils/StageManager";
 export class BackgroundComponent extends Component {

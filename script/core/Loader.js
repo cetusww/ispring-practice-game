@@ -1,4 +1,4 @@
-import {BackgroundComponent} from '/src/components/BackgroundComponent.js';
+import {BackgroundComponent} from '/script/components/BackgroundComponent.js';
 import * as PIXI from 'pixijs';
 
 export class Loader {

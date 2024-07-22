@@ -1,5 +1,5 @@
-import {System} from '/src/ecs/ECS.js';
-import {BackgroundComponent} from '/src/components/BackgroundComponent.js';
+import {System} from '/script/ecs/ECS.js';
+import {BackgroundComponent} from '/script/components/BackgroundComponent.js';
 
 export class BackgroundSystem extends System {
     constructor() {
