@@ -267,21 +267,14 @@ function gameLoop(time)
 {
     if (state['state'] === 'start')
     {
-        //portal.update(time);
         hero.update(time);
         heroView.update(time);
         hero.updateMap();
         arrayOfOpponent = [heroView];
-        // if (hero.experience >= hero.experienceMax * 0.7 && !portal.isActive && !hero.isWin)
-        // {
-        //     portal.activate();
-        //     hero.portalTextView();
-        // }
         if (hero.deadTime < 0)
         {
-            //saveScore();
             hero.deadTime = 1000;
-            window.location.href = "/lose";
+            window.location.href = "/lose-";
         }
         if (mouse.isDownLeft)
         {
