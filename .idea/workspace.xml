@@ -4,84 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/choose_level_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/choose_level_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/legend_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/legend_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/lobby_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lobby_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/lose_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lose_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/menu_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/menu_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/rating_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/rating_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/screensaver_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signin_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signup_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/win_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/win_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/bat_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/bat_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/bat_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/bat_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/boss.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/boss.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/boss.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/boss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/bullet.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/bullet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/continue_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/continue_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/cursor.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/cursor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/devil.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/devil.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/devil.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/devil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/enemy_beacon.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/enemy_beacon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/experience.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/experience.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/faerball.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/fire.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/fire.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/fire.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/fire.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/fireball.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/fireball.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/first_level_map.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Map/first_level_map.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/ground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/ground.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/ground.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/health.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/health.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_beacon.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/hero_beacon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_dead_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_dead_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_dead_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_dead_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_idle_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_idle_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_idle_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_idle_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_jump_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_jump_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_jump_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_jump_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_shoot_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_shoot_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_shoot_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_shoot_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_walk_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_walk_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_shoot_group.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_walk_shoot_group.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero_walk_shoot_group.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Hero/hero_walk_shoot_group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/home_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/home_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/legend-background.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/legend_background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/level2_map.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Map/level2_map.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/level3_map.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Map/level3_map.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/lose-background.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/lose_background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu-background.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/menu_background.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/multiplayer_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/multiplayer_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/mushroom.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/mushroom.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/mushroom.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Enemy/mushroom.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/non_active_portal.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/non_active_portal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/play-button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/play-button.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/poison.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/poison.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/portal.gif" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/portal.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/portal.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/portal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/rating_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/rating_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/restart_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/restart_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/screensaver-background.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/screensaver_background.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shield.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/shield.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shot.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/shot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/signin-background.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/signin_background.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/signup-background.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/signup_background.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/singleplayer_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/singleplayer_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/smoke.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/smoke.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/smoke.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/smoke.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sound_off.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/sound_off.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sound_on.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Icon/sound_on.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/stalactite.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Object/stalactite.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/win-background.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Background/win_background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/Hero.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game_lose.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game_lose.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -305,7 +228,7 @@
       <workItem from="1721202483528" duration="193000" />
       <workItem from="1721202713803" duration="5379000" />
       <workItem from="1721333447285" duration="9454000" />
-      <workItem from="1721626678600" duration="801000" />
+      <workItem from="1721626678600" duration="1116000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
@@ -523,7 +446,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721377250636</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="misha-07-19-images-improvements исправил отображение мультиплеера">
+      <option name="closed" value="true" />
+      <created>1721629247052</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1721629247053</updated>
+    </task>
+    <task id="LOCAL-00029" summary="misha-07-19-images-improvements исправил отображение мультиплеера">
+      <option name="closed" value="true" />
+      <created>1721629278374</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1721629278374</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-07-05-new-person добавил в Hero условие смерти для обновления текстуры персонажа" />
     <MESSAGE value="misha-07-05-new-person добавил alias на текстуру мёртвого персонажа" />
     <MESSAGE value="misha-07-05-new-person добавил картинку с мёртвым персонажем" />
     <MESSAGE value="misha-07-05-new-person добавил json файл с мёртвым героем" />
@@ -578,6 +516,7 @@
     <MESSAGE value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
     <MESSAGE value="2024-07-20-dev убрал лишние переменные и коментарии" />
     <MESSAGE value="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
+    <MESSAGE value="misha-07-19-images-improvements исправил отображение мультиплеера" />
+    <option name="LAST_COMMIT_MESSAGE" value="misha-07-19-images-improvements исправил отображение мультиплеера" />
   </component>
 </project>
