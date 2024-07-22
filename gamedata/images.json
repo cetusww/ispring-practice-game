@@ -1,0 +1,10 @@
+{
+    "level1_bg": "first_level_map.jpg",
+    "hero_dead": "hero_dead_group.json",
+    "hero_idle": "hero_idle_group.json",
+    "hero_jump": "hero_jump_group.json",
+    "hero_shoot": "hero_shoot_group.json",
+    "hero_walk": "hero_walk_group.json",
+    "hero_walk_shoot": "hero_walk_shoot_group.json",
+    "bat": "bat_group.json"
+  }

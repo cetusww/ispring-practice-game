@@ -46,4 +46,6 @@ export class SpriteSystem extends System {
             backgroundComponent.sprite = null;
         }
     }
+
+    
 }
