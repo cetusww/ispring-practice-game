@@ -192,7 +192,7 @@ function onKeyUp(event)
 {
     await app.init({ background: '#000000',  width: window.innerWidth, height: window.innerHeight});
     document.body.appendChild(app.canvas);
-    resizeWindow()
+    resizeWindow();
     await PIXI.Assets.load([
         { alias: 'level1_map', src: '/images/Map/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/Map/level2_map.png' },

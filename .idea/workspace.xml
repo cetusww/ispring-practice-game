@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта">
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/lobby_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lobby_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/lobby.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/level_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/level_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -498,7 +498,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721634217118</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4">
+      <option name="closed" value="true" />
+      <created>1721634512177</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1721634512177</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +536,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-06-26-login-signup доделал валидацию, добавил страницу 404" />
     <MESSAGE value="2024-07-01-test-dev-2 исправил грамматическую ошибку &quot;enemys&quot; -&gt; &quot;enemies&quot;" />
     <MESSAGE value="2024-07-01-test-dev-2 изменил внешний вид главного героя" />
     <MESSAGE value="2024-07-01-test-dev-2 добавил отображение экранов победы и проигрыша" />
@@ -553,6 +560,7 @@
     <MESSAGE value="main исправил количество жизней" />
     <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer сделал экраны победы и поражения для мультиплеера, добавил муршруты на них" />
     <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта" />
-    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта" />
+    <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4" />
   </component>
 </project>
