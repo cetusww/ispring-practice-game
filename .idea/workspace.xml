@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/server.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HeroController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MultiplayerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/SessionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SessionService.php" afterDir="false" />
-    </list>
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -470,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721629278374</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код">
+      <option name="closed" value="true" />
+      <created>1721630475962</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1721630475962</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +487,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="misha-07-19-images-improvements" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -500,7 +500,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-07-05-new-person добавил alias на текстуру мёртвого персонажа" />
     <MESSAGE value="misha-07-05-new-person добавил картинку с мёртвым персонажем" />
     <MESSAGE value="misha-07-05-new-person добавил json файл с мёртвым героем" />
     <MESSAGE value="misha-07-05-new-person убрал alias на мёртвого персонажа" />
@@ -525,6 +524,7 @@
     <MESSAGE value="2024-07-20-dev убрал лишние переменные и коментарии" />
     <MESSAGE value="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
     <MESSAGE value="misha-07-19-images-improvements исправил отображение мультиплеера" />
-    <option name="LAST_COMMIT_MESSAGE" value="misha-07-19-images-improvements исправил отображение мультиплеера" />
+    <MESSAGE value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
   </component>
 </project>
