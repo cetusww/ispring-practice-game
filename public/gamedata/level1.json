@@ -1,0 +1,317 @@
+{
+    "platforms": [
+        {
+            "texture": "",
+            "posX": 420,
+            "posY": 440,
+            "width": 470,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1243,
+            "posY": 580,
+            "width": 605,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2107,
+            "posY": 580,
+            "width": 905,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 77,
+            "posY": 820,
+            "width": 154,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 854,
+            "posY": 820,
+            "width": 1200,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1745,
+            "posY": 820,
+            "width": 380,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2305,
+            "posY": 820,
+            "width": 510,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 77,
+            "posY": 1080,
+            "width": 154,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 465,
+            "posY": 1080,
+            "width": 415,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1080,
+            "posY": 1080,
+            "width": 600,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1740,
+            "posY": 1080,
+            "width": 380,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2290,
+            "posY": 1190,
+            "width": 540,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1280,
+            "posY": 1400,
+            "width": 2560,
+            "height": 40
+        }
+    ],
+    "woodenPlanks": [
+        {
+            "texture": "",
+            "posX": 870,
+            "posY": 580,
+            "width": 145,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1600,
+            "posY": 580,
+            "width": 115,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 205,
+            "posY": 820,
+            "width": 105,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1505,
+            "posY": 820,
+            "width": 105,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1990,
+            "posY": 820,
+            "width": 115,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 205,
+            "posY": 1080,
+            "width": 105,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 725,
+            "posY": 1080,
+            "width": 115,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1465,
+            "posY": 1080,
+            "width": 185,
+            "height": 40
+        }
+    ],
+    "walls": [
+        {
+            "texture": "",
+            "posX": 60,
+            "posY": 730,
+            "width": 60,
+            "height": 1460
+        },
+        {
+            "texture": "",
+            "posX": 2500,
+            "posY": 730,
+            "width": 60,
+            "height": 1460
+        }
+    ],
+    "devils": [
+        {
+            "posX": 1600,
+            "posY": 530,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 1200,
+            "posY": 530,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 110
+        },
+        {
+            "posX": 1600,
+            "posY": 770,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 90
+        },
+        {
+            "posX": 1200,
+            "posY": 770,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 350,
+            "posY": 1030,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 100
+        },
+        {
+            "posX": 1300,
+            "posY": 1030,
+            "zoneWidth": 150,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 120
+        },
+        {
+            "posX": 450,
+            "posY": 1350,
+            "zoneWidth": 400,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 160
+        },
+        {
+            "posX": 1300,
+            "posY": 1350,
+            "zoneWidth": 500,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 90
+        },
+        {
+            "posX": 2000,
+            "posY": 1350,
+            "zoneWidth": 400,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 90
+        }
+    ],
+    "bats": [
+        {
+            "posX": 480,
+            "posY": 600,
+            "zoneWidth": 310,
+            "zoneHeight": 100,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 200,
+            "experience": 130
+        }
+    ],
+    "shields": [
+        {
+            "posX": 450,
+            "posY": 880,
+            "duration": 10
+        },
+        {
+            "posX": 350,
+            "posY": 520,
+            "duration": 10
+        }
+    ],
+    "health": [
+        {
+            "posX": 450,
+            "posY": 520
+        },
+        {
+            "posX": 1900,
+            "posY": 780
+        }
+    ],
+    "stalactites": [
+        {
+            "posX": 150,
+            "posY": 100,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 700,
+            "posY": 100,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 740,
+            "posY": 100,
+            "zoneHeight": 700,
+            "zoneWidth": 100
+        },
+        {
+            "posX": 1300,
+            "posY": 90,
+            "zoneHeight": 400,
+            "zoneWidth": 50
+        },
+        {
+            "posX": 1700,
+            "posY": 100,
+            "zoneHeight": 400,
+            "zoneWidth": 50
+        }
+    ]
+}
