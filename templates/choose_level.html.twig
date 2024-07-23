@@ -15,10 +15,10 @@
     <p class="level-list__first-level-title">1 уровень</p>
     <div class="level-list__result">
       {% if user.scoreFirstLevel %}
-        <p>Набрано очков: {{ user.scoreFirstLevel }}</p>
+        <p>Очки: {{ user.scoreFirstLevel }}</p>
       {% endif %}
       {% if user.timeFirstLevel %}
-        <p>Пройдено за: {{ user.timeFirstLevel }}с</p>
+        <p>Время: {{ user.timeFirstLevel }}с</p>
       {% endif %}
     </div>
   </a>
@@ -27,10 +27,10 @@
       <p class="level-list__second-level-title">2 уровень</p>
       <div class="level-list__result">
         {% if user.scoreSecondLevel %}
-          <p>Набрано очков: {{ user.scoreSecondLevel }}</p>
+          <p>Очки: {{ user.scoreSecondLevel }}</p>
         {% endif %}
         {% if user.timeSecondLevel %}
-          <p>Пройдено за: {{ user.timeSecondLevel }}с</p>
+          <p>Время: {{ user.timeSecondLevel }}с</p>
         {% endif %}
       </div>
     </a>
@@ -45,10 +45,10 @@
       <p class="level-list__third-level-title">3 уровень</p>
       <div class="level-list__result">
         {% if user.scoreThirdLevel %}
-          <p>Набрано очков: {{ user.scoreThirdLevel }}</p>
+          <p>Очки: {{ user.scoreThirdLevel }}</p>
         {% endif %}
         {% if user.timeThirdLevel %}
-          <p>Пройдено за: {{ user.timeThirdLevel }}с</p>
+          <p>Время: {{ user.timeThirdLevel }}с</p>
         {% endif %}
       </div>
     </a>
