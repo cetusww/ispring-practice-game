@@ -1,37 +1,158 @@
-const SCENE_WIDTH = 3000;
-const SCENE_HEIGHT = 1250;
-function levelCreate()
-{
-    background = PIXI.Sprite.from('level2_map');
-    background.anchor.set(0);
+let SCENE_WIDTH
+let SCENE_HEIGHT
+let levelData
 
-    function resizeBackground()
-    {
+function loadJSONSync(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, false);
+    xhr.send();
+    if (xhr.status === 200) {
+        return JSON.parse(xhr.responseText);
+    } else {
+        throw new Error('Ошибка: ' + xhr.status);
+    }
+}
+
+try {
+    levelData = loadJSONSync('../gamedata/level2.json');
+    SCENE_WIDTH = levelData.scene[0]['width'];
+    SCENE_HEIGHT = levelData.scene[0]['height'];
+} catch (error) {
+    console.error(error);
+}
+
+function resizeWindow() {
+    let relationshipWidth = window.innerWidth / SCENE_WIDTH;
+    let relationshipHeight = window.innerHeight / SCENE_HEIGHT;
+    if (relationshipWidth > 1 || relationshipHeight > 1) {
+        if (relationshipWidth > relationshipHeight) {
+            sceneScale = relationshipWidth;
+        } else {
+            sceneScale = relationshipHeight;
+        }
+        scene.scale.x = sceneScale;
+        scene.scale.y = sceneScale;
+    } else {
+        sceneScale = 1;
+    }
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+}
+
+function levelCreate() {
+    function resizeBackground() {
         background.width = SCENE_WIDTH;
         background.height = SCENE_HEIGHT;
     }
+    background = PIXI.Sprite.from(levelData.background);
+    background.anchor.set(0);
     scene.addChild(background);
     resizeBackground();
-    hero = new Hero(250, 100, 6, 0, 680);
-    portal = new Portal(2070, 1020);
 
-    let texture //= PIXI.Texture.from('ground');
+    hero = new Hero(levelData.hero[0]['posX'], levelData.hero[0]['posY'], levelData.hero[0]['speedX'], levelData.hero[0]['speedY'], levelData.hero[0]['experienceMax']);
+    portal = new Portal(levelData.portal[0]['posX'], levelData.portal[0]['posY']);
+
+    let platformsData = Array.from(levelData.platforms)
+    platformsData.forEach(item => {
+        platforms.push(new Ground(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+    });
+    let woodenPlanksData = Array.from(levelData.woodenPlanks)
+    woodenPlanksData.forEach(item => {
+        woodenPlanks.push(new WoodenPlank(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+    });
+    let wallsData = Array.from(levelData.walls)
+    wallsData.forEach(item => {
+        arrayOfWall.push(new Wall(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+    });
+    let devilsData = Array.from(levelData.devils)
+    devilsData.forEach(item => {
+        enemies.push(new Devil(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
+    });
+    let batsData = Array.from(levelData.bats)
+    batsData.forEach(item => {
+        enemies.push(new Bat(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
+    });
+    let shieldsData = Array.from(levelData.shields)
+    shieldsData.forEach(item => {
+        arrayOfBonus.push(new Shield(item['posX'], item['posY'], item['duration']))
+    });
+    let healthData = Array.from(levelData.health)
+    healthData.forEach(item => {
+        arrayOfBonus.push(new Health(item['posX'], item['posY']))
+    });
+    let stalactitesData = Array.from(levelData.stalactites)
+    stalactitesData.forEach(item => {
+        arrayOfStalactite.push(new Stalactite(item['posX'], item['posY'], item['zoneHeight'], item['zoneWidth']))
+    });
+    let mushroomsData = Array.from(levelData.mushrooms)
+    mushroomsData.forEach(item => {
+        enemies.push(new Mushroom(item['posX'], item['posY'], item['visibilityZoneWidth'], item['attackZoneWidth'], item['experience']))
+    });
+    let firesData = Array.from(levelData.fires)
+    firesData.forEach(item => {
+        fires.push(new Fire(item['posX'], item['posY']))
+    });
+}
+
+function levelView()
+{
+    portal.view();
+    arrayOfWall.forEach(wall => {
+        wall.view();
+    })
+    woodenPlanks.forEach(woodenPlank =>
+    {
+        woodenPlank.view();
+    })
+
+    platforms.forEach(platform =>
+    {
+        platform.view();
+    })
+    let experienceMax = 0;
+    enemies.forEach(enemy =>
+    {
+        enemy.view();
+        experienceMax += enemy.experience;
+    });
+    arrayOfBonus.forEach(bonus =>
+    {
+        bonus.view();
+    });
+    arrayOfStalactite.forEach(stalactite =>
+    {
+        stalactite.view();
+    });
+    fires.forEach(fire =>
+    {
+        fire.view();
+    });
+    
+    hero.experienceMax = experienceMax;
+    hero.view();
+}
+
+
+
+
+
     platforms.push(new Ground(texture, 1500, 70, 3000, 40)); // потолок - 4 уровень
     platforms.push(new Ground(texture, 345, 255, 690, 40)); // 3 уровень
+
     woodenPlanks.push(new WoodenPlank(texture, 745, 255, 110, 40));// 3 уровень
 
     platforms.push(new Ground(texture, 345, 550, 690, 40)); // 2 уровень
     platforms.push(new Ground(texture, 1355, 550, 1110, 40)); // 2 уровень
     platforms.push(new Ground(texture, 2270, 550, 520, 40)); // 2 уровень
     platforms.push(new Ground(texture, 2850, 550, 300, 40)); // 2 уровень
+
     woodenPlanks.push(new WoodenPlank(texture, 745, 550, 110, 40));// 2 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1958, 550, 100, 40));// 2 уровень
-
 
     platforms.push(new Ground(texture, 345, 845, 690, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1085, 845, 570, 40)); // 1 уровень
     platforms.push(new Ground(texture, 1870, 845, 800, 40)); // 1 уровень
     platforms.push(new Ground(texture, 2685, 845, 630, 40)); // 1 уровень
+
     woodenPlanks.push(new WoodenPlank(texture, 745, 845, 110, 40));// 1 уровень
     woodenPlanks.push(new WoodenPlank(texture, 1420, 845, 100, 40));// 1 уровень
     woodenPlanks.push(new WoodenPlank(texture, 2320, 845, 100, 40));// 1 уровень
@@ -49,6 +170,7 @@ function levelCreate()
     
     arrayOfBonus.push(new Shield(200, 1105, 10));
     arrayOfBonus.push(new Shield(2800, 1105, 10));
+    
     arrayOfBonus.push(new Health(100, 160));
     arrayOfBonus.push(new Health(200, 500));
     arrayOfBonus.push(new Health(1350, 500));
@@ -91,15 +213,9 @@ function levelCreate()
     enemies.push(new Mushroom(2700, 1105, 300, 250, 130));// mushroom test 0 уровень
     enemies.push(new Devil(2100, 1105, 300, 0, 300, 50, 130));// 0 уровень
     fires.push(new Fire(2500, 1100)); //0 уровень
-    // enemies.push(new Devil(1600, 500, 300, 0, 300, 50, 130));// 2 уровень
-    // enemies.push(new Devil(1200, 500, 300, 0, 300, 50, 110));// 2 уровень
 
-    // enemies.push(new Devil(1600, 795, 300, 0, 300, 50, 90));// 1 уровень
-    // enemies.push(new Devil(1200, 795, 300, 0, 300, 50, 130));// 1 уровень
 
-    // enemies.push(new Devil(350, 1105, 300, 0, 300, 50, 100));// 0 уровень
-    // enemies.push(new Devil(1300, 1105, 150, 0, 300, 50, 120));// 0 уровень
-}
+
 
 async function saveScore(isWin)
 {

@@ -1,128 +1,134 @@
-const SCENE_WIDTH = 2560;
-const SCENE_HEIGHT = 1460;
+let SCENE_WIDTH
+let SCENE_HEIGHT
+let levelData
 
+function loadJSONSync(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, false);
+    xhr.send();
+    if (xhr.status === 200) {
+        return JSON.parse(xhr.responseText);
+    } else {
+        throw new Error('Ошибка: ' + xhr.status);
+    }
+}
+
+try {
+    levelData = loadJSONSync('../gamedata/level1.json');
+    SCENE_WIDTH = levelData.scene[0]['width'];
+    SCENE_HEIGHT = levelData.scene[0]['height'];
+} catch (error) {
+    console.error(error);
+}
+
+function resizeWindow() {
+    let relationshipWidth = window.innerWidth / SCENE_WIDTH;
+    let relationshipHeight = window.innerHeight / SCENE_HEIGHT;
+    if (relationshipWidth > 1 || relationshipHeight > 1) {
+        if (relationshipWidth > relationshipHeight) {
+            sceneScale = relationshipWidth;
+        } else {
+            sceneScale = relationshipHeight;
+        }
+        scene.scale.x = sceneScale;
+        scene.scale.y = sceneScale;
+    } else {
+        sceneScale = 1;
+    }
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+}
 
 function levelCreate() {
-
-    function loadJSONSync(url) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, false);
-        xhr.send();
-        if (xhr.status === 200) {
-            return JSON.parse(xhr.responseText);
-        } else {
-            throw new Error('Ошибка: ' + xhr.status);
-        }
-    }
-
     function resizeBackground() {
         background.width = SCENE_WIDTH;
         background.height = SCENE_HEIGHT;
     }
-
-    background = PIXI.Sprite.from('level1_map');
+    background = PIXI.Sprite.from(levelData.background);
     background.anchor.set(0);
     scene.addChild(background);
     resizeBackground();
 
-    hero = new Hero(400, 100, 6, 0, 680);
-    portal = new Portal(2300, 1300);
+    hero = new Hero(levelData.hero[0]['posX'], levelData.hero[0]['posY'], levelData.hero[0]['speedX'], levelData.hero[0]['speedY'], levelData.hero[0]['experienceMax']);
+    portal = new Portal(levelData.portal[0]['posX'], levelData.portal[0]['posY']);
 
-    try {
-        const levelData = loadJSONSync('../gamedata/level1.json');
+    let platformsData = Array.from(levelData.platforms)
+    platformsData.forEach(item => {
+        platforms.push(new Ground(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+    });
+    let woodenPlanksData = Array.from(levelData.woodenPlanks)
+    woodenPlanksData.forEach(item => {
+        woodenPlanks.push(new WoodenPlank(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+    });
+    let wallsData = Array.from(levelData.walls)
+    wallsData.forEach(item => {
+        arrayOfWall.push(new Wall(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+    });
+    let devilsData = Array.from(levelData.devils)
+    devilsData.forEach(item => {
+        enemies.push(new Devil(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
+    });
+    let batsData = Array.from(levelData.bats)
+    batsData.forEach(item => {
+        enemies.push(new Bat(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
+    });
+    let shieldsData = Array.from(levelData.shields)
+    shieldsData.forEach(item => {
+        arrayOfBonus.push(new Shield(item['posX'], item['posY'], item['duration']))
+    });
+    let healthData = Array.from(levelData.health)
+    healthData.forEach(item => {
+        arrayOfBonus.push(new Health(item['posX'], item['posY']))
+    });
+    let stalactitesData = Array.from(levelData.stalactites)
+    stalactitesData.forEach(item => {
+        arrayOfStalactite.push(new Stalactite(item['posX'], item['posY'], item['zoneHeight'], item['zoneWidth']))
+    });
+    let mushroomsData = Array.from(levelData.mushrooms)
+    mushroomsData.forEach(item => {
+        enemies.push(new Mushroom(item['posX'], item['posY'], item['visibilityZoneWidth'], item['attackZoneWidth'], item['experience']))
+    });
+    let firesData = Array.from(levelData.fires)
+    firesData.forEach(item => {
+        fires.push(new Fire(item['posX'], item['posY']))
+    });
+}
 
-        let platformsData = Array.from(levelData.platforms)
-        platformsData.forEach(item => {
-            platforms.push(new Ground(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
-        });
+function levelView()
+{
+    portal.view();
+    arrayOfWall.forEach(wall => {
+        wall.view();
+    })
+    woodenPlanks.forEach(woodenPlank =>
+    {
+        woodenPlank.view();
+    })
 
-        let woodenPlanksData = Array.from(levelData.woodenPlanks)
-        woodenPlanksData.forEach(item => {
-            woodenPlanks.push(new WoodenPlank(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
-        });
-
-        let wallsData = Array.from(levelData.walls)
-        wallsData.forEach(item => {
-            arrayOfWall.push(new Wall(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
-        });
-
-        let devilsData = Array.from(levelData.devils)
-        devilsData.forEach(item => {
-            enemies.push(new Devil(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
-        });
-
-        let batsData = Array.from(levelData.bats)
-        batsData.forEach(item => {
-            enemies.push(new Bat(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
-        });
-
-        let shieldsData = Array.from(levelData.shields)
-        shieldsData.forEach(item => {
-            arrayOfBonus.push(new Shield(item['posX'], item['posY'], item['duration']))
-        });
-
-        let healthData = Array.from(levelData.health)
-        healthData.forEach(item => {
-            arrayOfBonus.push(new Health(item['posX'], item['posY']))
-        });
-
-        let stalactitesData = Array.from(levelData.stalactites)
-        stalactitesData.forEach(item => {
-            arrayOfStalactite.push(new Stalactite(item['posX'], item['posY'], item['zoneHeight'], item['zoneWidth']))
-        });
-    } catch (error) {
-        console.error(error);
-    }
-
-    // platforms.push(new Ground(texture, 420, 440, 470, 40)); // 5 уровень
-    // platforms.push(new Ground(texture, 1243, 580, 605, 40)); // 4 уровень
-    // platforms.push(new Ground(texture, 2107, 580, 905, 40)); // 4 уровень
-    // platforms.push(new Ground(texture, 77, 820, 154, 40)); // 3 уровень
-    // platforms.push(new Ground(texture, 854, 820, 1200, 40)); // 3 уровень
-    // platforms.push(new Ground(texture, 1745, 820, 380, 40)); // 3 уровень
-    // platforms.push(new Ground(texture, 2305, 820, 510, 40)); // 3 уровень
-    // platforms.push(new Ground(texture, 77, 1080, 154, 40)); // 2 уровень
-    // platforms.push(new Ground(texture, 465, 1080, 415, 40)); // 2 уровень
-    // platforms.push(new Ground(texture, 1080, 1080, 600, 40)); // 2 уровень
-    // platforms.push(new Ground(texture, 1740, 1080, 380, 40)); // 2 уровень
-    // platforms.push(new Ground(texture, 2290, 1190, 540, 40)); // 1 уровень
-    // platforms.push(new Ground(texture, 1280, 1400, 2560, 40)); // пол - 0 уровень
-
-    // woodenPlanks.push(new WoodenPlank(texture, 870, 580, 145, 40));// 4 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 1600, 580, 115, 40));//4 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 205, 820, 105, 40));// 3 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 1505, 820, 105, 40));// 3 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 1990, 820, 115, 40));// 3 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 205, 1080, 105, 40));// 2 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 725, 1080, 115, 40));// 2 уровень
-    // woodenPlanks.push(new WoodenPlank(texture, 1465, 1080, 185, 40));// 2 уровень
-
-    // arrayOfWall.push(new Wall(texture, 60, 730, 60, 1460)); // левая стена
-    // arrayOfWall.push(new Wall(texture, 2500, 730, 60, 1460)); // правая стена
-
-    // arrayOfBonus.push(new Shield(450, 880, 10));
-    // arrayOfBonus.push(new Shield(350, 520, 10));
-
-    // arrayOfBonus.push(new Health(450, 520));
-    // arrayOfBonus.push(new Health(1900, 780)); // 1 уровень
-
-    // arrayOfStalactite.push(new Stalactite(150, 100, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(700, 100, 700, 200));
-    // arrayOfStalactite.push(new Stalactite(740, 100, 700, 100));
-    // arrayOfStalactite.push(new Stalactite(1300, 90, 400, 50));
-    // arrayOfStalactite.push(new Stalactite(1700, 100, 400, 50));
-
-    // enemies.push(new Bat(480, 600, 310, 100, 300, 200, 130));// bat test
-
-    // enemies.push(new Devil(1600, 530, 300, 0, 300, 50, 130));// 4 уровень
-    // enemies.push(new Devil(1200, 530, 300, 0, 300, 50, 110));// 4 уровень
-    // enemies.push(new Devil(1600, 770, 300, 0, 300, 50, 90));// 3 уровень
-    // enemies.push(new Devil(1200, 770, 300, 0, 300, 50, 130));// 3 уровень
-    // enemies.push(new Devil(350, 1030, 300, 0, 300, 50, 100));// 2 уровень
-    // enemies.push(new Devil(1300, 1030, 150, 0, 300, 50, 120));// 2 уровень
-    // enemies.push(new Devil(450, 1350, 400, 0, 300, 50, 160));// 2 уровень
-    // enemies.push(new Devil(1300, 1350, 500, 0, 300, 50, 90));// 2 уровень
-    // enemies.push(new Devil(2000, 1350, 400, 0, 300, 50, 90));// 2 уровень
+    platforms.forEach(platform =>
+    {
+        platform.view();
+    })
+    let experienceMax = 0;
+    enemies.forEach(enemy =>
+    {
+        enemy.view();
+        experienceMax += enemy.experience;
+    });
+    arrayOfBonus.forEach(bonus =>
+    {
+        bonus.view();
+    });
+    arrayOfStalactite.forEach(stalactite =>
+    {
+        stalactite.view();
+    });
+    fires.forEach(fire =>
+    {
+        fire.view();
+    });
+    
+    hero.experienceMax = experienceMax;
+    hero.view();
 }
 
 async function saveScore(isWin) {

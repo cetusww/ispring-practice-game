@@ -5,7 +5,7 @@
             "height": 1460
         }
     ],
-    "background": "level1_map",
+    "background": "level3_map",
     "hero": [
         {
             "posX": 400,
@@ -21,6 +21,16 @@
             "posY": 1300
         }
     ],
+
+
+
+
+
+
+
+
+
+
     "platforms": [
         {
             "texture": "",
