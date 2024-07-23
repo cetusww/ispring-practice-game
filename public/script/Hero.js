@@ -36,6 +36,7 @@ class Hero {
         this.hp = this.hpMax;
         this.experience = 0;
         this.experienceMax = experienceMax;
+        this.time = 0;
         this.dead = false;
         this.isWin = false;
         this.deadTime = 1.5 * FPS;
@@ -194,14 +195,14 @@ class Hero {
         this.portalText = new PIXI.Text('Portal open!', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
         this.experienceTitle = new PIXI.Text('Score', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
         this.healthTitle = new PIXI.Text('Health', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
-        this.healthText.x = 300
-        this.healthTitle.x = 30
+        this.healthText.x = 300;
+        this.healthTitle.x = 30;
         this.portalText.x = app.screen.width - 158;
         this.portalText.y = 60;
-        this.healthText.y = 15
-        this.healthTitle.y = 15
-        this.experienceTitle.x = app.screen.width - 300
-        this.experienceTitle.y = 15
+        this.healthText.y = 15;
+        this.healthTitle.y = 15;
+        this.experienceTitle.x = app.screen.width - 300;
+        this.experienceTitle.y = 15;
         this.experienceText.x = app.screen.width - 30;
         this.experienceText.y = 15;
         this.experienceText.anchor.set(1, 0);
@@ -211,7 +212,29 @@ class Hero {
         app.stage.addChild(this.experienceTitle);
 
         app.stage.addChild(this.countBulletText);
+
+        this.timerText = new PIXI.Text('Time: 0.00s', {
+            fontFamily: 'Arial',
+            fontSize: 24,
+            fill: 0xfeeb77,
+        });
+        this.timerText.x = app.screen.width - 30;
+        this.timerText.y = 50;
+        this.timerText.anchor.set(1, 0);
+        app.stage.addChild(this.timerText);
+
+        this.startTime = Date.now();
+        this.updateTimer();
+
         this.updateHp();
+    }
+
+    updateTimer() {
+        setInterval(() => {
+            const duration = (Date.now() - this.startTime) / 1000;
+            this.timerText.text = `Time: ${duration}s`;
+            this.time = duration;
+        }, 1);
     }
 
     deleteView() {

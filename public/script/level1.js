@@ -72,15 +72,15 @@ function levelCreate()
     enemies.push(new Devil(2000, 1350, 400, 0, 300, 50, 90));// 2 уровень
 }
 
-async function saveScore(isWin)
+async function saveScore()
 {
     let nextLevel = 1;
-    if (isWin)
+    if (hero.isWin)
     {
         nextLevel = 2;
     }
     let data = {
-        score: hero.experience,
+        score: hero.experience / hero.time,
         currentLvl: 1,
         nextLvl: nextLevel,
     }

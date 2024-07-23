@@ -76,15 +76,15 @@ function levelCreate()
     enemies.push(new Boss(1440, 1490, 700, 500, 500));
 }
 
-async function saveScore(isWin)
+async function saveScore()
 {
     let nextLevel = 3;
-    if (isWin)
+    if (hero.isWin)
     {
         nextLevel = 4;
     }
     let data = {
-        score: hero.experience,
+        score: hero.experience / hero.time,
         currentLvl: 3,
         nextLvl: nextLevel,
     }
