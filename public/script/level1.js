@@ -91,6 +91,10 @@ function levelCreate() {
     firesData.forEach(item => {
         fires.push(new Fire(item['posX'], item['posY']))
     });
+    let bossData = Array.from(levelData.boss)
+    bossData.forEach(item => {
+        enemies.push(new Boss(item['posX'], item['posY'], item['zoneWidth'], item['visibilityZoneWidth'], item['visibilityZoneHeight']))
+    });
 }
 
 function levelView()
