@@ -31,9 +31,12 @@ class ApiController extends AbstractController
         $user = $this->userRepository->findUserByUserName($_SESSION['username']);
 
         $_SESSION['level'] = $data['nextLvl'];
+        $_SESSION['score'] = $data['score'];
+        $_SESSION['time'] = $data['time'];
 
         $this->userService->setUserLevel($user, $data['nextLvl']);
         $this->userService->setUserScore($user, $data['currentLvl'], $data['score']);
+        $this->userService->setUserTime($user, $data['currentLvl'], $data['time']);
 
         $this->userRepository->updateUserProgress($user);
 

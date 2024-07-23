@@ -132,9 +132,11 @@ class ViewController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
+        $user = $this->userRepository->findUserByUserName($_SESSION['username']);
+
         $_SESSION['level'] = $this->userRepository->getUserCurrentLevel($_SESSION['username']);
 
-        return $this->render('choose_level.html.twig', ['level' => $_SESSION['level']]);
+        return $this->render('choose_level.html.twig', ['level' => $_SESSION['level'], 'user' => $user]);
     }
 
     public function showRating(): Response
@@ -169,7 +171,8 @@ class ViewController extends AbstractController
         {
             return $this->redirectToRoute('index');
         }
-        return $this->render('game_win.html.twig');
+
+        return $this->render('game_win.html.twig', ['score' => $_SESSION['score'], 'time' => $_SESSION['time']]);
     }
 
     public function showLose(): Response
@@ -179,6 +182,9 @@ class ViewController extends AbstractController
         {
             return $this->redirectToRoute('index');
         }
+
+        $user = $this->userRepository->findUserByUserName($_SESSION['username']);
+
         return $this->render('game_lose.html.twig');
     }
 }

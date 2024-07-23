@@ -14,6 +14,9 @@ class User
         private ?int $scoreThirdLevel,
         private ?int $multiplayerAll,
         private ?int $multiplayerWin,
+        private ?float $timeFirstLevel,
+        private ?float $timeSecondLevel,
+        private ?float $timeThirdLevel,
     )
     {
     }
@@ -63,6 +66,21 @@ class User
         return $this->multiplayerWin;
     }
 
+    public function getTimeFirstLevel(): ?float
+    {
+        return $this->timeFirstLevel;
+    }
+
+    public function getTimeSecondLevel(): ?float
+    {
+        return $this->timeSecondLevel;
+    }
+
+    public function getTimeThirdLevel(): ?float
+    {
+        return $this->timeThirdLevel;
+    }
+
     public function setUserName(string $username): string
     {
         return $this->username = $username;
@@ -101,5 +119,20 @@ class User
     public function setMultiplayerWin(int $multiplayerWin): int
     {
         return $this->multiplayerWin = $multiplayerWin;
+    }
+
+    public function setTimeFirstLevel(float $timeFirstLevel): float
+    {
+        return $this->timeFirstLevel = $timeFirstLevel;
+    }
+
+    public function setTimeSecondLevel(float $timeSecondLevel): float
+    {
+        return $this->timeSecondLevel = $timeSecondLevel;
+    }
+
+    public function setTimeThirdLevel(float $timeThirdLevel): float
+    {
+        return $this->timeThirdLevel = $timeThirdLevel;
     }
 }

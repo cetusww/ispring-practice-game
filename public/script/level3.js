@@ -78,15 +78,11 @@ function levelCreate()
 
 async function saveScore()
 {
-    let nextLevel = 3;
-    if (hero.isWin)
-    {
-        nextLevel = 4;
-    }
     let data = {
-        score: hero.experience / hero.time,
+        time: hero.time,
+        score: (hero.experience / hero.time) * 100,
         currentLvl: 3,
-        nextLvl: nextLevel,
+        nextLvl: 4,
     }
     const stringifyData = JSON.stringify(data)
     const response = await fetch('/api/score', {

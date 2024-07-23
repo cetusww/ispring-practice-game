@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="07-22-front добавил потерянные файлы">
+      <change afterPath="$PROJECT_DIR$/script/subsystems/PhysicsSubsystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/first_level_map.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/level1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BackgroundComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/components/BackgroundComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RigidBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/components/RigidBody.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/GameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/core/GameController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/LevelParser.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/core/LevelParser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Loader.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/core/Loader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/ECS.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/ecs/ECS.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/subsystems/PhysicsSubsystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/gamedata/levels/level1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/systems/BackgroundSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/systems/BackgroundSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/systems/RenderSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/systems/RenderSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/StageManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/utils/StageManager.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

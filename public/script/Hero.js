@@ -213,13 +213,13 @@ class Hero {
 
         app.stage.addChild(this.countBulletText);
 
-        this.timerText = new PIXI.Text('Time: 0.00s', {
+        this.timerText = new PIXI.Text('Time: 0.000s', {
             fontFamily: 'Arial',
             fontSize: 24,
             fill: 0xfeeb77,
         });
-        this.timerText.x = app.screen.width - 30;
-        this.timerText.y = 50;
+        this.timerText.x = app.screen.width - 330;
+        this.timerText.y = 17;
         this.timerText.anchor.set(1, 0);
         app.stage.addChild(this.timerText);
 

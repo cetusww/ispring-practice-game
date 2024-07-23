@@ -11,6 +11,10 @@
 <body>
 <div class="main">
     <h1 class="center-align">Вы победили</h1>
+    <div class="result">
+        <p>Очки: {{ score|round(0) }}</p>
+        <p>Время: {{ time }}с</p>
+    </div>
     <div class="options-list">
         <div class="options-list__top">
             <a class="options-list__restart" onclick="history.back();">

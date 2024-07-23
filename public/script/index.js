@@ -305,7 +305,7 @@ function onKeyUp(event)
 })();
 
 
-function gameLoop(time)
+async function gameLoop(time)
 {
     portal.update(time);
     hero.update(time);
@@ -316,14 +316,11 @@ function gameLoop(time)
     }
     if (hero.deadTime < 0)
     {
-        saveScore();
-        console.log(hero.experience / hero.time);
         hero.deadTime = 1000;
         window.location.href = "/lose";
     }
     if (hero.isWin && portal.isActive) {
-        saveScore();
-        console.log(hero.experience / hero.time);
+        await saveScore();
         window.location.href = "/win";
         portal.isActive = false;
     }

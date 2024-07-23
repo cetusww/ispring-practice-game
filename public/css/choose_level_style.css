@@ -4,15 +4,21 @@
     text-decoration: none;
     box-sizing: border-box;
 }
+
 html {
     height: 100%;
     overflow: hidden;
 }
+
 body {
     position: relative;
     height: 100%;
     background: url('../images/Background/menu_background.jpeg') no-repeat;
     background-size: cover;
+}
+
+p {
+    margin: 0 0 0 0;
 }
 
 .title {
@@ -33,19 +39,46 @@ body {
 .level-list__first,
 .level-list__second,
 .level-list__third {
+    position: relative;
     display: block;
-    width: 300px;
+    width: 400px;
     height: 200px;
-    background-color: rgba(61, 61, 61, 0.6);
+    border: 2px solid rgba(61, 61, 61, 0.6);
     border-radius: 30px;
     padding: 20px;
     color: rgba(255, 255, 255, 1);
 }
 
+.level-list__first {
+    background: url('../images/Map/first_level_map.jpg') no-repeat;
+    background-size: cover;
+}
+
+.level-list__second {
+    background: url('../images/Map/level2_map.png') no-repeat;
+    background-size: cover;
+}
+
+.level-list__third {
+    background: url('../images/Map/level3_map.png') no-repeat;
+    background-size: cover;
+}
+
 .level-list__first-level-title,
 .level-list__second-level-title,
 .level-list__third-level-title {
-    font: 400 22px/24px "Russo One", sans-serif;
+    margin: 0 0 10px 0;
+    font: 400 30px/32px "Russo One", sans-serif;
+}
+
+.level-list__result {
+    position: absolute;
+    border-radius: 10px;
+    bottom: 0;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    font: 400 26px/28px "Russo One", sans-serif;
+    background-color: rgba(61, 61, 61, 0.6);
 }
 
 .unavailable {
