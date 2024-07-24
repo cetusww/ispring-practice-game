@@ -101,7 +101,14 @@ class ViewController extends AbstractController
         {
             return $this->redirectToRoute('index');
         }
-        return $this->render('second_level.html.twig');
+
+        $currentLevel = $this->userRepository->getUserCurrentLevel($_SESSION['username']);
+        if ($currentLevel >= 2)
+        {
+            return $this->render('second_level.html.twig');
+        }
+
+        return $this->redirectToRoute('choose_level');
     }
 
     public function showThirdLevel(): Response
@@ -111,7 +118,14 @@ class ViewController extends AbstractController
         {
             return $this->redirectToRoute('index');
         }
-        return $this->render('third_level.html.twig');
+
+        $currentLevel = $this->userRepository->getUserCurrentLevel($_SESSION['username']);
+        if ($currentLevel >= 3)
+        {
+            return $this->render('third_level.html.twig');
+        }
+
+        return $this->redirectToRoute('choose_level');
     }
 
     public function showLegend(): Response
