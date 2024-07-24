@@ -140,7 +140,7 @@ class Boss {
 
     createShot(heroX, heroY) {
         if (this.currentTimeShotAttack <= 0) {
-            let shotSpeed = this.shotSpeed
+            let shotSpeed = this.shotSpeed;
             let distanceX = heroX - this.sprite.x;
             let distanceY = heroY - this.sprite.y;
             let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -173,7 +173,7 @@ class Boss {
 
     createUlta() {
         if (this.currentTimeUltaAttack <= 0) {
-            let shotSpeed = this.shotSpeed
+            let shotSpeed = this.shotSpeed;
             let deg;
 
             for (deg = 0; deg <= 180; deg += 10)   //генерация веера из фаерболлов в полуокружности с шагом в 20 градусов
@@ -196,30 +196,6 @@ class Boss {
             this.currentTimeUltaAttack = this.timeUltaAttack;
         }
     }
-
-    // spawnDevils() {
-    //     if (this.currentTimeSpawnDevils <= 0) {
-    //         let q = Math.floor(Math.random() * 7 + 1);  // принимает рандомные значения с 1 по 7
-
-    //         for (let c = 0; c < q; c++) {
-    //             let spawned = false;
-    //             while (spawned === false) {
-    //                 let placeNum = Math.floor(Math.random() * 7 + 1); // принимает рандомные значения с 1 по 7
-    //                 if (this.devilSpawnPlace[placeNum].engaged === false) {
-    //                     const devil = new Devil(this.devilSpawnPlace[placeNum].x, this.devilSpawnPlace[placeNum].y, this.devilZoneWidth, this.devilZoneHeight, 500, 50, 0);
-    //                     devil.view();
-    //                     enemies.push(devil);
-    //                     this.devilSpawnPlace[placeNum].engaged = true;
-    //                     spawned = true;
-    //                 }
-    //             }
-    //         }
-    //         for (let placeNum = 1; placeNum <= q; placeNum++) {
-    //             this.devilSpawnPlace[placeNum].engaged = false;
-    //         }
-    //         this.currentTimeSpawnDevils = this.timeSpawnDevils
-    //     }
-    // }
 
     spawnDevils() {
         if (this.currentTimeSpawnDevils <= 0) {
@@ -246,7 +222,7 @@ class Boss {
             for (let placeNum = 1; placeNum <= 7; placeNum++) {
                 this.devilSpawnPlace[placeNum].engaged = false;
             }
-            this.currentTimeSpawnDevils = this.timeSpawnDevils
+            this.currentTimeSpawnDevils = this.timeSpawnDevils;
         }
     }
 
@@ -254,9 +230,7 @@ class Boss {
         this.hp -= damage;
         if (this.hp <= 0) {
             this.hp = 0;
-
             this.updateAnim('boss_dead');
-
             this.dead = true;
         }
         this.updateHp();
@@ -331,13 +305,13 @@ class Boss {
     dropExperience() {
         let randomCount = (Math.floor(Math.random() * 5) + 2) * 5;   // 10 .. 30 шариков опыта
         let experienceCount = Math.floor(this.experience / randomCount);
-        let i = -Math.floor(randomCount / 2)
+        let i = -Math.floor(randomCount / 2);
         for (i; i < randomCount - Math.floor(randomCount / 2) - 1; i++) {
             let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, experienceCount);
             experience.view();
             experiences.push(experience);
         }
-        let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
+        let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1));
         experience.view();
         experiences.push(experience);
     }

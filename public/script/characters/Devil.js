@@ -1,6 +1,6 @@
 class Devil {
     constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight, experience) {
-        this.sprite = new PIXI.AnimatedSprite(devilIdle);
+        this.sprite = new PIXI.AnimatedSprite(devil_idle);
         this.sprite.animationSpeed = 0.05; // Скорость анимации
         this.sprite.loop = true; // Зацикливание анимации
         this.sprite.play(); // Запуск анимации
@@ -45,13 +45,13 @@ class Devil {
     updateAnim(type) {
         if (type === 'idle' && this.animateType !== 'idle') {
             this.sprite.loop = false;
-            this.sprite.textures = devilIdle;
+            this.sprite.textures = devil_idle;
             this.sprite.animationSpeed = 0.05;
             this.sprite.loop = false;
             this.sprite.play();
             this.animateType = 'idle';
         } else if (type === 'walk' && this.animateType !== 'walk') {
-            this.sprite.textures = devilWalk;
+            this.sprite.textures = devil_walk;
             this.sprite.animationSpeed = 0.07;
             this.sprite.loop = true;
             this.sprite.play();
@@ -150,7 +150,6 @@ class Devil {
                 hero.collideBottom <= this.collideBottom + 10 && hero.collideBottom >= this.collideBottom - this.zoneHeight - this.visibilityZoneHeight
             ) {
                 this.createFireball(hero.sprite.x, hero.sprite.y);
-                //if (hero.sprite.x)
             }
         }
     }
@@ -166,7 +165,7 @@ class Devil {
                 experience.view();
                 experiences.push(experience);
             }
-            let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1))
+            let experience = new Experience(this.sprite.x + i * 20, this.collideBottom - 5, this.experience - experienceCount * (randomCount - 1));
             experience.view();
             experiences.push(experience);
         }

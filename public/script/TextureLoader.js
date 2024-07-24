@@ -1,12 +1,14 @@
+// массивы со спрайтами
+
 const hero_walk = [];
 const experiences = [];
 const hero_jump = [];
 const hero_idle = [];
 const hero_dead = [];
-const devilWalk = [];
-const devilIdle = [];
-const batFlyHorizontal = [];
-const batFlyVertical = [];
+const devil_walk = [];
+const devil_idle = [];
+const bat_fly_horizontal = [];
+const bat_fly_vertical = [];
 const hero_shoot = [];
 const hero_walk_shoot = [];
 const fire_anim = [];
@@ -22,29 +24,31 @@ const textureSources =
         { alias: 'level1_map', src: '/images/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/level2_map.png' },
         { alias: 'level3_map', src: '/images/level3_map.png' },
-        { alias: 'hero_idle_group', src: '/images/hero_idle_group.json' },
-        { alias: 'hero_walk_group', src: '/images/hero_walk_group.json' },
-        { alias: 'hero_jump_group', src: '/images/hero_jump_group.json' },
-        { alias: 'hero_shoot_group', src: '/images/hero_shoot_group.json' },
-        { alias: 'hero_walk_shoot_group', src: '/images/hero_walk_shoot_group.json' },
-        { alias: 'hero_dead_group', src: '/images/hero_dead_group.json' },
+        { alias: 'hero_idle_group', src: '/images/JSON/hero_idle_group.json' },
+        { alias: 'hero_walk_group', src: '/images/JSON/hero_walk_group.json' },
+        { alias: 'hero_jump_group', src: '/images/JSON/hero_jump_group.json' },
+        { alias: 'hero_shoot_group', src: '/images/JSON/hero_shoot_group.json' },
+        { alias: 'hero_walk_shoot_group', src: '/images/JSON/hero_walk_shoot_group.json' },
+        { alias: 'hero_dead_group', src: '/images/JSON/hero_dead_group.json' },
         { alias: 'experience', src: '/images/experience.svg' },
         { alias: 'ground', src: '/images/ground.svg' },
         { alias: 'bullet', src: '/images/bullet.png' },
+        { alias: 'hero_beacon', src: '/images/hero_beacon.png' },
+        { alias: 'enemy_beacon', src: '/images/enemy_beacon.png' },
         { alias: 'fireball', src: '/images/fireball.svg' },
         { alias: 'stalactite', src: '/images/stalactite.png' },
-        { alias: 'bat', src: '/images/bat_group.json' },
+        { alias: 'bat', src: '/images/JSON/bat_group.json' },
         { alias: 'poison', src: '/images/poison.png' },
-        { alias: 'devil', src: '/images/devil.json' },
-        { alias: 'fire', src: '/images/fire.json' },
-        { alias: 'mushroom', src: '/images/mushroom.json' },
-        { alias: 'smoke', src: '/images/smoke.json' },
+        { alias: 'devil', src: '/images/JSON/devil.json' },
+        { alias: 'fire', src: '/images/JSON/fire.json' },
+        { alias: 'mushroom', src: '/images/JSON/mushroom.json' },
+        { alias: 'smoke', src: '/images/JSON/smoke.json' },
         { alias: 'shield', src: '/images/shield.png' },
         { alias: 'shield_active', src: '/images/shield_active.png' },
         { alias: 'health', src: '/images/health.png' },
         { alias: 'portal', src: '/images/portal.png' },
         { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
-        { alias: 'boss', src: '/images/boss.json' },
+        { alias: 'boss', src: '/images/JSON/boss.json' },
         { alias: 'shot', src: '/images/shot.png' },
     ];
 
@@ -62,14 +66,14 @@ function loadTextures() {
         hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
     }
     for (let i = 0; i < 4; i++) {
-        devilWalk.push(PIXI.Texture.from(`devilWalk${1 + i}.png`));
+        devil_walk.push(PIXI.Texture.from(`devil_walk${1 + i}.png`));
     }
-    devilIdle.push(PIXI.Texture.from(`devilIdle.png`));
+    devil_idle.push(PIXI.Texture.from(`devil_idle.png`));
     for (let i = 0; i < 4; i++) {
-        batFlyVertical.push(PIXI.Texture.from(`batFlyVertical${1 + i}.png`));
+        bat_fly_vertical.push(PIXI.Texture.from(`bat_fly_vertical${1 + i}.png`));
     }
     for (let i = 0; i < 4; i++) {
-        batFlyHorizontal.push(PIXI.Texture.from(`batFlyHorizontal${1 + i}.png`));
+        bat_fly_horizontal.push(PIXI.Texture.from(`bat_fly_horizontal${1 + i}.png`));
     }
     for (let i = 0; i < 4; i++) {
         hero_shoot.push(PIXI.Texture.from(`hero_shoot${1 + i}.png`));

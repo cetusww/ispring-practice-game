@@ -1,6 +1,6 @@
-let SCENE_WIDTH
-let SCENE_HEIGHT
-let levelData
+let SCENE_WIDTH;
+let SCENE_HEIGHT;
+let levelData;
 
 function loadJSONSync(url) {
     var xhr = new XMLHttpRequest();
@@ -42,7 +42,7 @@ function levelCreate() {
     function resizeBackground() {
         background.width = SCENE_WIDTH;
         background.height = SCENE_HEIGHT;
-    }
+    };
     background = PIXI.Sprite.from(levelData.background);
     background.anchor.set(0);
     scene.addChild(background);
@@ -51,95 +51,86 @@ function levelCreate() {
     hero = new Hero(levelData.hero[0]['posX'], levelData.hero[0]['posY'], levelData.hero[0]['speedX'], levelData.hero[0]['speedY'], levelData.hero[0]['experienceMax']);
     portal = new Portal(levelData.portal[0]['posX'], levelData.portal[0]['posY']);
 
-    let platformsData = Array.from(levelData.platforms)
+    let platformsData = Array.from(levelData.platforms);
     platformsData.forEach(item => {
-        platforms.push(new Ground(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+        platforms.push(new Ground(item['texture'], item['posX'], item['posY'], item['width'], item['height']));
     });
-    let woodenPlanksData = Array.from(levelData.woodenPlanks)
+    let woodenPlanksData = Array.from(levelData.woodenPlanks);
     woodenPlanksData.forEach(item => {
-        woodenPlanks.push(new WoodenPlank(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+        woodenPlanks.push(new WoodenPlank(item['texture'], item['posX'], item['posY'], item['width'], item['height']));
     });
-    let wallsData = Array.from(levelData.walls)
+    let wallsData = Array.from(levelData.walls);
     wallsData.forEach(item => {
-        arrayOfWall.push(new Wall(item['texture'], item['posX'], item['posY'], item['width'], item['height']))
+        arrayOfWall.push(new Wall(item['texture'], item['posX'], item['posY'], item['width'], item['height']));
     });
-    let devilsData = Array.from(levelData.devils)
+    let devilsData = Array.from(levelData.devils);
     devilsData.forEach(item => {
-        enemies.push(new Devil(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
+        enemies.push(new Devil(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']));
     });
-    let batsData = Array.from(levelData.bats)
+    let batsData = Array.from(levelData.bats);
     batsData.forEach(item => {
-        enemies.push(new Bat(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']))
+        enemies.push(new Bat(item['posX'], item['posY'], item['zoneWidth'], item['zoneHeight'], item['visibilityZoneWidth'], item['visibilityZoneHeight'], item['experience']));
     });
-    let shieldsData = Array.from(levelData.shields)
+    let shieldsData = Array.from(levelData.shields);
     shieldsData.forEach(item => {
-        arrayOfBonus.push(new Shield(item['posX'], item['posY'], item['duration']))
+        arrayOfBonus.push(new Shield(item['posX'], item['posY'], item['duration']));
     });
-    let healthData = Array.from(levelData.health)
+    let healthData = Array.from(levelData.health);
     healthData.forEach(item => {
-        arrayOfBonus.push(new Health(item['posX'], item['posY']))
+        arrayOfBonus.push(new Health(item['posX'], item['posY']));
     });
-    let stalactitesData = Array.from(levelData.stalactites)
+    let stalactitesData = Array.from(levelData.stalactites);
     stalactitesData.forEach(item => {
-        arrayOfStalactite.push(new Stalactite(item['posX'], item['posY'], item['zoneHeight'], item['zoneWidth']))
+        arrayOfStalactite.push(new Stalactite(item['posX'], item['posY'], item['zoneHeight'], item['zoneWidth']));
     });
-    let mushroomsData = Array.from(levelData.mushrooms)
+    let mushroomsData = Array.from(levelData.mushrooms);
     mushroomsData.forEach(item => {
-        enemies.push(new Mushroom(item['posX'], item['posY'], item['visibilityZoneWidth'], item['attackZoneWidth'], item['experience']))
+        enemies.push(new Mushroom(item['posX'], item['posY'], item['visibilityZoneWidth'], item['attackZoneWidth'], item['experience']));
     });
-    let firesData = Array.from(levelData.fires)
+    let firesData = Array.from(levelData.fires);
     firesData.forEach(item => {
-        fires.push(new Fire(item['posX'], item['posY']))
+        fires.push(new Fire(item['posX'], item['posY']));
     });
-    let bossData = Array.from(levelData.boss)
+    let bossData = Array.from(levelData.boss);
     bossData.forEach(item => {
-        enemies.push(new Boss(item['posX'], item['posY'], item['zoneWidth'], item['visibilityZoneWidth'], item['visibilityZoneHeight']))
+        enemies.push(new Boss(item['posX'], item['posY'], item['zoneWidth'], item['visibilityZoneWidth'], item['visibilityZoneHeight']));
     });
 }
 
-function levelView()
-{
+function levelView() {
     portal.view();
     arrayOfWall.forEach(wall => {
         wall.view();
-    })
-    woodenPlanks.forEach(woodenPlank =>
-    {
+    });
+    woodenPlanks.forEach(woodenPlank => {
         woodenPlank.view();
-    })
+    });
 
-    platforms.forEach(platform =>
-    {
+    platforms.forEach(platform => {
         platform.view();
-    })
+    });
     let experienceMax = 0;
-    enemies.forEach(enemy =>
-    {
+    enemies.forEach(enemy => {
         enemy.view();
         experienceMax += enemy.experience;
     });
-    arrayOfBonus.forEach(bonus =>
-    {
+    arrayOfBonus.forEach(bonus => {
         bonus.view();
     });
-    arrayOfStalactite.forEach(stalactite =>
-    {
+    arrayOfStalactite.forEach(stalactite => {
         stalactite.view();
     });
-    fires.forEach(fire =>
-    {
+    fires.forEach(fire => {
         fire.view();
     });
-    
+
     hero.experienceMax = experienceMax;
     hero.view();
 }
 
-async function saveScore(isWin)
-{
+async function saveScore(isWin) {
     let nextLevel = 3;
-    if (isWin)
-    {
+    if (isWin) {
         nextLevel = 4;
     }
     let data = {
@@ -147,12 +138,12 @@ async function saveScore(isWin)
         currentLvl: 3,
         nextLvl: nextLevel,
     }
-    const stringifyData = JSON.stringify(data)
+    const stringifyData = JSON.stringify(data);
     const response = await fetch('/api/score', {
-         method: "POST",
-         body: stringifyData,
-         headers: {
-             "Content-Type": "application/json",
-         },
+        method: "POST",
+        body: stringifyData,
+        headers: {
+            "Content-Type": "application/json",
+        },
     });
 }

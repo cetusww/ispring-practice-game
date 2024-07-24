@@ -1,6 +1,6 @@
 class Bat {
     constructor(posX, posY, zoneWidth, zoneHeight, visibilityZoneWidth, visibilityZoneHeight, experience) {
-        this.sprite = new PIXI.AnimatedSprite(batFlyHorizontal);
+        this.sprite = new PIXI.AnimatedSprite(bat_fly_horizontal);
         this.sprite.animationSpeed = 0.1; // Скорость анимации
         this.sprite.loop = true; // Зацикливание анимации
         this.sprite.play(); // Запуск анимации
@@ -41,13 +41,13 @@ class Bat {
     updateAnim(type) {
         if (type === 'horizontal' && this.animateType !== 'horizontal') {
             this.sprite.loop = false;
-            this.sprite.textures = batFlyHorizontal;
+            this.sprite.textures = bat_fly_horizontal;
             this.sprite.animationSpeed = 0.1;
             this.sprite.loop = true;
             this.sprite.play();
             this.animateType = 'horizontal';
         } else if (type === 'vertical' && this.animateType !== 'vertical') {
-            this.sprite.textures = batFlyVertical;
+            this.sprite.textures = bat_fly_vertical;
             this.sprite.animationSpeed = 0.1;
             this.sprite.loop = true;
             this.sprite.play();

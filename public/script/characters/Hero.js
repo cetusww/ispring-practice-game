@@ -9,7 +9,6 @@ class Hero {
         this.posX = posX;
         this.posY = posY;
 
-
         this.sprite.x = posX;
         this.sprite.y = posY;
         this.sprite.width = 78;
@@ -52,7 +51,7 @@ class Hero {
         this.animateType = '';
         this.experienceText = null;
 
-        let radius = 3350;
+        let radius = 350;
         let blurSize = 200;
         const circle = new PIXI.Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({ color: 0xff0000 });
         circle.filters = [new PIXI.BlurFilter(blurSize)];
@@ -69,6 +68,7 @@ class Hero {
         this.focusTexture.tint = 0x000000;
         this.focusTexture.anchor.set(0.5);
     }
+
     restart() {
         this.updateAnim('idle')
         this.sprite.x = this.posX;
@@ -77,6 +77,7 @@ class Hero {
         this.sprite.vx = 0;
         this.sprite.vy = 0;
     }
+
     updateAnim(type) {
         if (type === 'idle' && this.animateType !== 'idle') {
             this.sprite.loop = false;
@@ -123,11 +124,6 @@ class Hero {
     }
 
     updateCollide() {
-        // if (this.isSeat) {
-        //     this.collideTop = this.sprite.y;
-        // } else {
-        //     this.collideTop = this.sprite.y - this.sprite.height / 2;
-        // }
         this.collideTop = this.sprite.y - this.sprite.height / 2 + 10;
         this.collideBottom = this.sprite.y + this.sprite.height / 2 - 6;
         this.collideLeft = this.sprite.x - this.sprite.width / 2 + 10;
@@ -221,6 +217,7 @@ class Hero {
     portalTextView() {
         app.stage.addChild(this.portalText);
     }
+
     updateHp() {
         app.stage.removeChild(this.graphicsHp);
         app.stage.removeChild(this.healthTitle);
@@ -235,6 +232,7 @@ class Hero {
         app.stage.addChild(this.healthText);
         app.stage.addChild(this.healthTitle);
     }
+
     updateExperience() {
         app.stage.removeChild(this.graphicsExperience);
         app.stage.removeChild(this.experienceTitle);
@@ -320,6 +318,7 @@ class Hero {
             }
         }
     }
+
     addExperience(experience) {
         this.experience += experience;
     }
@@ -362,6 +361,7 @@ class Hero {
             damage = Math.max(0, damage - 10);
         }
     }
+
     updateKey() {
         if (keys.keyR) {
             keys.keyR = false;
@@ -405,6 +405,7 @@ class Hero {
             }
         }
     }
+
     updateMove(time) {
         if (!this.isGround) {
             this.sprite.vy += GRAVITY_ACCELERATION * time.deltaTime;
@@ -433,6 +434,7 @@ class Hero {
         }
         this.move(time);
     }
+
     move(time) {
         this.sprite.x += this.sprite.vx * time.deltaTime;
         this.sprite.y += this.sprite.vy * time.deltaTime;
@@ -462,6 +464,7 @@ class Hero {
             moveCamera(0, moveY);
         }
     }
+
     update(time) {
         if (!this.dead) {
             this.updateKey();
@@ -488,9 +491,9 @@ class Hero {
 
             let currentTime = performance.now();
             let elapsedTime = (currentTime - this.shieldStartTime) / 1000;
-        
+
             this.shieldView();
-            
+
             if (elapsedTime >= this.shieldDuration) {
                 this.activateShield = false;
                 this.shieldDeleteView();

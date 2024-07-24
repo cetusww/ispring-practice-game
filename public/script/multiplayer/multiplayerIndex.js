@@ -4,8 +4,15 @@ const FPS = 60;
 const scene = new PIXI.Container();
 
 let background;
+let state =
+{
+    'state': 'stop',
+    'time': 0,
+};
 let hero;
-let portal;
+let heroView;
+let opponentDamage = 0;
+let arrayOfOpponent = [heroView];
 let sceneScale = 1;
 
 const platforms = [];
@@ -20,6 +27,11 @@ const poisons = [];
 const fires = [];
 const smokes = [];
 const shots = [];
+
+const removeBullets = [];
+const opponentBullets = [];
+
+let removeBonusId = [];
 
 const keys =
 {
@@ -58,6 +70,7 @@ function onAppMouseDown(event) {
         mouse.isDownLeft = true;
     }
 }
+
 function onAppMouseMove(event) {
     if (event.button === 0) {
         mouse.positionX = event.clientX;
@@ -67,6 +80,7 @@ function onAppMouseMove(event) {
         startMusic();
     }
 }
+
 function onAppMouseUp(event) {
     if (event.button === 0) {
         mouse.isDownLeft = false;
@@ -102,6 +116,7 @@ function onKeyDown(event) {
         startMusic();
     }
 }
+
 function onKeyUp(event) {
     if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф') {
         keys.keyLeft = false;
@@ -138,7 +153,10 @@ function onKeyUp(event) {
 
     await PIXI.Assets.load(textureSources)
     loadTextures();
+
+    window.addEventListener('resize', () => { resizeWindow() });
     app.stage.addChild(scene);
+
     levelCreate();
     levelView();
     app.ticker.maxFPS = FPS;
@@ -147,133 +165,66 @@ function onKeyUp(event) {
     });
 })();
 
-
 function gameLoop(time) {
-    portal.update(time);
-    hero.update(time);
-    if (hero.experience >= hero.experienceMax * 0.85 && !portal.isActive && !hero.isWin) {
-        portal.activate();
-        hero.portalTextView();
+    if (state['state'] === 'start') {
+        hero.update(time);
+        heroView.update(time);
+        hero.updateMap();
+        arrayOfOpponent = [heroView];
+        if (hero.deadTime < 0) {
+            hero.deadTime = 1000;
+            window.location.href = "/lose";
+        }
+        if (mouse.isDownLeft) {
+            hero.createBullet(mouse.positionX, mouse.positionY);
+        }
+        let i = 0;
+        while (i < experiences.length) {
+            if (!experiences[i].isTaken) {
+                experiences[i].update(time);
+            }
+            else {
+                experiences[i].deleteView();
+                experiences[i].sprite.destroy();
+                experiences.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        i = 0;
+        while (i < bullets.length) {
+            if (bullets[i].lifeTime > 0) {
+                bullets[i].update(time);
+                opponentDamage = opponentDamage + bullets[i].updateCollideOpponent(heroView);
+            }
+            else {
+                bullets[i].sprite.destroy();
+                bullets.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        for (let i = 0; i < fires.length; i++) {
+            fires[i].update();
+        }
+        i = 0;
+        while (i < arrayOfBonus.length) {
+            if (!arrayOfBonus[i].isTaken) {
+                arrayOfBonus[i].update(time);
+            }
+            else {
+                arrayOfBonus[i].deleteView();
+                arrayOfBonus[i].sprite.destroy();
+                removeBonusId.push(arrayOfBonus[i].id);
+                arrayOfBonus.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        arrayOfStalactite.forEach(stalactite => {
+            stalactite.update(time);
+        });
     }
-    if (hero.deadTime < 0) {
-        saveScore(hero.isWin);
-        hero.deadTime = 1000;
-        window.location.href = "/lose";
-    }
-    if (hero.isWin && portal.isActive) {
-        saveScore(hero.isWin);
-        window.location.href = "/win";
-        portal.isActive = false;
-    }
-    if (mouse.isDownLeft) {
-        hero.createBullet(mouse.positionX, mouse.positionY);
-    }
-    let i = 0;
-    while (i < enemies.length) {
-        if (enemies[i].deadTime > 0) {
-            enemies[i].update(time);
-        }
-        else {
-            enemies[i].dropExperience();
-            enemies[i].deleteView();
-            enemies[i].sprite.destroy();
-            enemies.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < poisons.length) {
-        if (poisons[i].lifeTime > 0) {
-            poisons[i].update(time);
-        }
-        else {
-            poisons[i].sprite.destroy();
-            poisons.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < experiences.length) {
-        if (!experiences[i].isTaken) {
-            experiences[i].update(time);
-        }
-        else {
-            experiences[i].deleteView();
-            experiences[i].sprite.destroy();
-            experiences.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < bullets.length) {
-        if (bullets[i].lifeTime > 0) {
-            bullets[i].update(time);
-        }
-        else {
-            bullets[i].sprite.destroy();
-            bullets.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < smokes.length) {
-        if (smokes[i].lifeTime > 0) {
-            smokes[i].update(time);
-        }
-        else {
-            smokes[i].sprite.destroy();
-            smokes.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < fireballs.length) {
-        if (fireballs[i].lifeTime > 0) {
-            fireballs[i].update(time);
-        }
-        else {
-            fireballs[i].sprite.destroy();
-            fireballs.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < shots.length) {
-        if (shots[i].lifeTime > 0) {
-            shots[i].update(time);
-        }
-        else {
-            shots[i].sprite.destroy();
-            shots.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    for (let i = 0; i < fires.length; i++) {
-        fires[i].update();
-    }
-    i = 0;
-    while (i < arrayOfBonus.length) {
-        if (!arrayOfBonus[i].isTaken) {
-            arrayOfBonus[i].update(time);
-        }
-        else {
-            arrayOfBonus[i].deleteView();
-            arrayOfBonus[i].sprite.destroy();
-            arrayOfBonus.splice(i, 1);
-            i--;
-        }
-        i++;
-    }
-    arrayOfStalactite.forEach(stalactite => {
-        stalactite.update(time);
-    });
     keys.keyDownDouble = false;
     if (new Date() - doubleKeyDown.keyTime > 200) {
         doubleClickremoveState();

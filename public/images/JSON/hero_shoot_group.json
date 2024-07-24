@@ -30,7 +30,7 @@
     }
   },
   "meta": {
-    "image": "hero_shoot_group.png",
+    "image": "../hero_shoot_group.png",
     "format": "RGBA8888",
     "size": {"w":2348, "h":707},
     "scale": "1"

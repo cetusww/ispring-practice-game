@@ -50,8 +50,6 @@ class Stalactite {
                 this.damage = 7;
             }
             this.currentTimeHeight = this.timeHeight;
-            
-    
     }
 
     deleteView() {

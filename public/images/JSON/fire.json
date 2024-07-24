@@ -352,7 +352,7 @@
     }
   },
   "meta": {
-    "image": "fire.png",
+    "image": "../fire.png",
     "format": "RGBA8888",
     "size": {"w":640, "h":384},
     "scale": "1"

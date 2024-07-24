@@ -8,27 +8,27 @@
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/lobby_style.css">
   <input type="hidden" id="username" value="{{ username }}">
-
   <script src="script/pixi.js"></script>
-  <script src="script/Bullet.js"></script>
-  <script src="script/Experience.js"></script>
-  <script src="script/Fireball.js"></script>
-  <script src="script/Stalactite.js"></script>
-  <script src="script/Hero.js"></script>
-  <script src="script/Fire.js"></script>
-  <script src="script/HeroView.js"></script>
-  <script src="script/Enemy.js"></script>
-  <script src="script/Devil.js"></script>
-  <script src="script/Bat.js"></script>
-  <script src="script/Poison.js"></script>
-  <script src="script/Ground.js"></script>
-  <script src="script/WoodenPlank.js"></script>
-  <script src="script/Shield.js"></script>
-  <script src="script/Health.js"></script>
-  <script src="script/Portal.js"></script>
-  <script src="script/multiplayerLevel.js"></script>
-  <script src="script/Wall.js"></script>
-
+  <script src="script/other/Bullet.js"></script>
+  <script src="script/other/Experience.js"></script>
+  <script src="script/other/Fireball.js"></script>
+  <script src="script/obstacles/Stalactite.js"></script>
+  <script src="script/characters/Hero.js"></script>
+  <script src="script/characters/Devil.js"></script>
+  <script src="script/characters/Bat.js"></script>
+  <script src="script/other/Poison.js"></script>
+  <script src="script/objects/Ground.js"></script>
+  <script src="script/objects/WoodenPlank.js"></script>
+  <script src="script/other/Shield.js"></script>
+  <script src="script/other/Health.js"></script>
+  <script src="script/other/Portal.js"></script>
+  <script src="script/objects/Wall.js"></script>
+  <script src="script/obstacles/Fire.js"></script>
+  <script src="script/characters/Mushroom.js"></script>
+  <script src="script/other/Smoke.js"></script>
+  <script src="script/multiplayer/HeroView.js"></script>
+  <script src="script/multiplayer/multiplayerLevel.js"></script>
+  <script src="script/TextureLoader.js"></script>
 </head>
 <body>
 <div class="main" id="main">
@@ -44,7 +44,7 @@
 </div>
 
 
-<script src="script/multiplayerIndex.js"></script>
+<script src="script/multiplayer/multiplayerIndex.js"></script>
 <script>
     //var w = new Worker("script/multiplayerIndex.js");
     const countdown = document.getElementById('countdown');

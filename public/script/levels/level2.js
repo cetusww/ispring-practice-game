@@ -14,7 +14,7 @@ function loadJSONSync(url) {
 }
 
 try {
-    levelData = loadJSONSync('../gamedata/level1.json');
+    levelData = loadJSONSync('../gamedata/level2.json');
     SCENE_WIDTH = levelData.scene[0]['width'];
     SCENE_HEIGHT = levelData.scene[0]['height'];
 } catch (error) {
@@ -97,55 +97,48 @@ function levelCreate() {
     });
 }
 
-function levelView()
-{
+function levelView() {
     portal.view();
     arrayOfWall.forEach(wall => {
         wall.view();
     })
-    woodenPlanks.forEach(woodenPlank =>
-    {
+    woodenPlanks.forEach(woodenPlank => {
         woodenPlank.view();
     })
 
-    platforms.forEach(platform =>
-    {
+    platforms.forEach(platform => {
         platform.view();
     })
     let experienceMax = 0;
-    enemies.forEach(enemy =>
-    {
+    enemies.forEach(enemy => {
         enemy.view();
         experienceMax += enemy.experience;
     });
-    arrayOfBonus.forEach(bonus =>
-    {
+    arrayOfBonus.forEach(bonus => {
         bonus.view();
     });
-    arrayOfStalactite.forEach(stalactite =>
-    {
+    arrayOfStalactite.forEach(stalactite => {
         stalactite.view();
     });
-    fires.forEach(fire =>
-    {
+    fires.forEach(fire => {
         fire.view();
     });
-    
+
     hero.experienceMax = experienceMax;
     hero.view();
 }
 
 async function saveScore(isWin) {
-    let nextLevel = 1;
+    let nextLevel = 2;
     if (isWin) {
-        nextLevel = 2;
+        nextLevel = 3;
     }
     let data = {
         score: hero.experience,
-        currentLvl: 1,
+        currentLvl: 2,
         nextLvl: nextLevel,
     }
-    const stringifyData = JSON.stringify(data)
+    const stringifyData = JSON.stringify(data);
     const response = await fetch('/api/score', {
         method: "POST",
         body: stringifyData,
@@ -154,4 +147,3 @@ async function saveScore(isWin) {
         },
     });
 }
-
