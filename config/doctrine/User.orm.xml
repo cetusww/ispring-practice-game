@@ -17,6 +17,9 @@
         <field name="scoreThirdLevel" column="score_3" type="integer" />
         <field name="multiplayerAll" column="multiplayer_all" type="integer" />
         <field name="multiplayerWin" column="multiplayer_win" type="integer" />
+        <field name="timeFirstLevel" column="time_1" type="float" />
+        <field name="timeSecondLevel" column="time_2" type="float" />
+        <field name="timeThirdLevel" column="time_3" type="float" />
     </entity>
 
 </doctrine-mapping>

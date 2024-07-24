@@ -32,6 +32,7 @@ body {
     width: 35vw;
     height: 85vh;
     background-color: rgba(61, 61, 61, 0.6);
+    border-radius: 20px;
     padding: 20px;
 }
 
@@ -43,6 +44,7 @@ body {
     width: 55vw;
     height: 85vh;
     background-color: rgba(61, 61, 61, 0.6);
+    border-radius: 20px;
     padding: 20px;
 }
 
@@ -56,12 +58,17 @@ body {
 .table__second-level,
 .table__third-level {
     width: 30%;
-    background-color: rgba(61, 61, 61, 0.8);
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 20px;
     color: rgba(255, 255, 255, 1);
     font: 800 16px/20px 'Russo One', sans-serif;
     padding: 10px;
     text-align: center;
     overflow: auto;
+}
+
+.table__score {
+    float: right;
 }
 
 h2 {
@@ -84,7 +91,11 @@ h3 {
 }
 
 .table__multi-list {
+    height: 90%;
     overflow: auto;
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .previous-page {

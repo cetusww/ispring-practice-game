@@ -39,6 +39,9 @@ class UserService
             0,
             0,
             0,
+            0,
+            0,
+            0,
         );
 
         $this->userRepository->saveUserToDatabase($user);
@@ -113,6 +116,22 @@ class UserService
         if ($user->getLevel() < $nextLevel)
         {
             $user->setLevel($nextLevel);
+        }
+    }
+
+    public function setUserTime(User $user, int $currentLevel, float $newTime): void
+    {
+        if ($currentLevel === 1 && ($user->getTimeFirstLevel() > $newTime || $user->getTimeFirstLevel() === 0.0) && $newTime != -1)
+        {
+            $user->setTimeFirstLevel($newTime);
+        }
+        if ($currentLevel === 2 && ($user->getTimeSecondLevel() > $newTime || $user->getTimeSecondLevel() === 0.0) && $newTime != -1)
+        {
+            $user->setTimeSecondLevel($newTime);
+        }
+        if ($currentLevel === 3 && ($user->getTimeThirdLevel() > $newTime || $user->getTimeThirdLevel() === 0.0) && $newTime != -1)
+        {
+            $user->setTimeThirdLevel($newTime);
         }
     }
 }

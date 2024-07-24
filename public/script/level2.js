@@ -101,17 +101,13 @@ function levelCreate()
     // enemies.push(new Devil(1300, 1105, 150, 0, 300, 50, 120));// 0 уровень
 }
 
-async function saveScore(isWin)
+async function saveScore()
 {
-    let nextLevel = 2;
-    if (isWin)
-    {
-        nextLevel = 3;
-    }
     let data = {
-        score: hero.experience,
+        time: hero.time,
+        score: (hero.experience / hero.time) * 100,
         currentLvl: 2,
-        nextLvl: nextLevel,
+        nextLvl: 3,
     }
     const stringifyData = JSON.stringify(data)
     const response = await fetch('/api/score', {

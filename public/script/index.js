@@ -38,6 +38,8 @@ const boss_idle = [];
 const boss_walk = [];
 const boss_dead = [];
 
+const startTime = new Date().getTime();
+
 const keys =
 {
     keyDown: false,
@@ -303,7 +305,7 @@ function onKeyUp(event)
 })();
 
 
-function gameLoop(time)
+async function gameLoop(time)
 {
     portal.update(time);
     hero.update(time);
@@ -314,12 +316,11 @@ function gameLoop(time)
     }
     if (hero.deadTime < 0)
     {
-        saveScore(hero.isWin);
         hero.deadTime = 1000;
         window.location.href = "/lose";
     }
     if (hero.isWin && portal.isActive) {
-        saveScore(hero.isWin);
+        await saveScore();
         window.location.href = "/win";
         portal.isActive = false;
     }
