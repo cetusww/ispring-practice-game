@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-22-rating-style-improvements поправил стили рейтинга">
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-23-demon-kombat">
       <change afterPath="$PROJECT_DIR$/bin/servers.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/css/demon_kombat_screensaver_style.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/images/Enemy/demon_dead.png" afterDir="false" />
@@ -271,7 +271,7 @@
       <workItem from="1721333447285" duration="9454000" />
       <workItem from="1721626678600" duration="1116000" />
       <workItem from="1721806328898" duration="316000" />
-      <workItem from="1721806657202" duration="12025000" />
+      <workItem from="1721806657202" duration="12786000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
@@ -561,7 +561,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721803485998</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="misha-07-23-demon-kombat">
+      <option name="closed" value="true" />
+      <created>1721826311257</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1721826311257</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -612,10 +620,10 @@
     <MESSAGE value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
     <MESSAGE value="misha-07-22-rating-style-improvements добавил запись времени прохождения уровня. Поменял стили выбора уровней. Добавил новую систему подсчёта очков в однопользовательском режиме" />
     <MESSAGE value="misha-07-22-rating-style-improvements поменял текст для результатов игрока в отображении уровней" />
-    <MESSAGE value="misha-07-23-demon-kombat" />
     <MESSAGE value="misha-07-22-rating-style-improvements переместил таймер на экране игры вниз" />
     <MESSAGE value="misha-07-22-rating-style-improvements исправил переход на заблокированный уровень через адресную строку" />
     <MESSAGE value="misha-07-22-rating-style-improvements поправил стили рейтинга" />
-    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-rating-style-improvements поправил стили рейтинга" />
+    <MESSAGE value="misha-07-23-demon-kombat" />
+    <option name="LAST_COMMIT_MESSAGE" value="misha-07-23-demon-kombat" />
   </component>
 </project>
