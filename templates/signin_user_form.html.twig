@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
 </head>
 <body>
-<div class=" form">
-    <form action="/signin" method="post">
+<div class="form">
+    <form class="form__block" action="/signin" method="post">
         <span class="error-text">{{ error.username ?? '' }}</span>
         <div class="field border fill responsive input">
             <input name="username" id="username" type="text" placeholder="имя">
