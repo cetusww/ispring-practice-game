@@ -193,7 +193,7 @@ class Hero {
         this.experienceText = new PIXI.Text(this.experience, { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
         this.healthText = new PIXI.Text(this.hp, { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
         this.portalText = new PIXI.Text('Portal open!', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
-        this.experienceTitle = new PIXI.Text('Score', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+        this.experienceTitle = new PIXI.Text('Experience', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
         this.healthTitle = new PIXI.Text('Health', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
         this.healthText.x = 300;
         this.healthTitle.x = 30;
@@ -218,8 +218,8 @@ class Hero {
             fontSize: 24,
             fill: 0xfeeb77,
         });
-        this.timerText.x = app.screen.width - 330;
-        this.timerText.y = 17;
+        this.timerText.x = app.screen.width - 15;
+        this.timerText.y = app.screen.height - 40;
         this.timerText.anchor.set(1, 0);
         app.stage.addChild(this.timerText);
 
