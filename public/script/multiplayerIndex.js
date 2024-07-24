@@ -30,17 +30,17 @@ let opponentDamage = 0;
 let arrayOfOpponent = [heroView];
 let portal;
 let sceneScale = 1;
-const hero_walk = [];
+const blue_walk = [];
 const experiences = [];
-const hero_jump = [];
-const hero_idle = [];
-const hero_dead = [];
+const blue_jump = [];
+const blue_idle = [];
+const blue_dead = [];
 const devilWalk = [];
 const devilIdle = [];
 const batFlyHorizontal = [];
 const batFlyVertical = [];
-const hero_shoot = [];
-const hero_walk_shoot = [];
+const blue_shoot = [];
+const blue_walk_shoot = [];
 const fire_anim = [];
 const mushroom_idle = [];
 const mushroom_active = [];
@@ -207,12 +207,12 @@ function onKeyUp(event)
         { alias: 'level1_map', src: '/images/Map/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/Map/level2_map.png' },
         { alias: 'level3_map', src: '/images/Map/level3_map.png' },
-        { alias: 'hero_idle_group', src: '/images/Hero/hero_idle_group.json' },
-        { alias: 'hero_walk_group', src: '/images/Hero/hero_walk_group.json' },
-        { alias: 'hero_jump_group', src: '/images/Hero/hero_jump_group.json' },
-        { alias: 'hero_shoot_group', src: '/images/Hero/hero_shoot_group.json' },
-        { alias: 'hero_walk_shoot_group', src: '/images/Hero/hero_walk_shoot_group.json' },
-        { alias: 'hero_dead_group', src: '/images/Hero/hero_dead_group.json' },
+        { alias: 'blue_idle_group', src: '/images/Hero/blue_idle_group.json' },
+        { alias: 'blue_walk_group', src: '/images/Hero/blue_walk_group.json' },
+        { alias: 'blue_jump_group', src: '/images/Hero/blue_jump_group.json' },
+        { alias: 'blue_shoot_group', src: '/images/Hero/blue_shoot_group.json' },
+        { alias: 'blue_walk_shoot_group', src: '/images/Hero/blue_walk_shoot_group.json' },
+        { alias: 'blue_dead_group', src: '/images/Hero/blue_dead_group.json' },
         { alias: 'ground', src: '/images/Object/ground.svg' },
         { alias: 'bullet', src: '/images/Object/bullet.png' },
         { alias: 'stalactite', src: '/images/Object/stalactite.png' },
@@ -222,27 +222,27 @@ function onKeyUp(event)
     ])
     for (let i = 0; i < 10; i++)
     {
-        hero_idle.push(PIXI.Texture.from(`hero_idle${1 + i}.png`));
+        blue_idle.push(PIXI.Texture.from(`blue_idle${1 + i}.png`));
     }
     for (let i = 0; i < 8; i++)
     {
-        hero_walk.push(PIXI.Texture.from(`hero_walk${1 + i}.png`));
+        blue_walk.push(PIXI.Texture.from(`blue_walk${1 + i}.png`));
     }
     for (let i = 0; i < 10; i++)
     {
-        hero_jump.push(PIXI.Texture.from(`hero_jump${1 + i}.png`));
+        blue_jump.push(PIXI.Texture.from(`blue_jump${1 + i}.png`));
     }
     for (let i = 9; i < 10; i++)
     {
-        hero_dead.push(PIXI.Texture.from(`hero_dead${1 + i}.png`));
+        blue_dead.push(PIXI.Texture.from(`blue_dead${1 + i}.png`));
     }
     for (let i = 0; i < 4; i++)
     {
-        hero_shoot.push(PIXI.Texture.from(`hero_shoot${1 + i}.png`));
+        blue_shoot.push(PIXI.Texture.from(`blue_shoot${1 + i}.png`));
     }
     for (let i = 0; i < 9; i++)
     {
-        hero_walk_shoot.push(PIXI.Texture.from(`hero_walk_shoot${1 + i}.png`));
+        blue_walk_shoot.push(PIXI.Texture.from(`blue_walk_shoot${1 + i}.png`));
     }
     for (let i = 0; i < 50; i++)
     {
