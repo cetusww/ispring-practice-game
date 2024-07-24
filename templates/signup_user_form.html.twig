@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="form" class=" form">
-    <form action="/signup" method="post">
+    <form class="form__block" action="/signup" method="post">
         {% if (error.username is defined) or (error.password is defined) %}
             <div class="snackbar error top active">
                 {% if error.username is defined %}

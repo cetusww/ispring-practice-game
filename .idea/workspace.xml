@@ -185,6 +185,9 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2ilkoqOfD5UjMRj8JVUaxa17BlO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -610,6 +613,16 @@
     <MESSAGE value="2024-07-13-dev добавил переход по клику мыши" />
     <MESSAGE value="2024-07-13-dev обновил базу данных" />
     <MESSAGE value="2024-07-13-dev поенял стили меню" />
+    <MESSAGE value="misha-07-16-lobby-layout убрал кнопку &quot;Готов&quot;. Сделал обратный отсчёт в 5 секунд после присоединения второго игрока" />
+    <MESSAGE value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
+    <MESSAGE value="2024-07-20-dev убрал лишние переменные и коментарии" />
+    <MESSAGE value="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
+    <MESSAGE value="misha-07-19-images-improvements исправил отображение мультиплеера" />
+    <MESSAGE value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
+    <MESSAGE value="main исправил количество жизней" />
+    <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer сделал экраны победы и поражения для мультиплеера, добавил муршруты на них" />
+    <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта" />
+    <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4" />
     <MESSAGE value="misha-07-16-lobby-layout убрал кнопку &quot;Готов&quot;. Сделал обратный отсчёт в 5 секунд после присоединения второго игрока" />
     <MESSAGE value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
     <MESSAGE value="2024-07-20-dev убрал лишние переменные и коментарии" />
