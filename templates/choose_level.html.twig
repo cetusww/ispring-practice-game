@@ -11,11 +11,11 @@
 <body>
 <h1 class="center-align title">Выбор уровня</h1>
 <div class="levels-list">
-  <a class="level-list__first" href="/first-level">
+  <a class="level-list__first" id="but1" href="/first-level">
     <p class="level-list__first-level-title">1 уровень</p>
   </a>
   {% if level >= 2 %}
-    <a class="level-list__second" href="/second-level">
+    <a class="level-list__second" id="but2" href="/second-level">
       <p class="level-list__second-level-title">2 уровень</p>
     </a>
   {% else %}
@@ -25,7 +25,7 @@
     </div>
   {% endif %}
   {% if level >= 3 %}
-    <a class="level-list__third" href="/third-level">
+    <a class="level-list__third" id="but3" href="/third-level">
       <p class="level-list__third-level-title">3 уровень</p>
     </a>
   {% else %}
@@ -36,5 +36,24 @@
   {% endif %}
 </div>
 <a class="previous-page" href="/menu">Вернуться</a>
+<script>
+  let audio = new Audio('/sounds/doom.mp3');
+      let music = false;
+      audio.volume = 1;
+      audio.loop = true;
+
+      function startMusic() {
+        audio.load();
+        audio.play();
+        music = true;
+      }
+
+      document.addEventListener('mousemove', function()
+      {
+          if (music === false) {
+            startMusic();
+          }
+      });
+</script>
 </body>
 </html>
