@@ -18,7 +18,7 @@
                 {% for user in usersMultiplayer %}
                     {% if user.multiplayerAll != 0 %}
                         {% set userInTable = true %}
-                        <li>{{ user.username }}: <span class="table__ratio">{{ (user.multiplayerWin / user.multiplayerAll) | number_format(2, '.', '') }}</span> </li>
+                        <li>{{ user.username }} <span class="table__ratio">{{ (user.multiplayerWin / user.multiplayerAll) | number_format(2, '.', '') }}</span> </li>
                     {% endif %}
                 {% endfor %}
             </ol>
@@ -37,7 +37,7 @@
                     {% for user in usersFirstLevel %}
                         {% if user.scoreFirstLevel != 0 %}
                             {% set userInTable = true %}
-                            <li> {{ user.username }}: <span class="table__score"> {{ user.scoreFirstLevel }} </span></li>
+                            <li> {{ user.username }} <span class="table__score"> {{ user.scoreFirstLevel }} </span></li>
                         {% endif %}
                     {% endfor %}
                 </ol>
@@ -52,7 +52,7 @@
                     {% for user in usersSecondLevel %}
                         {% if user.scoreSecondLevel != 0 %}
                             {% set userInTable = true %}
-                            <li> {{ user.username }}: <span class="table__score"> {{ user.scoreSecondLevel }} </span></li>
+                            <li> {{ user.username }} <span class="table__score"> {{ user.scoreSecondLevel }} </span></li>
                         {% endif %}
                     {% endfor %}
                 </ol>
@@ -67,7 +67,7 @@
                     {% for user in usersThirdLevel %}
                         {% if user.scoreThirdLevel != 0 %}
                             {% set userInTable = true %}
-                            <li> {{ user.username }}: <span class="table__score"> {{ user.scoreThirdLevel }} </span></li>
+                            <li> {{ user.username }} <span class="table__score"> {{ user.scoreThirdLevel }} </span></li>
                         {% endif %}
                     {% endfor %}
                 </ol>

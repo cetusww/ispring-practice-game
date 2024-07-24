@@ -67,6 +67,10 @@ body {
     overflow: auto;
 }
 
+.table__score {
+    float: right;
+}
+
 h2 {
     font: 800 30px/34px "Russo One", sans-serif;
     color: rgba(255, 255, 255, 1);
