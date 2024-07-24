@@ -83,3 +83,12 @@ api_multiplayer_score:
     path: /api/multiplayer-score
     controller: App\Controller\ApiController::saveMultiplayerScore
     methods: POST
+
+show_demon_kombat:
+    path: /demon-kombat
+    controller: App\Controller\ViewController::showDemonKombat
+
+show_demon_kombat_screensaver:
+    path: /demon-kombat-screensaver
+    controller: App\Controller\ViewController::showDemonKombatScreensaver
+

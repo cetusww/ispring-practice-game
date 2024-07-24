@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.demon-image {
+    height: 70vh;
+    margin: 5vh 0 0 0;
+}

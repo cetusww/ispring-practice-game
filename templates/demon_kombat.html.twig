@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demon Kombat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/demon_kombat_style.css"/>
+</head>
+<body>
+<p class="score" id="score"></p>
+<img class="demon-image" id="demon-kombat" src="images/Enemy/demon_kombat.png" alt="demon">
+
+<script>
+	let scoreCount = 0;
+	const score = document.getElementById('score');
+	const demonKombat = document.getElementById('demon-kombat');
+
+	demonKombat.addEventListener('touchstart', handleTouch);
+
+	function handleTouch() {
+		addScore();
+		// Use a timeout to call resizeDemon shortly after adding the score
+		setTimeout(resizeDemon, 100); // 100 milliseconds delay
+	}
+
+	function addScore() {
+		demonKombat.style.height = '75vh';
+		scoreCount += 1;
+		score.innerHTML = scoreCount;
+	}
+
+	function resizeDemon() {
+		demonKombat.style.height = '70vh';
+	}
+</script>
+</body>
+</html>

@@ -81,6 +81,11 @@ class ViewController extends AbstractController
             return $this->redirectToRoute('show_third_level');
         }
 
+        if ($_SESSION['level'] === 4)
+        {
+            return $this->redirectToRoute('show_demon_kombat_screensaver');
+        }
+
         return $this->redirectToRoute('choose_level');
     }
 
@@ -180,5 +185,25 @@ class ViewController extends AbstractController
             return $this->redirectToRoute('index');
         }
         return $this->render('game_lose.html.twig');
+    }
+
+    public function showDemonKombat(): Response
+    {
+//        $this->sessionService->startSession('auth');
+//        if ($_SESSION === [])
+//        {
+//            return $this->redirectToRoute('index');
+//        }
+        return $this->render('demon_kombat.html.twig');
+    }
+
+    public function showDemonKombatScreensaver(): Response
+    {
+        $this->sessionService->startSession('auth');
+        if ($_SESSION === [])
+        {
+            return $this->redirectToRoute('index');
+        }
+        return $this->render('demon_kombat_screensaver.html.twig');
     }
 }
