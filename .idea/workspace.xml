@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-22-rating-style-improvements поправил стили рейтинга">
+      <change afterPath="$PROJECT_DIR$/bin/servers.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/demon_kombat_screensaver_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/Enemy/demon_dead.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/demon_kombat_qr_institute.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/demon_kombat_qr_local.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/DemonCombatController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/QrCodeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/UserScoreService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ispring-practice-game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ispring-practice-game.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MultiplayerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MultiplayerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/demon_kombat.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demon_kombat.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/demon_kombat_screensaver.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demon_kombat_screensaver.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +58,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2024-07-20-dev" />
+        <entry key="$PROJECT_DIR$" value="misha-07-22-rating-style-improvements" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -168,6 +202,9 @@
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/endroid/qr-code" />
+      <path value="$PROJECT_DIR$/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -175,34 +212,38 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2ilkoqOfD5UjMRj8JVUaxa17BlO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/yogurt/Documents/projects/ispring-practice-game/public/images&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/yogurt/Documents/projects/ispring-practice-game/public/images",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/public/images/Enemy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images/Enemy" />
+      <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/public/images/Icon" />
       <recent name="$PROJECT_DIR$/public/images/Object" />
       <recent name="$PROJECT_DIR$/public/images/Background" />
-      <recent name="$PROJECT_DIR$/public/images/Enemy" />
-      <recent name="$PROJECT_DIR$/public/images/Hero" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -229,6 +270,8 @@
       <workItem from="1721202713803" duration="5379000" />
       <workItem from="1721333447285" duration="9454000" />
       <workItem from="1721626678600" duration="1116000" />
+      <workItem from="1721806328898" duration="316000" />
+      <workItem from="1721806657202" duration="12025000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
@@ -470,7 +513,55 @@
       <option name="project" value="LOCAL" />
       <updated>1721630475962</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="misha-07-22-rating-style-improvements добавил запись времени прохождения уровня. Поменял стили выбора уровней. Добавил новую систему подсчёта очков в однопользовательском режиме">
+      <option name="closed" value="true" />
+      <created>1721745414558</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1721745414558</updated>
+    </task>
+    <task id="LOCAL-00032" summary="misha-07-22-rating-style-improvements поменял текст для результатов игрока в отображении уровней">
+      <option name="closed" value="true" />
+      <created>1721745531072</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1721745531072</updated>
+    </task>
+    <task id="LOCAL-00033" summary="misha-07-23-demon-kombat">
+      <option name="closed" value="true" />
+      <created>1721799759654</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1721799759654</updated>
+    </task>
+    <task id="LOCAL-00034" summary="misha-07-22-rating-style-improvements переместил таймер на экране игры вниз">
+      <option name="closed" value="true" />
+      <created>1721802594493</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1721802594493</updated>
+    </task>
+    <task id="LOCAL-00035" summary="misha-07-22-rating-style-improvements исправил переход на заблокированный уровень через адресную строку">
+      <option name="closed" value="true" />
+      <created>1721803203915</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1721803203915</updated>
+    </task>
+    <task id="LOCAL-00036" summary="misha-07-22-rating-style-improvements поправил стили рейтинга">
+      <option name="closed" value="true" />
+      <created>1721803485998</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1721803485998</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +578,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="misha-07-23-demon-kombat" />
                       </list>
                     </value>
                   </entry>
@@ -500,12 +591,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="misha-07-05-new-person добавил картинку с мёртвым персонажем" />
-    <MESSAGE value="misha-07-05-new-person добавил json файл с мёртвым героем" />
-    <MESSAGE value="misha-07-05-new-person убрал alias на мёртвого персонажа" />
-    <MESSAGE value="misha-06-26-login-signup доделал валидацию, добавил страницу 404" />
-    <MESSAGE value="2024-07-01-test-dev-2 исправил грамматическую ошибку &quot;enemys&quot; -&gt; &quot;enemies&quot;" />
-    <MESSAGE value="2024-07-01-test-dev-2 изменил внешний вид главного героя" />
     <MESSAGE value="2024-07-01-test-dev-2 добавил отображение экранов победы и проигрыша" />
     <MESSAGE value="2024-07-01-test-dev-2-with-gamepad смержил тестовую ветку с веткой геймпада" />
     <MESSAGE value="2024-07-05-shoot-animation добавил анимацию стрельбы в стоячем состоянии и при ходьбе" />
@@ -525,6 +610,12 @@
     <MESSAGE value="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService" />
     <MESSAGE value="misha-07-19-images-improvements исправил отображение мультиплеера" />
     <MESSAGE value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код" />
+    <MESSAGE value="misha-07-22-rating-style-improvements добавил запись времени прохождения уровня. Поменял стили выбора уровней. Добавил новую систему подсчёта очков в однопользовательском режиме" />
+    <MESSAGE value="misha-07-22-rating-style-improvements поменял текст для результатов игрока в отображении уровней" />
+    <MESSAGE value="misha-07-23-demon-kombat" />
+    <MESSAGE value="misha-07-22-rating-style-improvements переместил таймер на экране игры вниз" />
+    <MESSAGE value="misha-07-22-rating-style-improvements исправил переход на заблокированный уровень через адресную строку" />
+    <MESSAGE value="misha-07-22-rating-style-improvements поправил стили рейтинга" />
+    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-rating-style-improvements поправил стили рейтинга" />
   </component>
 </project>

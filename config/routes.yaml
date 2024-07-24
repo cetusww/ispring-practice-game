@@ -92,3 +92,7 @@ show_demon_kombat_screensaver:
     path: /demon-kombat-screensaver
     controller: App\Controller\ViewController::showDemonKombatScreensaver
 
+qrcode_generate:
+    path: /qrcode-generate
+    controller: App\Controller\QrCodeController::generateQrCode
+

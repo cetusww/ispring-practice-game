@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use App\Service\UserScoreService;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 
@@ -30,6 +33,12 @@ class MultiplayerController implements MessageComponentInterface
 
         $data = json_decode($msg, true);
         $kick = false;
+
+        if (isset($data['score']))
+        {
+
+        }
+
         if (isset($data['username']))
         {
             if (count($this->arrayOfUsers) === 1)

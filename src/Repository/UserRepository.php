@@ -67,4 +67,14 @@ class UserRepository
 
         $this->entityManager->flush();
     }
+
+    public function addUserScore(string $username, int $score): void
+    {
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+        if ($user) {
+            $user->setScoreThirdLevel($user->getScoreThirdLevel() + $score);
+            $this->entityManager->flush();
+            echo "Updated user {$username} score to {$user->getScoreThirdLevel()}\n";
+        }
+    }
 }

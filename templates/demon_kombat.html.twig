@@ -3,6 +3,8 @@
 <head>
     <title>Demon Kombat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/beercss@3.5.8/dist/cdn/beer.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/demon_kombat_style.css"/>
 </head>
 <body>
@@ -10,16 +12,20 @@
 <img class="demon-image" id="demon-kombat" src="images/Enemy/demon_kombat.png" alt="demon">
 
 <script>
+	const urlParams = new URLSearchParams(window.location.search);
+	const username = urlParams.get('username');
 	let scoreCount = 0;
 	const score = document.getElementById('score');
 	const demonKombat = document.getElementById('demon-kombat');
+
+	const ws = new WebSocket('ws://localhost:8080');
 
 	demonKombat.addEventListener('touchstart', handleTouch);
 
 	function handleTouch() {
 		addScore();
-		// Use a timeout to call resizeDemon shortly after adding the score
-		setTimeout(resizeDemon, 100); // 100 milliseconds delay
+		setTimeout(resizeDemon, 100);
+		sendScore();
 	}
 
 	function addScore() {
@@ -31,6 +37,30 @@
 	function resizeDemon() {
 		demonKombat.style.height = '70vh';
 	}
+
+	function sendScore() {
+		const data = {
+			username: username,
+			score: scoreCount
+		};
+		ws.send(JSON.stringify(data));
+	}
+
+	ws.onerror = function(error) {
+		console.error('WebSocket Error: ', error);
+	};
+
+	ws.onmessage = function(event) {
+		console.log('Message from server ', event.data);
+	};
+
+	ws.onclose = function() {
+		console.log('WebSocket connection closed');
+	};
+
+	ws.onopen = function() {
+		console.log('WebSocket connection established');
+	};
 </script>
 </body>
 </html>
