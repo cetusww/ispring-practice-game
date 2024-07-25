@@ -41,7 +41,7 @@ class UserController extends AbstractController
         $this->sessionService->startSession('auth');
         $this->sessionService->setUserSession($user->getId(), $user->getUsername(), $user->getLevel());
 
-        return $this->redirectToRoute('show_menu');
+        return $this->redirectToRoute('show_legend');
     }
 
     public function signInUser(Request $request): Response
