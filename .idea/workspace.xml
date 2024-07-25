@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/screensaver_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/screensaver_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signin_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signin_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signup_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ValidationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ValidationService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signin_user_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin_user_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signup_user_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup_user_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/level_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/level_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lobby.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lobby.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,6 +171,9 @@
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/endroid/qr-code" />
+      <path value="$PROJECT_DIR$/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -185,24 +181,27 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2ilkoqOfD5UjMRj8JVUaxa17BlO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/yogurt/Documents/projects/ispring-practice-game/public/images&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/yogurt/Documents/projects/ispring-practice-game/public/images/Hero",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/images" />
@@ -480,55 +479,6 @@
       <option name="project" value="LOCAL" />
       <updated>1721630475962</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
-    <task id="LOCAL-00025" summary="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней">
-      <option name="closed" value="true" />
-      <created>1721333556882</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1721333556882</updated>
-    </task>
-    <task id="LOCAL-00026" summary="2024-07-20-dev убрал лишние переменные и коментарии">
-      <option name="closed" value="true" />
-      <created>1721375685425</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1721375685425</updated>
-    </task>
-    <task id="LOCAL-00027" summary="2024-07-20-dev убрал логику сортировки пользователей из ViewController в UserService">
-      <option name="closed" value="true" />
-      <created>1721377250635</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1721377250636</updated>
-    </task>
-    <task id="LOCAL-00028" summary="misha-07-19-images-improvements исправил отображение мультиплеера">
-      <option name="closed" value="true" />
-      <created>1721629247052</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1721629247053</updated>
-    </task>
-    <task id="LOCAL-00029" summary="misha-07-19-images-improvements исправил отображение мультиплеера">
-      <option name="closed" value="true" />
-      <created>1721629278374</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1721629278374</updated>
-    </task>
-    <task id="LOCAL-00030" summary="2024-07-20-dev смержил misha-07-19-images-improvements, отрефакторил код">
-      <option name="closed" value="true" />
-      <created>1721630475962</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1721630475962</updated>
-    </task>
     <task id="LOCAL-00031" summary="main исправил количество жизней">
       <option name="closed" value="true" />
       <created>1721630952873</created>
@@ -630,7 +580,6 @@
     <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer сделал экраны победы и поражения для мультиплеера, добавил муршруты на них" />
     <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил баг при отключении одного из пользователей во время обратного отсчёта" />
     <MESSAGE value="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="misha-07-22-win-and-lose-for-multiplayer исправил таймер на 5 секунд, а не 4" />
     <MESSAGE value="misha-07-16-lobby-layout убрал кнопку &quot;Готов&quot;. Сделал обратный отсчёт в 5 секунд после присоединения второго игрока" />
     <MESSAGE value="2024-07-20-dev данные в объект при создании пользователя, добавил обновления текущего уровня при прохождении уровней" />
     <MESSAGE value="2024-07-20-dev убрал лишние переменные и коментарии" />
