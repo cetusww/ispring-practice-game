@@ -26,44 +26,44 @@
   </div>
   <a class="signout" type="submit" href="/user/signout">Выйти</a>
   <script>
-  const but1 = document.getElementById('but1');
-  const but2 = document.getElementById('but2');
-  const but3 = document.getElementById('but3');
-  
-  let audio = new Audio('/sounds/choose.mp3');
-      audio.volume = 0.8;
-      audio.loop = false;
-      audio.load();
-      let music = false;
-
-      function startMusic() {
-        audio.play();
-        music = true;
-        window.setInterval(updateMusic(), 500);
-      }
-
-      function updateMusic() {
-        music = false;
-      }
-
-      
-      but1.addEventListener('mouseover', () => {
-          if (!music) {
-            startMusic();
-          }
-      })
-
-      but2.addEventListener('mouseover', () => {
-          if (!music) {
-            startMusic();
-          }
-      })
-
-      but3.addEventListener('mouseover', () => {
-          if (!music) {
-            startMusic();
-          }
-      })
+  //const but1 = document.getElementById('but1');
+  //const but2 = document.getElementById('but2');
+  //const but3 = document.getElementById('but3');
+  //
+  //let audio = new Audio('/sounds/choose.mp3');
+  //    audio.volume = 0.8;
+  //    audio.loop = false;
+  //    audio.load();
+  //    let music = false;
+//
+  //    function startMusic() {
+  //      audio.play();
+  //      music = true;
+  //      window.setInterval(updateMusic(), 500);
+  //    }
+//
+  //    function updateMusic() {
+  //      music = false;
+  //    }
+//
+  //    
+  //    but1.addEventListener('mouseover', () => {
+  //        if (!music) {
+  //          startMusic();
+  //        }
+  //    })
+//
+  //    but2.addEventListener('mouseover', () => {
+  //        if (!music) {
+  //          startMusic();
+  //        }
+  //    })
+//
+  //    but3.addEventListener('mouseover', () => {
+  //        if (!music) {
+  //          startMusic();
+  //        }
+  //    })
 </script>
 </body>
 </html>

@@ -226,7 +226,7 @@
             "experience": 130
         },
         {
-            "posX": 350,
+            "posX": 450,
             "posY": 1030,
             "zoneWidth": 300,
             "zoneHeight": 0,
@@ -235,7 +235,7 @@
             "experience": 100
         },
         {
-            "posX": 1300,
+            "posX": 1250,
             "posY": 1030,
             "zoneWidth": 150,
             "zoneHeight": 0,
@@ -244,7 +244,7 @@
             "experience": 120
         },
         {
-            "posX": 450,
+            "posX": 560,
             "posY": 1350,
             "zoneWidth": 400,
             "zoneHeight": 0,
@@ -262,7 +262,7 @@
             "experience": 90
         },
         {
-            "posX": 2000,
+            "posX": 1920,
             "posY": 1350,
             "zoneWidth": 400,
             "zoneHeight": 0,

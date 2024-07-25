@@ -204,7 +204,7 @@
     ],
     "devils": [
         {
-            "posX": 500,
+            "posX": 550,
             "posY": 500,
             "zoneWidth": 300,
             "zoneHeight": 0,
@@ -215,14 +215,14 @@
         {
             "posX": 1560,
             "posY": 500,
-            "zoneWidth": 160,
+            "zoneWidth": 120,
             "zoneHeight": 0,
             "visibilityZoneWidth": 200,
             "visibilityZoneHeight": 50,
             "experience": 130
         },
         {
-            "posX": 400,
+            "posX": 520,
             "posY": 795,
             "zoneWidth": 200,
             "zoneHeight": 0,

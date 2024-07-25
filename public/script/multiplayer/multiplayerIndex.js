@@ -15,6 +15,9 @@ let opponentDamage = 0;
 let arrayOfOpponent = [heroView];
 let sceneScale = 1;
 
+let musicButton;
+let musicText;
+
 const platforms = [];
 const arrayOfWall = [];
 const arrayOfBonus = [];
@@ -56,13 +59,22 @@ const mouse =
 
 let audio = new Audio('/sounds/music.mp3');
 let music = false;
-audio.volume = 1;
+audio.load();
+audio.volume = 0.8;
 audio.loop = true;
 
-function startMusic() {
-    audio.load();
-    audio.play();
-    music = true;
+function musicToggle()
+{
+    if (!music) {
+        music = true
+        musicButton.texture = PIXI.Texture.from('sound_on')
+        audio.play();
+    } else {
+        music = false
+        musicButton.texture = PIXI.Texture.from('sound_off')
+        audio.pause();
+    }
+    console.log(music)
 }
 
 function onAppMouseDown(event) {
@@ -158,6 +170,23 @@ function onKeyUp(event) {
     app.stage.addChild(scene);
 
     levelCreate();
+
+    musicButton = new PIXI.Sprite(PIXI.Texture.from('sound_off'));
+    musicButton.x = 450;
+    musicButton.y = 30;
+    musicButton.anchor.set(0.5);
+    musicButton.cursor = 'pointer';
+    musicButton.eventMode = 'static';
+    musicButton.width = 40;
+    musicButton.height = 40;
+    musicButton.on('pointerdown', musicToggle);
+    app.stage.addChild(musicButton);
+
+    musicText = new PIXI.Text('Music', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+    musicText.x = 480
+    musicText.y = 17
+    app.stage.addChild(musicText);
+
     levelView();
     app.ticker.maxFPS = FPS;
     app.ticker.add((time) => {

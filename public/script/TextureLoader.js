@@ -50,6 +50,8 @@ const textureSources =
         { alias: 'non_active_portal', src: '/images/non_active_portal.png' },
         { alias: 'boss', src: '/images/JSON/boss.json' },
         { alias: 'shot', src: '/images/shot.png' },
+        { alias: 'sound_on', src: '/images/sound_on.png' },
+        { alias: 'sound_off', src: '/images/sound_off.png' },
     ];
 
 function loadTextures() {

@@ -88,6 +88,10 @@ class Devil {
             const fireball = new Fireball('fireball', this.sprite.x, this.sprite.y, vecX, -vecY, 0, 5);
             fireball.view();
             fireballs.push(fireball);
+            let audio = new Audio('/sounds/fireball.mp3');
+            audio.volume = 0.5;
+            audio.loop = false;
+            audio.play();
             this.currentTimeAttack = this.timeAttack;
         }
     }
