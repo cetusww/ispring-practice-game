@@ -81,6 +81,11 @@ class ViewController extends AbstractController
             return $this->redirectToRoute('show_third_level');
         }
 
+        if ($_SESSION['level'] === 4)
+        {
+            return $this->redirectToRoute('show_congrats');
+        }
+
         return $this->redirectToRoute('choose_level');
     }
 
