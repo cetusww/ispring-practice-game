@@ -29,7 +29,8 @@ body {
 }
 
 h1 {
-    font: 400 50px/100px "Miltonian Tattoo", sans-serif;
+    font: 700 70px/100px "Amatic SC", sans-serif !important;
+    text-shadow: 4px -5px 5px red !important;
     color: rgba(255, 255, 255, 1);
     text-align: center;
 }
