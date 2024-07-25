@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: url('../images/Background/menu_background.jpeg') no-repeat;
+    background-size: cover;
+    padding: 40px;
+}
+
+.main {
+    background-color: rgba(61, 61, 61, 0.6);
+    border-radius: 30px;
+    padding: 20px;
+    margin: 5vh 0 0 0;
+    text-align: center;
+}
+
+.congrats {
+    text-align: center;
+    margin: 5vh;
+}
+
+.congrats__title {
+    display: block;
+    font: 400 50px/60px "Russo One", sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.demon_dead_image {
+    width: 10vw;
+}
+
+.qr {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 30vh;
+    font: 400 50px/100px "Russo One", sans-serif;
+    color: rgba(255, 255, 255, 1);
+    margin: 5vh 0 0 0;
+    padding: 30px;
+    border-radius: 0;
+}
+
+.qr__demon-kombat {
+    height: 20vh;
+}

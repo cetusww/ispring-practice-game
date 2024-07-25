@@ -91,3 +91,7 @@ api_multiplayer_score:
     path: /api/multiplayer-score
     controller: App\Controller\ApiController::saveMultiplayerScore
     methods: POST
+
+show_congrats:
+    path: /congrats
+    controller: App\Controller\ViewController::showCongrats

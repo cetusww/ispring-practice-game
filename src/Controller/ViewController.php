@@ -221,4 +221,14 @@ class ViewController extends AbstractController
         }
         return $this->render('game_lose_multiplayer.html.twig');
     }
+
+    public function showCongrats(): Response
+    {
+        $this->sessionService->startSession('auth');
+        if ($_SESSION === [])
+        {
+            return $this->redirectToRoute('index');
+        }
+        return $this->render('congrats.html.twig');
+    }
 }
