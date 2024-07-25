@@ -173,7 +173,7 @@ function onKeyUp(event) {
 
     musicButton = new PIXI.Sprite(PIXI.Texture.from('sound_off'));
     musicButton.x = 450;
-    musicButton.y = 30;
+    musicButton.y = app.screen.height - 30;
     musicButton.anchor.set(0.5);
     musicButton.cursor = 'pointer';
     musicButton.eventMode = 'static';
@@ -183,8 +183,8 @@ function onKeyUp(event) {
     app.stage.addChild(musicButton);
 
     musicText = new PIXI.Text('Music', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
-    musicText.x = 480
-    musicText.y = 17
+    musicText.x = 480;
+    musicText.y = app.screen.height - 42;
     app.stage.addChild(musicText);
 
     levelView();
