@@ -1,0 +1,421 @@
+{
+    "scene": [
+        {
+            "width": 3000,
+            "height": 1250
+        }
+    ],
+    "background": "level2_map",
+    "hero": [
+        {
+            "posX": 250,
+            "posY": 100,
+            "speedX": 6,
+            "speedY": 0,
+            "experienceMax": 680
+        }
+    ],
+    "portal": [
+        {
+            "posX": 2070,
+            "posY": 1020
+        }
+    ],
+    "platforms": [
+        {
+            "texture": "",
+            "posX": 1500,
+            "posY": 70,
+            "width": 3000,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 345,
+            "posY": 255,
+            "width": 690,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 345,
+            "posY": 550,
+            "width": 690,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1355,
+            "posY": 550,
+            "width": 1110,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2270,
+            "posY": 550,
+            "width": 520,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2850,
+            "posY": 550,
+            "width": 300,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 345,
+            "posY": 845,
+            "width": 690,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1085,
+            "posY": 845,
+            "width": 570,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1870,
+            "posY": 845,
+            "width": 800,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2685,
+            "posY": 845,
+            "width": 630,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1500,
+            "posY": 1155,
+            "width": 3000,
+            "height": 40
+        }
+    ],
+    "woodenPlanks": [
+        {
+            "texture": "",
+            "posX": 745,
+            "posY": 255,
+            "width": 110,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 745,
+            "posY": 550,
+            "width": 110,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1958,
+            "posY": 550,
+            "width": 100,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 745,
+            "posY": 845,
+            "width": 110,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1420,
+            "posY": 845,
+            "width": 100,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2320,
+            "posY": 845,
+            "width": 100,
+            "height": 40
+        }
+    ],
+    "walls": [
+        {
+            "texture": "",
+            "posX": 1262,
+            "posY": 410,
+            "width": 64,
+            "height": 820
+        },
+        {
+            "texture": "",
+            "posX": 1635,
+            "posY": 1010,
+            "width": 64,
+            "height": 320
+        },
+        {
+            "texture": "",
+            "posX": 2500,
+            "posY": 265,
+            "width": 64,
+            "height": 530
+        },
+        {
+            "texture": "",
+            "posX": 1828,
+            "posY": 450,
+            "width": 68,
+            "height": 160
+        },
+        {
+            "texture": "",
+            "posX": 2645,
+            "posY": 790,
+            "width": 68,
+            "height": 60
+        },
+        {
+            "texture": "",
+            "posX": 10,
+            "posY": 150,
+            "width": 64,
+            "height": 150
+        },
+        {
+            "texture": "",
+            "posX": 78,
+            "posY": 730,
+            "width": 128,
+            "height": 1050
+        },
+        {
+            "texture": "",
+            "posX": 2950,
+            "posY": 625,
+            "width": 128,
+            "height": 1250
+        }
+    ],
+    "devils": [
+        {
+            "posX": 550,
+            "posY": 500,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 1560,
+            "posY": 500,
+            "zoneWidth": 120,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 200,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 520,
+            "posY": 795,
+            "zoneWidth": 200,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 1800,
+            "posY": 795,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 2100,
+            "posY": 795,
+            "zoneWidth": 400,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 800,
+            "posY": 1105,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        },
+        {
+            "posX": 2100,
+            "posY": 1105,
+            "zoneWidth": 300,
+            "zoneHeight": 0,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 50,
+            "experience": 130
+        }
+    ],
+    "bats": [
+        {
+            "posX": 1000,
+            "posY": 320,
+            "zoneWidth": 180,
+            "zoneHeight": 150,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 300,
+            "experience": 140
+        },
+        {
+            "posX": 1880,
+            "posY": 180,
+            "zoneWidth": 520,
+            "zoneHeight": 70,
+            "visibilityZoneWidth": 300,
+            "visibilityZoneHeight": 300,
+            "experience": 130
+        },
+        {
+            "posX": 2640,
+            "posY": 390,
+            "zoneWidth": 60,
+            "zoneHeight": 280,
+            "visibilityZoneWidth": 150,
+            "visibilityZoneHeight": 300,
+            "experience": 130
+        },
+        {
+            "posX": 1450,
+            "posY": 1000,
+            "zoneWidth": 60,
+            "zoneHeight": 100,
+            "visibilityZoneWidth": 250,
+            "visibilityZoneHeight": 120,
+            "experience": 130
+        }
+    ],
+    "shields": [
+        {
+            "posX": 200,
+            "posY": 1105,
+            "duration": 10
+        },
+        {
+            "posX": 2800,
+            "posY": 1105,
+            "duration": 10
+        }
+    ],
+    "health": [
+        {
+            "posX": 100,
+            "posY": 160
+        },
+        {
+            "posX": 200,
+            "posY": 500
+        },
+        {
+            "posX": 1350,
+            "posY": 500
+        },
+        {
+            "posX": 2750,
+            "posY": 500
+        } 
+    ],
+    "stalactites": [
+        {
+            "posX": 900,
+            "posY": 60,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1170,
+            "posY": 60,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1700,
+            "posY": 60,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 2200,
+            "posY": 60,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 2700,
+            "posY": 60,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 2560,
+            "posY": 60,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        }
+    ],
+    "mushrooms": [
+        {
+            "posX": 2270,
+            "posY": 500,
+            "visibilityZoneWidth": 300,
+            "attackZoneWidth": 240,
+            "experience": 150
+        },
+        {
+            "posX": 1000,
+            "posY": 795,
+            "visibilityZoneWidth": 300,
+            "attackZoneWidth": 250,
+            "experience": 130
+        },
+        {
+            "posX": 400,
+            "posY": 1105,
+            "visibilityZoneWidth": 300,
+            "attackZoneWidth": 250,
+            "experience": 130
+        },
+        {
+            "posX": 2700,
+            "posY": 1105,
+            "visibilityZoneWidth": 300,
+            "attackZoneWidth": 250,
+            "experience": 130
+        }
+    ],
+    "fires": [
+        {
+            "posX": 630,
+            "posY": 780
+        },
+        {
+            "posX": 1200,
+            "posY": 1100
+        },
+        {
+            "posX": 2500,
+            "posY": 1100
+        }
+    ],
+    "boss": []
+}

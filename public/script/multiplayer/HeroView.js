@@ -1,7 +1,5 @@
-class HeroView
-{
-    constructor(posX, posY)
-    {
+class HeroView {
+    constructor(posX, posY) {
         this.sprite = new PIXI.AnimatedSprite(hero_idle);
         this.sprite.animationSpeed = 0.2; // Скорость анимации
         this.sprite.loop = true; // Зацикливание анимации
@@ -17,7 +15,7 @@ class HeroView
         this.collideLeft = this.sprite.x - this.sprite.width / 2;
         this.collideRight = this.sprite.x + this.sprite.width / 2;
 
-        this.sprite.anchor.set(0.5);        
+        this.sprite.anchor.set(0.5);
 
         this.hpMax = 100;
         this.hp = this.hpMax;
@@ -69,44 +67,39 @@ class HeroView
             this.sprite.loop = true;
             this.sprite.play();
             this.animateType = 'walk_shoot';
-        }
+        };
     }
 
-    updateCollide()
-    {
+    updateCollide() {
         this.collideTop = this.sprite.y - this.sprite.height / 2 + 10;
         this.collideBottom = this.sprite.y + this.sprite.height / 2 - 6;
         this.collideLeft = this.sprite.x - this.sprite.width / 2 + 10;
         this.collideRight = this.sprite.x + this.sprite.width / 2 - 10;
     }
 
-    view()
-    {
+    view() {
         scene.addChild(this.sprite);
         this.updateHp();
 
-        this.nameText = new PIXI.Text(this.name, {fontFamily: 'Arial', fontSize: 14, fill: 0xdddddd,});
+        this.nameText = new PIXI.Text(this.name, { fontFamily: 'Arial', fontSize: 14, fill: 0xdddddd, });
         this.nameText.x = this.sprite.x;
         this.nameText.y = this.sprite.y - this.sprite.height / 2 - 14;
         this.nameText.anchor.set(0.5);
         scene.addChild(this.nameText);
     }
 
-    deleteView()
-    {
+    deleteView() {
         scene.removeChild(this.sprite);
         scene.removeChild(this.graphics);
     }
 
-    updateName()
-    {
+    updateName() {
         this.nameText.text = this.name;
         this.nameText.x = this.sprite.x;
         this.nameText.y = this.sprite.y - this.sprite.height / 2 - 14;
     }
 
-    updateHp()
-    {
+    updateHp() {
         scene.removeChild(this.graphics);
         this.graphics = new PIXI.Graphics();
         this.graphics.rect(this.sprite.x - this.sprite.width / 2 + 5, this.sprite.y - this.sprite.height / 2 - 3, this.hp / this.hpMax * (this.sprite.width - 10), 5);
@@ -115,8 +108,7 @@ class HeroView
         this.graphics.stroke({ width: 1, color: 0xfeeb77 });
         scene.addChild(this.graphics);
     }
-    addShield(duration)
-    {
+    addShield(duration) {
         this.activateShield = true;
         this.shieldDuration = duration;
         this.shieldStartTime = performance.now();
@@ -135,45 +127,36 @@ class HeroView
         scene.removeChild(this.shieldImage);
     }
 
-    takeDamage(damage)
-    {
-        if (!this.activateShield)
-        {
+    takeDamage(damage) {
+        if (!this.activateShield) {
             this.hp -= damage;
-            if (this.hp <= 0)
-            {
+            if (this.hp <= 0) {
                 this.hp = 0;
                 this.dead = true;
                 this.sprite.vy = 0;
             }
             this.updateHp();
-        } else
-        {
+        } else {
             damage = Math.max(0, damage - 10);
         }
     }
-    updateMove(x, y) 
-    {             
+
+    updateMove(x, y) {
         this.sprite.x = x;
         this.sprite.y = y;
     }
-   
-    update(time)
-    {
-        if (!this.dead)
-        {
+
+    update(time) {
+        if (!this.dead) {
             this.updateHp();
-            //this.updateMove(x, y);
             this.updateName();
             this.updateCollide();
             this.shieldDeleteView();
-            if (this.activateShield)
-            {   
+            if (this.activateShield) {
                 this.shieldView();
             }
         }
-        else 
-        {
+        else {
             this.deadTime -= time.deltaTime;
         }
     }

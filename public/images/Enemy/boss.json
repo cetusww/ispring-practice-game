@@ -213,7 +213,7 @@
     }
   },
   "meta": {
-    "image": "boss.png",
+    "image": "../boss.png",
     "format": "RGBA8888",
     "size": {"w":432, "h":320},
     "scale": "1"

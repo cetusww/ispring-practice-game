@@ -34,5 +34,24 @@
         </div>
     </div>
 </div>
+<script>
+  let audio = new Audio('/sounds/win.mp3');
+      let music = false;
+      audio.volume = 1;
+      audio.loop = false;
+
+      function startMusic() {
+        audio.load();
+        audio.play();
+        music = true;
+      }
+
+      document.addEventListener('mousemove', function()
+      {
+          if (music === false) {
+            startMusic();
+          }
+      });
+</script>
 </body>
 </html>

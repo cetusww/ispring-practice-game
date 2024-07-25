@@ -1,0 +1,305 @@
+{
+    "scene": [
+        {
+            "width": 2880,
+            "height": 1920
+        }
+    ],
+    "background": "level3_map",
+    "hero": [
+        {
+            "posX": 405,
+            "posY": 500,
+            "speedX": 6,
+            "speedY": 0,
+            "experienceMax": 680
+        }
+    ],
+    "portal": [
+        {
+            "posX": 2480,
+            "posY": 1400
+        }
+    ],
+    "platforms": [
+        {
+            "texture": "",
+            "posX": 1925,
+            "posY": 467,
+            "width": 160,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1080,
+            "posY": 467,
+            "width": 160,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 395,
+            "posY": 637,
+            "width": 170,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2185,
+            "posY": 635,
+            "width": 170,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 912,
+            "posY": 635,
+            "width": 170,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 250,
+            "posY": 850,
+            "width": 215,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1930,
+            "posY": 1075,
+            "width": 190,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1300,
+            "posY": 1120,
+            "width": 220,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 910,
+            "posY": 1074,
+            "width": 200,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 250,
+            "posY": 850,
+            "width": 215,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1475,
+            "posY": 880,
+            "width": 1620,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 415,
+            "posY": 1245,
+            "width": 110,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 652,
+            "posY": 1305,
+            "width": 95,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2585,
+            "posY": 1005,
+            "width": 240,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2470,
+            "posY": 1270,
+            "width": 380,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 2720,
+            "posY": 1450,
+            "width": 270,
+            "height": 40
+        },
+        {
+            "texture": "",
+            "posX": 1450,
+            "posY": 1590,
+            "width": 2880,
+            "height": 40
+        }
+    ],
+    "woodenPlanks": [],
+    "walls": [
+        {
+            "texture": "",
+            "posX": 170,
+            "posY": 1205,
+            "width": 64,
+            "height": 720
+        },
+        {
+            "texture": "",
+            "posX": 110,
+            "posY": 430,
+            "width": 64,
+            "height": 810
+        },
+        {
+            "texture": "",
+            "posX": 2800,
+            "posY": 770,
+            "width": 64,
+            "height": 1500
+        },
+        {
+            "texture": "",
+            "posX": 2635,
+            "posY": 1530,
+            "width": 64,
+            "height": 130
+        }
+    ],
+    "devils": [],
+    "bats": [],
+    "shields": [
+        {
+            "posX": 1930,
+            "posY": 1010,
+            "duration": 10
+        },
+        {
+            "posX": 2725,
+            "posY": 750,
+            "duration": 10
+        },
+        {
+            "posX": 915,
+            "posY": 560,
+            "duration": 10
+        },
+        {
+            "posX": 1930,
+            "posY": 400,
+            "duration": 10
+        },
+        {
+            "posX": 260,
+            "posY": 1520,
+            "duration": 10
+        }
+    ],
+    "health": [
+        {
+            "posX": 1300,
+            "posY": 1060
+        },
+        {
+            "posX": 250,
+            "posY": 780
+        },
+        {
+            "posX": 2725,
+            "posY": 1380
+        },
+        {
+            "posX": 1080,
+            "posY": 400
+        },
+        {
+            "posX": 2180,
+            "posY": 575
+        } 
+    ],
+    "stalactites": [
+        {
+            "posX": 1950,
+            "posY": 1100,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1890,
+            "posY": 1090,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1330,
+            "posY": 1150,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1510,
+            "posY": 940,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 880,
+            "posY": 1090,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 955,
+            "posY": 1100,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1100,
+            "posY": 503,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        },
+        {
+            "posX": 1950,
+            "posY": 503,
+            "zoneHeight": 700,
+            "zoneWidth": 200
+        }
+    ],
+    "mushrooms": [],
+    "fires": [
+        {
+            "posX": 530,
+            "posY": 1520
+        },
+        {
+            "posX": 1130,
+            "posY": 1520
+        },
+        {
+            "posX": 1430,
+            "posY": 1520
+        },
+        {
+            "posX": 1930,
+            "posY": 1520
+        }
+    ],
+    "boss": [
+        {
+            "posX": 1440,
+            "posY": 1490,
+            "zoneWidth": 700,
+            "visibilityZoneWidth": 500,
+            "visibilityZoneHeight": 500
+        }
+    ]
+}

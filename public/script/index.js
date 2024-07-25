@@ -1,5 +1,16 @@
+const app = new PIXI.Application();
+const GRAVITY_ACCELERATION = 0.98;
 const FPS = 60;
 const scene = new PIXI.Container();
+
+let background;
+let hero;
+let portal;
+let sceneScale = 1;
+
+let musicButton;
+let musicText;
+
 const platforms = [];
 const arrayOfWall = [];
 const arrayOfBonus = [];
@@ -12,31 +23,6 @@ const poisons = [];
 const fires = [];
 const smokes = [];
 const shots = [];
-
-const app = new PIXI.Application();
-const GRAVITY_ACCELERATION = 0.98;
-let background;
-let hero;
-let portal;
-let sceneScale = 1;
-const hero_walk = [];
-const experiences = [];
-const hero_jump = [];
-const hero_idle = [];
-const hero_dead = [];
-const devilWalk = [];
-const devilIdle = [];
-const batFlyHorizontal = [];
-const batFlyVertical = [];
-const hero_shoot = [];
-const hero_walk_shoot = [];
-const fire_anim = [];
-const mushroom_idle = [];
-const mushroom_active = [];
-const smoke_anim = [];
-const boss_idle = [];
-const boss_walk = [];
-const boss_dead = [];
 
 const startTime = new Date().getTime();
 
@@ -63,138 +49,97 @@ const mouse =
 
 let audio = new Audio('/sounds/music.mp3');
 let music = false;
-audio.volume = 1;
+audio.load();
+audio.volume = 0.8;
 audio.loop = true;
 
-function startMusic()
+function musicToggle()
 {
-    audio.load();
-    audio.play();
-    music = true;
+    if (!music) {
+        music = true
+        musicButton.texture = PIXI.Texture.from('sound_on')
+        audio.play();
+    } else {
+        music = false
+        musicButton.texture = PIXI.Texture.from('sound_off')
+        audio.pause();
+    }
+    console.log(music)
 }
 
-function onAppMouseDown(event)
-{
-    if (event.button === 0)
-    {
+function onAppMouseDown(event) {
+    if (event.button === 0) {
         mouse.isDownLeft = true;
     }
 }
-function onAppMouseMove(event)
-{
-    if (event.button === 0)
-    {
+function onAppMouseMove(event) {
+    if (event.button === 0) {
         mouse.positionX = event.clientX;
         mouse.positionY = event.clientY;
     }
-    if (music === false)
-    {
-        startMusic();
-    }
 }
-function onAppMouseUp(event)
-{
-    if (event.button === 0)
-    {
+function onAppMouseUp(event) {
+    if (event.button === 0) {
         mouse.isDownLeft = false;
     }
 }
-function resizeWindow()
-{
-    let relationshipWidth =  window.innerWidth / SCENE_WIDTH;
-    let relationshipHeight = window.innerHeight / SCENE_HEIGHT;
-    if (relationshipWidth > 1 || relationshipHeight > 1) {
-        if (relationshipWidth > relationshipHeight) {
-            sceneScale = relationshipWidth;
-        } else
-        {
-            sceneScale = relationshipHeight;
-        }
-        scene.scale.x = sceneScale;
-        scene.scale.y = sceneScale;
-    } else
-    {
-        sceneScale = 1;
-    }
-    app.renderer.resize(window.innerWidth, window.innerHeight);
-}
 
-function doubleClickremoveState()
-{
+function doubleClickremoveState() {
     doubleKeyDown.keyClickCount = 0;
     doubleKeyDown.keyTime = 0;
 }
 
-function onKeyDown(event)
-{
-    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф')
-    {
+function onKeyDown(event) {
+    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф') {
         keys.keyLeft = true;
         keys.keyRight = false;
     }
-    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D' || event.key === 'в' || event.key === 'В')
-    {
+    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D' || event.key === 'в' || event.key === 'В') {
         keys.keyRight = true;
         keys.keyLeft = false;
     }
-    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W' || event.key === 'ц' || event.key === 'Ц')
-    {
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W' || event.key === 'ц' || event.key === 'Ц') {
         keys.keyUp = true;
         keys.keyDown = false;
     }
-    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S' || event.key === 'ы' || event.key === 'Ы')
-    {
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S' || event.key === 'ы' || event.key === 'Ы') {
         keys.keyDown = true;
         keys.keyUp = false;
     }
-    if (event.key === 'r' || event.key === 'к')
-    {
+    if (event.key === 'r' || event.key === 'к') {
         keys.keyR = true;
     }
-    if (music === false)
-    {
-        startMusic();
-    }
 }
-function onKeyUp(event)
-{
-    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф')
-    {
+function onKeyUp(event) {
+    if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A' || event.key === 'ф' || event.key === 'Ф') {
         keys.keyLeft = false;
     }
-    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D' || event.key === 'в' || event.key === 'В')
-    {
+    if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D' || event.key === 'в' || event.key === 'В') {
         keys.keyRight = false;
     }
-    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S' || event.key === 'ы' || event.key === 'Ы')
-    {
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S' || event.key === 'ы' || event.key === 'Ы') {
         keys.keyDown = false;
-        if (new Date() - doubleKeyDown.keyTime < 200 || doubleKeyDown.keyTime === 0)
-        {
+        if (new Date() - doubleKeyDown.keyTime < 200 || doubleKeyDown.keyTime === 0) {
             doubleKeyDown.keyTime = new Date();
             doubleKeyDown.keyClickCount += 1;
-        } else
-        {
+        } else {
             doubleClickremoveState();
         }
         console.log(doubleKeyDown)
-        if (doubleKeyDown.keyClickCount === 2)
-        {
+        if (doubleKeyDown.keyClickCount === 2) {
             doubleClickremoveState();
             keys.keyDownDouble = true;
         }
     }
-    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W' || event.key === 'ц' || event.key === 'Ц')
-    {
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W' || event.key === 'ц' || event.key === 'Ц') {
         keys.keyUp = false;
     }
 }
 
-(async () =>
-{
-    await app.init({ background: '#000000',  width: window.innerWidth, height: window.innerHeight});
+(async () => {
+    await app.init({ background: '#000000', width: window.innerWidth, height: window.innerHeight });
     document.body.appendChild(app.canvas);
-    resizeWindow();
+    //resizeWindow();
     await PIXI.Assets.load([
         { alias: 'level1_map', src: '/images/Map/first_level_map.jpg' },
         { alias: 'level2_map', src: '/images/Map/level2_map.png' },
@@ -293,13 +238,31 @@ function onKeyUp(event)
     app.canvas.addEventListener('mousedown', onAppMouseDown);
     app.canvas.addEventListener('mousemove', onAppMouseMove);
     app.canvas.addEventListener('mouseup', onAppMouseUp);
-    window.addEventListener('resize', () => { resizeWindow() });
+
+    await PIXI.Assets.load(textureSources)
+    loadTextures();
     app.stage.addChild(scene);
     levelCreate();
+
+    musicButton = new PIXI.Sprite(PIXI.Texture.from('sound_off'));
+    musicButton.x = 30;
+    musicButton.y = app.screen.height - 30;
+    musicButton.anchor.set(0.5);
+    musicButton.cursor = 'pointer';
+    musicButton.eventMode = 'static';
+    musicButton.width = 40;
+    musicButton.height = 40;
+    musicButton.on('pointerdown', musicToggle);
+    app.stage.addChild(musicButton);
+
+    musicText = new PIXI.Text('Music', { fontFamily: 'Arial', fontSize: 24, fill: 0xfeeb77, });
+    musicText.x = 60;
+    musicText.y = app.screen.height - 42;
+    app.stage.addChild(musicText);
+
     levelView();
     app.ticker.maxFPS = FPS;
-    app.ticker.add((time) =>
-    {
+    app.ticker.add((time) => {
         gameLoop(time);
     });
 })();
@@ -309,13 +272,12 @@ async function gameLoop(time)
 {
     portal.update(time);
     hero.update(time);
-    if (hero.experience >= hero.experienceMax * 0.85 && !portal.isActive && !hero.isWin)
-    {
+    if (hero.experience >= hero.experienceMax * 0.85 && !portal.isActive && !hero.isWin) {
         portal.activate();
         hero.portalTextView();
     }
-    if (hero.deadTime < 0)
-    {
+    if (hero.deadTime < 0) {
+        saveScore(hero.isWin);
         hero.deadTime = 1000;
         window.location.href = "/lose";
     }
@@ -324,19 +286,15 @@ async function gameLoop(time)
         window.location.href = "/win";
         portal.isActive = false;
     }
-    if (mouse.isDownLeft)
-    {
+    if (mouse.isDownLeft) {
         hero.createBullet(mouse.positionX, mouse.positionY);
     }
     let i = 0;
-    while (i < enemies.length)
-    {
-        if (enemies[i].deadTime > 0)
-        {
+    while (i < enemies.length) {
+        if (enemies[i].deadTime > 0) {
             enemies[i].update(time);
         }
-        else
-        {
+        else {
             enemies[i].dropExperience();
             enemies[i].deleteView();
             enemies[i].sprite.destroy();
@@ -346,14 +304,11 @@ async function gameLoop(time)
         i++;
     }
     i = 0;
-    while (i < poisons.length)
-    {
-        if (poisons[i].lifeTime > 0)
-        {
+    while (i < poisons.length) {
+        if (poisons[i].lifeTime > 0) {
             poisons[i].update(time);
         }
-        else
-        {
+        else {
             poisons[i].sprite.destroy();
             poisons.splice(i, 1);
             i--;
@@ -361,14 +316,11 @@ async function gameLoop(time)
         i++;
     }
     i = 0;
-    while (i < experiences.length)
-    {
-        if (!experiences[i].isTaken)
-        {
+    while (i < experiences.length) {
+        if (!experiences[i].isTaken) {
             experiences[i].update(time);
         }
-        else
-        {
+        else {
             experiences[i].deleteView();
             experiences[i].sprite.destroy();
             experiences.splice(i, 1);
@@ -377,14 +329,11 @@ async function gameLoop(time)
         i++;
     }
     i = 0;
-    while (i < bullets.length)
-    {
-        if (bullets[i].lifeTime > 0)
-        {
+    while (i < bullets.length) {
+        if (bullets[i].lifeTime > 0) {
             bullets[i].update(time);
         }
-        else
-        {
+        else {
             bullets[i].sprite.destroy();
             bullets.splice(i, 1);
             i--;
@@ -392,14 +341,11 @@ async function gameLoop(time)
         i++;
     }
     i = 0;
-    while (i < smokes.length)
-    {
-        if (smokes[i].lifeTime > 0)
-        {
+    while (i < smokes.length) {
+        if (smokes[i].lifeTime > 0) {
             smokes[i].update(time);
         }
-        else
-        {
+        else {
             smokes[i].sprite.destroy();
             smokes.splice(i, 1);
             i--;
@@ -407,14 +353,11 @@ async function gameLoop(time)
         i++;
     }
     i = 0;
-    while (i < fireballs.length)
-    {
-        if (fireballs[i].lifeTime > 0)
-        {
+    while (i < fireballs.length) {
+        if (fireballs[i].lifeTime > 0) {
             fireballs[i].update(time);
         }
-        else
-        {
+        else {
             fireballs[i].sprite.destroy();
             fireballs.splice(i, 1);
             i--;
@@ -422,33 +365,26 @@ async function gameLoop(time)
         i++;
     }
     i = 0;
-    while (i < shots.length)
-    {
-        if (shots[i].lifeTime > 0)
-        {
+    while (i < shots.length) {
+        if (shots[i].lifeTime > 0) {
             shots[i].update(time);
         }
-        else
-        {
+        else {
             shots[i].sprite.destroy();
             shots.splice(i, 1);
             i--;
         }
         i++;
     }
-    for (let i = 0; i < fires.length; i++)
-    {
+    for (let i = 0; i < fires.length; i++) {
         fires[i].update();
     }
     i = 0;
-    while (i < arrayOfBonus.length)
-    {
-        if (!arrayOfBonus[i].isTaken)
-        {
+    while (i < arrayOfBonus.length) {
+        if (!arrayOfBonus[i].isTaken) {
             arrayOfBonus[i].update(time);
         }
-        else
-        {
+        else {
             arrayOfBonus[i].deleteView();
             arrayOfBonus[i].sprite.destroy();
             arrayOfBonus.splice(i, 1);
@@ -456,8 +392,7 @@ async function gameLoop(time)
         }
         i++;
     }
-    arrayOfStalactite.forEach(stalactite =>
-    {
+    arrayOfStalactite.forEach(stalactite => {
         stalactite.update(time);
     });
     keys.keyDownDouble = false;
@@ -465,76 +400,32 @@ async function gameLoop(time)
         doubleClickremoveState();
     }
 }
-function levelView()
-{
-    portal.view();
-    arrayOfWall.forEach(wall => {
-        wall.view();
-    })
-    woodenPlanks.forEach(woodenPlank =>
-    {
-        woodenPlank.view();
-    })
 
-    platforms.forEach(platform =>
-    {
-        platform.view();
-    })
-    let experienceMax = 0;
-    enemies.forEach(enemy =>
-    {
-        enemy.view();
-        experienceMax += enemy.experience;
-    });
-    arrayOfBonus.forEach(bonus =>
-    {
-        bonus.view();
-    });
-    arrayOfStalactite.forEach(stalactite =>
-    {
-        stalactite.view();
-    });
-    fires.forEach(fire =>
-    {
-        fire.view();
-    });
-    
-    hero.experienceMax = experienceMax;
-    hero.view();
-}
-
-
-function moveCamera(x, y)
-{
+function moveCamera(x, y) {
     let moveX = x;
     let moveY = y;
-    if (scene.x - x > 0)
-    {
+    if (scene.x - x > 0) {
         moveX = scene.x;
         scene.x -= moveX;
     }
-    else if (scene.x - x < app.screen.width - SCENE_WIDTH * sceneScale)
-    {
+    else if (scene.x - x < app.screen.width - SCENE_WIDTH * sceneScale) {
         moveX = (scene.x + SCENE_WIDTH * sceneScale - app.screen.width);
         scene.x -= moveX;
     }
-    else
-    {
+    else {
         scene.x -= moveX;
     }
-    if (scene.y - y > 0)
-    {
+    if (scene.y - y > 0) {
         moveY = scene.y;
         scene.y -= moveY;
-    } else if (scene.y - y < app.screen.height - SCENE_HEIGHT * sceneScale)
-    {
+    } else if (scene.y - y < app.screen.height - SCENE_HEIGHT * sceneScale) {
         moveY = (scene.y + SCENE_HEIGHT * sceneScale - app.screen.height);
         scene.y -= moveY;
-    } else
-    {
+    } else {
         scene.y -= moveY;
     }
 }
 
+window.addEventListener('resize', () => { resizeWindow() });
 window.addEventListener('keydown', onKeyDown);
 window.addEventListener('keyup', onKeyUp);

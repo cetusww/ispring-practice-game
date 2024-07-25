@@ -65,7 +65,7 @@
     }
   },
   "meta": {
-    "image": "hero_walk_shoot_group.png",
+    "image": "../hero_walk_shoot_group.png",
     "format": "RGBA8888",
     "size": {"w":5283, "h":707},
     "scale": "1"

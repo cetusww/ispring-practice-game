@@ -72,7 +72,7 @@
     }
   },
   "meta": {
-    "image": "hero_dead_group.png",
+    "image": "../hero_dead_group.png",
     "format": "RGBA8888",
     "size": {"w":9440, "h":780},
     "scale": "1"

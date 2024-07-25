@@ -93,7 +93,7 @@
     }
   },
   "meta": {
-    "image": "smoke.png",
+    "image": "../smoke.png",
     "format": "RGBA8888",
     "size": {"w":520, "h":18},
     "scale": "1"
