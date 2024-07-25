@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="2024-07-27-dev добавил экран с поздравлением и qr кодом">
-      <change afterPath="$PROJECT_DIR$/public/images/rick_roll.png" afterDir="false" />
+    <list default="true" id="a79e3321-8fe7-4f32-af7e-8ee52da40e48" name="Changes" comment="misha-07-25-congrats-improvements сделал переход после победы над боссом на страницу поздравления, добавил текст">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/data/user.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2024-07-27-dev" />
+        <entry key="$PROJECT_DIR$" value="misha-07-25-backup-2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -240,7 +239,7 @@
       <workItem from="1721202713803" duration="5379000" />
       <workItem from="1721333447285" duration="9454000" />
       <workItem from="1721626678600" duration="1116000" />
-      <workItem from="1721903780539" duration="1933000" />
+      <workItem from="1721903780539" duration="2944000" />
     </task>
     <task id="LOCAL-00001" summary="misha-07-02-gamepad-ratchet-with-symfony собрал джойстик, персонаж двигается вправо-влево">
       <option name="closed" value="true" />
@@ -546,7 +545,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721903868063</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="misha-07-25-congrats-improvements сделал переход после победы над боссом на страницу поздравления, добавил текст">
+      <option name="closed" value="true" />
+      <created>1721909810091</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1721909810091</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +583,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2024-07-01-test-dev-2 добавил отображение экранов победы и проигрыша" />
     <MESSAGE value="2024-07-01-test-dev-2-with-gamepad смержил тестовую ветку с веткой геймпада" />
     <MESSAGE value="2024-07-05-shoot-animation добавил анимацию стрельбы в стоячем состоянии и при ходьбе" />
     <MESSAGE value="2024-07-01-test-dev-2 смержил анимацию стрельбы" />
@@ -619,6 +625,7 @@
     <MESSAGE value="2024-07-27-dev добавил кнопку с легендой в меню" />
     <MESSAGE value="2024-07-27-dev изменил стиль у заголовка в легенде и вписал название корпорации зла" />
     <MESSAGE value="2024-07-27-dev добавил экран с поздравлением и qr кодом" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024-07-27-dev добавил экран с поздравлением и qr кодом" />
+    <MESSAGE value="misha-07-25-congrats-improvements сделал переход после победы над боссом на страницу поздравления, добавил текст" />
+    <option name="LAST_COMMIT_MESSAGE" value="misha-07-25-congrats-improvements сделал переход после победы над боссом на страницу поздравления, добавил текст" />
   </component>
 </project>
