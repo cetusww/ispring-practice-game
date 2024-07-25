@@ -13,9 +13,10 @@
   <h1 class="center-align title">Demon Deliverance</h1>
   <p class="center-align middle-align continue">Нажмите любую клавишу, чтобы продолжить</p>
   <script>
-      let audio = new Audio('/sounds/doom.mp3');
+      let audio = new Audio('/sounds/highway.mp3');
+      //let audio = new Audio('/sounds/doom.mp3');
       let music = false;
-      audio.volume = 1;
+      audio.volume = 0.8;
       audio.loop = true;
 
       function startMusic() {
@@ -26,7 +27,7 @@
 
       document.addEventListener('mousemove', function()
       {
-          if (music === false) {
+          if (!music) {
             startMusic();
           }
       });

@@ -13,36 +13,57 @@
   <div class="options-list">
     <a class="rating" href="/rating">
       <p class="rating__title">Рейтинг</p>
-      <img src="images/rating_icon.svg">
+      <img src="images/rating_icon.svg" id="but1">
     </a>
     <a class="single" href="/choose-level">
       <p class="single__title">Одиночная кампания</p>
-      <img src="images/singleplayer_icon.svg">
+      <img src="images/singleplayer_icon.svg" id="but2">
     </a>
     <a class="multi" href="/multiplayer">
       <p class="multi__title">Вдвоём</p>
-      <img src="images/multiplayer_icon.svg">
+      <img src="images/multiplayer_icon.svg" id="but3">
     </a>
   </div>
   <a class="signout" type="submit" href="/user/signout">Выйти</a>
   <script>
-  let audio = new Audio('/sounds/doom.mp3');
+  const but1 = document.getElementById('but1');
+  const but2 = document.getElementById('but2');
+  const but3 = document.getElementById('but3');
+  
+  let audio = new Audio('/sounds/choose.mp3');
+      audio.volume = 0.8;
+      audio.loop = false;
+      audio.load();
       let music = false;
-      audio.volume = 1;
-      audio.loop = true;
 
       function startMusic() {
-        audio.load();
         audio.play();
         music = true;
+        window.setInterval(updateMusic(), 500);
       }
 
-      document.addEventListener('mousemove', function()
-      {
-          if (music === false) {
+      function updateMusic() {
+        music = false;
+      }
+
+      
+      but1.addEventListener('mouseover', () => {
+          if (!music) {
             startMusic();
           }
-      });
+      })
+
+      but2.addEventListener('mouseover', () => {
+          if (!music) {
+            startMusic();
+          }
+      })
+
+      but3.addEventListener('mouseover', () => {
+          if (!music) {
+            startMusic();
+          }
+      })
 </script>
 </body>
 </html>
