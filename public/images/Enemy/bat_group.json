@@ -58,7 +58,7 @@
     }
   },
   "meta": {
-    "image": "../bat_group.png",
+    "image": "/bat_group.png",
     "format": "RGBA8888",
     "size": {"w":128, "h":128},
     "scale": "1"

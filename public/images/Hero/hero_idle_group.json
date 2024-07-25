@@ -72,7 +72,7 @@
     }
   },
   "meta": {
-    "image": "../hero_idle_group.png",
+    "image": "/hero_idle_group.png",
     "format": "RGBA8888",
     "size": {"w":5870, "h":707},
     "scale": "1"

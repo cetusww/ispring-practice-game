@@ -37,7 +37,7 @@
     }
   },
   "meta": {
-    "image": "../devil.png",
+    "image": "/devil.png",
     "format": "RGBA8888",
     "size": {"w":144, "h":256},
     "scale": "1"

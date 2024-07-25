@@ -129,14 +129,12 @@ function levelView() {
 }
 
 async function saveScore(isWin) {
-    let nextLevel = 2;
-    if (isWin) {
-        nextLevel = 3;
-    }
+    
     let data = {
-        score: hero.experience,
+        time: hero.time,
+        score: (hero.experience / hero.time) * 100,
         currentLvl: 2,
-        nextLvl: nextLevel,
+        nextLvl: 3,
     }
     const stringifyData = JSON.stringify(data);
     const response = await fetch('/api/score', {
